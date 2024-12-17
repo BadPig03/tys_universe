@@ -6,12 +6,12 @@ function Utils.IsRoomFirstVisit()
 end
 
 function Utils.IsRoomType(type)
-    if type == nil then
-        return false
-    end
-
     local room = TYU.GAME:GetRoom()
     return room:GetType() == type
+end
+
+function Utils.IsRoomIndex(index)
+    return TYU.LEVEL:GetCurrentRoomIndex() == index
 end
 
 function Utils.IsRoomBossChallenge()
@@ -21,6 +21,23 @@ end
 
 function Utils.IsInDeathCertificate()
     return TYU.LEVEL:GetDimension() == Dimension.DEATH_CERTIFICATE
+end
+
+function Utils.IsInKnifePuzzle()
+    return TYU.LEVEL:HasAbandonedMineshaft() and TYU.LEVEL:GetDimension() == Dimension.KNIFE_PUZZLE
+end
+
+function Utils.IsCathedral()
+    return TYU.LEVEL:GetStage() == LevelStage.STAGE5 and TYU.LEVEL:GetStageType() == StageType.STAGETYPE_WOTL
+end
+
+function Utils.HasUseFlags(useFlags, flag)
+    return useFlags & flag == flag
+end
+
+function Utils.CreateTimer(...)
+    local timer = Isaac.CreateTimer(...)
+    timer:AddEntityFlags(TYU.ModEntityFlags.FLAG_NO_PAUSE)
 end
 
 return Utils

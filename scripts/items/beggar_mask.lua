@@ -1,5 +1,6 @@
 local BeggarMask = TYU:NewModItem("Beggar Mask", "BEGGARMASK")
 local Players = TYU.Players
+local Entities = TYU.Entities
 local Utils = TYU.Utils
 local PrivateField = {}
 
@@ -8,48 +9,56 @@ do
         local variant = beggar.Variant
         return variant == SlotVariant.BEGGAR or variant == SlotVariant.DEVIL_BEGGAR or variant == SlotVariant.BOMB_BUM or variant == SlotVariant.KEY_MASTER or variant == SlotVariant.BATTERY_BUM or variant == SlotVariant.ROTTEN_BEGGAR or variant == TYU.ModEntityIDs.HEALINGBEGGAR.Variant or variant == TYU.ModEntityIDs.CHEFBEGGAR.Variant
     end
+
+    function PrivateField.GetPositionFromRoomShape(shape)
+        local positions = {
+            [RoomShape.ROOMSHAPE_IV] = Vector(360, 360),
+            [RoomShape.ROOMSHAPE_IH] = Vector(440, 280),
+            [RoomShape.ROOMSHAPE_2x1] = Vector(1000, 360)
+        }
+        return positions[shape] or Vector(520, 360)
+    end
+
+    function PrivateField.GetBeggarVariantFromRoomType(roomType)
+        local variants = {
+            [RoomType.ROOM_ANGEL] = TYU.ModEntityIDs.HEALINGBEGGAR.Variant,
+            [RoomType.ROOM_DEVIL] = SlotVariant.DEVIL_BEGGAR,
+            [RoomType.ROOM_TREASURE] = SlotVariant.BEGGAR,
+            [RoomType.ROOM_SECRET] = SlotVariant.BOMB_BUM,
+            [RoomType.ROOM_SUPERSECRET] = SlotVariant.KEY_MASTER,
+            [RoomType.ROOM_SHOP] = SlotVariant.BATTERY_BUM,
+            [RoomType.ROOM_CURSE] = SlotVariant.ROTTEN_BEGGAR,
+            [RoomType.ROOM_ISAACS] = TYU.ModEntityIDs.CHEFBEGGAR.Variant
+        }
+        return variants[roomType]
+    end
 end
 
 function BeggarMask:PostNewRoom()
-    local room = TYU.GAME:GetRoom()
-    local roomType = room:GetType()
     if not Players.AnyoneHasCollectible(TYU.ModItemIDs.BEGGARMASK) or not Utils.IsRoomFirstVisit() then
         return
     end
-    local roomType = room:GetType()
-    local positions = {
-        [RoomShape.ROOMSHAPE_IV] = Vector(360, 360),
-        [RoomShape.ROOMSHAPE_IH] = Vector(440, 280),
-        [RoomShape.ROOMSHAPE_2x1] = Vector(1000, 360)
-    }
-    local pos = positions[room:GetRoomShape()] or Vector(520, 360)
-    pos = room:FindFreePickupSpawnPosition(pos, 0, true, false)
-    local roomTypeToVariant = {
-        [RoomType.ROOM_ANGEL] = TYU.ModEntityIDs.HEALINGBEGGAR.Variant,
-        [RoomType.ROOM_DEVIL] = SlotVariant.DEVIL_BEGGAR,
-        [RoomType.ROOM_TREASURE] = SlotVariant.BEGGAR,
-        [RoomType.ROOM_SECRET] = SlotVariant.BOMB_BUM,
-        [RoomType.ROOM_SUPERSECRET] = SlotVariant.KEY_MASTER,
-        [RoomType.ROOM_SHOP] = SlotVariant.BATTERY_BUM,
-        [RoomType.ROOM_CURSE] = SlotVariant.ROTTEN_BEGGAR,
-        [RoomType.ROOM_ISAACS] = TYU.ModEntityIDs.CHEFBEGGAR.Variant
-    }
-    local variant = roomTypeToVariant[roomType]
-    if variant then
-        local slot = TYU.Entities.Spawn(EntityType.ENTITY_SLOT, variant, 0, pos)
-        TYU.Entities.SpawnPoof(slot.Position)
+    local room = TYU.GAME:GetRoom()
+    local variant = PrivateField.GetBeggarVariantFromRoomType(room:GetType())
+    if not variant then
+        return
     end
+    local pos = room:FindFreePickupSpawnPosition(PrivateField.GetPositionFromRoomShape(room:GetRoomShape()), 0, true, false)
+    local slot = Entities.Spawn(EntityType.ENTITY_SLOT, variant, 0, pos)
+    Entities.SpawnPoof(slot.Position)
 end
 BeggarMask:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, BeggarMask.PostNewRoom)
 
 function BeggarMask:PostSlotUpdate(slot)
-    if TYU.Players.AnyoneHasCollectible(TYU.ModItemIDs.BEGGARMASK) and IsValidBeggar(slot) and slot:GetState() == 4 and slot:GetDropRNG():RandomInt(100) < 40 then
-        local slotSprite = slot:GetSprite()
-        if slotSprite:GetAnimation() == "Teleport" and slotSprite:GetFrame() == 20 then
-            TYU.Entities.Spawn(EntityType.ENTITY_SLOT, slot.Variant, 0, slot.Position)
-            TYU.Entities.SpawnPoof(slot.Position)
-        end
+    if not Players.AnyoneHasCollectible(TYU.ModItemIDs.BEGGARMASK) or not PrivateField.IsBeggarValid(slot) or slot:GetState() ~= 4 or slot:GetDropRNG():RandomInt(100) >= 50 then
+        return
     end
+    local sprite = slot:GetSprite()
+    if sprite:GetAnimation() ~= "Teleport" or sprite:GetFrame() ~= 20 then
+        return
+    end
+    Entities.Spawn(EntityType.ENTITY_SLOT, slot.Variant, 0, slot.Position)
+    Entities.SpawnPoof(slot.Position)
 end
 BeggarMask:AddCallback(ModCallbacks.MC_POST_SLOT_UPDATE, BeggarMask.PostSlotUpdate)
 

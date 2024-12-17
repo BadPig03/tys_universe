@@ -33,7 +33,40 @@ function Players.GetPlayers(ignoreCoopBabies)
     return playerList
 end
 
-function Players.AddLostCurse(player, remove)
+function Players.GetNumCollectibles(id)
+    return PlayerManager.GetNumCollectibles(id)
+end
+
+function Players.IsJacobOrEsau(player)
+    local playerType = player:GetPlayerType()
+    return playerType == PlayerType.PLAYER_JACOB or playerType == PlayerType.PLAYER_ESAU
+end
+
+function Players.IsForgottenOrSoul(player)
+    local playerType = player:GetPlayerType()
+    return playerType == PlayerType.PLAYER_THEFORGOTTEN or playerType == PlayerType.PLAYER_THESOUL
+end
+
+function Players.IsTaintedForgottenAndSoul(player)
+    local playerType = player:GetPlayerType()
+    return playerType == PlayerType.PLAYER_THEFORGOTTEN_B or playerType == PlayerType.PLAYER_THESOUL_B
+end
+
+function Players.IsTaintedLazarusOrFlippedLazarus(player)
+    local playerType = player:GetPlayerType()
+    return playerType == PlayerType.PLAYER_LAZARUS_B or playerType == PlayerType.PLAYER_LAZARUS2_B
+end
+
+function Players.IsInLostCurse(player)
+    return player:HasInstantDeathCurse()
+end
+
+function Players.IsRedOnlyCharacter(player)
+    local playerType = player:GetPlayerType()
+    return playerType == PlayerType.PLAYER_BETHANY or playerType == TYU.ModPlayerIDs.WARFARIN
+end
+
+function Players.ChangeLostCurseState(player, remove)
     remove = remove or false
     local effects = player:GetEffects()
     if remove then
@@ -42,6 +75,17 @@ function Players.AddLostCurse(player, remove)
         effects:AddNullEffect(NullItemID.ID_LOST_CURSE)
     end
 end
+
+
+
+
+
+
+
+
+
+
+
 
 function Players.AnyoneIsPlayerType(type)
     return PlayerManager.AnyoneIsPlayerType(type)
@@ -87,34 +131,12 @@ function Players.GetPlayerID(player, differ)
     return player2:GetCollectibleRNG(CollectibleType.COLLECTIBLE_SAD_ONION):GetSeed()
 end
 
-function Players.IsInLostCurse(player)
-    return player:HasInstantDeathCurse()
-end
 
-function Players.IsJacobOrEsau(player)
-    local playerType = player:GetPlayerType()
-    return playerType == PlayerType.PLAYER_JACOB or playerType == PlayerType.PLAYER_ESAU
-end
 
-function Players.IsForgottenOrSoul(player)
-    local playerType = player:GetPlayerType()
-    return playerType == PlayerType.PLAYER_THEFORGOTTEN or playerType == PlayerType.PLAYER_THESOUL
-end
 
-function Players.IsTaintedForgottenAndSoul(player)
-    local playerType = player:GetPlayerType()
-    return playerType == PlayerType.PLAYER_THEFORGOTTEN_B or playerType == PlayerType.PLAYER_THESOUL_B
-end
 
-function Players.IsTaintedLazarusOrFlippedLazarus(player)
-    local playerType = player:GetPlayerType()
-    return playerType == PlayerType.PLAYER_LAZARUS_B or playerType == PlayerType.PLAYER_LAZARUS2_B
-end
 
-function Players.IsRedOnlyCharacter(player)
-    local playerType = player:GetPlayerType()
-    return playerType == PlayerType.PLAYER_BETHANY or playerType == TYU.ModPlayerIDs.WARFARIN
-end
+
 
 function Players.RemoveCollectibles(player, id, count)
     count = count or 1

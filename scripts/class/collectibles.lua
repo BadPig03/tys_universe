@@ -104,8 +104,15 @@ function Collectibles.GetCollectibleFromCurrentRoom(excludeTags, rng)
     return itemID
 end
 
+function Collectibles.CheckFamiliarFromCollectible(player, id, variant, maxCount)
+    maxCount = maxCount or math.maxinteger
+    local count = math.min(maxCount, player:GetCollectibleNum(id) + player:GetEffects():GetCollectibleEffectNum(id))
+    local rng = player:GetCollectibleRNG(id)
+    player:CheckFamiliar(variant, count, RNG(rng:Next()), TYU.ITEMCONFIG:GetCollectible(id))
+end
+
 function Collectibles.GetNearestDevilDeal(position, distance)
-    local minDistance = distance or 192
+    local minDistance = distance
     local collectible = nil
     for _, ent in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE)) do
         local pickup = ent:ToPickup()
