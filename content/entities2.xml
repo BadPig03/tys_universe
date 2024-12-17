@@ -1,0 +1,144 @@
+<entities anm2root="gfx/" version="5">
+    <!--Slots-->
+    <entity anm2path="items/slots/healing_beggar.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" name="Healing Beggar" numGridCollisionPoints="24" shadowSize="15" stageHP="0" id="6">
+        <gibs amount="6" blood="1" bone="1" eye="1" gut="1" large="0" />
+    </entity>
+    <entity anm2path="items/slots/chef_beggar.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" name="Chef Beggar" numGridCollisionPoints="24" shadowSize="15" stageHP="0" id="6">
+        <gibs amount="6" blood="1" bone="1" eye="1" gut="1" large="0" />
+    </entity>
+    <entity anm2path="items/slots/meat_effigy.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="15" friction="1" name="Meat Effigy" numGridCollisionPoints="24" shadowSize="12" stageHP="0" id="6"/>
+    <entity anm2path="items/slots/meat_effigy_soul.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="15" friction="1" name="Meat Effigy Soul" numGridCollisionPoints="24" shadowSize="12" stageHP="0" id="6"/>
+    <entity anm2path="items/slots/landmine.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="15" friction="1" name="Landmine" numGridCollisionPoints="24" shadowSize="19" stageHP="0" id="6"/>
+
+    <!--Effects-->
+    <entity anm2path="effects/empty.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" name="Fake Pickup" numGridCollisionPoints="0" shadowSize="0" stageHP="0" id="1000"/>
+    <entity anm2path="effects/empty.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" name="Collapse Effect" numGridCollisionPoints="0" shadowSize="0" stageHP="0" id="1000"/>
+    <entity anm2path="items/slots/meat_effigy_broken.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="15" friction="1" name="Meat Effigy Broken" numGridCollisionPoints="24" shadowSize="12" stageHP="0" id="1000"/>
+    <entity anm2path="effects/crown_of_kings.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" name="Crown of Kings Effect" numGridCollisionPoints="0" shadowSize="0" stageHP="0" id="1000"/>
+    <entity anm2path="effects/fallen_sky_sword.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" name="Fallen Sky Sword" numGridCollisionPoints="1" shadowSize="0" stageHP="0" id="1000"/>
+    <entity anm2path="effects/laser_orb.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" name="Laser Orb" numGridCollisionPoints="12" shadowSize="0" stageHP="0" id="1000"/>
+    <entity anm2path="effects/fire_jet_blue.anm2" baseHP="0" boss="0" champion="0" collisionDamage="10" collisionMass="8" collisionRadius="14" friction="1" id="1000" name="Fire Jet (blue)" numGridCollisionPoints="0" shadowSize="0" stageHP="0" variant="147" subtype="2">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="effects/twilight_fox_halo.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" id="1000" name="Twilight Fox Halo" numGridCollisionPoints="0" shadowSize="0" stageHP="0" variant="123" subtype="10">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+
+    <!--Charge Bars-->
+    <entity anm2path="effects/bobs_stomach_chargebar.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" name="Bobs Stomach ChargeBar" numGridCollisionPoints="1" shadowSize="0" stageHP="0" id="1000"/>
+    <entity anm2path="effects/hephaestus_soul_chargebar.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" name="Hephaestus Soul ChargeBar" numGridCollisionPoints="1" shadowSize="0" stageHP="0" id="1000"/>
+    <entity anm2path="effects/oceanus_soul_chargebar.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" name="Oceanus Soul ChargeBar" numGridCollisionPoints="1" shadowSize="0" stageHP="0" id="1000"/>
+
+    <!--Pick Ups-->
+    <entity anm2path="items/pick ups/cursed_penny.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Cursed Penny" numGridCollisionPoints="24" shadowSize="14" stageHP="0" variant="20" subtype="12" coinvalue="1"/>
+    <entity anm2path="items/pick ups/enchanted_card.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Enchanted Card" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="128"/>
+    <entity anm2path="items/pick ups/glowing_hourglass_shard.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Glowing Hourglass Shard" numGridCollisionPoints="24" shadowSize="16" stageHP="0" variant="300" subtype="129"/>
+    <entity anm2path="items/pick ups/icu_bed.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="200" collisionRadius="30" collisionRadiusYMulti="1.6" friction="1" id="5" name="ICU Bed" numGridCollisionPoints="24" shadowSize="0" stageHP="0" variant="380" subtype="30">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+
+    <!--Familiars-->
+    <entity anm2path="items/familiars/blaze_fly.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Blaze Fly" numGridCollisionPoints="12" shadowSize="11" stageHP="0" tags="cansacrifice" customtags="familiarblockprojectiles"/>
+    <entity anm2path="items/familiars/magnifier.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Magnifier" numGridCollisionPoints="12" shadowSize="11" stageHP="0" customtags="familiarignorebffs"/>
+    <entity anm2path="items/familiars/tool_box.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Tool Box" numGridCollisionPoints="12" shadowSize="11" stageHP="0" tags="cansacrifice"/>
+    <entity anm2path="items/familiars/twilight_fox.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="13" friction="1" id="3" name="Twilight Fox" numGridCollisionPoints="12" shadowSize="11" stageHP="0" tags="cansacrifice"/>
+
+    <!--Tears-->
+    <entity anm2path="projectiles/sticky_ball_tear.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="8" collisionRadius="7" friction="1" id="2" name="Sticky Ball Tear" numGridCollisionPoints="8" shadowSize="8" stageHP="0">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
+    </entity>
+
+    <!--Monsters-->
+    <entity id="217" variant="4" name="Sticky Ball Dip Level 1" baseHP="2" stageHP="0" boss="0" champion="0" collisionDamage="1" collisionMass="6" collisionRadius="9" friction="1" numGridCollisionPoints="12" shadowSize="12" portrait="85" anm2path="monsters/sticky_ball_dip.anm2">
+		<bestiary transform="0,0,1" anim="Idle" />
+        <gibs amount="5" blood="0" bone="0" eye="0" gut="0" large="0" poop="1" />
+    </entity>
+    <entity id="217" variant="5" name="Sticky Ball Dip Level 2" baseHP="3" stageHP="1" boss="0" champion="0" collisionDamage="2" collisionMass="6" collisionRadius="9" friction="1" numGridCollisionPoints="12" shadowSize="12" portrait="85" anm2path="monsters/sticky_ball_dip.anm2">
+		<bestiary transform="0,0,1" anim="Idle" />
+        <gibs amount="5" blood="0" bone="0" eye="0" gut="0" large="0" poop="1" />
+    </entity>
+    <entity id="217" variant="6" name="Sticky Ball Dip Level 3" baseHP="5" stageHP="2" boss="0" champion="0" collisionDamage="3" collisionMass="6" collisionRadius="9" friction="1" numGridCollisionPoints="12" shadowSize="12" portrait="85" anm2path="monsters/sticky_ball_dip.anm2">
+		<bestiary transform="0,0,1" anim="Idle" />
+        <gibs amount="5" blood="0" bone="0" eye="0" gut="0" large="0" poop="1" />
+    </entity>
+    <entity id="220" variant="2" name="Sticky Ball Squirt Level 1" baseHP="10" stageHP="4" boss="0" champion="0" collisionDamage="1" collisionMass="30" collisionRadius="13" friction="1" numGridCollisionPoints="12" shadowSize="21" portrait="140" anm2path="monsters/sticky_ball_squirt.anm2">
+		<bestiary transform="0,0,1" anim="Idle" />
+        <gibs amount="5" blood="1" bone="0" eye="0" gut="0" large="0" poop="1" />
+    </entity>
+    <entity id="220" variant="3" name="Sticky Ball Squirt Level 2" baseHP="15" stageHP="6" boss="0" champion="0" collisionDamage="2" collisionMass="30" collisionRadius="13" friction="1" numGridCollisionPoints="12" shadowSize="21" portrait="140" anm2path="monsters/sticky_ball_squirt.anm2">
+		<bestiary transform="0,0,1" anim="Idle" />
+        <gibs amount="5" blood="1" bone="0" eye="0" gut="0" large="0" poop="1" />
+    </entity>
+    <entity id="220" variant="4" name="Sticky Ball Squirt Level 3" baseHP="23" stageHP="9" boss="0" champion="0" collisionDamage="3" collisionMass="30" collisionRadius="13" friction="1" numGridCollisionPoints="12" shadowSize="21" portrait="140" anm2path="monsters/sticky_ball_squirt.anm2">
+		<bestiary transform="0,0,1" anim="Idle" />
+        <gibs amount="5" blood="1" bone="0" eye="0" gut="0" large="0" poop="1" />
+    </entity>
+
+    <!--Foods-->
+    <entity anm2path="items/foods/placeholder.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Foods (food item)" numGridCollisionPoints="24" shadowSize="15" stageHP="0" subtype="0" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/apple.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Apple (food item)" numGridCollisionPoints="24" shadowSize="15" stageHP="0" subtype="1" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/baked_potato.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Baked Potato (food item)" numGridCollisionPoints="24" shadowSize="15" stageHP="0" subtype="2" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/beetroot.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Beetroot (food item)" numGridCollisionPoints="24" shadowSize="13" stageHP="0" subtype="3" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/brown_mushroom.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Brown Mushroom (food item)" numGridCollisionPoints="24" shadowSize="10" stageHP="0" subtype="4" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/carrot.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Carrot (food item)" numGridCollisionPoints="24" shadowSize="17" stageHP="0" subtype="5" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/chorus_fruit.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Chorus Fruit (food item)" numGridCollisionPoints="24" shadowSize="15" stageHP="0" subtype="6" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/cocoa_beans.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Cocoa Beans (food item)" numGridCollisionPoints="24" shadowSize="13" stageHP="0" subtype="7" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/dried_kelp.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Dried Kelp (food item)" numGridCollisionPoints="24" shadowSize="17" stageHP="0" subtype="8" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/glow_berries.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Glow Berries (food item)" numGridCollisionPoints="24" shadowSize="15" stageHP="0" subtype="9" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/golden_apple.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Golden Apple (food item)" numGridCollisionPoints="24" shadowSize="15" stageHP="0" subtype="10" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/golden_carrot.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Golden Carrot (food item)" numGridCollisionPoints="24" shadowSize="17" stageHP="0" subtype="11" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/melon_slice.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Melon Slice (food item)" numGridCollisionPoints="24" shadowSize="15" stageHP="0" subtype="12" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/potato.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Potato (food item)" numGridCollisionPoints="24" shadowSize="15" stageHP="0" subtype="13" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/red_mushroom.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Red Mushroom (food item)" numGridCollisionPoints="24" shadowSize="10" stageHP="0" subtype="14" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/sweet_berries.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Sweet Berries (food item)" numGridCollisionPoints="24" shadowSize="16" stageHP="0" subtype="15" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/wheat.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Wheat (food item)" numGridCollisionPoints="24" shadowSize="17" stageHP="0" subtype="16" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/cabbage.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Cabbage (food item)" numGridCollisionPoints="24" shadowSize="17" stageHP="0" subtype="17" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/onion.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Onion (food item)" numGridCollisionPoints="24" shadowSize="17" stageHP="0" subtype="18" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/pumpkin_slice.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Pumpkin Slice (food item)" numGridCollisionPoints="24" shadowSize="15" stageHP="0" subtype="19" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/tomato.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Tomato (food item)" numGridCollisionPoints="24" shadowSize="15" stageHP="0" subtype="20" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+    <entity anm2path="items/foods/monster_meat.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="3" collisionRadius="12" friction="1" id="5" name="Monster Meat (food item)" numGridCollisionPoints="24" shadowSize="17" stageHP="0" subtype="21" variant="203">
+        <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0"/>
+    </entity>
+</entities>

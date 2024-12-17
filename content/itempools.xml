@@ -1,0 +1,261 @@
+<ItemPools>
+    <Pool Name="treasure">
+        <Item Name="Absence Note" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Anorexia" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Beggar Mask" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Blaze Fly" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Bob's Stomach" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Bone-in Fish Steak" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Chef Hat" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Chocolate Pancake" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Collapse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Conjunctivitis" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Conservative Treatment" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Cornucopia" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Crown of Kings" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Guppy's Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Landmine" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Laser Blaster" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Magnifier" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Marriage Certificate" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Peeled Banana" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Planetarium Telescope" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Recon Vision" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Rewind" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Sticky Ball" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Strange Syringe" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Tool Box" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="shop">
+        <Item Name="Absence Note" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Anorexia" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Atonement Voucher" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Chef Hat" Weight="0.5" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Explosion Master" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Landmine" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Laser Blaster" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Order" Weight="0.2" DecreaseBy="0.1" RemoveOn="0.02"/>
+        <Item Name="Overload Battery" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Philosopher's Staff" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Recon Vision" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Ruby" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Tool Box" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Wake-up" Weight="0.5" DecreaseBy="0.5" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="boss">
+        <Item Name="Bone-in Fish Steak" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Chocolate Pancake" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Conservative Treatment" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Guppy's Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Peeled Banana" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Strange Syringe" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="devil">
+        <Item Name="Blood Sacrifice" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Fallen Sky" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Guilt" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Hades Blade" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Notice of Critical Condition" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Scapegoat" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Sinister Pact" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="angel">
+        <Item Name="Absolution" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Hephaestus' Soul" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="The Gospel of John" Weight="0.2" DecreaseBy="0.2" RemoveOn="0.1"/>
+        <Item Name="Blessed Destiny" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Oceanus' Soul" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="secret">
+        <Item Name="Beggar Mask" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Cornucopia" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Crown of Kings" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Mirroring" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Order" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Rewind" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Wake-up" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="library">
+        <Item Name="Enchanted Book" Weight="1" DecreaseBy="0.1" RemoveOn="0.1"/>
+        <Item Name="The Gospel of John" Weight="0.2" DecreaseBy="0.02" RemoveOn="0.02"/>
+	</Pool>
+    <Pool Name="goldenChest">
+        <Item Name="Chef Hat" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Explosion Master" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Magnifier" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Marriage Certificate" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Philosopher's Staff" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="redChest">
+        <Item Name="Cursed Dice" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Cursed Treasure" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Expired Glue" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Notice of Critical Condition" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="curse">
+        <Item Name="Collapse" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Cursed Dice" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Cursed Treasure" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Expired Glue" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Notice of Critical Condition" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="keyMaster">
+        <Item Name="Blaze Fly" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="greedTreasure">
+        <Item Name="Absence Note" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Anorexia" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Beggar Mask" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Blaze Fly" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Bob's Stomach" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Bone-in Fish Steak" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Chef Hat" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Chocolate Pancake" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Collapse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Conjunctivitis" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Conservative Treatment" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Cornucopia" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Guppy's Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Laser Blaster" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Magnifier" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Marriage Certificate" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Peeled Banana" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Recon Vision" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Sticky Ball" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Strange Syringe" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Tool Box" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="greedDevil">
+        <Item Name="Fallen Sky" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Guilt" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Hades Blade" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Scapegoat" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Sinister Pact" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+	</Pool>
+    <Pool Name="greedAngel">
+        <Item Name="Absolution" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Hephaestus' Soul" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Blessed Destiny" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Oceanus' Soul" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="The Gospel of John" Weight="0.2" DecreaseBy="0.2" RemoveOn="0.1"/>
+	</Pool>
+    <Pool Name="greedShop">
+        <Item Name="Anorexia" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Atonement Voucher" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Chef Hat" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Explosion Master" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Landmine" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Laser Blaster" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Order" Weight="0.5" DecreaseBy="0.5" RemoveOn="0.05"/>
+        <Item Name="Overload Battery" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Philosopher's Staff" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Recon Vision" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Ruby" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Tool Box" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="planetarium">
+        <Item Name="Planetarium Telescope" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+	</Pool>
+    <Pool Name="ultraSecret">
+        <Item Name="Blood Sacrifice" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Laser Blaster" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Sinister Pact" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Tool Box" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+        <Item Name="Wake-up" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
+	</Pool>
+    <Pool Name="bombBum">
+        <Item Name="Explosion Master" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Landmine" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+	</Pool>
+    <Pool Name="babyShop">
+        <Item Name="Blaze Fly" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="batteryBum">
+        <Item Name="Overload Battery" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="woodenChest">
+        <Item Name="Mirroring" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Mirroring Shard" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="craneGame">
+        <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="0.1" RemoveOn="0.1"/>
+        <Item Name="Magnifier" Weight="1" DecreaseBy="0.1" RemoveOn="0.1"/>
+        <Item Name="Overload Battery" Weight="1" DecreaseBy="0.1" RemoveOn="0.1"/>
+        <Item Name="Tool Box" Weight="1" DecreaseBy="0.1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="tyuIllness">
+        <Item Id="13" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="14" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="70" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="75" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="92" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="102" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="103" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="104" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="119" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="127" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="135" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="143" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="149" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="154" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="169" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="176" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="214" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="219" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="240" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="254" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="261" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="340" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="345" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="347" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="350" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="368" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="379" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="440" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="446" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="452" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="453" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="454" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="459" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="460" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="466" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="469" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="475" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="493" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="496" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="502" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="525" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="531" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="532" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="549" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="553" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="558" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="600" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="628" Weight="0.1" DecreaseBy="0.1" RemoveOn="0.01"/>
+        <Item Id="637" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="645" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="654" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="657" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="658" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="659" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="678" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="680" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="683" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="688" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="694" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="697" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="724" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="725" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="726" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Id="731" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Anorexia" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Conjunctivitis" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Conservative Treatment" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Strange Syringe" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+</ItemPools>

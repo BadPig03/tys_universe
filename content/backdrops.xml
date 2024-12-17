@@ -1,0 +1,6 @@
+<backdrops gfxroot="gfx/backdrop/" gridgfxroot="gfx/grid/" effectsgfxroot="gfx/effects/">
+	<backdrop name="tyuniverse_icu" gfx="icu.png" walls="1" wallvariants="6" floors="1" floorvariants="6"
+		nfloorgfx	= "icu_floor.png"
+		door		= "icu_door.png"
+	/>
+</backdrops>

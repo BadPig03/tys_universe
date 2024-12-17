@@ -1,0 +1,9 @@
+<giantbook anm2root="gfx/ui/giantbook/">
+	<entry name="TheGospelOfJohnGiantBook" anm2="TheGospelOfJohnGiantBook.anm2" anim="Shake" gfx="GiantBook_TheGospelOfJohn.png">
+		<layer name="poof" r="228" g="228" b="228" a="255" />
+		<layer name="bg" r="228" g="228" b="228" a="153" />
+		<layer name="poof2" r="225" g="225" b="225" a="128" />
+	</entry>
+	<entry name="WarfarinInGiantBook" anm2="WarfarinInGiantBook.anm2" anim="Appear" gfx="GiantBook_WarfarinIn.png" />
+	<entry name="WarfarinOutGiantBook" anm2="WarfarinOutGiantBook.anm2" anim="Appear" gfx="GiantBook_WarfarinOut.png" />
+</giantbook>

@@ -1,0 +1,4 @@
+<players root="gfx/characters/costumes/" portraitroot="gfx/ui/boss/" nameimageroot="gfx/ui/boss/">
+    <player name="Warfarin" skin="character_warfarin.png" heartcontainers="6" redhearts="6" bonehearts="1" keys="1" pocketActive="Blood Sample" costumeSuffix="warfarin" skinColor="-1" nameimage="playername_warfarin.png" portrait="playerportrait_warfarin.png" birthright="Better conversion" modcostume="6" speedmodifier="-0.2" rangemodifier="-1" luckmodifier="-0.5" noshake="true" />
+    <player name="Tainted Warfarin" skin="character_tainted_warfarin.png" healthtype="1" brokenhearts="12" costumeSuffix="tainted_warfarin" skinColor="-1" nameimage="playername_tainted_warfarin.png" portrait="playerportrait_tainted_warfarin.png" birthright="" achievement="tainted_ff0_unlocked" bSkinParent="Warfarin"/>
+</players>

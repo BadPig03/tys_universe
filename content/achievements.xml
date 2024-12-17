@@ -1,0 +1,5 @@
+<achievements gfxroot="gfx/ui/achievement/">
+	<achievement name="prompt_read" text='You have read the prompt"' gfx="achievement_prompt_read.png" hidden="true"/>
+	<achievement name="ff0_unlocked" text='You unlocked "ff0"' gfx="achievement_ff0.png"/>
+	<achievement name="tainted_ff0_unlocked" text='You unlocked "tainted ff0"' gfx="achievement_tainted_ff0.png"/>
+</achievements>

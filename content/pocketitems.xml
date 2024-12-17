@@ -1,0 +1,8 @@
+<pocketitems>
+	<!--Cards-->
+	<card type="special" name="Enchanted Card" hud="Enchanted Card" description="A random enchantment" pickup="128"/>
+	<card type="object" name="Glowing Hourglass Shard" hud="Glowing Hourglass Shard" description="Turn back time" pickup="129"/>
+
+	<!--Pills-->
+	<pilleffect id="0" name="Bait and Switch" class="0" mimiccharge="2"/>
+</pocketitems>

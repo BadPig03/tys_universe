@@ -1,0 +1,41 @@
+<costumes anm2root="gfx/characters/">
+	<!--Null Items-->
+	<costume id="2" anm2path="character_warfarin_black_candle.anm2" type="none"/>
+	<costume id="3" anm2path="character_warfarin_card_reading.anm2" type="none"/>
+	<costume id="4" anm2path="character_warfarin_ceremonial_robes.anm2" type="none" priority="99"/>
+	<costume id="5" anm2path="character_warfarin_esau_jr_hair.anm2" type="none" priority="98"/>
+	<costume id="6" anm2path="character_warfarin_hair.anm2" type="none" priority="97"/>
+	<costume id="7" anm2path="character_warfarin_haemolacria.anm2" type="none"/>
+	<costume id="8" anm2path="character_warfarin_frozen_hair.anm2" type="none" priority="98"/>
+	<costume id="9" anm2path="character_warfarin_frozen_hair.anm2" type="none" priority="98"/>
+	<costume id="10" anm2path="character_warfarin_frozen_hair.anm2" type="none" priority="98"/>
+	<costume id="11" anm2path="character_warfarin_frozen_hair2.anm2" type="none" priority="98"/>
+	<costume id="12" anm2path="character_warfarin_wings.anm2" type="none" isFlying="true"/>
+	<costume id="13" anm2path="character_warfarin_leo.anm2" type="none" priority="99"/>
+	<costume id="14" anm2path="character_warfarin_magic_8_ball.anm2" type="none"/>
+	<costume id="15" anm2path="character_warfarin_moms_wig.anm2" type="none" priority="99"/>
+	<costume id="16" anm2path="character_warfarin_reverse_empress.anm2" type="none" priority="99"/>
+	<costume id="17" anm2path="character_warfarin_taurus.anm2" type="none"/>
+	<costume id="18" anm2path="character_warfarin_wings.anm2" type="none" isFlying="true"/>
+	<costume id="36" anm2path="costume_effervescent_tablet.anm2" type="none"/>
+	<costume id="39" anm2path="costume_blessed_destiny.anm2" type="none" priority="1"/>
+	<costume id="41" anm2path="costume_ruby.anm2" type="none" priority="1"/>
+
+	<!--Normal Items-->
+	<costume id="1" anm2path="costume_absolution.anm2" type="passive"/>
+	<costume id="2" anm2path="costume_anorexia.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="4" anm2path="costume_beggar_mask.anm2" type="passive"/>
+	<costume id="10" anm2path="" type="passive" overwriteColor="true" skinColor="4" forceBodyColor="true" forceHeadColor="true"/>
+	<costume id="13" anm2path="costume_chef_hat.anm2" type="passive"/>
+	<costume id="14" anm2path="" type="passive" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
+	<costume id="15" anm2path="costume_conjunctivitis.anm2" type="passive"/>
+	<costume id="16" anm2path="costume_conservative_treatment.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="25" anm2path="costume_fallen_sky.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="26" anm2path="costume_guilt.anm2" type="passive"/>
+	<costume id="29" anm2path="costume_hephaestus_soul.anm2" type="passive" isFlying="true" hasOverlay="true"/>
+	<costume id="33" anm2path="costume_marriage_certificate.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="37" anm2path="costume_oceanus_soul.anm2" type="passive" isFlying="true"/>
+	<costume id="43" anm2path="costume_recon_vision.anm2" type="passive" priority="1"/>
+	<costume id="46" anm2path="costume_scapegoat.anm2" type="passive" priority="96" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
+	<costume id="48" anm2path="costume_sticky_ball.anm2" type="passive" hasSkinAlt="true"/>
+</costumes>
