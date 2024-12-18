@@ -1,11 +1,11 @@
 local Lib = TYU
-local SuperSonic = Lib:NewModEnchantment("Super Sonic", "SUPERSONIC")
+local SuperSonic = Lib:NewModEnchantment("Super Sonic", "SUPER_SONIC")
 
 function SuperSonic:PostUpdate()
     if Lib.GAME:GetRoom():HasCurseMist() then
         return
     end
-    local count = Lib.Players.GetNullEffectCounts(Lib.ModEnchantmentIDs.SUPERSONIC)
+    local count = Lib.Players.GetNullEffectCounts(Lib.ModEnchantmentIDs.SUPER_SONIC)
     if count <= 0 then
         return
     end

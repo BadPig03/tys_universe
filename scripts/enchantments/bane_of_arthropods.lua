@@ -1,5 +1,5 @@
 local Lib = TYU
-local BaneOfArthropods = Lib:NewModEnchantment("Bane Of Arthropods", "BANEOFARTHROPODS")
+local BaneOfArthropods = Lib:NewModEnchantment("Bane Of Arthropods", "BANE_OF_ARTHROPODS")
 
 local arthropodList = {
     [EntityType.ENTITY_FLY] = true,
@@ -50,7 +50,7 @@ function BaneOfArthropods:TakeDamage(entity, amount, flags, source, countdown)
     if Lib.GAME:GetRoom():HasCurseMist() or not entity:ToNPC() then
         return
     end
-    local count = Lib.Players.GetNullEffectCounts(Lib.ModEnchantmentIDs.BANEOFARTHROPODS)
+    local count = Lib.Players.GetNullEffectCounts(Lib.ModEnchantmentIDs.BANE_OF_ARTHROPODS)
     if count == 0 or not arthropodList[entity.Type] or (type(arthropodList[entity.Type]) == "table" and not arthropodList[entity.Type][entity.Variant]) then
         return
     end

@@ -1,5 +1,7 @@
 local Absolution = TYU:NewModItem("Absolution", "ABSOLUTION")
 local Players = TYU.Players
+local Utils = TYU.Utils
+local ModItemIDs = TYU.ModItemIDs
 local PrivateField = {}
 
 do
@@ -23,7 +25,7 @@ do
             ['BloodSacrifice'] = DamageFlag.DAMAGE_FAKE | DamageFlag.DAMAGE_NO_PENALTIES | DamageFlag.DAMAGE_INVINCIBLE
         }
         for _, flags in pairs(selfDamageFlags) do
-            if damageFlags & flags == flags then
+            if Utils.HasFlags(damageFlags, flags) then
                 return true
             end
         end
@@ -33,7 +35,7 @@ end
 
 function Absolution:EntityTakeDamage(entity, amount, flags, source, countdown)
     local player = entity:ToPlayer()
-    if not player or not player:HasCollectible(TYU.ModItemIDs.ABSOLUTION) then
+    if not player or not player:HasCollectible(ModItemIDs.ABSOLUTION) then
         return
     end
     if PrivateField.IsSelfDamage(flags) then
@@ -48,7 +50,7 @@ Absolution:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, Absolution.EntityTakeDam
 
 function Absolution:FamiliarUpdate(familiar)
     local player = familiar.Player
-    if not player or not player:HasCollectible(TYU.ModItemIDs.ABSOLUTION) or not player:HasCollectible(CollectibleType.COLLECTIBLE_DAMOCLES_PASSIVE) or familiar.State ~= 2 or player:HasInvincibility() then
+    if not player or not player:HasCollectible(ModItemIDs.ABSOLUTION) or not player:HasCollectible(CollectibleType.COLLECTIBLE_DAMOCLES_PASSIVE) or familiar.State ~= 2 or player:HasInvincibility() then
         return
     end
     Players.AddShield(player, 30)

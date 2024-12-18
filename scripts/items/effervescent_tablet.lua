@@ -1,8 +1,8 @@
 local Lib = TYU
-local EffervescentTablet = Lib:NewModItem("Effervescent Tablet", "EFFERVESCENTTABLET")
+local EffervescentTablet = Lib:NewModItem("Effervescent Tablet", "EFFERVESCENT_TABLET")
 
 function EffervescentTablet:EvaluateCache(player, cacheFlag)
-    if not player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.EFFERVESCENTTABLETEFFECT) then
+    if not player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.EFFERVESCENT_TABLET_EFFECT) then
         return
     end
     if cacheFlag == CacheFlag.CACHE_SPEED then
@@ -33,7 +33,7 @@ EffervescentTablet:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, EffervescentTable
 
 function EffervescentTablet:PostFireTear(tear)
     local player = tear.SpawnerEntity and tear.SpawnerEntity:ToPlayer()
-    if not player or not player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.EFFERVESCENTTABLETEFFECT) then
+    if not player or not player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.EFFERVESCENT_TABLET_EFFECT) then
         return
     end
     tear:ChangeVariant(TearVariant.BALLOON_BRIMSTONE)
@@ -50,7 +50,7 @@ function EffervescentTablet:PostFamiliarFireProjectile(tear)
         return
     end
     local familiar = tear.SpawnerEntity and tear.SpawnerEntity:ToFamiliar()
-    if familiar.SubType ~= Lib.ModItemIDs.EFFERVESCENTTABLET then
+    if familiar.SubType ~= Lib.ModItemIDs.EFFERVESCENT_TABLET then
         return
     end
     local color = Color(1, 1, 1, 0.7, 0, 0, 0)
@@ -60,7 +60,7 @@ end
 EffervescentTablet:AddCallback(ModCallbacks.MC_POST_FAMILIAR_FIRE_PROJECTILE, EffervescentTablet.PostFamiliarFireProjectile, FamiliarVariant.WISP)
 
 function EffervescentTablet:FamiliarUpdate(familiar)
-    if familiar.SubType ~= Lib.ModItemIDs.EFFERVESCENTTABLET then
+    if familiar.SubType ~= Lib.ModItemIDs.EFFERVESCENT_TABLET then
         return
     end
     if familiar.FrameCount >= 240 then
@@ -70,10 +70,10 @@ end
 EffervescentTablet:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, EffervescentTablet.FamiliarUpdate, FamiliarVariant.WISP)
 
 function EffervescentTablet:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
-    player:AddNullItemEffect(Lib.ModNullItemIDs.EFFERVESCENTTABLETEFFECT, true, 120, true)
+    player:AddNullItemEffect(Lib.ModNullItemIDs.EFFERVESCENT_TABLET_EFFECT, true, 120, true)
     player:AddCacheFlags(CacheFlag.CACHE_ALL, true)
     return { Discharge = true, Remove = false, ShowAnim = true }
 end
-EffervescentTablet:AddCallback(ModCallbacks.MC_USE_ITEM, EffervescentTablet.UseItem, Lib.ModItemIDs.EFFERVESCENTTABLET)
+EffervescentTablet:AddCallback(ModCallbacks.MC_USE_ITEM, EffervescentTablet.UseItem, Lib.ModItemIDs.EFFERVESCENT_TABLET)
 
 return EffervescentTablet

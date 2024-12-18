@@ -1,14 +1,14 @@
 local Lib = TYU
-local WakeUp = Lib:NewModItem("Wake-up", "WAKEUP")
+local WakeUp = Lib:NewModItem("Wake-up", "WAKE_UP")
 
 local function IsInvalidRoom()
     if Lib.LEVEL:GetCurrentRoomIndex() ~= GridRooms.ROOM_EXTRA_BOSS_IDX or not Lib.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data then
         return true
     end
-    if Lib.ModRoomIDs.WAKEUPMAINROOM == -1 then
+    if Lib.ModRoomIDs.WAKE_UP_MAIN_ROOM == -1 then
         Lib.SaveAndLoad.ReloadRoomData()
     end
-    if Lib.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data.Variant ~= Lib.ModRoomIDs.WAKEUPMAINROOM then
+    if Lib.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data.Variant ~= Lib.ModRoomIDs.WAKE_UP_MAIN_ROOM then
         return true
     end
     return false
@@ -46,11 +46,11 @@ function WakeUp:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     if Lib:GetGlobalLibData("WakeUp", "Used") or Lib:GetGlobalLibData("WakeUp", "Killed") or Lib:GetGlobalLibData("WakeUp", "Escaped") or Lib.GAME:IsGreedMode() or Lib.LEVEL:GetAbsoluteStage() >= LevelStage.STAGE5 or Lib.LEVEL:IsAscent() or Lib.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data then
         return { Discharge = false, Remove = false, ShowAnim = true }
     end
-    if Lib.ModRoomIDs.WAKEUPMAINROOM == -1 then
+    if Lib.ModRoomIDs.WAKE_UP_MAIN_ROOM == -1 then
         Lib.SaveAndLoad.ReloadRoomData()
     end
     player:UseCard(Card.CARD_REVERSE_EMPEROR, 0)
-    local newRoom = RoomConfigHolder.GetRoomByStageTypeAndVariant(StbType.SPECIAL_ROOMS, RoomType.ROOM_ERROR, Lib.ModRoomIDs.WAKEUPMAINROOM)
+    local newRoom = RoomConfigHolder.GetRoomByStageTypeAndVariant(StbType.SPECIAL_ROOMS, RoomType.ROOM_ERROR, Lib.ModRoomIDs.WAKE_UP_MAIN_ROOM)
     Lib.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data = newRoom
     Lib.GAME:StartRoomTransition(GridRooms.ROOM_EXTRA_BOSS_IDX, Direction.UP, RoomTransitionAnim.DEATH_CERTIFICATE, Isaac.GetPlayer(0), 0)
     Lib:SetGlobalLibData(true, "WakeUp", "Used")
@@ -59,7 +59,7 @@ function WakeUp:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     Lib:SetGlobalLibData(player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_BELIAL_PASSIVE), "WakeUp", "Devil")
 	return { Discharge = true, Remove = true, ShowAnim = true }
 end
-WakeUp:AddCallback(ModCallbacks.MC_USE_ITEM, WakeUp.UseItem, Lib.ModItemIDs.WAKEUP)
+WakeUp:AddCallback(ModCallbacks.MC_USE_ITEM, WakeUp.UseItem, Lib.ModItemIDs.WAKE_UP)
 
 function WakeUp:PostNewLevel()
     if Lib:GetGlobalLibData("WakeUp", "CurrentLevelUsed") then
@@ -109,7 +109,7 @@ function WakeUp:PostUpdate()
     local room = Lib.GAME:GetRoom()
     if Lib:GetGlobalLibData("WakeUp", "Escaped") then
         if room:GetFrameCount() % 300 == 30 then
-            local rng = Isaac.GetPlayer(0):GetCollectibleRNG(Lib.ModItemIDs.WAKEUP)
+            local rng = Isaac.GetPlayer(0):GetCollectibleRNG(Lib.ModItemIDs.WAKE_UP)
             local angelBaby = Lib.Entities.Spawn(EntityType.ENTITY_DOGMA, 10, 0, room:GetGridPosition(room:GetRandomTileIndex(rng:Next())))
             angelBaby:SetInvincible(true)
             angelBaby:AddEntityFlags(EntityFlag.FLAG_AMBUSH | EntityFlag.FLAG_NO_STATUS_EFFECTS)

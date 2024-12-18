@@ -1,12 +1,12 @@
 local Lib = TYU
-local TwilightFoxHalo = Lib:NewModEntity("Twilight Fox Halo", "TWILIGHTFOXHALO")
+local TwilightFoxHalo = Lib:NewModEntity("Twilight Fox Halo", "TWILIGHT_FOX_HALO")
 
 function TwilightFoxHalo:PostEffectUpdate(effect)
-    if effect.SubType ~= 3 and effect.SubType ~= Lib.ModEntityIDs.TWILIGHTFOXHALO.SubType then
+    if effect.SubType ~= 3 and effect.SubType ~= Lib.ModEntityIDs.TWILIGHT_FOX_HALO.SubType then
         return
     end
     local familiar = effect.SpawnerEntity and effect.SpawnerEntity:ToFamiliar()
-    if not familiar or familiar.SubType ~= Lib.ModEntityIDs.TWILIGHTFOX.SubType or not effect.IsFollowing then
+    if not familiar or familiar.SubType ~= Lib.ModEntityIDs.TWILIGHT_FOX.SubType or not effect.IsFollowing then
         effect:Remove()
         return
     end
@@ -22,7 +22,7 @@ function TwilightFoxHalo:PostEffectUpdate(effect)
             end
         end
     end
-    if effect.SubType == Lib.ModEntityIDs.TWILIGHTFOXHALO.SubType then
+    if effect.SubType == Lib.ModEntityIDs.TWILIGHT_FOX_HALO.SubType then
         for _, ent in pairs(Isaac.FindInRadius(effect.Position + Vector(0, -5), 52, EntityPartition.BULLET | EntityPartition.ENEMY)) do
             if ent:ToProjectile() then
                 familiar.Hearts = familiar.Hearts + 1
@@ -35,6 +35,6 @@ function TwilightFoxHalo:PostEffectUpdate(effect)
         end
     end
 end
-TwilightFoxHalo:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, TwilightFoxHalo.PostEffectUpdate, Lib.ModEntityIDs.TWILIGHTFOXHALO.Variant)
+TwilightFoxHalo:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, TwilightFoxHalo.PostEffectUpdate, Lib.ModEntityIDs.TWILIGHT_FOX_HALO.Variant)
 
 return TwilightFoxHalo

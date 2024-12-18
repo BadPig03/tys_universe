@@ -43,8 +43,21 @@ function Utils.IsCathedral()
     return TYU.LEVEL:GetStage() == LevelStage.STAGE5 and TYU.LEVEL:GetStageType() == StageType.STAGETYPE_WOTL
 end
 
-function Utils.HasUseFlags(useFlags, flag)
-    return useFlags & flag == flag
+function Utils.HasFlags(useFlags, flag, reverse)
+    if reverse then
+        return useFlags & flag ~= flag
+    else
+        return useFlags & flag == flag
+    end
+end
+
+function Utils.GetPlayerFromTear(tear)
+    if tear.SpawnerEntity and tear.SpawnerEntity:ToPlayer() then
+        return tear.SpawnerEntity:ToPlayer()
+    elseif tear.SpawnerEntity and tear.SpawnerEntity:ToFamiliar() and (tear.SpawnerEntity.Variant == FamiliarVariant.CAINS_OTHER_EYE or tear.SpawnerEntity.Variant == FamiliarVariant.INCUBUS or tear.SpawnerEntity.Variant == FamiliarVariant.FATES_REWARD or tear.SpawnerEntity.Variant == FamiliarVariant.TWISTED_BABY or tear.SpawnerEntity.Variant == FamiliarVariant.BLOOD_BABY or tear.SpawnerEntity.Variant == FamiliarVariant.UMBILICAL_BABY) and tear.SpawnerEntity:ToFamiliar().Player and tear.SpawnerEntity:ToFamiliar().Player:ToPlayer() then
+        return tear.SpawnerEntity:ToFamiliar().Player:ToPlayer()
+    end
+    return nil
 end
 
 function Utils.CreateTimer(...)

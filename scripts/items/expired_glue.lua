@@ -1,8 +1,8 @@
 local Lib = TYU
-local ExpiredGlue = Lib:NewModItem("Expired Glue", "EXPIREDGLUE")
+local ExpiredGlue = Lib:NewModItem("Expired Glue", "EXPIRED_GLUE")
 
 function ExpiredGlue:PostPickupInit(pickup)
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.EXPIREDGLUE) or pickup.SubType == CoinSubType.COIN_STICKYNICKEL then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.EXPIRED_GLUE) or pickup.SubType == CoinSubType.COIN_STICKYNICKEL then
         return
     end
     Lib.Entities.Morph(pickup, nil, nil, CoinSubType.COIN_STICKYNICKEL)

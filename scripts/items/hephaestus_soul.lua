@@ -1,8 +1,8 @@
 local Lib = TYU
-local HephaestusSoul = Lib:NewModItem("Hephaestus' Soul", "HEPHAESTUSSOUL")
+local HephaestusSoul = Lib:NewModItem("Hephaestus' Soul", "HEPHAESTUS_SOUL")
 
 local function SpawnChargeBar(player)
-    local chargeBar = Lib.Entities.Spawn(Lib.ModEntityIDs.HEPHAESTUSSOULCHARGEBAR.Type, Lib.ModEntityIDs.HEPHAESTUSSOULCHARGEBAR.Variant, Lib.ModEntityIDs.HEPHAESTUSSOULCHARGEBAR.SubType, player.Position + Lib.Players.GetChargeBarPosition(player, 2), player.Velocity, player):ToEffect()
+    local chargeBar = Lib.Entities.Spawn(Lib.ModEntityIDs.HEPHAESTUS_SOUL_CHARGEBAR.Type, Lib.ModEntityIDs.HEPHAESTUS_SOUL_CHARGEBAR.Variant, Lib.ModEntityIDs.HEPHAESTUS_SOUL_CHARGEBAR.SubType, player.Position + Lib.Players.GetChargeBarPosition(player, 2), player.Velocity, player):ToEffect()
     chargeBar.Parent = player
     chargeBar:FollowParent(player)
     chargeBar.DepthOffset = 104
@@ -16,7 +16,7 @@ local function SpawnChargeBar(player)
 end
 
 local function GetChargerBar(player)
-    for _, effect in pairs(Isaac.FindByType(Lib.ModEntityIDs.HEPHAESTUSSOULCHARGEBAR.Type, Lib.ModEntityIDs.HEPHAESTUSSOULCHARGEBAR.Variant, Lib.ModEntityIDs.HEPHAESTUSSOULCHARGEBAR.SubType)) do
+    for _, effect in pairs(Isaac.FindByType(Lib.ModEntityIDs.HEPHAESTUS_SOUL_CHARGEBAR.Type, Lib.ModEntityIDs.HEPHAESTUS_SOUL_CHARGEBAR.Variant, Lib.ModEntityIDs.HEPHAESTUS_SOUL_CHARGEBAR.SubType)) do
         if effect.Parent and effect.Parent:ToPlayer() and GetPtrHash(effect.Parent:ToPlayer()) == GetPtrHash(player) then
             return effect:ToEffect()
         end
@@ -107,7 +107,7 @@ local function SpawnFireProjectiles(player)
         if player:HasCollectible(CollectibleType.COLLECTIBLE_BIRDS_EYE) then
             projectile:AddProjectileFlags(ProjectileFlags.FIRE_SPAWN)
         end
-        if player:HasCollectible(CollectibleType.COLLECTIBLE_GHOST_PEPPER) or player:HasCollectible(Lib.ModItemIDs.OCEANUSSOUL) then
+        if player:HasCollectible(CollectibleType.COLLECTIBLE_GHOST_PEPPER) or player:HasCollectible(Lib.ModItemIDs.OCEANUS_SOUL) then
             projectile:AddProjectileFlags(ProjectileFlags.BLUE_FIRE_SPAWN)
             projectile:GetSprite().Color = Color(1, 1, 1, 1, -0.49, -0.1, 0, 0.51, 0.9, 1, 1)
         end
@@ -129,7 +129,7 @@ local function SpawnFireProjectiles(player)
 end
 
 function HephaestusSoul:EvaluateCache(player, cacheFlag)
-    if not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUSSOUL) then
+    if not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUS_SOUL) then
 		return
     end
     player.CanFly = true
@@ -137,7 +137,7 @@ end
 HephaestusSoul:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, HephaestusSoul.EvaluateCache, CacheFlag.CACHE_FLYING)
 
 function HephaestusSoul:PostPlayerUpdate(player)
-    if not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUSSOUL) then
+    if not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUS_SOUL) then
 		return
     end
     local chargeBar = GetChargerBar(player)
@@ -173,7 +173,7 @@ HephaestusSoul:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, HephaestusSoul.Po
 
 function HephaestusSoul:PostEffectInit(effect)
     local player = effect.SpawnerEntity and effect.SpawnerEntity:ToPlayer()
-    if not player or not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUSSOUL) then
+    if not player or not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUS_SOUL) then
         return
     end
     effect.CollisionDamage = player.Damage * 4 + 12
@@ -182,7 +182,7 @@ HephaestusSoul:AddCallback(ModCallbacks.MC_POST_EFFECT_INIT, HephaestusSoul.Post
 
 function HephaestusSoul:PostEffectUpdate(effect)
     local player = effect.SpawnerEntity and effect.SpawnerEntity:ToPlayer()
-    if not player or not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUSSOUL) then
+    if not player or not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUS_SOUL) then
         return
     end
     for _, ent in pairs(Isaac.FindInRadius(effect.Position, 11, EntityPartition.BULLET)) do
@@ -245,7 +245,7 @@ function HephaestusSoul:EntityTakeDMG(entity, damage, damageFlags, source, count
     end
     local familiar = entity:ToFamiliar()
     local player = familiar.Player
-    if not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUSSOUL) then
+    if not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUS_SOUL) then
         return
     end
     if source.Type == EntityType.ENTITY_PROJECTILE and source.Variant == ProjectileVariant.PROJECTILE_FIRE and source.Entity:ToProjectile():HasProjectileFlags(Lib.ModProjectileFlags.TEAR_BELONGTOPLAYER) then
@@ -258,7 +258,7 @@ end
 HephaestusSoul:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, HephaestusSoul.EntityTakeDMG)
 
 function HephaestusSoul:PrePlayerTakeDamage(player, amount, flags, source, countdown)
-	if not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUSSOUL) or (source.Type == EntityType.ENTITY_FIREPLACE and source.Variant == 4) or flags & DamageFlag.DAMAGE_FIRE ~= DamageFlag.DAMAGE_FIRE then
+	if not player:HasCollectible(Lib.ModItemIDs.HEPHAESTUS_SOUL) or (source.Type == EntityType.ENTITY_FIREPLACE and source.Variant == 4) or flags & DamageFlag.DAMAGE_FIRE ~= DamageFlag.DAMAGE_FIRE then
 		return
 	end
     return false

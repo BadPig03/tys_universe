@@ -50,11 +50,11 @@ function Ruby:PostPlayerUpdate(player)
         end
     end
     local effects = player:GetEffects()
-    if found and not effects:HasNullEffect(Lib.ModNullItemIDs.RUBYEFFECT) then
-        effects:AddNullEffect(Lib.ModNullItemIDs.RUBYEFFECT)
+    if found and not effects:HasNullEffect(Lib.ModNullItemIDs.RUBY_EFFECT) then
+        effects:AddNullEffect(Lib.ModNullItemIDs.RUBY_EFFECT)
     end
-    if not found and effects:HasNullEffect(Lib.ModNullItemIDs.RUBYEFFECT) then
-        effects:RemoveNullEffect(Lib.ModNullItemIDs.RUBYEFFECT)
+    if not found and effects:HasNullEffect(Lib.ModNullItemIDs.RUBY_EFFECT) then
+        effects:RemoveNullEffect(Lib.ModNullItemIDs.RUBY_EFFECT)
     end
 end
 Ruby:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, Ruby.PostPlayerUpdate, 0)

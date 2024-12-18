@@ -26,11 +26,11 @@ end
 local function ReplaceDevilRoom()
     Lib.LEVEL:InitializeDevilAngelRoom(false, true)
     local rng = Isaac.GetPlayer(0):GetCollectibleRNG(Lib.ModItemIDs.GUILT)
-    if #Lib.ModRoomIDs.GUILTDEVILROOMS == 0 then
+    if #Lib.ModRoomIDs.GUILT_DEVIL_ROOMS == 0 then
         Lib.SaveAndLoad.ReloadRoomData()
     end
     local roomList = WeightedOutcomePicker()
-    for _, id in ipairs(Lib.ModRoomIDs.GUILTDEVILROOMS) do
+    for _, id in ipairs(Lib.ModRoomIDs.GUILT_DEVIL_ROOMS) do
         roomList:AddOutcomeWeight(id, 1)
     end
     local newRoom = RoomConfigHolder.GetRoomByStageTypeAndVariant(StbType.SPECIAL_ROOMS, RoomType.ROOM_DEVIL, roomList:PickOutcome(rng))

@@ -1,7 +1,8 @@
-local AbsenceNote = TYU:NewModItem("Absence Note", "ABSENCENOTE")
+local AbsenceNote = TYU:NewModItem("Absence Note", "ABSENCE_NOTE")
 local Players = TYU.Players
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+local ModItemIDs = TYU.ModItemIDs
 local PrivateField = {}
 
 do
@@ -27,7 +28,7 @@ do
 end
 
 function AbsenceNote:PostNewRoom()
-    if not Players.AnyoneHasCollectible(TYU.ModItemIDs.ABSENCENOTE) or not Utils.IsRoomFirstVisit() then
+    if not Players.AnyoneHasCollectible(ModItemIDs.ABSENCE_NOTE) or not Utils.IsRoomFirstVisit() then
         return
     end
     local room = TYU.GAME:GetRoom()
@@ -42,11 +43,11 @@ AbsenceNote:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, AbsenceNote.PostNewRoom)
 function AbsenceNote:PostAddCollectible(collectibleType, charge, firstTime, slot, varData, player)
     PrivateField.SetWaves()
 end
-AbsenceNote:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, AbsenceNote.PostAddCollectible, TYU.ModItemIDs.ABSENCENOTE)
+AbsenceNote:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, AbsenceNote.PostAddCollectible, ModItemIDs.ABSENCE_NOTE)
 
 function AbsenceNote:PostTriggerCollectibleRemoved(player, collectibleType)
     PrivateField.ResetWaves()
 end
-AbsenceNote:AddCallback(ModCallbacks.MC_POST_TRIGGER_COLLECTIBLE_REMOVED, AbsenceNote.PostTriggerCollectibleRemoved, TYU.ModItemIDs.ABSENCENOTE)    
+AbsenceNote:AddCallback(ModCallbacks.MC_POST_TRIGGER_COLLECTIBLE_REMOVED, AbsenceNote.PostTriggerCollectibleRemoved, ModItemIDs.ABSENCE_NOTE)    
 
 return AbsenceNote

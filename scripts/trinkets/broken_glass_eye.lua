@@ -1,8 +1,8 @@
 local Lib = TYU
-local BrokenGlassEye = Lib:NewModTrinket("Broken Glass Eye", "BROKENGLASSEYE")
+local BrokenGlassEye = Lib:NewModTrinket("Broken Glass Eye", "BROKEN_GLASS_EYE")
 
 function BrokenGlassEye:EvaluateCache(player, cacheFlag)
-    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BROKENGLASSEYE)
+    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BROKEN_GLASS_EYE)
     if multiplier == 0 then
         return
     end
@@ -19,7 +19,7 @@ function BrokenGlassEye:PostPlayerGetMultiShotParams(player)
     if not weapon then
         return
     end
-    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BROKENGLASSEYE)
+    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BROKEN_GLASS_EYE)
     if multiplier == 0 then
         return
     end

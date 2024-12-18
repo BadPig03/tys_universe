@@ -1,5 +1,5 @@
 local Lib = TYU
-local PlanetariumTelescope = Lib:NewModItem("Planetarium Telescope", "PLANETARIUMTELESCOPE")
+local PlanetariumTelescope = Lib:NewModItem("Planetarium Telescope", "PLANETARIUM_TELESCOPE")
 
 local function GetAvarageLuck()
     local luck = 0
@@ -18,7 +18,7 @@ local function GetItemCount(player)
 end
 
 function PlanetariumTelescope:EvaluateCache(player, cacheFlag)
-    if not player:HasCollectible(Lib.ModItemIDs.PLANETARIUMTELESCOPE) then
+    if not player:HasCollectible(Lib.ModItemIDs.PLANETARIUM_TELESCOPE) then
         return
     end
     player.Luck = player.Luck + 2 * GetItemCount(player)
@@ -27,7 +27,7 @@ PlanetariumTelescope:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, PlanetariumTele
 
 function PlanetariumTelescope:PrePlanetariumApplyStagePenalty()
     local stage = Lib.LEVEL:GetAbsoluteStage()
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.PLANETARIUMTELESCOPE) or stage == LevelStage.STAGE4_3 or stage == LevelStage.STAGE8 then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.PLANETARIUM_TELESCOPE) or stage == LevelStage.STAGE4_3 or stage == LevelStage.STAGE8 then
         return
     end
     return false
@@ -35,7 +35,7 @@ end
 PlanetariumTelescope:AddCallback(ModCallbacks.MC_PRE_PLANETARIUM_APPLY_STAGE_PENALTY, PlanetariumTelescope.PrePlanetariumApplyStagePenalty)
 
 function PlanetariumTelescope:PrePlanetariumApplyTelescopeLens(chance)
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.PLANETARIUMTELESCOPE) then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.PLANETARIUM_TELESCOPE) then
         return
     end
     return chance + math.min(0.5, math.max(0, GetAvarageLuck() / 12))
@@ -44,7 +44,7 @@ PlanetariumTelescope:AddCallback(ModCallbacks.MC_PRE_PLANETARIUM_APPLY_TELESCOPE
 
 function PlanetariumTelescope:PostAddCollectible(type, charge, firstTime, slot, varData, player)
     local room = Lib.GAME:GetRoom()
-    if type == Lib.ModItemIDs.PLANETARIUMTELESCOPE and firstTime then
+    if type == Lib.ModItemIDs.PLANETARIUM_TELESCOPE and firstTime then
         Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_STARS, room:FindFreePickupSpawnPosition(player.Position, 0, true))
     end
     if type and Lib.ITEMCONFIG:GetCollectible(type):HasTags(ItemConfig.TAG_STARS) then
@@ -55,7 +55,7 @@ PlanetariumTelescope:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, Planetari
 
 function PlanetariumTelescope:PostPickupUpdate(pickup)
     local room = Lib.GAME:GetRoom()
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.PLANETARIUMTELESCOPE) or room:GetType() ~= RoomType.ROOM_PLANETARIUM or pickup.OptionsPickupIndex == 0 then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.PLANETARIUM_TELESCOPE) or room:GetType() ~= RoomType.ROOM_PLANETARIUM or pickup.OptionsPickupIndex == 0 then
         return
     end
     pickup.OptionsPickupIndex = 0

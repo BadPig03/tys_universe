@@ -1,15 +1,15 @@
 local Lib = TYU
-local NoticeOfCriticalCondition = Lib:NewModItem("Notice of Critical Condition", "NOTICEOFCRITICALCONDITION")
+local NoticeOfCriticalCondition = Lib:NewModItem("Notice of Critical Condition", "NOTICE_OF_CRITICAL_CONDITION")
 
 local itemPoolFlag = true
 
 function NoticeOfCriticalCondition:PostNewLevel()
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.NOTICEOFCRITICALCONDITION) or Lib.LEVEL:IsAscent() or Lib.Levels.AtHome() or Lib.LEVEL:GetStage() == LevelStage.STAGE7 then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.NOTICE_OF_CRITICAL_CONDITION) or Lib.LEVEL:IsAscent() or Lib.Levels.AtHome() or Lib.LEVEL:GetStage() == LevelStage.STAGE7 then
         return
     end
     Lib:SetGlobalLibData({ RoomIndex = -1, Spawned = false }, "NoticeOfCriticalCondition")
     for _, player in pairs(Lib.Players.GetPlayers(true)) do
-		if player:HasCollectible(Lib.ModItemIDs.NOTICEOFCRITICALCONDITION) then
+		if player:HasCollectible(Lib.ModItemIDs.NOTICE_OF_CRITICAL_CONDITION) then
             local type = player:GetPlayerType()
             if type == PlayerType.PLAYER_THEFORGOTTEN or type == PlayerType.PLAYER_THESOUL then
                 player:AddBrokenHearts(1)
@@ -21,9 +21,9 @@ function NoticeOfCriticalCondition:PostNewLevel()
     if Lib.ModRoomIDs.ICUROOMEMPTY == -1 then
         Lib.SaveAndLoad.ReloadRoomData()
     end
-    local rng = Isaac.GetPlayer(0):GetCollectibleRNG(Lib.ModItemIDs.NOTICEOFCRITICALCONDITION)
+    local rng = Isaac.GetPlayer(0):GetCollectibleRNG(Lib.ModItemIDs.NOTICE_OF_CRITICAL_CONDITION)
     local roomList = WeightedOutcomePicker()
-    for _, id in ipairs(Lib.ModRoomIDs.ICUROOMS) do
+    for _, id in ipairs(Lib.ModRoomIDs.ICU_ROOMS) do
         roomList:AddOutcomeWeight(id, 1)
     end
     local newRoom = RoomConfigHolder.GetRoomByStageTypeAndVariant(StbType.SPECIAL_ROOMS, RoomType.ROOM_SECRET_EXIT, roomList:PickOutcome(rng))
@@ -81,11 +81,11 @@ function NoticeOfCriticalCondition:ReplaceICUDoorSprite()
         room:SetBackdropType(Lib.ModBackdropIDs.ICU, 1)
         if room:IsFirstVisit() then
             for _, slot in pairs(Isaac.FindByType(EntityType.ENTITY_SLOT, SlotVariant.MOMS_DRESSING_TABLE)) do
-                Lib.Entities.Spawn(Lib.ModEntityIDs.HEALINGBEGGAR.Type, Lib.ModEntityIDs.HEALINGBEGGAR.Variant, Lib.ModEntityIDs.HEALINGBEGGAR.SubType, slot.Position)
+                Lib.Entities.Spawn(Lib.ModEntityIDs.HEALING_BEGGAR.Type, Lib.ModEntityIDs.HEALING_BEGGAR.Variant, Lib.ModEntityIDs.HEALING_BEGGAR.SubType, slot.Position)
                 slot:Remove()
             end
             for _, bed in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_BED)) do
-                Lib.Entities.Spawn(Lib.ModEntityIDs.ICUBED.Type, Lib.ModEntityIDs.ICUBED.Variant, Lib.ModEntityIDs.ICUBED.SubType, bed.Position)
+                Lib.Entities.Spawn(Lib.ModEntityIDs.ICU_BED.Type, Lib.ModEntityIDs.ICU_BED.Variant, Lib.ModEntityIDs.ICU_BED.SubType, bed.Position)
                 bed:Remove()
             end
             Lib.Levels.RemoveAllDecorations()
@@ -95,10 +95,10 @@ end
 NoticeOfCriticalCondition:AddCallback(Lib.Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, NoticeOfCriticalCondition.ReplaceICUDoorSprite)
 
 function NoticeOfCriticalCondition:UsePill(pillEffect, player, useFlags, pillColor)
-    if not player:HasCollectible(Lib.ModItemIDs.NOTICEOFCRITICALCONDITION) or pillColor == PillColor.PILL_NULL then
+    if not player:HasCollectible(Lib.ModItemIDs.NOTICE_OF_CRITICAL_CONDITION) or pillColor == PillColor.PILL_NULL then
         return
     end
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.NOTICEOFCRITICALCONDITION)
+    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.NOTICE_OF_CRITICAL_CONDITION)
     local pillConfig = Lib.ITEMCONFIG:GetPillEffect(pillEffect)
     if pillConfig.EffectSubClass == 1 and player:GetBrokenHearts() >= 1 and rng:RandomInt(100) < 25 then
         Lib.SFXMANAGER:Play(SoundEffect.SOUND_BAND_AID_PICK_UP, 0.6)

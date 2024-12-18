@@ -3,7 +3,7 @@ local EIDLanguage = { "zh_cn", "en_us" }
 local Lib = TYU
 
 EIDInfo.Collectibles = {
-    [Lib.ModItemIDs.ABSENCENOTE] = {
+    [Lib.ModItemIDs.ABSENCE_NOTE] = {
         {
             Name = "请假条",
             Desc = "#进入新的{{ChallengeRoom}}挑战房、{{BossRushRoom}}头目挑战房或头目车轮战房时会生成一张床"..
@@ -43,7 +43,7 @@ EIDInfo.Collectibles = {
             "#{{Warning}} Overriden by the {{Collectible664}}Binge Eater"
         }
     },
-    [Lib.ModItemIDs.ATONEMENTVOUCHER] = {
+    [Lib.ModItemIDs.ATONEMENT_VOUCHER] = {
         {
             Name = "赎罪券",
             Desc = "#{{AngelChance}} 本层天使房的几率为100%"..
@@ -57,7 +57,7 @@ EIDInfo.Collectibles = {
             "#{{DevilChance}} If a Devil Deal was taken previously, grants a {{Collectible673}}Redemption instead"
         }
     },
-    [Lib.ModItemIDs.BEGGARMASK] = {
+    [Lib.ModItemIDs.BEGGAR_MASK] = {
         {
             Name = "丐帮面具",
             Desc = "#部分房间第一次进入时会生成一个对应的乞丐"..
@@ -69,7 +69,7 @@ EIDInfo.Collectibles = {
             "#When a beggar leaves after dropping an item or trinket, there is a chance that the beggar will respawn"
         }
     },
-    [Lib.ModItemIDs.BLAZEFLY] = {
+    [Lib.ModItemIDs.BLAZE_FLY] = {
         {
             Name = "烈焰苍蝇",
             Desc = "#斜向移动"..
@@ -85,7 +85,7 @@ EIDInfo.Collectibles = {
             "#{{Burning}} Leaves flames when moving"
         }
     },
-    [Lib.ModItemIDs.BLESSEDDESTINY] = {
+    [Lib.ModItemIDs.BLESSED_DESTINY] = {
         {
             Name = "神圣命运",
             Desc = "#{{AngelRoom}} 首次进入房间时有概率变为教堂的样式，道具池变为天使房道具池"..
@@ -99,7 +99,7 @@ EIDInfo.Collectibles = {
             "#{{Warning}} After leaving the room, it reverts to its original appearance. This effect is always active in the Cathedral"
         }
     },
-    [Lib.ModItemIDs.BLOODSACRIFICE] = {
+    [Lib.ModItemIDs.BLOOD_SACRIFICE] = {
         {
             Name = "鲜血献祭",
             Desc = "#消耗1心之容器或2魂心生成肉块雕像并+0.4伤害修正"..
@@ -119,7 +119,7 @@ EIDInfo.Collectibles = {
             CarBattery = "No Effect"
         }
     },
-    [Lib.ModItemIDs.BLOODSAMPLE] = {
+    [Lib.ModItemIDs.BLOOD_SAMPLE] = {
         {
             Name = "血液样本",
             Desc = "#{{EmptyHeart}} +1空心之容器"..
@@ -133,7 +133,7 @@ EIDInfo.Collectibles = {
             CarBattery = "No Effect"
         }
     },
-    [Lib.ModItemIDs.BLOODYDICE] = {
+    [Lib.ModItemIDs.BLOODY_DICE] = {
         {
             Name = "血之骰",
             Desc = "#重置离角色最近的恶魔交易，并使其免费"..
@@ -147,7 +147,7 @@ EIDInfo.Collectibles = {
             CarBattery = "No Effect"
         }
     },
-    [Lib.ModItemIDs.BOBSSTOMACH] = {
+    [Lib.ModItemIDs.BOBS_STOMACH] = {
         {
             Name = "鲍勃的胃",
             Desc = "#{{Chargeable}} 蓄力一段时间可射出爆炸泪弹"..
@@ -159,7 +159,7 @@ EIDInfo.Collectibles = {
             "#{{Damage}} Deals damage equal to 15 + 250% of Isaac's damage"
         }
     },
-    [Lib.ModItemIDs.BONEINFISHSTEAK] = {
+    [Lib.ModItemIDs.BONE_IN_FISH_STEAK] = {
         {
             Name = "带骨鱼排",
             Desc = "#{{BoneHeart}} 获得一个骨心"..
@@ -181,7 +181,7 @@ EIDInfo.Collectibles = {
             "#{{ArrowDown}} -0.03 Speed"
         }
     },
-    [Lib.ModItemIDs.CHEFHAT] = {
+    [Lib.ModItemIDs.CHEF_HAT] = {
         {
             Name = "厨师帽",
             Desc = "#在每层的初始房间生成一个厨师乞丐"..
@@ -195,7 +195,7 @@ EIDInfo.Collectibles = {
             "#{{Warning}} Isaac can only store up to 4 food items"
         }
     },
-    [Lib.ModItemIDs.CHOCOLATEPANCAKE] = {
+    [Lib.ModItemIDs.CHOCOLATE_PANCAKE] = {
         {
             Name = "巧克力煎饼",
             Desc = "#{{EmptyHeart}} +1空心之容器"..
@@ -241,7 +241,7 @@ EIDInfo.Collectibles = {
             "Trailing tears deal x0.5 damage"
         }
     },
-    [Lib.ModItemIDs.CONSERVATIVETREATMENT] = {
+    [Lib.ModItemIDs.CONSERVATIVE_TREATMENT] = {
         {
             Name = "保守疗法",
             Desc = "#{{ArrowUp}} 属性值不会低于{{Player0}}以撒的属性初始值"..
@@ -272,7 +272,7 @@ EIDInfo.Collectibles = {
             CarBattery = "No effect"
         }
     },
-    [Lib.ModItemIDs.CROWNOFKINGS] = {
+    [Lib.ModItemIDs.CROWN_OF_KINGS] = {
         {
             Name = "主宰之冠",
             Desc = "#在未受到伤害的情况下，清理初始含头目的房间："..
@@ -284,7 +284,7 @@ EIDInfo.Collectibles = {
             "#{{Collectible}} Spawns a collectible of at most quality 3 from random item pools"
         }
     },
-    [Lib.ModItemIDs.CURSEDDICE] = {
+    [Lib.ModItemIDs.CURSED_DICE] = {
         {
             Name = "被诅咒的骰子",
             Desc = "#重置并用{{CurseBlind}}致盲诅咒的效果遮蔽所在房间的底座道具"..
@@ -302,7 +302,7 @@ EIDInfo.Collectibles = {
             CarBattery = "No effect"
         }
     },
-    [Lib.ModItemIDs.CURSEDTREASURE] = {
+    [Lib.ModItemIDs.CURSED_TREASURE] = {
         {
             Name = "被诅咒的宝藏",
             Desc = "#将所有种类的硬币替换为诅咒硬币，拾取后触发一次随机硬币系列饰品的效果"..
@@ -314,7 +314,7 @@ EIDInfo.Collectibles = {
             "#Pick ups sold in the shop will be replaced with collectibles",
         }
     },
-    [Lib.ModItemIDs.EFFERVESCENTTABLET] = {
+    [Lib.ModItemIDs.EFFERVESCENT_TABLET] = {
         {
             Name = "泡腾片",
             Desc = "#提供4秒以下效果："..
@@ -338,7 +338,7 @@ EIDInfo.Collectibles = {
             CarBattery = {4, 8}
         }
     },
-    [Lib.ModItemIDs.EXPIREDGLUE] = {
+    [Lib.ModItemIDs.EXPIRED_GLUE] = {
         {
             Name = "过期胶水",
             Desc = "#硬币在生成时会被替换为黏性镍币"..
@@ -350,7 +350,7 @@ EIDInfo.Collectibles = {
             "#{{Warning}} The replaced coins will disappear at a random time and after leaving the room"
         }
     },
-    [Lib.ModItemIDs.ENCHANTEDBOOK] = {
+    [Lib.ModItemIDs.ENCHANTED_BOOK] = {
         {
             Name = "附魔书",
             Desc = "#获得1条随机附魔"..
@@ -368,7 +368,7 @@ EIDInfo.Collectibles = {
             CarBattery = {"a random enchantment", "two random enchantments"}
         }
     },
-    [Lib.ModItemIDs.EXPLOSIONMASTER] = {
+    [Lib.ModItemIDs.EXPLOSION_MASTER] = {
         {
             Name = "爆炸大师",
             Desc = "#敌方泪弹有概率被替换成不伤害角色的炸弹"
@@ -378,7 +378,7 @@ EIDInfo.Collectibles = {
             Desc = "#Enemy projectiles have a chance to be replaced by bombs that do no harm to Isaac"
         }
     },
-    [Lib.ModItemIDs.FALLENSKY] = {
+    [Lib.ModItemIDs.FALLEN_SKY] = {
         {
             Name = "天坠",
             Desc = "#有概率发射追踪剑气泪弹，击中敌人后坠下圣剑"..
@@ -407,7 +407,7 @@ EIDInfo.Collectibles = {
             "#Killing the Krampus drops 2 Devil Room items"
         }
     },
-    [Lib.ModItemIDs.GUPPYSFOOD] = {
+    [Lib.ModItemIDs.GUPPYS_FOOD] = {
         {
             Name = "嗝屁猫的罐头",
             Desc = "#{{ArrowUp}} +1心之容器"..
@@ -425,7 +425,7 @@ EIDInfo.Collectibles = {
             "#{{ArrowDown}} -0.03 Speed"
         }
     },
-    [Lib.ModItemIDs.HADESBLADE] = {
+    [Lib.ModItemIDs.HADES_BLADE] = {
         {
             Name = "冥府之刃",
             Desc = "#如果成功移除1个心之容器或3颗魂心，则获得一个来自恶魔房道具池的跟班"..
@@ -443,7 +443,7 @@ EIDInfo.Collectibles = {
             CarBattery = "No effect"
         }
     },
-    [Lib.ModItemIDs.HEPHAESTUSSOUL] = {
+    [Lib.ModItemIDs.HEPHAESTUS_SOUL] = {
         {
             Name = "赫菲斯托斯之魂",
             Desc = "#{{Chargeable}} 蓄力一段时间可射出一堆火焰"..
@@ -469,7 +469,7 @@ EIDInfo.Collectibles = {
             Desc = "#"
         }
     },
-    [Lib.ModItemIDs.LASERBLASTER] = {
+    [Lib.ModItemIDs.LASER_BLASTER] = {
         {
             Name = "激光发射器",
             Desc = "#生成一个缓慢移动的激光球"..
@@ -499,7 +499,7 @@ EIDInfo.Collectibles = {
             "#Automatically tracks the enemy with the lowest health"
         }
     },
-    [Lib.ModItemIDs.MARRIAGECERTIFICATE] = {
+    [Lib.ModItemIDs.MARRIAGE_CERTIFICATE] = {
         {
             Name = "结婚证明",
             Desc = "#{{Player5}} 生成夏娃作为副角色，拾取的道具会转移到角色上"..
@@ -533,7 +533,7 @@ EIDInfo.Collectibles = {
             CarBattery = "No effect"
         }
     },
-    [Lib.ModItemIDs.MIRRORINGSHARD] = {
+    [Lib.ModItemIDs.MIRRORING_SHARD] = {
         {
             Name = "镜像碎块",
             Desc = "#将堕化角色转换为对应的正常角色"..
@@ -551,7 +551,7 @@ EIDInfo.Collectibles = {
             CarBattery = "No effect"
         }
     },
-    [Lib.ModItemIDs.NOTICEOFCRITICALCONDITION] = {
+    [Lib.ModItemIDs.NOTICE_OF_CRITICAL_CONDITION] = {
         {
             Name = "病危通知书",
             Desc = "#{{Pill}} 使用正面胶囊时有概率消除一颗碎心"..
@@ -563,7 +563,7 @@ EIDInfo.Collectibles = {
             "#Gains 2 broken hearts each time Isaac enters a new floor, with a chance to spawn an ICU room"
         }
     },
-    [Lib.ModItemIDs.OCEANUSSOUL] = {
+    [Lib.ModItemIDs.OCEANUS_SOUL] = {
         {
             Name = "俄刻阿诺斯之魂",
             Desc = "#{{Chargeable}} 蓄力一段时间可在房间内产生强大的水流"..
@@ -589,7 +589,7 @@ EIDInfo.Collectibles = {
             "#Spawns a red heart, a bomb and a key"
         }
     },
-    [Lib.ModItemIDs.OVERLOADBATTERY] = {
+    [Lib.ModItemIDs.OVERLOAD_BATTERY] = {
         {
             Name = "过载电池",
             Desc = "#当角色无法容纳要拾取的心掉落物时，将其转化为充能"..
@@ -601,7 +601,7 @@ EIDInfo.Collectibles = {
             "#2{{Heart}}/{{RottenHeart}}=1{{SoulHeart}}/{{BlackHeart}}/{{EmptyBoneHeart}}=1 charge, 1{{GoldHeart}}/{{EternalHeart}}=12 charges"
         }
     },
-    [Lib.ModItemIDs.PEELEDBANANA] = {
+    [Lib.ModItemIDs.PEELED_BANANA] = {
         {
             Name = "剥皮香蕉",
             Desc = "#{{ArrowUp}} +1心之容器并治疗1红心"..
@@ -619,7 +619,7 @@ EIDInfo.Collectibles = {
             "#{{ArrowDown}} -0.03 Speed"
         }
     },
-    [Lib.ModItemIDs.PHILOSOPHERSSTAFF] = {
+    [Lib.ModItemIDs.PHILOSOPHERS_STAFF] = {
         {
             Name = "贤者权杖",
             Desc = "#{{ArrowUp}} 持有时，转化持有的饰品为对应金饰品"..
@@ -640,7 +640,7 @@ EIDInfo.Collectibles = {
             CarBattery = "No effect"
         }
     },
-    [Lib.ModItemIDs.PLANETARIUMTELESCOPE] = {
+    [Lib.ModItemIDs.PLANETARIUM_TELESCOPE] = {
         {
             Name = "星象望远镜",
             Desc = "#{{Card}} 生成一张'XVII-星星'卡牌"..
@@ -654,7 +654,7 @@ EIDInfo.Collectibles = {
             "#{{Luck}} Each collectible with a 'star' tag grants +2 luck"
         }
     },
-    [Lib.ModItemIDs.RECONVISION] = {
+    [Lib.ModItemIDs.RECON_VISION] = {
         {
             Name = "洞察视界",
             Desc = "#揭示所有被{{CurseBlind}}致盲诅咒替换为问号的道具"..
@@ -710,7 +710,7 @@ EIDInfo.Collectibles = {
             "#{{Warning}} The revival has the lowest priority"
         }
     },
-    [Lib.ModItemIDs.SINISTERPACT] = {
+    [Lib.ModItemIDs.SINISTER_PACT] = {
         {
             Name = "邪恶契约",
             Desc = "{{BlackHeart}} +1黑心"..
@@ -722,7 +722,7 @@ EIDInfo.Collectibles = {
             "#Buying an item by heart containers restocks it instantly"
         }
     },
-    [Lib.ModItemIDs.STICKYBALL] = {
+    [Lib.ModItemIDs.STICKY_BALL] = {
         {
             Name = "粘性球",
             Desc = "#有概率发射粘性泪弹，减速击中的敌人并增加粘性等级"..
@@ -736,7 +736,7 @@ EIDInfo.Collectibles = {
             "#{{Warning}} If no level is applied within 5 seconds, the sticky level will reset"
         }
     },
-    [Lib.ModItemIDs.STRANGESYRINGE] = {
+    [Lib.ModItemIDs.STRANGE_SYRINGE] = {
         {
             Name = "奇怪的针筒",
             Desc = "#{{Warning}} 一次性"..
@@ -756,7 +756,7 @@ EIDInfo.Collectibles = {
             CarBattery = "No effect"
         }
     },
-    [Lib.ModItemIDs.SUSPICIOUSSTEW] = {
+    [Lib.ModItemIDs.SUSPICIOUS_STEW] = {
         {
             Name = "迷之炖菜",
             Desc = "#{{ArrowUp}} 使用后获得以下效果：",
@@ -772,7 +772,7 @@ EIDInfo.Collectibles = {
             CarBattery = "No effect"
         }
     },
-    [Lib.ModItemIDs.THEGOSPELOFJOHN] = {
+    [Lib.ModItemIDs.THE_GOSPEL_OF_JOHN] = {
         {
             Name = "约翰福音",
             Desc = "#重置所在房间的底座道具为品质3/4级的天使被动道具，每重置一个就获得1/2碎心"..
@@ -792,7 +792,7 @@ EIDInfo.Collectibles = {
             CarBattery = {"1 broken heart", "2 broken hearts"}
         }
     },
-    [Lib.ModItemIDs.TOOLBOX] = {
+    [Lib.ModItemIDs.TOOL_BOX] = {
         {
             Name = "工具箱",
             Desc = "#生成一个工具箱跟班"..
@@ -804,7 +804,7 @@ EIDInfo.Collectibles = {
             "#{{Card}} Randomly spawns a special card every 5 rooms"
         }
     },
-    [Lib.ModItemIDs.TWILIGHTFOX] = {
+    [Lib.ModItemIDs.TWILIGHT_FOX] = {
         {
             Name = "暮光狐",
             Desc = "#生成一个跟随角色且会阻挡泪弹的狐狸跟班"..
@@ -817,7 +817,7 @@ EIDInfo.Collectibles = {
             Desc = ""
         }
     },
-    [Lib.ModItemIDs.WAKEUP] = {
+    [Lib.ModItemIDs.WAKE_UP] = {
         {
             Name = "唤醒",
             Desc = "#传送至教条房间，并生成3个最低品质为3的攻击道具"..
@@ -840,7 +840,7 @@ EIDInfo.Collectibles = {
 }
 
 EIDInfo.Trinkets = {
-    [Lib.ModTrinketIDs.BETHSSALVATION] = {
+    [Lib.ModTrinketIDs.BETHS_SALVATION] = {
         {
             Name = "伯大尼的救赎",
             Desc = "#到下一层时有50%的概率传送到{{AngelRoom}}天使房"..
@@ -852,7 +852,7 @@ EIDInfo.Trinkets = {
             "#Always triggers if Isaac has {{Collectible499}} the Eucharist"
         }
     },
-    [Lib.ModTrinketIDs.BROKENVISION] = {
+    [Lib.ModTrinketIDs.BROKEN_VISION] = {
         {
             Name = "视力受损",
             Desc = "#拾取的被动道具有70%的概率会变为角色拥有的最后一个被动道具，\"任务\"道具除外"..
@@ -876,7 +876,7 @@ EIDInfo.Trinkets = {
             }
         }
     },
-    [Lib.ModTrinketIDs.BROKENGLASSEYE] = {
+    [Lib.ModTrinketIDs.BROKEN_GLASS_EYE] = {
         {
             Name = "损坏的玻璃眼",
             Desc = "#{{ArrowUp}} 额外发射一颗泪弹"..
@@ -900,7 +900,7 @@ EIDInfo.Trinkets = {
             }
         }
     },
-    [Lib.ModTrinketIDs.KEEPERSCORE] = {
+    [Lib.ModTrinketIDs.KEEPERS_CORE] = {
         {
             Name = "店主的核心",
             Desc = "#箱子和福袋中至少含有1枚硬币",
@@ -922,7 +922,7 @@ EIDInfo.Trinkets = {
             }
         }
     },
-    [Lib.ModTrinketIDs.LOSTBOTTLECAP] = {
+    [Lib.ModTrinketIDs.LOST_BOTTLE_CAP] = {
         {
             Name = "丢失的瓶盖",
             Desc = "#使用主动道具后有33%的概率恢复一半的充能"..
@@ -946,7 +946,7 @@ EIDInfo.Trinkets = {
             }
         }
     },
-    [Lib.ModTrinketIDs.STONECARVINGKNIFE] = {
+    [Lib.ModTrinketIDs.STONE_CARVING_KNIFE] = {
         {
             Name = "石刻刀",
             Desc = "#{{Rune}} 摧毁岩石有3%几率掉落符文或魂石",
@@ -971,7 +971,7 @@ EIDInfo.Trinkets = {
 }
 
 EIDInfo.Cards = {
-    [Lib.ModCardIDs.ENCHANTEDCARD] = {
+    [Lib.ModCardIDs.ENCHANTED_CARD] = {
         {
             Name = "附魔卡",
             Desc = "#拾取后获得附魔词条：",
@@ -987,7 +987,7 @@ EIDInfo.Cards = {
             TarotCloth = nil
         }
     },
-    [Lib.ModCardIDs.GLOWINGHOURGLASSSHARD] = {
+    [Lib.ModCardIDs.GLOWING_HOURGLASS_SHARD] = {
         {
             Name = "发光沙漏碎片",
             Desc = "#使用一次{{Collectible422}}发光沙漏"..
@@ -1023,7 +1023,7 @@ EIDInfo.Players = {
 }
 
 EIDInfo.Pills = {
-    [Lib.ModPillEffectIDs.BAITANDSWITCH] = {
+    [Lib.ModPillEffectIDs.BAIT_AND_SWITCH] = {
         {
             Name = "偷天换日",
             Desc = "#传送角色至房间中某个随机位置，并获得2秒无敌",
@@ -1052,7 +1052,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.BAKEDPOTATO] = {
+    [Lib.ModFoodItemIDs.BAKED_POTATO] = {
         {
             Name = "烤马铃薯",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1072,7 +1072,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.BROWNMUSHROOM] = {
+    [Lib.ModFoodItemIDs.BROWN_MUSHROOM] = {
         {
             Name = "棕色蘑菇",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1092,7 +1092,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.CHORUSFRUIT] = {
+    [Lib.ModFoodItemIDs.CHORUS_FRUIT] = {
         {
             Name = "紫颂果",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1102,7 +1102,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.COCOABEANS] = {
+    [Lib.ModFoodItemIDs.COCOA_BEANS] = {
         {
             Name = "可可豆",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1112,7 +1112,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.DRIEDKELP] = {
+    [Lib.ModFoodItemIDs.DRIED_KELP] = {
         {
             Name = "干海带",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1122,7 +1122,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.GLOWBERRIES] = {
+    [Lib.ModFoodItemIDs.GLOW_BERRIES] = {
         {
             Name = "发光浆果",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1132,7 +1132,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.GOLDENAPPLE] = {
+    [Lib.ModFoodItemIDs.GOLDEN_APPLE] = {
         {
             Name = "金苹果",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1142,7 +1142,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.GOLDENCARROT] = {
+    [Lib.ModFoodItemIDs.GOLDEN_CARROT] = {
         {
             Name = "金胡萝卜",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1152,7 +1152,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.MELONSLICE] = {
+    [Lib.ModFoodItemIDs.MELON_SLICE] = {
         {
             Name = "西瓜片",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1182,7 +1182,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.REDMUSHROOM] = {
+    [Lib.ModFoodItemIDs.RED_MUSHROOM] = {
         {
             Name = "红色蘑菇",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1192,7 +1192,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.SWEETBERRIES] = {
+    [Lib.ModFoodItemIDs.SWEET_BERRIES] = {
         {
             Name = "甜浆果",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1232,7 +1232,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.PUMPKINSLICE] = {
+    [Lib.ModFoodItemIDs.PUMPKIN_SLICE] = {
         {
             Name = "南瓜片",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1252,7 +1252,7 @@ EIDInfo.Foods = {
             Desc = "#{{ArrowUp}} Grants the following effects after cooking:"
         }
     },
-    [Lib.ModFoodItemIDs.MONSTERMEAT] = {
+    [Lib.ModFoodItemIDs.MONSTER_MEAT] = {
         {
             Name = "怪物肉",
             Desc = "#{{ArrowUp}} 烹饪后获得以下效果："
@@ -1295,7 +1295,7 @@ do
             TopOffset = 0,
             SpriteObject = inclineIcons
         },
-        ["Card"..Lib.ModCardIDs.ENCHANTEDCARD] = {
+        ["Card"..Lib.ModCardIDs.ENCHANTED_CARD] = {
             AnimationName = "Enchanted Card",
             AnimationFrame = 0,
             Width = 9,
@@ -1304,7 +1304,7 @@ do
             TopOffset = 1.5,
             SpriteObject = cardfronts
         },
-        ["Card"..Lib.ModCardIDs.GLOWINGHOURGLASSSHARD] = {
+        ["Card"..Lib.ModCardIDs.GLOWING_HOURGLASS_SHARD] = {
             AnimationName = "Glowing Hourglass Shard",
             AnimationFrame = 0,
             Width = 9,
@@ -1369,7 +1369,7 @@ end
 for ID, Info in pairs(EIDInfo.Foods) do
     for i = 1, 2 do
         local descTable = Info[i]
-        EID:addEntity(Lib.ModEntityIDs.FOODSFOODITEM.Type, Lib.ModEntityIDs.FOODSFOODITEM.Variant, ID, descTable.Name, descTable.Desc, EIDLanguage[i])
+        EID:addEntity(Lib.ModEntityIDs.FOODS_FOOD_ITEM.Type, Lib.ModEntityIDs.FOODS_FOOD_ITEM.Variant, ID, descTable.Name, descTable.Desc, EIDLanguage[i])
     end
 end
 
@@ -1392,7 +1392,7 @@ end
 
 do
     local function EnchantmentsCondition(descObj)
-        if descObj.ObjType == EntityType.ENTITY_PICKUP and descObj.ObjVariant == PickupVariant.PICKUP_TAROTCARD and descObj.ObjSubType == Lib.ModCardIDs.ENCHANTEDCARD then
+        if descObj.ObjType == EntityType.ENTITY_PICKUP and descObj.ObjVariant == PickupVariant.PICKUP_TAROTCARD and descObj.ObjSubType == Lib.ModCardIDs.ENCHANTED_CARD then
             return true
         end
     end
@@ -1408,7 +1408,7 @@ end
 
 do
     local function FoodsCondition(descObj)
-        if descObj.ObjType == Lib.ModEntityIDs.FOODSFOODITEM.Type and descObj.ObjVariant == Lib.ModEntityIDs.FOODSFOODITEM.Variant then
+        if descObj.ObjType == Lib.ModEntityIDs.FOODS_FOOD_ITEM.Type and descObj.ObjVariant == Lib.ModEntityIDs.FOODS_FOOD_ITEM.Variant then
             return true
         end
     end
@@ -1421,7 +1421,7 @@ end
 
 do
     local function SuspiciousStewCondition(descObj)
-        if descObj.ObjType == EntityType.ENTITY_PICKUP and descObj.ObjVariant == PickupVariant.PICKUP_COLLECTIBLE and descObj.ObjSubType == Lib.ModItemIDs.SUSPICIOUSSTEW then
+        if descObj.ObjType == EntityType.ENTITY_PICKUP and descObj.ObjVariant == PickupVariant.PICKUP_COLLECTIBLE and descObj.ObjSubType == Lib.ModItemIDs.SUSPICIOUS_STEW then
             return true
         end
     end
@@ -1435,9 +1435,9 @@ do
         return descObj
     end
     EID:addDescriptionModifier("SuspiciousStewModifier", SuspiciousStewCondition, SuspiciousStewCallback)
-    EID.ItemReminderDescriptionModifier["5.100."..Lib.ModItemIDs.SUSPICIOUSSTEW] = {
+    EID.ItemReminderDescriptionModifier["5.100."..Lib.ModItemIDs.SUSPICIOUS_STEW] = {
         modifierFunction = function(descObj, player, inOverview)
-            local slot = player:GetActiveItemSlot(Lib.ModItemIDs.SUSPICIOUSSTEW)
+            local slot = player:GetActiveItemSlot(Lib.ModItemIDs.SUSPICIOUS_STEW)
             local combined = player:GetActiveItemDesc(slot).VarData
             descObj.Quality = nil
             EID:ItemReminderAddResult(descObj, Lib.Foods.GetSuspiciousStewResult(combined))

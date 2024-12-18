@@ -1,8 +1,8 @@
 local Lib = TYU
-local OceanusSoulChargeBar = Lib:NewModEntity("Oceanus Soul ChargeBar", "OCEANUSSOULCHARGEBAR")
+local OceanusSoulChargeBar = Lib:NewModEntity("Oceanus Soul ChargeBar", "OCEANUS_SOUL_CHARGEBAR")
 
 function OceanusSoulChargeBar:PostEffectUpdate(effect)
-    if not effect.Parent or not effect.Parent:ToPlayer() or not effect.Parent:ToPlayer():HasCollectible(Lib.ModItemIDs.OCEANUSSOUL) then
+    if not effect.Parent or not effect.Parent:ToPlayer() or not effect.Parent:ToPlayer():HasCollectible(Lib.ModItemIDs.OCEANUS_SOUL) then
         effect:Remove()
         return
     end
@@ -29,6 +29,6 @@ function OceanusSoulChargeBar:PostEffectUpdate(effect)
         effect:Remove()
 	end
 end
-OceanusSoulChargeBar:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, OceanusSoulChargeBar.PostEffectUpdate, Lib.ModEntityIDs.OCEANUSSOULCHARGEBAR.Variant)
+OceanusSoulChargeBar:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, OceanusSoulChargeBar.PostEffectUpdate, Lib.ModEntityIDs.OCEANUS_SOUL_CHARGEBAR.Variant)
 
 return OceanusSoulChargeBar

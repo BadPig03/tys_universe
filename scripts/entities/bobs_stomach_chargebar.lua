@@ -1,11 +1,11 @@
-local BobsStomachChargeBar = TYU:NewModEntity("Bobs Stomach ChargeBar", "BOBSSTOMACHCHARGEBAR")
+local BobsStomachChargeBar = TYU:NewModEntity("Bobs Stomach ChargeBar", "BOBS_STOMACH_CHARGEBAR")
 
 local function SetTempEntityLibData(entity, value, ...)
     TYU:SetTempEntityLibData(entity, value, "BobsStomach", ...)
 end
 
 function BobsStomachChargeBar:PostEffectUpdate(effect)
-    if not effect.Parent or not effect.Parent:ToPlayer() or not effect.Parent:ToPlayer():HasCollectible(TYU.ModItemIDs.BOBSSTOMACH) then
+    if not effect.Parent or not effect.Parent:ToPlayer() or not effect.Parent:ToPlayer():HasCollectible(TYU.ModItemIDs.BOBS_STOMACH) then
         effect:Remove()
         return
     end
@@ -32,6 +32,6 @@ function BobsStomachChargeBar:PostEffectUpdate(effect)
         effect:Remove()
 	end
 end
-BobsStomachChargeBar:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, BobsStomachChargeBar.PostEffectUpdate, TYU.ModEntityIDs.BOBSSTOMACHCHARGEBAR.Variant)
+BobsStomachChargeBar:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, BobsStomachChargeBar.PostEffectUpdate, TYU.ModEntityIDs.BOBS_STOMACH_CHARGEBAR.Variant)
 
 return BobsStomachChargeBar

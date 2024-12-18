@@ -1,11 +1,11 @@
-local ChocolatePancake = TYU:NewModItem("Chocolate Pancake", "CHOCOLATEPANCAKE")
+local ChocolatePancake = TYU:NewModItem("Chocolate Pancake", "CHOCOLATE_PANCAKE")
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Stat = TYU.Stat
 local Utils = TYU.Utils
 
 function ChocolatePancake:PostNPCDeath(npc)
-    if not Players.AnyoneHasCollectible(TYU.ModItemIDs.CHOCOLATEPANCAKE) then
+    if not Players.AnyoneHasCollectible(TYU.ModItemIDs.CHOCOLATE_PANCAKE) then
         return
     end
     local rng = npc:GetDropRNG()
@@ -16,7 +16,7 @@ end
 ChocolatePancake:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, ChocolatePancake.PostNPCDeath)
 
 function ChocolatePancake:EvaluateCache(player, cacheFlag)
-    local count = player:GetCollectibleNum(TYU.ModItemIDs.CHOCOLATEPANCAKE)
+    local count = player:GetCollectibleNum(TYU.ModItemIDs.CHOCOLATE_PANCAKE)
     if count < 0 or not player:HasCollectible(CollectibleType.COLLECTIBLE_BINGE_EATER) then
         return
     end

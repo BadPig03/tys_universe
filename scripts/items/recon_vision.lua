@@ -1,9 +1,9 @@
 local Lib = TYU
-local ReconVision = Lib:NewModItem("Recon Vision", "RECONVISION")
+local ReconVision = Lib:NewModItem("Recon Vision", "RECON_VISION")
 
 if EID then
     function EID:hasCurseBlind()
-        if Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.RECONVISION) then
+        if Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.RECON_VISION) then
             return false
         end
         return Lib.LEVEL:GetCurses() & LevelCurse.CURSE_OF_BLIND > 0
@@ -12,7 +12,7 @@ end
 
 function ReconVision:PostPickupRender(pickup, offset)
     local subType = pickup.SubType
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.RECONVISION) or subType == 0 or subType >= Lib.Constants.GLITCHED_ITEM_ID then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.RECON_VISION) or subType == 0 or subType >= Lib.Constants.GLITCHED_ITEM_ID then
         return
     end
     if not Lib.Collectibles.IsBlind(pickup) then

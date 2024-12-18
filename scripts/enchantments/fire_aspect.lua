@@ -1,11 +1,11 @@
 local Lib = TYU
-local FireAspect = Lib:NewModEnchantment("Fire Aspect", "FIREASPECT")
+local FireAspect = Lib:NewModEnchantment("Fire Aspect", "FIRE_ASPECT")
 
 function FireAspect:PostPlayerUpdate(player)
     if player:HasCurseMistEffect() then
         return
     end
-    local count = Lib.Players.GetNullEffectCounts(Lib.ModEnchantmentIDs.FIREASPECT)
+    local count = Lib.Players.GetNullEffectCounts(Lib.ModEnchantmentIDs.FIRE_ASPECT)
     if count == 0 then
         return
     end

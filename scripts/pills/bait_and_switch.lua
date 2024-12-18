@@ -1,5 +1,5 @@
 local Lib = TYU
-local BaitAndSwitch = Lib:NewModPill("Bait And Switch", "BAITANDSWITCH")
+local BaitAndSwitch = Lib:NewModPill("Bait And Switch", "BAIT_AND_SWITCH")
 
 function BaitAndSwitch:UsePill(pillEffect, player, useFlags, pillColor)
     if pillColor & PillColor.PILL_GIANT_FLAG == PillColor.PILL_GIANT_FLAG then
@@ -9,6 +9,6 @@ function BaitAndSwitch:UsePill(pillEffect, player, useFlags, pillColor)
     Lib.SFXMANAGER:Play(SoundEffect.SOUND_HELL_PORTAL2, 0.6)
     Lib.Players.AddShield(player, 60)
 end
-BaitAndSwitch:AddCallback(ModCallbacks.MC_USE_PILL, BaitAndSwitch.UsePill, Lib.ModPillEffectIDs.BAITANDSWITCH)
+BaitAndSwitch:AddCallback(ModCallbacks.MC_USE_PILL, BaitAndSwitch.UsePill, Lib.ModPillEffectIDs.BAIT_AND_SWITCH)
 
 return BaitAndSwitch

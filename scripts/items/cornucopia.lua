@@ -53,10 +53,10 @@ local pickupCharge = {
     [PickupVariant.PICKUP_POOP] = {
         [PoopPickupSubType.POOP_SMALL] = 1
     },
-    [Lib.ModEntityIDs.FOODSFOODITEM.Variant] = {
-        [Lib.ModFoodItemIDs.GOLDENAPPLE] = 3,
-        [Lib.ModFoodItemIDs.GOLDENCARROT] = 3,
-        [Lib.ModFoodItemIDs.MONSTERMEAT] = 1
+    [Lib.ModEntityIDs.FOODS_FOOD_ITEM.Variant] = {
+        [Lib.ModFoodItemIDs.GOLDEN_APPLE] = 3,
+        [Lib.ModFoodItemIDs.GOLDEN_CARROT] = 3,
+        [Lib.ModFoodItemIDs.MONSTER_MEAT] = 1
     }
 }
 setmetatable(pickupCharge[PickupVariant.PICKUP_HEART], {__index = function() return 2 end})
@@ -79,7 +79,7 @@ setmetatable(pickupCharge[PickupVariant.PICKUP_TAROTCARD], {__index = function(k
     end
 end})
 setmetatable(pickupCharge[PickupVariant.PICKUP_POOP], {__index = function() return 2 end})
-setmetatable(pickupCharge[Lib.ModEntityIDs.FOODSFOODITEM.Variant], {__index = function() return 2 end})
+setmetatable(pickupCharge[Lib.ModEntityIDs.FOODS_FOOD_ITEM.Variant], {__index = function() return 2 end})
 
 local function GetPickupCharge(pickup)
     if pickup.Variant == PickupVariant.PICKUP_COLLECTIBLE then

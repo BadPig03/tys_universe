@@ -24,7 +24,7 @@ function Thorns:PostEntityTakeDamage(entity, amount, flags, source, countdown)
     if count == 0 then
         return
     end
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.ENCHANTEDBOOK)
+    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.ENCHANTED_BOOK)
     if rng:RandomInt(90) < 30 * count then
         enemy:TakeDamage(player.Damage * (1.2 + 0.6 * count) + 6 + 3 * count, DamageFlag.DAMAGE_SPIKES, EntityRef(player), 0)
     end

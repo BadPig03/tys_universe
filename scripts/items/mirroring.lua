@@ -68,12 +68,12 @@ function Mirroring:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     end
     if playerConfig:IsTainted() then
         player:RemoveCollectible(Lib.ModItemIDs.MIRRORING, false, activeSlot)
-        player:AddCollectible(Lib.ModItemIDs.MIRRORINGSHARD, player:GetActiveCharge(activeSlot) + player:GetBatteryCharge(activeSlot), false, activeSlot, varData)
+        player:AddCollectible(Lib.ModItemIDs.MIRRORING_SHARD, player:GetActiveCharge(activeSlot) + player:GetBatteryCharge(activeSlot), false, activeSlot, varData)
         return { Discharge = false, Remove = false, ShowAnim = true }
     else
         ChangePlayerToTaintedVersion(player)
         player:RemoveCollectible(Lib.ModItemIDs.MIRRORING, false, activeSlot)
-        player:AddCollectible(Lib.ModItemIDs.MIRRORINGSHARD, player:GetActiveCharge(activeSlot) + player:GetBatteryCharge(activeSlot), false, activeSlot, varData)
+        player:AddCollectible(Lib.ModItemIDs.MIRRORING_SHARD, player:GetActiveCharge(activeSlot) + player:GetBatteryCharge(activeSlot), false, activeSlot, varData)
         Lib.SFXMANAGER:Play(SoundEffect.SOUND_MIRROR_ENTER)
         player:AnimateSad()
         Lib.SFXMANAGER:Stop(SoundEffect.SOUND_THUMBS_DOWN)

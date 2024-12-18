@@ -800,7 +800,7 @@ do
                     tears = modi.Func(tears, origin)
                 end
             end
-            if player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and tears < 30 / 11 then
+            if player:HasCollectible(TYU.ModItemIDs.CONSERVATIVE_TREATMENT) and tears < 30 / 11 then
                 return 30 / 11
             end
             return tears
@@ -861,7 +861,7 @@ do
                 damage = step(damage, player, false)
             end
             damage = damage * multiplier
-            if player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and damage < 3.5 then
+            if player:HasCollectible(TYU.ModItemIDs.CONSERVATIVE_TREATMENT) and damage < 3.5 then
                 return 3.5
             end
             return damage
@@ -896,7 +896,7 @@ do
             if lowerLimit >= 0 and addition < 0 then
                 addition = math.max(lowerLimit - speed, addition)
             end
-            if player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and speed + addition < 1 then
+            if player:HasCollectible(TYU.ModItemIDs.CONSERVATIVE_TREATMENT) and speed + addition < 1 then
                 player.MoveSpeed = 1
             else
                 player.MoveSpeed = speed + addition
@@ -905,14 +905,14 @@ do
             Stat:SetSpeedMultiplier(player, nil)
             Stat:SetSpeedLimit(player, nil)
             Stat:SetSpeedLowerLimit(player, nil)
-        elseif cache == CacheFlag.CACHE_RANGE and player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and player.TearRange < 260 then
+        elseif cache == CacheFlag.CACHE_RANGE and player:HasCollectible(TYU.ModItemIDs.CONSERVATIVE_TREATMENT) and player.TearRange < 260 then
             player.TearRange = 260
             player.TearHeight = -23.75
         end
-        if cache == CacheFlag.CACHE_SHOTSPEED and player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and player.ShotSpeed < 1 then
+        if cache == CacheFlag.CACHE_SHOTSPEED and player:HasCollectible(TYU.ModItemIDs.CONSERVATIVE_TREATMENT) and player.ShotSpeed < 1 then
             player.ShotSpeed = 1
         end
-        if cache == CacheFlag.CACHE_LUCK and player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and player.Luck < 0 then
+        if cache == CacheFlag.CACHE_LUCK and player:HasCollectible(TYU.ModItemIDs.CONSERVATIVE_TREATMENT) and player.Luck < 0 then
             player.Luck = 0
         end
     end

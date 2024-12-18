@@ -1,5 +1,5 @@
 local Lib = TYU
-local PhilosophersStaff = Lib:NewModItem("Philosopher's Staff", "PHILOSOPHERSSTAFF")
+local PhilosophersStaff = Lib:NewModItem("Philosopher's Staff", "PHILOSOPHERS_STAFF")
 
 function PhilosophersStaff:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     if useFlags & UseFlag.USE_CARBATTERY == UseFlag.USE_CARBATTERY then
@@ -37,22 +37,22 @@ function PhilosophersStaff:UseItem(itemID, rng, player, useFlags, activeSlot, va
     end
     return { Discharge = discharge, Remove = false, ShowAnim = true }
 end
-PhilosophersStaff:AddCallback(ModCallbacks.MC_USE_ITEM, PhilosophersStaff.UseItem, Lib.ModItemIDs.PHILOSOPHERSSTAFF)
+PhilosophersStaff:AddCallback(ModCallbacks.MC_USE_ITEM, PhilosophersStaff.UseItem, Lib.ModItemIDs.PHILOSOPHERS_STAFF)
 
 function PhilosophersStaff:PostPlayerUpdate(player)
-    if not player:HasCollectible(Lib.ModItemIDs.PHILOSOPHERSSTAFF) then
+    if not player:HasCollectible(Lib.ModItemIDs.PHILOSOPHERS_STAFF) then
         return
     end
-    if player:HasCollectible(Lib.ModItemIDs.CHEFHAT) then
+    if player:HasCollectible(Lib.ModItemIDs.CHEF_HAT) then
         local bank = Lib:GetGlobalLibData("Foods", "Bank")
         if not bank then
             return
         end
         for i = 1, 4 do
             if bank[i] == Lib.ModFoodItemIDs.APPLE - 1 then
-                bank[i] = Lib.ModFoodItemIDs.GOLDENAPPLE - 1
+                bank[i] = Lib.ModFoodItemIDs.GOLDEN_APPLE - 1
             elseif bank[i] == Lib.ModFoodItemIDs.CARROT - 1 then
-                bank[i] = Lib.ModFoodItemIDs.GOLDENCARROT - 1
+                bank[i] = Lib.ModFoodItemIDs.GOLDEN_CARROT - 1
             end
         end
     end
@@ -67,7 +67,7 @@ end
 PhilosophersStaff:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, PhilosophersStaff.PostPlayerUpdate, 0)
 
 function PhilosophersStaff:PostNPCDeath(npc)
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.PHILOSOPHERSSTAFF) then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.PHILOSOPHERS_STAFF) then
         return
     end
     local rng = RNG(npc.InitSeed)

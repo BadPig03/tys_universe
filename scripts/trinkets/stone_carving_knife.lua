@@ -1,8 +1,8 @@
 local Lib = TYU
-local StoneCarvingKnife = Lib:NewModTrinket("Stone Carving Knife", "STONECARVINGKNIFE")
+local StoneCarvingKnife = Lib:NewModTrinket("Stone Carving Knife", "STONE_CARVING_KNIFE")
 
 function StoneCarvingKnife:PostGridRockDestroy(rock, type, immediate)
-    local multiplier = Lib.Players.GetTotalTrinketMultiplier(Lib.ModTrinketIDs.STONECARVINGKNIFE)
+    local multiplier = Lib.Players.GetTotalTrinketMultiplier(Lib.ModTrinketIDs.STONE_CARVING_KNIFE)
     if multiplier == 0 or not rock:ToRock() then
         return
     end

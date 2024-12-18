@@ -61,15 +61,15 @@ local wakeUpBannedItems = {
     [CollectibleType.COLLECTIBLE_ABYSS] = true,
     [CollectibleType.COLLECTIBLE_FLIP] = true,
     [CollectibleType.COLLECTIBLE_SPINDOWN_DICE] = true,
-    [TYU.ModItemIDs.BEGGARMASK] = true,
-    [TYU.ModItemIDs.CROWNOFKINGS] = true,
+    [TYU.ModItemIDs.BEGGAR_MASK] = true,
+    [TYU.ModItemIDs.CROWN_OF_KINGS] = true,
     [TYU.ModItemIDs.ORDER] = true,
-    [TYU.ModItemIDs.HADESBLADE] = true,
+    [TYU.ModItemIDs.HADES_BLADE] = true,
     [TYU.ModItemIDs.MIRRORING] = true,
-    [TYU.ModItemIDs.MIRRORINGSHARD] = true,
-    [TYU.ModItemIDs.PLANETARIUMTELESCOPE] = true,
-    [TYU.ModItemIDs.THEGOSPELOFJOHN] = true,
-    [TYU.ModItemIDs.WAKEUP] = true
+    [TYU.ModItemIDs.MIRRORING_SHARD] = true,
+    [TYU.ModItemIDs.PLANETARIUM_TELESCOPE] = true,
+    [TYU.ModItemIDs.THE_GOSPEL_OF_JOHN] = true,
+    [TYU.ModItemIDs.WAKE_UP] = true
 }
 
 function Collectibles.GetCollectibleFromCurrentRoom(excludeTags, rng)

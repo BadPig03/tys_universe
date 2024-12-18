@@ -1,5 +1,5 @@
 local Lib = TYU
-local MirroringShard = Lib:NewModItem("Mirroring Shard", "MIRRORINGSHARD")
+local MirroringShard = Lib:NewModItem("Mirroring Shard", "MIRRORING_SHARD")
 
 local function ChangePlayerToNonTaintedVersion(player)
     local playerType = player:GetPlayerType()
@@ -37,7 +37,7 @@ function MirroringShard:UseItem(itemID, rng, player, useFlags, activeSlot, varDa
     end
     if playerConfig:IsTainted() then
         ChangePlayerToNonTaintedVersion(player)
-        player:RemoveCollectible(Lib.ModItemIDs.MIRRORINGSHARD, false, activeSlot)
+        player:RemoveCollectible(Lib.ModItemIDs.MIRRORING_SHARD, false, activeSlot)
         player:AddCollectible(Lib.ModItemIDs.MIRRORING, player:GetActiveCharge(activeSlot) + player:GetBatteryCharge(activeSlot), false, activeSlot, varData)
         Lib.SFXMANAGER:Play(SoundEffect.SOUND_MIRROR_EXIT)
         player:AnimateSad()
@@ -46,11 +46,11 @@ function MirroringShard:UseItem(itemID, rng, player, useFlags, activeSlot, varDa
         Lib.SFXMANAGER:Stop(SoundEffect.SOUND_DEATH_CARD)
         return { Discharge = true, Remove = false, ShowAnim = false }    
     else
-        player:RemoveCollectible(Lib.ModItemIDs.MIRRORINGSHARD, false, activeSlot)
+        player:RemoveCollectible(Lib.ModItemIDs.MIRRORING_SHARD, false, activeSlot)
         player:AddCollectible(Lib.ModItemIDs.MIRRORING, player:GetActiveCharge(activeSlot) + player:GetBatteryCharge(activeSlot), false, activeSlot, varData)
         return { Discharge = false, Remove = false, ShowAnim = true }
     end
 end
-MirroringShard:AddCallback(ModCallbacks.MC_USE_ITEM, MirroringShard.UseItem, Lib.ModItemIDs.MIRRORINGSHARD)
+MirroringShard:AddCallback(ModCallbacks.MC_USE_ITEM, MirroringShard.UseItem, Lib.ModItemIDs.MIRRORING_SHARD)
 
 return MirroringShard

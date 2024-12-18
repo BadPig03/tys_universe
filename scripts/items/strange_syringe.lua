@@ -1,5 +1,5 @@
 local Lib = TYU
-local StrangeSyringe = Lib:NewModItem("Strange Syringe", "STRANGESYRINGE")
+local StrangeSyringe = Lib:NewModItem("Strange Syringe", "STRANGE_SYRINGE")
 
 function StrangeSyringe:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     if useFlags & UseFlag.USE_CARBATTERY == UseFlag.USE_CARBATTERY or activeSlot < ActiveSlot.SLOT_PRIMARY then
@@ -18,6 +18,6 @@ function StrangeSyringe:UseItem(itemID, rng, player, useFlags, activeSlot, varDa
     end
     return { Discharge = true, Remove = true, ShowAnim = true }
 end
-StrangeSyringe:AddCallback(ModCallbacks.MC_USE_ITEM, StrangeSyringe.UseItem, Lib.ModItemIDs.STRANGESYRINGE)
+StrangeSyringe:AddCallback(ModCallbacks.MC_USE_ITEM, StrangeSyringe.UseItem, Lib.ModItemIDs.STRANGE_SYRINGE)
 
 return StrangeSyringe

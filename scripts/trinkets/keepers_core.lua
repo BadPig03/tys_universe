@@ -1,5 +1,5 @@
 local Lib = TYU
-local KeepersCore = Lib:NewModTrinket("Keeper's Core", "KEEPERSCORE")
+local KeepersCore = Lib:NewModTrinket("Keeper's Core", "KEEPERS_CORE")
 
 local chestTable = {
     [PickupVariant.PICKUP_CHEST] = true,
@@ -37,7 +37,7 @@ end
 KeepersCore:AddCallback(ModCallbacks.MC_POST_PICKUP_INIT, KeepersCore.PostPickupInit)
 
 function KeepersCore:PrePickupGetLootList(pickup, shouldAdvance)
-    local multiplier = Lib.Players.GetTotalTrinketMultiplier(Lib.ModTrinketIDs.KEEPERSCORE)
+    local multiplier = Lib.Players.GetTotalTrinketMultiplier(Lib.ModTrinketIDs.KEEPERS_CORE)
     local lootTable = Lib:GetGlobalLibData("KeepersCore", "LootTable") and Lib:GetGlobalLibData("KeepersCore", "LootTable")[tostring(pickup.InitSeed)]
     if multiplier == 0 or not lootTable or not chestTable[pickup.Variant] then
         return
@@ -60,7 +60,7 @@ end
 KeepersCore:AddCallback(ModCallbacks.MC_PRE_PICKUP_GET_LOOT_LIST, KeepersCore.PrePickupGetLootList)
 
 function KeepersCore:PostTriggerTrinketChanged(player, trinket, _)
-    if trinket ~= Lib.ModTrinketIDs.KEEPERSCORE and trinket ~= Lib.ModTrinketIDs.KEEPERSCORE | TrinketType.TRINKET_GOLDEN_FLAG then
+    if trinket ~= Lib.ModTrinketIDs.KEEPERS_CORE and trinket ~= Lib.ModTrinketIDs.KEEPERS_CORE | TrinketType.TRINKET_GOLDEN_FLAG then
         return
     end
     local room = Lib.GAME:GetRoom()

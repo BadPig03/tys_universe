@@ -1,10 +1,10 @@
 local Lib = TYU
-local BethsSalvation = Lib:NewModTrinket("Beth's Salvation", "BETHSSALVATION")
+local BethsSalvation = Lib:NewModTrinket("Beth's Salvation", "BETHS_SALVATION")
 
 local function CanNotTeleportToAngelRoom(player)
     if Lib.Players.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_EUCHARIST) then
         return false
-    elseif player:GetTrinketRNG(Lib.ModTrinketIDs.BETHSSALVATION):RandomInt(100) < 50 then
+    elseif player:GetTrinketRNG(Lib.ModTrinketIDs.BETHS_SALVATION):RandomInt(100) < 50 then
         return false
     end
     return true
@@ -15,7 +15,7 @@ function BethsSalvation:PostPlayerNewRoomTempEffects(player)
     if Lib.LEVEL:GetCurrentRoomIndex() ~= Lib.LEVEL:GetStartingRoomIndex() or not room:IsFirstVisit() or Lib.LEVEL:IsAscent() or Isaac.GetChallenge() == Challenge.CHALLENGE_BACKASSWARDS then
         return
     end
-    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BETHSSALVATION)
+    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BETHS_SALVATION)
     if multiplier == 0 then
         return
     end

@@ -1,5 +1,5 @@
 local Lib = TYU
-local SpikeProtection = Lib:NewModEnchantment("Spike Protection", "SPIKEPROTECTION")
+local SpikeProtection = Lib:NewModEnchantment("Spike Protection", "SPIKE_PROTECTION")
 
 local function IsSourceRelatedToSpike(source, flags)
     if flags & DamageFlag.DAMAGE_SPIKES == DamageFlag.DAMAGE_SPIKES or flags & DamageFlag.DAMAGE_CURSED_DOOR == DamageFlag.DAMAGE_CURSED_DOOR or flags & DamageFlag.DAMAGE_CHEST == DamageFlag.DAMAGE_CHEST then
@@ -22,11 +22,11 @@ function SpikeProtection:EntityTakeDamage(entity, amount, flags, source, countdo
     if not player or player:HasCurseMistEffect() then
         return
     end
-    local count = player:GetEffects():GetNullEffectNum(Lib.ModEnchantmentIDs.SPIKEPROTECTION)
+    local count = player:GetEffects():GetNullEffectNum(Lib.ModEnchantmentIDs.SPIKE_PROTECTION)
     if not IsSourceRelatedToSpike(source, flags) or amount == 0 or count == 0 then
         return
     end
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.ENCHANTEDBOOK)
+    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.ENCHANTED_BOOK)
     if rng:RandomInt(100) < 25 * count then
         return { Damage = 0, DamageCountdown = 30 }
     end

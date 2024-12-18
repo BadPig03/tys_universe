@@ -1,8 +1,8 @@
 local Lib = TYU
-local ExplosionMaster = Lib:NewModItem("Explosion Master", "EXPLOSIONMASTER")
+local ExplosionMaster = Lib:NewModItem("Explosion Master", "EXPLOSION_MASTER")
 
 function ExplosionMaster:PostProjectileUpdate(projectile)
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.EXPLOSIONMASTER) or projectile:HasProjectileFlags(Lib.ModProjectileFlags.TEAR_BELONGTOPLAYER) then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.EXPLOSION_MASTER) or projectile:HasProjectileFlags(Lib.ModProjectileFlags.TEAR_BELONGTOPLAYER) then
         return
     end
     local rng = RNG(projectile.InitSeed)

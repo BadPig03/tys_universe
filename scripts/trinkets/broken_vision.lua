@@ -1,5 +1,5 @@
 local Lib = TYU
-local BrokenVision = Lib:NewModTrinket("Broken Vision", "BROKENVISION")
+local BrokenVision = Lib:NewModTrinket("Broken Vision", "BROKEN_VISION")
 
 local function GetLastPassiveItem(player)
     local historyItems = player:GetHistory():GetCollectiblesHistory()
@@ -21,11 +21,11 @@ function BrokenVision:PreAddCollectible(type, charge, firstTime, slot, varData, 
     if type <= 0 or Lib.ITEMCONFIG:GetCollectible(type).Type == ItemType.ITEM_ACTIVE or Lib.ITEMCONFIG:GetCollectible(type):HasTags(ItemConfig.TAG_QUEST) then
         return
     end
-    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BROKENVISION)
+    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BROKEN_VISION)
     if multiplier == 0 then
         return
     end
-    local rng = player:GetTrinketRNG(Lib.ModTrinketIDs.BROKENVISION)
+    local rng = player:GetTrinketRNG(Lib.ModTrinketIDs.BROKEN_VISION)
     if not (rng:RandomInt(100) < 60 + multiplier * 10) then
         return
     end

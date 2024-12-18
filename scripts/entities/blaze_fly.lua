@@ -1,12 +1,13 @@
-local BlazeFly = TYU:NewModEntity("Blaze Fly", "BLAZEFLY")
+local BlazeFly = TYU:NewModEntity("Blaze Fly", "BLAZE_FLY")
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+local ModEntityIDs = TYU.ModEntityIDs
 
 function BlazeFly:FamiliarInit(familiar)
     local sprite = familiar:GetSprite()
     sprite:Play("Appear", true)
 end
-BlazeFly:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, BlazeFly.FamiliarInit, TYU.ModEntityIDs.BLAZEFLY.Variant)
+BlazeFly:AddCallback(ModCallbacks.MC_FAMILIAR_INIT, BlazeFly.FamiliarInit, ModEntityIDs.BLAZE_FLY.Variant)
 
 function BlazeFly:FamiliarUpdate(familiar)
     local player = familiar.Player
@@ -42,7 +43,7 @@ function BlazeFly:FamiliarUpdate(familiar)
     end
     familiar:MoveDiagonally(1 / math.sqrt(2))
 end
-BlazeFly:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, BlazeFly.FamiliarUpdate, TYU.ModEntityIDs.BLAZEFLY.Variant)
+BlazeFly:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, BlazeFly.FamiliarUpdate, ModEntityIDs.BLAZE_FLY.Variant)
 
 function BlazeFly:PrePlayerTakeDamage(player, amount, flags, source, countdown)
 	if not source or not source.Entity or not source.Entity:ToEffect() or source.Entity.Variant ~= EffectVariant.FIRE_JET or not source.Entity.SpawnerEntity or not source.Entity.SpawnerEntity:ToPlayer() then
@@ -64,6 +65,6 @@ function BlazeFly:PreFamiliarCollision(familiar, collider, low)
     collider:TakeDamage(7 * multiplier, DamageFlag.DAMAGE_FIRE, EntityRef(familiar), 0)
     collider:AddBurn(EntityRef(player), 63, player.Damage * 2)
 end
-BlazeFly:AddCallback(ModCallbacks.MC_PRE_FAMILIAR_COLLISION, BlazeFly.PreFamiliarCollision, TYU.ModEntityIDs.BLAZEFLY.Variant)
+BlazeFly:AddCallback(ModCallbacks.MC_PRE_FAMILIAR_COLLISION, BlazeFly.PreFamiliarCollision, ModEntityIDs.BLAZE_FLY.Variant)
 
 return BlazeFly

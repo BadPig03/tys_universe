@@ -1,8 +1,9 @@
-local AtonementVoucher = TYU:NewModItem("Atonement Voucher", "ATONEMENTVOUCHER")
+local AtonementVoucher = TYU:NewModItem("Atonement Voucher", "ATONEMENT_VOUCHER")
 local Players = TYU.Players
+local ModItemIDs = TYU.ModItemIDs
 
 function AtonementVoucher:PostDevilCalculate(chance)
-    if Players.AnyoneHasCollectible(TYU.ModItemIDs.ATONEMENTVOUCHER) then
+    if Players.AnyoneHasCollectible(ModItemIDs.ATONEMENT_VOUCHER) then
         if TYU.LEVEL:GetAngelRoomChance() <= 0 then
             TYU.LEVEL:AddAngelRoomChance(1)
         end
@@ -13,7 +14,7 @@ AtonementVoucher:AddCallback(ModCallbacks.MC_POST_DEVIL_CALCULATE, AtonementVouc
 
 function AtonementVoucher:PostNewLevel()
     for _, player in pairs(Players.GetPlayers(true)) do
-        Players.RemoveCollectibles(player, TYU.ModItemIDs.ATONEMENTVOUCHER, -1)
+        Players.RemoveCollectibles(player, ModItemIDs.ATONEMENT_VOUCHER, 1)
     end
 end
 AtonementVoucher:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, AtonementVoucher.PostNewLevel)
@@ -24,6 +25,6 @@ function AtonementVoucher:PreAddCollectible(collectibleType, charge, firstTime, 
         return false
     end
 end
-AtonementVoucher:AddCallback(ModCallbacks.MC_PRE_ADD_COLLECTIBLE, AtonementVoucher.PreAddCollectible, TYU.ModItemIDs.ATONEMENTVOUCHER)
+AtonementVoucher:AddCallback(ModCallbacks.MC_PRE_ADD_COLLECTIBLE, AtonementVoucher.PreAddCollectible, ModItemIDs.ATONEMENT_VOUCHER)
 
 return AtonementVoucher

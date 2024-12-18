@@ -1,5 +1,5 @@
 local Lib = TYU
-local LaserBlaster = Lib:NewModItem("Laser Blaster", "LASERBLASTER")
+local LaserBlaster = Lib:NewModItem("Laser Blaster", "LASER_BLASTER")
 
 local function SetEntityColor(effect, laser)
     local sprite = effect:GetSprite()
@@ -11,7 +11,7 @@ end
 
 local function FireLaserOrb(player, direction, delay)
     delay = delay or 0
-    local laserOrb = Lib.Entities.Spawn(Lib.ModEntityIDs.LASERORB.Type, Lib.ModEntityIDs.LASERORB.Variant, Lib.ModEntityIDs.LASERORB.SubType, player.Position, Vector(0, 0), player):ToEffect()
+    local laserOrb = Lib.Entities.Spawn(Lib.ModEntityIDs.LASER_ORB.Type, Lib.ModEntityIDs.LASER_ORB.Variant, Lib.ModEntityIDs.LASER_ORB.SubType, player.Position, Vector(0, 0), player):ToEffect()
     local laserX = player:FireTechXLaser(laserOrb.Position, Vector(0, 0), 0, player, 1)
     local sprite = laserOrb:GetSprite()
     laserX.Parent = laserOrb
@@ -138,28 +138,28 @@ function LaserBlaster:UseItem(itemID, rng, player, useFlags, activeSlot, varData
     end
     if player:IsHoldingItem() then
         Lib:SetPlayerLibData(player, false, "LaserBlaster", "Lifted")
-        player:AnimateCollectible(Lib.ModItemIDs.LASERBLASTER, "HideItem")
+        player:AnimateCollectible(Lib.ModItemIDs.LASER_BLASTER, "HideItem")
     else
         Lib:SetPlayerLibData(player, true, "LaserBlaster", "Lifted")
-        player:AnimateCollectible(Lib.ModItemIDs.LASERBLASTER, "LiftItem")
+        player:AnimateCollectible(Lib.ModItemIDs.LASER_BLASTER, "LiftItem")
     end
     return { Discharge = false, Remove = false, ShowAnim = false }
 end
-LaserBlaster:AddCallback(ModCallbacks.MC_USE_ITEM, LaserBlaster.UseItem, Lib.ModItemIDs.LASERBLASTER)
+LaserBlaster:AddCallback(ModCallbacks.MC_USE_ITEM, LaserBlaster.UseItem, Lib.ModItemIDs.LASER_BLASTER)
 
 function LaserBlaster:PostPlayerUpdate(player)
-    if not player:HasCollectible(Lib.ModItemIDs.LASERBLASTER) then
+    if not player:HasCollectible(Lib.ModItemIDs.LASER_BLASTER) then
         return
     end
-    if Lib:GetPlayerLibData(player, "LaserBlaster", "Lifted") and (player:GetActiveItem(ActiveSlot.SLOT_PRIMARY) ~= Lib.ModItemIDs.LASERBLASTER or not player:IsHoldingItem()) then
+    if Lib:GetPlayerLibData(player, "LaserBlaster", "Lifted") and (player:GetActiveItem(ActiveSlot.SLOT_PRIMARY) ~= Lib.ModItemIDs.LASER_BLASTER or not player:IsHoldingItem()) then
         Lib:SetPlayerLibData(player, false, "LaserBlaster", "Lifted")
-        player:AnimateCollectible(Lib.ModItemIDs.LASERBLASTER, "HideItem")
+        player:AnimateCollectible(Lib.ModItemIDs.LASER_BLASTER, "HideItem")
     end
     local direction = player:GetShootingInput()
     if Lib:GetPlayerLibData(player, "LaserBlaster", "Lifted") and not (direction.X == 0 and direction.Y == 0) then
         FireLaserOrb(player, direction)
         player:DischargeActiveItem(ActiveSlot.SLOT_PRIMARY)
-        player:AnimateCollectible(Lib.ModItemIDs.LASERBLASTER, "HideItem")
+        player:AnimateCollectible(Lib.ModItemIDs.LASER_BLASTER, "HideItem")
         Lib:SetPlayerLibData(player, false, "LaserBlaster", "Lifted")
     end
 end

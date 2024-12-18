@@ -1,10 +1,10 @@
 local Lib = TYU
-local TwilightFox = Lib:NewModItem("Twilight Fox", "TWILIGHTFOX")
+local TwilightFox = Lib:NewModItem("Twilight Fox", "TWILIGHT_FOX")
 
 function TwilightFox:EvaluateCache(player, cacheFlag)
-    local count = player:GetCollectibleNum(Lib.ModItemIDs.TWILIGHTFOX) + player:GetEffects():GetCollectibleEffectNum(Lib.ModItemIDs.TWILIGHTFOX)
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.TWILIGHTFOX)
-    for _, familiar in pairs(player:CheckFamiliarEx(Lib.ModEntityIDs.TWILIGHTFOX.Variant, count, RNG(rng:Next()), Lib.ITEMCONFIG:GetCollectible(Lib.ModItemIDs.TWILIGHTFOX))) do
+    local count = player:GetCollectibleNum(Lib.ModItemIDs.TWILIGHT_FOX) + player:GetEffects():GetCollectibleEffectNum(Lib.ModItemIDs.TWILIGHT_FOX)
+    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.TWILIGHT_FOX)
+    for _, familiar in pairs(player:CheckFamiliarEx(Lib.ModEntityIDs.TWILIGHT_FOX.Variant, count, RNG(rng:Next()), Lib.ITEMCONFIG:GetCollectible(Lib.ModItemIDs.TWILIGHT_FOX))) do
         local sprite = familiar:GetSprite()
         sprite:Play("Idle", true)
         familiar:AddToFollowers()

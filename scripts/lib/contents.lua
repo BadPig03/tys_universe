@@ -94,61 +94,61 @@ do
         WakeUp = TYU:Require("scripts/items/wake_up")
     }
     TYU.ModItemTexts = {
-        [TYU.ModItemIDs.ABSENCENOTE] = {"请假条", "遇到困难睡大觉"},
+        [TYU.ModItemIDs.ABSENCE_NOTE] = {"请假条", "遇到困难睡大觉"},
         [TYU.ModItemIDs.ABSOLUTION] = {"赦罪", "这不是你的错"},
         [TYU.ModItemIDs.ANOREXIA] = {"厌食症", "我吃不下了"},
-        [TYU.ModItemIDs.ATONEMENTVOUCHER] = {"赎罪券", "承认我的罪过"},
-        [TYU.ModItemIDs.BEGGARMASK] = {"丐帮面具", "忠诚"},
-        [TYU.ModItemIDs.BLAZEFLY] = {"烈焰苍蝇", "太燃了"},
-        [TYU.ModItemIDs.BLESSEDDESTINY] = {"神圣命运", "命中注定"},
-        [TYU.ModItemIDs.BLOODSACRIFICE] = {"鲜血献祭", "以血肉铸就"},
-        [TYU.ModItemIDs.BLOODSAMPLE] = {"血液样本", "血量提升"},
-        [TYU.ModItemIDs.BLOODYDICE] = {"血之骰", "重置你的交易"},
-        [TYU.ModItemIDs.BOBSSTOMACH] = {"鲍勃的胃", "快要溢出了"},
-        [TYU.ModItemIDs.BONEINFISHSTEAK] = {"带骨鱼排", "小心地吃"},
-        [TYU.ModItemIDs.CHEFHAT] = {"厨师帽", "烹饪时间到"},
-        [TYU.ModItemIDs.CHOCOLATEPANCAKE] = {"巧克力煎饼", "恶魔的最爱"},
+        [TYU.ModItemIDs.ATONEMENT_VOUCHER] = {"赎罪券", "承认我的罪过"},
+        [TYU.ModItemIDs.BEGGAR_MASK] = {"丐帮面具", "忠诚"},
+        [TYU.ModItemIDs.BLAZE_FLY] = {"烈焰苍蝇", "太燃了"},
+        [TYU.ModItemIDs.BLESSED_DESTINY] = {"神圣命运", "命中注定"},
+        [TYU.ModItemIDs.BLOOD_SACRIFICE] = {"鲜血献祭", "以血肉铸就"},
+        [TYU.ModItemIDs.BLOOD_SAMPLE] = {"血液样本", "血量提升"},
+        [TYU.ModItemIDs.BLOODY_DICE] = {"血之骰", "重置你的交易"},
+        [TYU.ModItemIDs.BOBS_STOMACH] = {"鲍勃的胃", "快要溢出了"},
+        [TYU.ModItemIDs.BONE_IN_FISH_STEAK] = {"带骨鱼排", "小心地吃"},
+        [TYU.ModItemIDs.CHEF_HAT] = {"厨师帽", "烹饪时间到"},
+        [TYU.ModItemIDs.CHOCOLATE_PANCAKE] = {"巧克力煎饼", "恶魔的最爱"},
         [TYU.ModItemIDs.COLLAPSE] = {"坍缩", "超引力"},
         [TYU.ModItemIDs.CONJUNCTIVITIS] = {"结膜炎", "红眼睛"},
-        [TYU.ModItemIDs.CONSERVATIVETREATMENT] = {"保守疗法", "不会再恶化了"},
+        [TYU.ModItemIDs.CONSERVATIVE_TREATMENT] = {"保守疗法", "不会再恶化了"},
         [TYU.ModItemIDs.CORNUCOPIA] = {"丰饶羊角", "变废为宝"},
-        [TYU.ModItemIDs.CROWNOFKINGS] = {"主宰之冠", "权力易逝"},
-        [TYU.ModItemIDs.CURSEDDICE] = {"被诅咒的骰子", "遮蔽你的命运"},
-        [TYU.ModItemIDs.CURSEDTREASURE] = {"被诅咒的宝藏", "更多的商品...但代价是什么?"},
-        [TYU.ModItemIDs.EFFERVESCENTTABLET] = {"泡腾片", "好多泡泡"},
-        [TYU.ModItemIDs.ENCHANTEDBOOK] = {"附魔书", "附加能力"},
-        [TYU.ModItemIDs.EXPIREDGLUE] = {"过期胶水", "好臭"},
-        [TYU.ModItemIDs.EXPLOSIONMASTER] = {"爆炸大师", "艺术就是爆炸"},
-        [TYU.ModItemIDs.FALLENSKY] = {"天坠", "直坠深渊"},
+        [TYU.ModItemIDs.CROWN_OF_KINGS] = {"主宰之冠", "权力易逝"},
+        [TYU.ModItemIDs.CURSED_DICE] = {"被诅咒的骰子", "遮蔽你的命运"},
+        [TYU.ModItemIDs.CURSED_TREASURE] = {"被诅咒的宝藏", "更多的商品...但代价是什么?"},
+        [TYU.ModItemIDs.EFFERVESCENT_TABLET] = {"泡腾片", "好多泡泡"},
+        [TYU.ModItemIDs.ENCHANTED_BOOK] = {"附魔书", "附加能力"},
+        [TYU.ModItemIDs.EXPIRED_GLUE] = {"过期胶水", "好臭"},
+        [TYU.ModItemIDs.EXPLOSION_MASTER] = {"爆炸大师", "艺术就是爆炸"},
+        [TYU.ModItemIDs.FALLEN_SKY] = {"天坠", "直坠深渊"},
         [TYU.ModItemIDs.GUILT] = {"罪孽", "这就是你的错"},
-        [TYU.ModItemIDs.GUPPYSFOOD] = {"嗝屁猫的罐头", "还没过期"},
-        [TYU.ModItemIDs.HADESBLADE] = {"冥府之刃", "心怀鬼胎"},
-        [TYU.ModItemIDs.HEPHAESTUSSOUL] = {"赫菲斯托斯之魂", "火焰化身"},
+        [TYU.ModItemIDs.GUPPYS_FOOD] = {"嗝屁猫的罐头", "还没过期"},
+        [TYU.ModItemIDs.HADES_BLADE] = {"冥府之刃", "心怀鬼胎"},
+        [TYU.ModItemIDs.HEPHAESTUS_SOUL] = {"赫菲斯托斯之魂", "火焰化身"},
         [TYU.ModItemIDs.LANDMINE] = {"地雷", "一触即爆"},
-        [TYU.ModItemIDs.LASERBLASTER] = {"激光发射器", "未来科技"},
+        [TYU.ModItemIDs.LASER_BLASTER] = {"激光发射器", "未来科技"},
         [TYU.ModItemIDs.MAGNIFIER] = {"放大镜", "放大你的敌人"},
-        [TYU.ModItemIDs.MARRIAGECERTIFICATE] = {"结婚证明", "见证坚定不移的爱情"},
-        [TYU.ModItemIDs.MIRRORINGSHARD] = {"镜像碎块", "另一个我"},
+        [TYU.ModItemIDs.MARRIAGE_CERTIFICATE] = {"结婚证明", "见证坚定不移的爱情"},
+        [TYU.ModItemIDs.MIRRORING_SHARD] = {"镜像碎块", "另一个我"},
         [TYU.ModItemIDs.MIRRORING] = {"镜像", "另一个我"},
-        [TYU.ModItemIDs.NOTICEOFCRITICALCONDITION] = {"病危通知书", "生死未卜"},
-        [TYU.ModItemIDs.OCEANUSSOUL] = {"俄刻阿诺斯之魂", "海洋化身"},
+        [TYU.ModItemIDs.NOTICE_OF_CRITICAL_CONDITION] = {"病危通知书", "生死未卜"},
+        [TYU.ModItemIDs.OCEANUS_SOUL] = {"俄刻阿诺斯之魂", "海洋化身"},
         [TYU.ModItemIDs.ORDER] = {"秩序", "???"},
-        [TYU.ModItemIDs.OVERLOADBATTERY] = {"过载电池", "<3=充能"},
-        [TYU.ModItemIDs.PEELEDBANANA] = {"剥皮香蕉", "甜甜的感觉"},
-        [TYU.ModItemIDs.PHILOSOPHERSSTAFF] = {"贤者权杖", "别碰它!"},
-        [TYU.ModItemIDs.PLANETARIUMTELESCOPE] = {"星象望远镜", "远距离观察"},
-        [TYU.ModItemIDs.RECONVISION] = {"洞察视界", "看穿一切"},
+        [TYU.ModItemIDs.OVERLOAD_BATTERY] = {"过载电池", "<3=充能"},
+        [TYU.ModItemIDs.PEELED_BANANA] = {"剥皮香蕉", "甜甜的感觉"},
+        [TYU.ModItemIDs.PHILOSOPHERS_STAFF] = {"贤者权杖", "别碰它!"},
+        [TYU.ModItemIDs.PLANETARIUM_TELESCOPE] = {"星象望远镜", "远距离观察"},
+        [TYU.ModItemIDs.RECON_VISION] = {"洞察视界", "看穿一切"},
         [TYU.ModItemIDs.REWIND] = {"倒带", "似曾相识"},
         [TYU.ModItemIDs.RUBY] = {"红宝石", "财富的象征"},
         [TYU.ModItemIDs.SCAPEGOAT] = {"替罪羊", "承担所有的罪恶和污浊"},
-        [TYU.ModItemIDs.SINISTERPACT] = {"邪恶契约", "他渴望你的誓言"},
-        [TYU.ModItemIDs.STICKYBALL] = {"粘性球", "好粘"},
-        [TYU.ModItemIDs.STRANGESYRINGE] = {"奇怪的针筒", "嗑药?"},
-        [TYU.ModItemIDs.SUSPICIOUSSTEW] = {"迷之炖菜", "好奇怪"},
-        [TYU.ModItemIDs.THEGOSPELOFJOHN] = {"约翰福音", "憧憬未来"},
-        [TYU.ModItemIDs.TOOLBOX] = {"工具箱", "里面有什么?"},
-        [TYU.ModItemIDs.TWILIGHTFOX] = {"暮光狐", "静寂的保护者"},
-        [TYU.ModItemIDs.WAKEUP] = {"唤醒", "这是一场梦吗?"}
+        [TYU.ModItemIDs.SINISTER_PACT] = {"邪恶契约", "他渴望你的誓言"},
+        [TYU.ModItemIDs.STICKY_BALL] = {"粘性球", "好粘"},
+        [TYU.ModItemIDs.STRANGE_SYRINGE] = {"奇怪的针筒", "嗑药?"},
+        [TYU.ModItemIDs.SUSPICIOUS_STEW] = {"迷之炖菜", "好奇怪"},
+        [TYU.ModItemIDs.THE_GOSPEL_OF_JOHN] = {"约翰福音", "憧憬未来"},
+        [TYU.ModItemIDs.TOOL_BOX] = {"工具箱", "里面有什么?"},
+        [TYU.ModItemIDs.TWILIGHT_FOX] = {"暮光狐", "静寂的保护者"},
+        [TYU.ModItemIDs.WAKE_UP] = {"唤醒", "这是一场梦吗?"}
     }
 end
 
@@ -161,8 +161,8 @@ do
         GlowingHourglassShard = TYU:Require("scripts/cards/glowing_hourglass_shard")
     }
     TYU.ModCardTexts = {
-        [TYU.ModCardIDs.ENCHANTEDCARD] = {"附魔卡", "随机附魔"},
-        [TYU.ModCardIDs.GLOWINGHOURGLASSSHARD] = {"发光沙漏碎片", "逆转时间"}
+        [TYU.ModCardIDs.ENCHANTED_CARD] = {"附魔卡", "随机附魔"},
+        [TYU.ModCardIDs.GLOWING_HOURGLASS_SHARD] = {"发光沙漏碎片", "逆转时间"}
     }
 end
 
@@ -218,22 +218,22 @@ do
         Thorns = TYU:Require("scripts/enchantments/thorns")
     }
     TYU.ModEnchantmentInfos = {
-        [TYU.ModEnchantmentIDs.AQUALORD] = {"水域领主", "Aqua Lord", 6, 1, false},
-        [TYU.ModEnchantmentIDs.BANEOFARTHROPODS] = {"节肢杀手", "Bane Of Arthropods", 10, 5, false},
-        [TYU.ModEnchantmentIDs.BLASTPROTECTION] = {"爆炸保护", "Blast Protection", 8, 4, false},
-        [TYU.ModEnchantmentIDs.CHAMPIONKILLER] = {"精英杀手", "Champion Killer", 10, 5, false},
-        [TYU.ModEnchantmentIDs.CURSEOFBINDING] = {"绑定诅咒", "Curse Of Binding", 1, 1, true},
-        [TYU.ModEnchantmentIDs.CURSEOFSALVAGING] = {"拾荒诅咒", "Curse Of Salvaging", 1, 1, true},
-        [TYU.ModEnchantmentIDs.CURSEOFVANISHING] = {"消失诅咒", "Curse Of Vanishing", 1, 1, true},
-        [TYU.ModEnchantmentIDs.FIREASPECT] = {"火焰附加", "Fire Aspect", 6, 2, false},
-        [TYU.ModEnchantmentIDs.FIREPROTECTION] = {"火焰保护", "Fire Protection", 8, 4, false},
+        [TYU.ModEnchantmentIDs.AQUA_LORD] = {"水域领主", "Aqua Lord", 6, 1, false},
+        [TYU.ModEnchantmentIDs.BANE_OF_ARTHROPODS] = {"节肢杀手", "Bane Of Arthropods", 10, 5, false},
+        [TYU.ModEnchantmentIDs.BLAST_PROTECTION] = {"爆炸保护", "Blast Protection", 8, 4, false},
+        [TYU.ModEnchantmentIDs.CHAMPION_KILLER] = {"精英杀手", "Champion Killer", 10, 5, false},
+        [TYU.ModEnchantmentIDs.CURSE_OF_BINDING] = {"绑定诅咒", "Curse Of Binding", 1, 1, true},
+        [TYU.ModEnchantmentIDs.CURSE_OF_SALVAGING] = {"拾荒诅咒", "Curse Of Salvaging", 1, 1, true},
+        [TYU.ModEnchantmentIDs.CURSE_OF_VANISHING] = {"消失诅咒", "Curse Of Vanishing", 1, 1, true},
+        [TYU.ModEnchantmentIDs.FIRE_ASPECT] = {"火焰附加", "Fire Aspect", 6, 2, false},
+        [TYU.ModEnchantmentIDs.FIRE_PROTECTION] = {"火焰保护", "Fire Protection", 8, 4, false},
         [TYU.ModEnchantmentIDs.FORTUNE] = {"时运", "Fortune", 6, 3, false},
         [TYU.ModEnchantmentIDs.KNOCKBACK] = {"击退", "Knockback", 6, 2, false},
         [TYU.ModEnchantmentIDs.LOOTING] = {"抢夺", "Looting", 6, 3, false},
-        [TYU.ModEnchantmentIDs.PROJECTILEPROTECTION] = {"弹射物保护", "Projectile Protection", 8, 4, false},
+        [TYU.ModEnchantmentIDs.PROJECTILE_PROTECTION] = {"弹射物保护", "Projectile Protection", 8, 4, false},
         [TYU.ModEnchantmentIDs.SMITE] = {"亡灵杀手", "Smite", 10, 5, false},
-        [TYU.ModEnchantmentIDs.SPIKEPROTECTION] = {"尖刺保护", "Spike Protection", 8, 4, false},
-        [TYU.ModEnchantmentIDs.SUPERSONIC] = {"超音速", "Super Sonic", 6, 3, false},
+        [TYU.ModEnchantmentIDs.SPIKE_PROTECTION] = {"尖刺保护", "Spike Protection", 8, 4, false},
+        [TYU.ModEnchantmentIDs.SUPER_SONIC] = {"超音速", "Super Sonic", 6, 3, false},
         [TYU.ModEnchantmentIDs.THORNS] = {"荆棘", "Thorns", 6, 3, false}
     }
 end
@@ -246,7 +246,7 @@ do
         BaitAndSwitch = TYU:Require("scripts/pills/bait_and_switch")
     }
     TYU.ModPillTexts = {
-        [TYU.ModPillEffectIDs.BAITANDSWITCH] = "偷天换日"
+        [TYU.ModPillEffectIDs.BAIT_AND_SWITCH] = "偷天换日"
     }
 end
 
@@ -272,12 +272,12 @@ do
         StoneCarvingKnife = TYU:Require("scripts/trinkets/stone_carving_knife")
     }
     TYU.ModTrinketTexts = {
-        [TYU.ModTrinketIDs.BETHSSALVATION] = {"伯大尼的救赎", "解脱于罪恶"},
-        [TYU.ModTrinketIDs.BROKENVISION] = {"视力受损", "双倍道具?"},
-        [TYU.ModTrinketIDs.BROKENGLASSEYE] = {"损坏的玻璃眼", "它曾经是完整的"},
-        [TYU.ModTrinketIDs.KEEPERSCORE] = {"店主的核心", "积少成多"},
-        [TYU.ModTrinketIDs.LOSTBOTTLECAP] = {"丢失的瓶盖", "再来一瓶!"},
-        [TYU.ModTrinketIDs.STONECARVINGKNIFE] = {"石刻刀", "石雕"}
+        [TYU.ModTrinketIDs.BETHS_SALVATION] = {"伯大尼的救赎", "解脱于罪恶"},
+        [TYU.ModTrinketIDs.BROKEN_VISION] = {"视力受损", "双倍道具?"},
+        [TYU.ModTrinketIDs.BROKEN_GLASS_EYE] = {"损坏的玻璃眼", "它曾经是完整的"},
+        [TYU.ModTrinketIDs.KEEPERS_CORE] = {"店主的核心", "积少成多"},
+        [TYU.ModTrinketIDs.LOST_BOTTLE_CAP] = {"丢失的瓶盖", "再来一瓶!"},
+        [TYU.ModTrinketIDs.STONE_CARVING_KNIFE] = {"石刻刀", "石雕"}
     }
 end
 

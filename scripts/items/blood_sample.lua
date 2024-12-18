@@ -1,4 +1,4 @@
-local BloodSample = TYU:NewModItem("Blood Sample", "BLOODSAMPLE")
+local BloodSample = TYU:NewModItem("Blood Sample", "BLOOD_SAMPLE")
 local Utils = TYU.Utils
 
 local function SetPlayerLibData(player, value, ...)
@@ -10,7 +10,7 @@ local function GetPlayerLibData(player, ...)
 end
 
 function BloodSample:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
-    if Utils.HasUseFlags(useFlags, UseFlag.USE_CARBATTERY) or Utils.HasUseFlags(useFlags, UseFlag.USE_VOID) then
+    if Utils.HasFlags(useFlags, UseFlag.USE_CARBATTERY) or Utils.HasFlags(useFlags, UseFlag.USE_VOID) then
         return { Discharge = false, Remove = false, ShowAnim = false }
     end
     local count = GetPlayerLibData(player, "Counts") or 0
@@ -22,13 +22,13 @@ function BloodSample:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     end
     return { Discharge = true, Remove = false, ShowAnim = true }
 end
-BloodSample:AddCallback(ModCallbacks.MC_USE_ITEM, BloodSample.UseItem, TYU.ModItemIDs.BLOODSAMPLE)
+BloodSample:AddCallback(ModCallbacks.MC_USE_ITEM, BloodSample.UseItem, TYU.ModItemIDs.BLOOD_SAMPLE)
 
 function BloodSample:PostPlayerHUDRenderActiveItem(player, slot, offset, alpha, scale)
-    if not player:HasCollectible(TYU.ModItemIDs.BLOODSAMPLE) or slot < ActiveSlot.SLOT_PRIMARY then
+    if not player:HasCollectible(TYU.ModItemIDs.BLOOD_SAMPLE) or slot < ActiveSlot.SLOT_PRIMARY then
         return
     end
-    local activeSlot = player:GetActiveItemSlot(TYU.ModItemIDs.BLOODSAMPLE)
+    local activeSlot = player:GetActiveItemSlot(TYU.ModItemIDs.BLOOD_SAMPLE)
     local charge = GetPlayerLibData(player, "Charge") or 0
     player:GetActiveItemDesc(activeSlot).PartialCharge = charge
 end

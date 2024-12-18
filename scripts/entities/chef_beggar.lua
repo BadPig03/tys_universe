@@ -1,4 +1,4 @@
-local ChefBeggar = TYU:NewModEntity("Chef Beggar", "CHEFBEGGAR")
+local ChefBeggar = TYU:NewModEntity("Chef Beggar", "CHEF_BEGGAR")
 local Entities = TYU.Entities
 local Foods = TYU.Foods
 local Players = TYU.Players
@@ -60,12 +60,12 @@ function ChefBeggar:PreSlotCollision(slot, collider, low)
 	sprite:ReplaceSpritesheet(2, "gfx/ui/foods/"..(food + 1)..".png", true)
 	sprite:Play("PayNothing", true)
 end
-ChefBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_COLLISION, ChefBeggar.PreSlotCollision, TYU.ModEntityIDs.CHEFBEGGAR.Variant)
+ChefBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_COLLISION, ChefBeggar.PreSlotCollision, TYU.ModEntityIDs.CHEF_BEGGAR.Variant)
 
 function ChefBeggar:PostSlotUpdate(slot)
 	local sprite = slot:GetSprite()
 	if sprite:IsEventTriggered("Prize") then
-		local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, TYU.ModItemIDs.SUSPICIOUSSTEW, Utils.FindFreePickupSpawnPosition(slot.Position + Vector(0, 40))):ToPickup()
+		local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, TYU.ModItemIDs.SUSPICIOUS_STEW, Utils.FindFreePickupSpawnPosition(slot.Position + Vector(0, 40))):ToPickup()
 		item:SetVarData(slot:GetDonationValue())
 		item:RemoveCollectibleCycle()
 		item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
@@ -93,16 +93,16 @@ function ChefBeggar:PostSlotUpdate(slot)
 		slot:SetState(1)
 	end
 end
-ChefBeggar:AddCallback(ModCallbacks.MC_POST_SLOT_UPDATE, ChefBeggar.PostSlotUpdate, TYU.ModEntityIDs.CHEFBEGGAR.Variant)
+ChefBeggar:AddCallback(ModCallbacks.MC_POST_SLOT_UPDATE, ChefBeggar.PostSlotUpdate, TYU.ModEntityIDs.CHEF_BEGGAR.Variant)
 
 function ChefBeggar:PreSlotCreateExplosionDrops(slot)
-	if Players.AnyoneHasCollectible(TYU.ModItemIDs.CHEFHAT) or GetGlobalLibData("ChefHatSpawned") then
+	if Players.AnyoneHasCollectible(TYU.ModItemIDs.CHEF_HAT) or GetGlobalLibData("ChefHatSpawned") then
 		local rng = slot:GetDropRNG()
 		for i = 0, rng:RandomInt(2) do
-			Entities.Spawn(TYU.ModEntityIDs.FOODSFOODITEM.Type, TYU.ModEntityIDs.FOODSFOODITEM.Variant, 0, slot.Position, Vector(1, 0):Resized(2 + rng:RandomFloat() * 3):Rotated(rng:RandomInt(360)))
+			Entities.Spawn(TYU.ModEntityIDs.FOODS_FOOD_ITEM.Type, TYU.ModEntityIDs.FOODS_FOOD_ITEM.Variant, 0, slot.Position, Vector(1, 0):Resized(2 + rng:RandomFloat() * 3):Rotated(rng:RandomInt(360)))
 		end
 	else
-		local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, TYU.ModItemIDs.CHEFHAT, slot.Position):ToPickup()
+		local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, TYU.ModItemIDs.CHEF_HAT, slot.Position):ToPickup()
 		item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
 		item.Price = 0
 		SetGlobalLibData(true, "ChefHatSpawned")
@@ -111,6 +111,6 @@ function ChefBeggar:PreSlotCreateExplosionDrops(slot)
 	slot:Remove()
     return false
 end
-ChefBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_CREATE_EXPLOSION_DROPS, ChefBeggar.PreSlotCreateExplosionDrops, TYU.ModEntityIDs.CHEFBEGGAR.Variant)
+ChefBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_CREATE_EXPLOSION_DROPS, ChefBeggar.PreSlotCreateExplosionDrops, TYU.ModEntityIDs.CHEF_BEGGAR.Variant)
 
 return ChefBeggar

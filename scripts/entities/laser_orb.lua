@@ -1,5 +1,5 @@
 local Lib = TYU
-local LaserOrb = Lib:NewModEntity("Laser Orb", "LASERORB")
+local LaserOrb = Lib:NewModEntity("Laser Orb", "LASER_ORB")
 
 local function DamageNearbyEnemies(effect, player)
     local entityList = {}
@@ -170,6 +170,6 @@ function LaserOrb:PostEffectUpdate(effect)
         end    
     end
 end
-LaserOrb:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, LaserOrb.PostEffectUpdate, Lib.ModEntityIDs.LASERORB.Variant)
+LaserOrb:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, LaserOrb.PostEffectUpdate, Lib.ModEntityIDs.LASER_ORB.Variant)
 
 return LaserOrb

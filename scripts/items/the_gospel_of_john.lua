@@ -1,5 +1,5 @@
 local Lib = TYU
-local TheGospelOfJohn = Lib:NewModItem("The Gospel of John", "THEGOSPELOFJOHN")
+local TheGospelOfJohn = Lib:NewModItem("The Gospel of John", "THE_GOSPEL_OF_JOHN")
 
 function TheGospelOfJohn:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     if useFlags & UseFlag.USE_CARBATTERY == UseFlag.USE_CARBATTERY then   
@@ -11,7 +11,7 @@ function TheGospelOfJohn:UseItem(itemID, rng, player, useFlags, activeSlot, varD
         if ent.SubType > 0 then
             foundAnyCollectible = true
             local pickup = ent:ToPickup()
-            local newType = Lib.Collectibles.GetAngelRoomCollectible(player:GetCollectibleRNG(Lib.ModItemIDs.THEGOSPELOFJOHN))
+            local newType = Lib.Collectibles.GetAngelRoomCollectible(player:GetCollectibleRNG(Lib.ModItemIDs.THE_GOSPEL_OF_JOHN))
             if newType == CollectibleType.COLLECTIBLE_BREAKFAST then
                 return { Discharge = false, Remove = false, ShowAnim = true }
             end
@@ -29,7 +29,7 @@ function TheGospelOfJohn:UseItem(itemID, rng, player, useFlags, activeSlot, varD
         return { Discharge = false, Remove = false, ShowAnim = true }
     end
     if useFlags & UseFlag.USE_VOID ~= UseFlag.USE_VOID then
-        ItemOverlay.Show(Lib.ModGiantBookIDs.THEGOSPELOFJOHN, 3, player)
+        ItemOverlay.Show(Lib.ModGiantBookIDs.THE_GOSPEL_OF_JOHN, 3, player)
     end
     if not foundAnyCollectible then
         player:AddBrokenHearts(-1)
@@ -46,6 +46,6 @@ function TheGospelOfJohn:UseItem(itemID, rng, player, useFlags, activeSlot, varD
     end
     return { Discharge = true, Remove = false, ShowAnim = true }
 end
-TheGospelOfJohn:AddCallback(ModCallbacks.MC_USE_ITEM, TheGospelOfJohn.UseItem, Lib.ModItemIDs.THEGOSPELOFJOHN)
+TheGospelOfJohn:AddCallback(ModCallbacks.MC_USE_ITEM, TheGospelOfJohn.UseItem, Lib.ModItemIDs.THE_GOSPEL_OF_JOHN)
 
 return TheGospelOfJohn

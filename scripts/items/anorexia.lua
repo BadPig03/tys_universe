@@ -3,6 +3,7 @@ local Collectibles = TYU.Collectibles
 local Players = TYU.Players
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+local ModItemIDs = TYU.ModItemIDs
 local PrivateField = {}
 
 do
@@ -30,23 +31,23 @@ do
 end
 
 function Anorexia:PostAddCollectible(collectibleType, charge, firstTime, slot, varData, player)
-	if collectibleType == TYU.ModItemIDs.ANOREXIA then
+	if collectibleType == ModItemIDs.ANOREXIA then
 		if player:HasCollectible(CollectibleType.COLLECTIBLE_BINGE_EATER) then
-			Players.RemoveCostume(player, TYU.ModItemIDs.ANOREXIA)
+			Players.RemoveCostume(player, ModItemIDs.ANOREXIA)
 		elseif firstTime then
 			PrivateField.SimulateHematemesisEffect(player)
 		end
-	elseif collectibleType == CollectibleType.COLLECTIBLE_BINGE_EATER and player:HasCollectible(TYU.ModItemIDs.ANOREXIA) then
-		Players.RemoveCostume(player, TYU.ModItemIDs.ANOREXIA)
+	elseif collectibleType == CollectibleType.COLLECTIBLE_BINGE_EATER and player:HasCollectible(ModItemIDs.ANOREXIA) then
+		Players.RemoveCostume(player, ModItemIDs.ANOREXIA)
 	end
 end
 Anorexia:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, Anorexia.PostAddCollectible)
 
 function Anorexia:PostPickupUpdate(pickup)
-	if not Players.AnyoneHasCollectible(TYU.ModItemIDs.ANOREXIA) or Players.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_BINGE_EATER) or Utils.IsInDeathCertificate() or pickup.Wait >= 5 or pickup.SubType == 0 or not TYU.ITEMCONFIG:GetCollectible(pickup.SubType) or not TYU.ITEMCONFIG:GetCollectible(pickup.SubType):HasTags(ItemConfig.TAG_FOOD) then
+	if not Players.AnyoneHasCollectible(ModItemIDs.ANOREXIA) or Players.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_BINGE_EATER) or Utils.IsInDeathCertificate() or pickup.Wait >= 5 or pickup.SubType == 0 or not TYU.ITEMCONFIG:GetCollectible(pickup.SubType) or not TYU.ITEMCONFIG:GetCollectible(pickup.SubType):HasTags(ItemConfig.TAG_FOOD) then
 		return
 	end
-	local rng = Isaac.GetPlayer(0):GetCollectibleRNG(TYU.ModItemIDs.ANOREXIA)
+	local rng = Isaac.GetPlayer(0):GetCollectibleRNG(ModItemIDs.ANOREXIA)
 	local newType = Collectibles.GetCollectibleFromCurrentRoom(ItemConfig.TAG_FOOD, rng)
 	if pickup.SubType ~= newType then
 		Entities.Morph(pickup, nil, nil, newType)

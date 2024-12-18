@@ -1,8 +1,8 @@
 local Lib = TYU
-local CrownOfKings = Lib:NewModItem("Crown of Kings", "CROWNOFKINGS")
+local CrownOfKings = Lib:NewModItem("Crown of Kings", "CROWN_OF_KINGS")
 
 local function GetEffect(player)
-    for _, effect in pairs(Isaac.FindByType(Lib.ModEntityIDs.CROWNOFKINGSEFFECT.Type, Lib.ModEntityIDs.CROWNOFKINGSEFFECT.Variant, Lib.ModEntityIDs.CROWNOFKINGSEFFECT.SubType)) do
+    for _, effect in pairs(Isaac.FindByType(Lib.ModEntityIDs.CROWN_OF_KINGS_EFFECT.Type, Lib.ModEntityIDs.CROWN_OF_KINGS_EFFECT.Variant, Lib.ModEntityIDs.CROWN_OF_KINGS_EFFECT.SubType)) do
         if effect.Parent and effect.Parent:ToPlayer() and GetPtrHash(effect.Parent:ToPlayer()) == GetPtrHash(player) then
             return effect:ToEffect()
         end
@@ -11,7 +11,7 @@ local function GetEffect(player)
 end
 
 local function SpawnEffect(player)
-    local effect = Lib.Entities.Spawn(Lib.ModEntityIDs.CROWNOFKINGSEFFECT.Type, Lib.ModEntityIDs.CROWNOFKINGSEFFECT.Variant, Lib.ModEntityIDs.CROWNOFKINGSEFFECT.SubType, player.Position, player.Velocity, player):ToEffect()
+    local effect = Lib.Entities.Spawn(Lib.ModEntityIDs.CROWN_OF_KINGS_EFFECT.Type, Lib.ModEntityIDs.CROWN_OF_KINGS_EFFECT.Variant, Lib.ModEntityIDs.CROWN_OF_KINGS_EFFECT.SubType, player.Position, player.Velocity, player):ToEffect()
     local effectSprite = effect:GetSprite()
     local hasCrownOfLight = player:HasCollectible(CollectibleType.COLLECTIBLE_CROWN_OF_LIGHT)
     local hasDarkPrincesCrown = player:HasCollectible(CollectibleType.COLLECTIBLE_DARK_PRINCES_CROWN)
@@ -40,7 +40,7 @@ local function SpawnEffect(player)
 end
 
 function CrownOfKings:PostPlayerUpdate(player)
-    if not player:HasCollectible(Lib.ModItemIDs.CROWNOFKINGS) then
+    if not player:HasCollectible(Lib.ModItemIDs.CROWN_OF_KINGS) then
         return
     end
     if not GetEffect(player) then
@@ -53,7 +53,7 @@ function CrownOfKings:PostNewRoom()
     local room = Lib.GAME:GetRoom()
     for _, player in pairs(Lib.Players.GetPlayers(true)) do
         local bossFound = false
-        if player:HasCollectible(Lib.ModItemIDs.CROWNOFKINGS) then
+        if player:HasCollectible(Lib.ModItemIDs.CROWN_OF_KINGS) then
             for _, ent in pairs(Isaac.GetRoomEntities()) do
                 if ent:ToNPC() and ent:IsBoss() and ent.Type ~= EntityType.ENTITY_DARK_ESAU then
                     bossFound = true
@@ -77,7 +77,7 @@ function CrownOfKings:PreSpawnCleanAward(rng, spawnPosition)
     local room = Lib.GAME:GetRoom()
     local roomType = room:GetType()
     for _, player in pairs(Lib.Players.GetPlayers(true)) do
-        if player:HasCollectible(Lib.ModItemIDs.CROWNOFKINGS) and Lib:GetPlayerLibData(player, "CrownOfKings", "BossFound") then
+        if player:HasCollectible(Lib.ModItemIDs.CROWN_OF_KINGS) and Lib:GetPlayerLibData(player, "CrownOfKings", "BossFound") then
             if roomType == RoomType.ROOM_CHALLENGE and Lib:GetPlayerLibData(player, "CrownOfKings", "IsBossChallenge") then
                 Isaac.CreateTimer(function()
                     Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, Lib.Collectibles.GetCollectibleFromRandomPool(1, 3, rng), room:FindFreePickupSpawnPosition(room:GetCenterPos() + Vector(0, 40), 0, true)) 
@@ -102,7 +102,7 @@ CrownOfKings:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, CrownOfKings.Pre
 
 function CrownOfKings:PostTakeDamage(entity, amount, flags, source, countdown)
     local player = entity:ToPlayer()
-    if not player or not player:HasCollectible(Lib.ModItemIDs.CROWNOFKINGS) or not Lib:GetPlayerLibData(player, "CrownOfKings", "BossFound") then
+    if not player or not player:HasCollectible(Lib.ModItemIDs.CROWN_OF_KINGS) or not Lib:GetPlayerLibData(player, "CrownOfKings", "BossFound") then
         return
     end
     Lib:SetPlayerLibData(player, false, "CrownOfKings", "BossFound")

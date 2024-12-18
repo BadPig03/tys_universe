@@ -1,10 +1,10 @@
 local Lib = TYU
-local ToolBox = Lib:NewModItem("Tool Box", "TOOLBOX")
+local ToolBox = Lib:NewModItem("Tool Box", "TOOL_BOX")
 
 function ToolBox:EvaluateCache(player, cacheFlag)
-    local count = player:GetCollectibleNum(Lib.ModItemIDs.TOOLBOX) + player:GetEffects():GetCollectibleEffectNum(Lib.ModItemIDs.TOOLBOX)
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.TOOLBOX)
-    for _, familiar in pairs(player:CheckFamiliarEx(Lib.ModEntityIDs.TOOLBOX.Variant, count, RNG(rng:Next()), Lib.ITEMCONFIG:GetCollectible(Lib.ModItemIDs.TOOLBOX))) do
+    local count = player:GetCollectibleNum(Lib.ModItemIDs.TOOL_BOX) + player:GetEffects():GetCollectibleEffectNum(Lib.ModItemIDs.TOOL_BOX)
+    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.TOOL_BOX)
+    for _, familiar in pairs(player:CheckFamiliarEx(Lib.ModEntityIDs.TOOL_BOX.Variant, count, RNG(rng:Next()), Lib.ITEMCONFIG:GetCollectible(Lib.ModItemIDs.TOOL_BOX))) do
         local sprite = familiar:GetSprite()
         sprite:Play("Appear", true)
         familiar:AddToFollowers()

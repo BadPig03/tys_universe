@@ -34,12 +34,12 @@ if REPENTOGON then
         end)
 
         TYU:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, function ()
-            if not TYU.PERSISTENDGAMEDATA:Unlocked(TYU.ModAchievementIDs.PROMPTREAD) then
+            if not TYU.PERSISTENDGAMEDATA:Unlocked(TYU.ModAchievementIDs.PROMPT_READ) then
                 for _, player in pairs(TYU.Players.GetPlayers(true)) do
                     player:AddControlsCooldown(8192)
                 end
                 TYU.GENERICPROMPT:Show()
-                TYU.PERSISTENDGAMEDATA:TryUnlock(TYU.ModAchievementIDs.PROMPTREAD, true)
+                TYU.PERSISTENDGAMEDATA:TryUnlock(TYU.ModAchievementIDs.PROMPT_READ, true)
                 isPromptShowed = true
             end
         end)

@@ -1,5 +1,5 @@
 local Lib = TYU
-local TwilightFox = Lib:NewModEntity("Twilight Fox", "TWILIGHTFOX")
+local TwilightFox = Lib:NewModEntity("Twilight Fox", "TWILIGHT_FOX")
 
 local function SpawnHalo(familiar, subType)
     local halo = Lib.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.HALO, subType, familiar.Position, familiar.Velocity, familiar):ToEffect()
@@ -8,7 +8,7 @@ local function SpawnHalo(familiar, subType)
     halo.Timeout = -1
     halo:FollowParent(familiar)
     halo:AddEntityFlags(Lib.ModEntityFlags.FLAG_NO_PAUSE)
-    if subType == Lib.ModEntityIDs.TWILIGHTFOXHALO.SubType then
+    if subType == Lib.ModEntityIDs.TWILIGHT_FOX_HALO.SubType then
         sprite.Color = Color(1, 0.5, 1, 1)
         sprite.PlaybackSpeed = 0.8
     else
@@ -52,15 +52,15 @@ function TwilightFox:FamiliarUpdate(familiar)
     if not GetHalo(familiar, 3) then
         SpawnHalo(familiar, 3)
     end
-    if not GetHalo(familiar, Lib.ModEntityIDs.TWILIGHTFOXHALO.SubType) then
-        SpawnHalo(familiar, Lib.ModEntityIDs.TWILIGHTFOXHALO.SubType)
+    if not GetHalo(familiar, Lib.ModEntityIDs.TWILIGHT_FOX_HALO.SubType) then
+        SpawnHalo(familiar, Lib.ModEntityIDs.TWILIGHT_FOX_HALO.SubType)
     end
     familiar:FollowParent()
 end
-TwilightFox:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, TwilightFox.FamiliarUpdate, Lib.ModEntityIDs.TWILIGHTFOX.Variant)
+TwilightFox:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, TwilightFox.FamiliarUpdate, Lib.ModEntityIDs.TWILIGHT_FOX.Variant)
 
 function TwilightFox:PostNewLevel()
-    for _, ent in pairs(Isaac.FindByType(Lib.ModEntityIDs.TWILIGHTFOX.Type, Lib.ModEntityIDs.TWILIGHTFOX.Variant)) do
+    for _, ent in pairs(Isaac.FindByType(Lib.ModEntityIDs.TWILIGHT_FOX.Type, Lib.ModEntityIDs.TWILIGHT_FOX.Variant)) do
         local familiar = ent:ToFamiliar()
         if familiar then
             familiar.Hearts = 0

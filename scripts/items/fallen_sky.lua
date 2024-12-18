@@ -1,11 +1,11 @@
 local Lib = TYU
-local FallenSky = Lib:NewModItem("Fallen Sky", "FALLENSKY")
+local FallenSky = Lib:NewModItem("Fallen Sky", "FALLEN_SKY")
 
 local chainSprite = Sprite("gfx/effects/fallen_sky_chain.anm2", true)
 chainSprite:Play("Idle", true)
 
 local function ValidatePossibility(player, rng, multiplier)
-    rng = rng or player:GetCollectibleRNG(Lib.ModItemIDs.FALLENSKY)
+    rng = rng or player:GetCollectibleRNG(Lib.ModItemIDs.FALLEN_SKY)
     multiplier = multiplier or 1
     return rng:RandomFloat() < multiplier / math.max(2, 10 - math.floor(player.Luck / 2))
 end
@@ -46,7 +46,7 @@ local function ReplaceFetusSprite(tear, player)
 end
 
 local function SpawnASword(entity, player, multiplier)
-    local sword = Lib.Entities.Spawn(Lib.ModEntityIDs.FALLENSKYSWORD.Type, Lib.ModEntityIDs.FALLENSKYSWORD.Variant, Lib.ModEntityIDs.FALLENSKYSWORD.SubType, entity.Position - Vector(0, 500), Vector(0, 0), player):ToEffect()
+    local sword = Lib.Entities.Spawn(Lib.ModEntityIDs.FALLEN_SKY_SWORD.Type, Lib.ModEntityIDs.FALLEN_SKY_SWORD.Variant, Lib.ModEntityIDs.FALLEN_SKY_SWORD.SubType, entity.Position - Vector(0, 500), Vector(0, 0), player):ToEffect()
     local swordSprite = sword:GetSprite()
     local randomNumber = sword:GetDropRNG():RandomFloat()
     if randomNumber < 1 / 3 then
@@ -63,10 +63,10 @@ end
 
 local function SpawnAGroupOfFallenSwords(entity, player)
     local room = Lib.GAME:GetRoom()
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.FALLENSKY)
+    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.FALLEN_SKY)
     local times = rng:RandomInt(4, 12)
     for i = 0, times - 1 do
-        local sword = Lib.Entities.Spawn(Lib.ModEntityIDs.FALLENSKYSWORD.Type, Lib.ModEntityIDs.FALLENSKYSWORD.Variant, Lib.ModEntityIDs.FALLENSKYSWORD.SubType, room:GetClampedPosition(entity.Position + rng:RandomVector() * rng:RandomInt(60), 16) - Vector(0, 500), Vector(0, 0), player):ToEffect()
+        local sword = Lib.Entities.Spawn(Lib.ModEntityIDs.FALLEN_SKY_SWORD.Type, Lib.ModEntityIDs.FALLEN_SKY_SWORD.Variant, Lib.ModEntityIDs.FALLEN_SKY_SWORD.SubType, room:GetClampedPosition(entity.Position + rng:RandomVector() * rng:RandomInt(60), 16) - Vector(0, 500), Vector(0, 0), player):ToEffect()
         local swordSprite = sword:GetSprite()
         local randomNumber = rng:RandomFloat()
         if randomNumber < 1 / 3 then
@@ -95,8 +95,8 @@ local function GetChainedEnemies(origin)
 end
 
 function FallenSky:PostFireTear(tear)
-    local player = Lib.Entities.GetPlayerFromTear(tear)
-    if not player or not player:HasCollectible(Lib.ModItemIDs.FALLENSKY) then
+    local player = Lib.Utils.GetPlayerFromTear(tear)
+    if not player or not player:HasCollectible(Lib.ModItemIDs.FALLEN_SKY) then
         return
     end
     if ValidatePossibility(player) then
@@ -121,11 +121,11 @@ end
 FallenSky:AddCallback(ModCallbacks.MC_POST_FIRE_TEAR, FallenSky.PostFireTear)
 
 function FallenSky:PostTearCollision(tear, collider, low)
-    local player = Lib.Entities.GetPlayerFromTear(tear)
+    local player = Lib.Utils.GetPlayerFromTear(tear)
     if not player then
         return
     end
-    if player:HasCollectible(Lib.ModItemIDs.FALLENSKY) and tear:HasTearFlags(TearFlags.TEAR_LUDOVICO) then
+    if player:HasCollectible(Lib.ModItemIDs.FALLEN_SKY) and tear:HasTearFlags(TearFlags.TEAR_LUDOVICO) then
         tear:AddTearFlags(Lib.ModTearFlags.TEAR_FALLENSKY)
     end
     if not tear:HasTearFlags(Lib.ModTearFlags.TEAR_FALLENSKY) or not Lib.Entities.IsValidEnemy(collider) then
@@ -200,7 +200,7 @@ FallenSky:AddCallback(ModCallbacks.MC_NPC_UPDATE, FallenSky.PostNPCUpdate)
 
 function FallenSky:PostBombUpdate(bomb)
 	local player = bomb.SpawnerEntity and bomb.SpawnerEntity:ToPlayer()
-	if not player or not player:HasCollectible(Lib.ModItemIDs.FALLENSKY) or bomb:GetExplosionCountdown() > 0 or bomb:GetSprite():GetFrame() == 58 then
+	if not player or not player:HasCollectible(Lib.ModItemIDs.FALLEN_SKY) or bomb:GetExplosionCountdown() > 0 or bomb:GetSprite():GetFrame() == 58 then
         return
     end
     for _, enemy in pairs(Isaac.FindInRadius(bomb.Position, bomb.RadiusMultiplier * player.TearRange / 4, EntityPartition.ENEMY)) do
@@ -213,7 +213,7 @@ FallenSky:AddCallback(ModCallbacks.MC_POST_BOMB_UPDATE, FallenSky.PostBombUpdate
 
 function FallenSky:PostRocketEffectUpdate(rocket)
 	local player = rocket.SpawnerEntity and rocket.SpawnerEntity:ToPlayer()
-	if not player or not player:HasCollectible(Lib.ModItemIDs.FALLENSKY) or rocket.PositionOffset.Y ~= 0 then
+	if not player or not player:HasCollectible(Lib.ModItemIDs.FALLEN_SKY) or rocket.PositionOffset.Y ~= 0 then
         return
     end
     for _, enemy in pairs(Isaac.FindInRadius(rocket.Position, player.TearRange / 4, EntityPartition.ENEMY)) do
@@ -226,7 +226,7 @@ FallenSky:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, FallenSky.PostRocketEf
 
 function FallenSky:PostLaserCollision(laser, collider, low)
 	local player = laser.SpawnerEntity and laser.SpawnerEntity:ToPlayer()
-	if not laser.Visible or not player or not player:HasCollectible(Lib.ModItemIDs.FALLENSKY) or not Lib.Entities.IsValidEnemy(collider) or not ValidatePossibility(player, laser:GetDropRNG()) then
+	if not laser.Visible or not player or not player:HasCollectible(Lib.ModItemIDs.FALLEN_SKY) or not Lib.Entities.IsValidEnemy(collider) or not ValidatePossibility(player, laser:GetDropRNG()) then
         return
     end
     SpawnASword(collider, player, laser.CollisionDamage / player.Damage)
@@ -235,7 +235,7 @@ FallenSky:AddCallback(ModCallbacks.MC_POST_LASER_COLLISION, FallenSky.PostLaserC
 
 function FallenSky:PostKnifeCollision(knife, collider, low)
 	local player = knife.SpawnerEntity and knife.SpawnerEntity:ToPlayer()
-	if not player or not player:HasCollectible(Lib.ModItemIDs.FALLENSKY) or not Lib.Entities.IsValidEnemy(collider) then
+	if not player or not player:HasCollectible(Lib.ModItemIDs.FALLEN_SKY) or not Lib.Entities.IsValidEnemy(collider) then
         return
     end
     if knife.Variant == KnifeVariant.MOMS_KNIFE or knife.Variant == KnifeVariant.SUMPTORIUM then
@@ -254,7 +254,7 @@ FallenSky:AddCallback(ModCallbacks.MC_POST_KNIFE_COLLISION, FallenSky.PostKnifeC
 
 function FallenSky:PostKnifeInit(knife)
 	local player = knife.SpawnerEntity and knife.SpawnerEntity:ToPlayer()
-    if not player or not player:HasCollectible(Lib.ModItemIDs.FALLENSKY) or not (knife.Variant ~= KnifeVariant.MOMS_KNIFE and knife.Variant ~= KnifeVariant.SUMPTORIUM and knife.Variant ~= KnifeVariant.BAG_OF_CRAFTING) then
+    if not player or not player:HasCollectible(Lib.ModItemIDs.FALLEN_SKY) or not (knife.Variant ~= KnifeVariant.MOMS_KNIFE and knife.Variant ~= KnifeVariant.SUMPTORIUM and knife.Variant ~= KnifeVariant.BAG_OF_CRAFTING) then
         return
     end
     local knifeSprite = knife:GetSprite()

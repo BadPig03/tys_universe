@@ -1,10 +1,10 @@
 local Lib = TYU
-local OceanusSoul = Lib:NewModItem("Oceanus' Soul", "OCEANUSSOUL")
+local OceanusSoul = Lib:NewModItem("Oceanus' Soul", "OCEANUS_SOUL")
 
 local stopFlushSound = false
 
 local function SpawnChargeBar(player)
-    local chargeBar = Lib.Entities.Spawn(Lib.ModEntityIDs.OCEANUSSOULCHARGEBAR.Type, Lib.ModEntityIDs.OCEANUSSOULCHARGEBAR.Variant, Lib.ModEntityIDs.OCEANUSSOULCHARGEBAR.SubType, player.Position + Lib.Players.GetChargeBarPosition(player, 3), player.Velocity, player):ToEffect()
+    local chargeBar = Lib.Entities.Spawn(Lib.ModEntityIDs.OCEANUS_SOUL_CHARGEBAR.Type, Lib.ModEntityIDs.OCEANUS_SOUL_CHARGEBAR.Variant, Lib.ModEntityIDs.OCEANUS_SOUL_CHARGEBAR.SubType, player.Position + Lib.Players.GetChargeBarPosition(player, 3), player.Velocity, player):ToEffect()
     chargeBar.Parent = player
     chargeBar:FollowParent(player)
     chargeBar.DepthOffset = 103
@@ -18,7 +18,7 @@ local function SpawnChargeBar(player)
 end
 
 local function GetChargerBar(player)
-    for _, effect in pairs(Isaac.FindByType(Lib.ModEntityIDs.OCEANUSSOULCHARGEBAR.Type, Lib.ModEntityIDs.OCEANUSSOULCHARGEBAR.Variant, Lib.ModEntityIDs.OCEANUSSOULCHARGEBAR.SubType)) do
+    for _, effect in pairs(Isaac.FindByType(Lib.ModEntityIDs.OCEANUS_SOUL_CHARGEBAR.Type, Lib.ModEntityIDs.OCEANUS_SOUL_CHARGEBAR.Variant, Lib.ModEntityIDs.OCEANUS_SOUL_CHARGEBAR.SubType)) do
         if effect.Parent and effect.Parent:ToPlayer() and GetPtrHash(effect.Parent:ToPlayer()) == GetPtrHash(player) then
             return effect:ToEffect()
         end
@@ -86,7 +86,7 @@ local function AddStatueEffects(npc, player)
     local ref = EntityRef(player)
     local id = -1
     if player:HasCollectible(CollectibleType.COLLECTIBLE_PLAYDOUGH_COOKIE) then
-        id = player:GetCollectibleRNG(Lib.ModItemIDs.OCEANUSSOUL):RandomInt(1, 12)
+        id = player:GetCollectibleRNG(Lib.ModItemIDs.OCEANUS_SOUL):RandomInt(1, 12)
     end
     if player:HasCollectible(CollectibleType.COLLECTIBLE_FIRE_MIND) or id == 1 then
         npc:AddBurn(ref, 30, player.Damage)
@@ -128,7 +128,7 @@ local function AddStatueEffects(npc, player)
 end
 
 function OceanusSoul:EvaluateCache(player, cacheFlag)
-    if not player:HasCollectible(Lib.ModItemIDs.OCEANUSSOUL) then
+    if not player:HasCollectible(Lib.ModItemIDs.OCEANUS_SOUL) then
 		return
     end
     player.CanFly = true
@@ -136,7 +136,7 @@ end
 OceanusSoul:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, OceanusSoul.EvaluateCache, CacheFlag.CACHE_FLYING)
 
 function OceanusSoul:PostPlayerUpdate(player)
-    if not player:HasCollectible(Lib.ModItemIDs.OCEANUSSOUL) then
+    if not player:HasCollectible(Lib.ModItemIDs.OCEANUS_SOUL) then
 		return
     end
     local chargeBar = GetChargerBar(player)
@@ -176,7 +176,7 @@ end
 OceanusSoul:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, OceanusSoul.PostPlayerUpdate, 0)
 
 function OceanusSoul:PostNewRoom()
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.OCEANUSSOUL) then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.OCEANUS_SOUL) then
         return
     end
     Lib:SetGlobalLibData(0, "OceanusSoul", "Timeout")
@@ -196,14 +196,14 @@ end
 OceanusSoul:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, OceanusSoul.PostNewRoom)
 
 function OceanusSoul:PostUpdate()
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.OCEANUSSOUL) then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.OCEANUS_SOUL) then
         return
     end
     local room = Lib.GAME:GetRoom()
     local timeout = Lib:GetGlobalLibData("OceanusSoul", "Timeout") or 0
     local direction = Lib:GetGlobalLibData("OceanusSoul", "Direction") or Vector(0, 1)
     local waterAmount = room:GetWaterAmount()
-    local player = PlayerManager.FirstCollectibleOwner(Lib.ModItemIDs.OCEANUSSOUL)
+    local player = PlayerManager.FirstCollectibleOwner(Lib.ModItemIDs.OCEANUS_SOUL)
     if timeout > 0 then
         if waterAmount < 1 then
             room:SetWaterAmount(math.min(1, waterAmount + 1 / 10))
@@ -273,14 +273,14 @@ function OceanusSoul:PostAddCollectible(type, charge, firstTime, slot, varData, 
     Lib.SFXMANAGER:Play(SoundEffect.SOUND_BOSS2INTRO_WATER_EXPLOSION, 0.8)
     Lib.SFXMANAGER:Play(SoundEffect.SOUND_BERSERK_END, 0.8, 2, false, 1.2, 0)
 end
-OceanusSoul:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, OceanusSoul.PostAddCollectible, Lib.ModItemIDs.OCEANUSSOUL)
+OceanusSoul:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, OceanusSoul.PostAddCollectible, Lib.ModItemIDs.OCEANUS_SOUL)
 
 function OceanusSoul:PreSFXPlay(id, volume, frameDelay, loop, pitch, pan)
 	if stopFlushSound and id == SoundEffect.SOUND_FLUSH then
         stopFlushSound = false
         return false
     end
-    if Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.OCEANUSSOUL) and id == SoundEffect.SOUND_WATER_FLOW_LARGE then
+    if Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.OCEANUS_SOUL) and id == SoundEffect.SOUND_WATER_FLOW_LARGE then
         return false
     end
 end

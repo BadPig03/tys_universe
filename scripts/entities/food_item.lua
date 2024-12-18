@@ -8,7 +8,7 @@ foodSprite:Play("Idle", true)
 foodSprite.Scale = Vector(0.5, 0.5)
 
 function FoodItem:PostHUDRender()
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.CHEFHAT) or not Lib.HUD:IsVisible() then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.CHEF_HAT) or not Lib.HUD:IsVisible() then
         return
     end
     local hudOffset = Options.HUDOffset
@@ -45,10 +45,10 @@ function FoodItem:PostPickupUpdate(pickup)
         Lib.SFXMANAGER:Play(SoundEffect.SOUND_SCAMPER)
     end
 end
-FoodItem:AddCallback(ModCallbacks.MC_POST_PICKUP_UPDATE, FoodItem.PostPickupUpdate, Lib.ModEntityIDs.FOODSFOODITEM.Variant)
+FoodItem:AddCallback(ModCallbacks.MC_POST_PICKUP_UPDATE, FoodItem.PostPickupUpdate, Lib.ModEntityIDs.FOODS_FOOD_ITEM.Variant)
 
 function FoodItem:PostPickupCollision(pickup, collider, low)
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.CHEFHAT) then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.CHEF_HAT) then
         return
     end
     local player = collider:ToPlayer()
@@ -65,10 +65,10 @@ function FoodItem:PostPickupCollision(pickup, collider, low)
         end
     end
 end
-FoodItem:AddCallback(ModCallbacks.MC_POST_PICKUP_COLLISION, FoodItem.PostPickupCollision, Lib.ModEntityIDs.FOODSFOODITEM.Variant)
+FoodItem:AddCallback(ModCallbacks.MC_POST_PICKUP_COLLISION, FoodItem.PostPickupCollision, Lib.ModEntityIDs.FOODS_FOOD_ITEM.Variant)
 
 function FoodItem:PostRender()
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.CHEFHAT) then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.CHEF_HAT) then
         return
     end
     local bank = Lib:GetGlobalLibData("Foods", "Bank")
@@ -89,7 +89,7 @@ function FoodItem:PostRender()
     local room = Lib.GAME:GetRoom()
     for i = 4, 1, -1 do
         if bank[i] ~= -1 then
-            Lib.Entities.Spawn(Lib.ModEntityIDs.FOODSFOODITEM.Type, Lib.ModEntityIDs.FOODSFOODITEM.Variant, bank[i] + 1, room:FindFreePickupSpawnPosition(player.Position, 0, true, false))
+            Lib.Entities.Spawn(Lib.ModEntityIDs.FOODS_FOOD_ITEM.Type, Lib.ModEntityIDs.FOODS_FOOD_ITEM.Variant, bank[i] + 1, room:FindFreePickupSpawnPosition(player.Position, 0, true, false))
             Lib:SetGlobalLibData(-1, "Foods", "Bank", i)
             Lib:SetGlobalLibData(0, "Foods", "DropTimeout")
             break
@@ -99,7 +99,7 @@ end
 FoodItem:AddCallback(ModCallbacks.MC_POST_RENDER, FoodItem.PostRender)
 
 function FoodItem:PreEntitySpawn(type, variant, subType, position, velocity, spawner, seed)
-    if type ~= Lib.ModEntityIDs.FOODSFOODITEM.Type or variant ~= Lib.ModEntityIDs.FOODSFOODITEM.Variant or subType ~= Lib.ModFoodItemIDs.FOODS then
+    if type ~= Lib.ModEntityIDs.FOODS_FOOD_ITEM.Type or variant ~= Lib.ModEntityIDs.FOODS_FOOD_ITEM.Variant or subType ~= Lib.ModFoodItemIDs.FOODS then
         return
     end
     local rng = RNG(seed)
@@ -109,7 +109,7 @@ end
 FoodItem:AddCallback(ModCallbacks.MC_PRE_ENTITY_SPAWN, FoodItem.PreEntitySpawn)
 
 function FoodItem:PostNewLevel()
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.CHEFHAT) then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.CHEF_HAT) then
         return
     end
     Lib:SetGlobalLibData({}, "Foods", "Effects")

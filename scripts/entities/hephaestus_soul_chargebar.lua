@@ -1,8 +1,8 @@
 local Lib = TYU
-local HephaestusSoulChargeBar = Lib:NewModEntity("Hephaestus Soul ChargeBar", "HEPHAESTUSSOULCHARGEBAR")
+local HephaestusSoulChargeBar = Lib:NewModEntity("Hephaestus Soul ChargeBar", "HEPHAESTUS_SOUL_CHARGEBAR")
 
 function HephaestusSoulChargeBar:PostEffectUpdate(effect)
-    if not effect.Parent or not effect.Parent:ToPlayer() or not effect.Parent:ToPlayer():HasCollectible(Lib.ModItemIDs.HEPHAESTUSSOUL) then
+    if not effect.Parent or not effect.Parent:ToPlayer() or not effect.Parent:ToPlayer():HasCollectible(Lib.ModItemIDs.HEPHAESTUS_SOUL) then
         effect:Remove()
         return
     end
@@ -29,6 +29,6 @@ function HephaestusSoulChargeBar:PostEffectUpdate(effect)
         effect:Remove()
 	end
 end
-HephaestusSoulChargeBar:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, HephaestusSoulChargeBar.PostEffectUpdate, Lib.ModEntityIDs.HEPHAESTUSSOULCHARGEBAR.Variant)
+HephaestusSoulChargeBar:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, HephaestusSoulChargeBar.PostEffectUpdate, Lib.ModEntityIDs.HEPHAESTUS_SOUL_CHARGEBAR.Variant)
 
 return HephaestusSoulChargeBar

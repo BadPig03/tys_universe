@@ -1,5 +1,5 @@
 local Lib = TYU
-local OverloadBattery = Lib:NewModItem("Overload Battery", "OVERLOADBATTERY")
+local OverloadBattery = Lib:NewModItem("Overload Battery", "OVERLOAD_BATTERY")
 
 local function TryToAddCharge(player)
     local charge = Lib:GetPlayerLibData(player, "OverloadBattery", "Charge")
@@ -18,7 +18,7 @@ end
 
 function OverloadBattery:PrePickupCollision(pickup, collider, low)
     local player = collider:ToPlayer()
-    if not player or not player:HasCollectible(Lib.ModItemIDs.OVERLOADBATTERY) or pickup:IsShopItem() then
+    if not player or not player:HasCollectible(Lib.ModItemIDs.OVERLOAD_BATTERY) or pickup:IsShopItem() then
         return
     end
     local needsCharge = false

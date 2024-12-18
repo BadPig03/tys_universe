@@ -78,7 +78,7 @@ end
 function Entities.SpawnFakePickupSprite(pickup, golden)
     golden = golden or false
     pickup:PlayPickupSound()
-    local fakePickup = TYU.Entities.Spawn(TYU.ModEntityIDs.FAKEPICKUP.Type, TYU.ModEntityIDs.FAKEPICKUP.Variant, TYU.ModEntityIDs.FAKEPICKUP.SubType, pickup.Position, pickup.Velocity, pickup.SpawnerEntity, pickup.InitSeed)
+    local fakePickup = TYU.Entities.Spawn(TYU.ModEntityIDs.FAKE_PICKUP.Type, TYU.ModEntityIDs.FAKE_PICKUP.Variant, TYU.ModEntityIDs.FAKE_PICKUP.SubType, pickup.Position, pickup.Velocity, pickup.SpawnerEntity, pickup.InitSeed)
     local fakeSprite = fakePickup:GetSprite()
     fakeSprite:Load(pickup:GetSprite():GetFilename(), true)
     fakeSprite:Play("Collect", true)
@@ -86,15 +86,6 @@ function Entities.SpawnFakePickupSprite(pickup, golden)
         fakeSprite:SetRenderFlags(AnimRenderFlags.GOLDEN | AnimRenderFlags.IGNORE_GAME_TIME)
     end
     pickup:Remove()
-end
-
-function Entities.GetPlayerFromTear(tear)
-    if tear.SpawnerEntity and tear.SpawnerEntity:ToPlayer() then
-        return tear.SpawnerEntity:ToPlayer()
-    elseif tear.SpawnerEntity and tear.SpawnerEntity:ToFamiliar() and (tear.SpawnerEntity.Variant == FamiliarVariant.CAINS_OTHER_EYE or tear.SpawnerEntity.Variant == FamiliarVariant.INCUBUS or tear.SpawnerEntity.Variant == FamiliarVariant.FATES_REWARD or tear.SpawnerEntity.Variant == FamiliarVariant.TWISTED_BABY or tear.SpawnerEntity.Variant == FamiliarVariant.BLOOD_BABY or tear.SpawnerEntity.Variant == FamiliarVariant.UMBILICAL_BABY) and tear.SpawnerEntity:ToFamiliar().Player and tear.SpawnerEntity:ToFamiliar().Player:ToPlayer() then
-        return tear.SpawnerEntity:ToFamiliar().Player:ToPlayer()
-    end
-    return nil
 end
 
 function Entities.IsValidEnemy(enemy)

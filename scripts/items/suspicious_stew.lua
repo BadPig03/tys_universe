@@ -1,9 +1,9 @@
 local Lib = TYU
-local SuspiciousStew = Lib:NewModItem("Suspicious Stew", "SUSPICIOUSSTEW")
+local SuspiciousStew = Lib:NewModItem("Suspicious Stew", "SUSPICIOUS_STEW")
 
 function SuspiciousStew:EvaluateCache(player, cacheFlag)
     local stats = Lib:GetPlayerLibData(player, "SuspiciousStew")
-    if stats == nil or not player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.SUSPICIOUSSTEWEFFECT) then
+    if stats == nil or not player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.SUSPICIOUS_STEW_EFFECT) then
         return
     end
     local statsStandardValues = Lib.Foods.GetStatStandardValues()
@@ -29,13 +29,13 @@ end
 SuspiciousStew:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, SuspiciousStew.EvaluateCache)
 
 function SuspiciousStew:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
-    if itemID == Lib.ModItemIDs.SUSPICIOUSSTEW then
+    if itemID == Lib.ModItemIDs.SUSPICIOUS_STEW then
         if useFlags & UseFlag.USE_CARBATTERY == UseFlag.USE_CARBATTERY or useFlags & UseFlag.USE_VOID == UseFlag.USE_VOID or activeSlot < ActiveSlot.SLOT_PRIMARY then
             return { Discharge = false, Remove = false, ShowAnim = false }
         end
         if Lib:GetPlayerLibData(player, "SuspiciousStew") == nil then
             Lib:SetPlayerLibData(player, { 0, 0, 0, 0, 0, 0 }, "SuspiciousStew")
-            player:GetEffects():AddNullEffect(Lib.ModNullItemIDs.SUSPICIOUSSTEWEFFECT)
+            player:GetEffects():AddNullEffect(Lib.ModNullItemIDs.SUSPICIOUS_STEW_EFFECT)
         end
         local combined = player:GetActiveItemDesc(activeSlot).VarData
         if combined == 0 then
@@ -64,7 +64,7 @@ function SuspiciousStew:UseItem(itemID, rng, player, useFlags, activeSlot, varDa
         return { Discharge = true, Remove = true, ShowAnim = true }    
     end
     if itemID == CollectibleType.COLLECTIBLE_DIPLOPIA or itemID == CollectibleType.COLLECTIBLE_CROOKED_PENNY then
-        for _, ent in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, Lib.ModItemIDs.SUSPICIOUSSTEW)) do
+        for _, ent in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, Lib.ModItemIDs.SUSPICIOUS_STEW)) do
             local pickup = ent:ToPickup()
             if pickup:GetVarData() == 0 and pickup.FrameCount == 0 then
                 local varData = Lib:GetGlobalLibData("Foods", "Effects", tostring(pickup.InitSeed))

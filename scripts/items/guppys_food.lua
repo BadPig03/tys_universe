@@ -1,8 +1,8 @@
 local Lib = TYU
-local GuppysFood = Lib:NewModItem("Guppy's Food", "GUPPYSFOOD")
+local GuppysFood = Lib:NewModItem("Guppy's Food", "GUPPYS_FOOD")
 
 function GuppysFood:EvaluateCache(player, cacheFlag)
-    local num = player:GetCollectibleNum(Lib.ModItemIDs.GUPPYSFOOD)
+    local num = player:GetCollectibleNum(Lib.ModItemIDs.GUPPYS_FOOD)
     if num == 0 or not player:HasCollectible(CollectibleType.COLLECTIBLE_BINGE_EATER) then
         return
     end

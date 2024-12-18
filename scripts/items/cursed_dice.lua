@@ -1,5 +1,5 @@
 local Lib = TYU
-local CursedDice = Lib:NewModItem("Cursed Dice", "CURSEDDICE")
+local CursedDice = Lib:NewModItem("Cursed Dice", "CURSED_DICE")
 
 function CursedDice:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     if useFlags & UseFlag.USE_CARBATTERY == UseFlag.USE_CARBATTERY then
@@ -11,7 +11,7 @@ function CursedDice:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
             if Lib.Collectibles.IsBlind(pickup) then
                 pickup:SetNewOptionsPickupIndex(0)
                 pickup.Price = 0
-                Lib.Entities.Morph(pickup, nil, Lib.ModEntityIDs.CURSEDPENNY.Variant, Lib.ModEntityIDs.CURSEDPENNY.SubType)
+                Lib.Entities.Morph(pickup, nil, Lib.ModEntityIDs.CURSED_PENNY.Variant, Lib.ModEntityIDs.CURSED_PENNY.SubType)
             else
                 local newType = Lib.Collectibles.GetCollectibleFromCurrentRoom(nil, RNG(pickup.InitSeed))
                 local chance = 0
@@ -31,6 +31,6 @@ function CursedDice:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     end
     return { Discharge = true, Remove = false, ShowAnim = true }
 end
-CursedDice:AddCallback(ModCallbacks.MC_USE_ITEM, CursedDice.UseItem, Lib.ModItemIDs.CURSEDDICE)
+CursedDice:AddCallback(ModCallbacks.MC_USE_ITEM, CursedDice.UseItem, Lib.ModItemIDs.CURSED_DICE)
 
 return CursedDice

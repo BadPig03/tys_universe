@@ -96,17 +96,17 @@ function SaveAndLoad.ReloadRoomData()
         local name = roomConfigRoom.Name
         local variant = roomConfigRoom.Variant
         if type == RoomType.ROOM_DEVIL and name == "Guilt Devil Room" then
-            table.insert(Lib.ModRoomIDs.GUILTDEVILROOMS, variant)
+            table.insert(Lib.ModRoomIDs.GUILT_DEVIL_ROOMS, variant)
         end
         if type == RoomType.ROOM_SECRET_EXIT then
             if name == "ICU Room" then
-                table.insert(Lib.ModRoomIDs.ICUROOMS, variant)
+                table.insert(Lib.ModRoomIDs.ICU_ROOMS, variant)
             elseif name == "Warfarin Blackmarket" then
-                table.insert(Lib.ModRoomIDs.WARFARINBLACKMARKETS, variant)
+                table.insert(Lib.ModRoomIDs.WARFARIN_BLACK_MARKETS, variant)
             end
         end
         if type == RoomType.ROOM_ERROR and name == "Wake-up Main Room" then
-            Lib.ModRoomIDs.WAKEUPMAINROOM = variant
+            Lib.ModRoomIDs.WAKE_UP_MAIN_ROOM = variant
         end
     end
 end

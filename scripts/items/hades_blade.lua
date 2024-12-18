@@ -1,8 +1,8 @@
 local Lib = TYU
-local HadesBlade = Lib:NewModItem("Hades Blade", "HADESBLADE")
+local HadesBlade = Lib:NewModItem("Hades Blade", "HADES_BLADE")
 
 local function GrantsDevilFamiliar(player)
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.HADESBLADE)
+    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.HADES_BLADE)
     Lib.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_EXPLOSION, 0, player.Position)
     Lib.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.LARGE_BLOOD_EXPLOSION, 0, player.Position)
     player:TakeDamage(0, DamageFlag.DAMAGE_FAKE | DamageFlag.DAMAGE_SPIKES | DamageFlag.DAMAGE_NO_PENALTIES | DamageFlag.DAMAGE_INVINCIBLE, EntityRef(player), 30)
@@ -14,7 +14,7 @@ local function GrantsDevilFamiliar(player)
         item.Price = 0
         item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
         item:RemoveCollectibleCycle()
-        player:AnimateCollectible(Lib.ModItemIDs.HADESBLADE)
+        player:AnimateCollectible(Lib.ModItemIDs.HADES_BLADE)
     else
         player:AnimateCollectible(item)
         player:QueueItem(itemConfigCollectible)    
@@ -59,6 +59,6 @@ function HadesBlade:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     end
     return { Discharge = false, Remove = false, ShowAnim = true }
 end
-HadesBlade:AddCallback(ModCallbacks.MC_USE_ITEM, HadesBlade.UseItem, Lib.ModItemIDs.HADESBLADE)
+HadesBlade:AddCallback(ModCallbacks.MC_USE_ITEM, HadesBlade.UseItem, Lib.ModItemIDs.HADES_BLADE)
 
 return HadesBlade

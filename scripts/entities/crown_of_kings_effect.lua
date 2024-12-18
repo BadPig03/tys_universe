@@ -1,8 +1,8 @@
 local Lib = TYU
-local CrownOfKingsEffect = Lib:NewModEntity("Crown Of Kings Effect", "CROWNOFKINGSEFFECT")
+local CrownOfKingsEffect = Lib:NewModEntity("Crown Of Kings Effect", "CROWN_OF_KINGS_EFFECT")
 
 function CrownOfKingsEffect:PostEffectUpdate(effect)
-    if not effect.Parent or not effect.Parent:ToPlayer() or not effect.Parent:ToPlayer():HasCollectible(Lib.ModItemIDs.CROWNOFKINGS) then
+    if not effect.Parent or not effect.Parent:ToPlayer() or not effect.Parent:ToPlayer():HasCollectible(Lib.ModItemIDs.CROWN_OF_KINGS) then
         effect:Remove()
         return
     end
@@ -30,6 +30,6 @@ function CrownOfKingsEffect:PostEffectUpdate(effect)
     end
     effect.Visible = player:IsExtraAnimationFinished()
 end
-CrownOfKingsEffect:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, CrownOfKingsEffect.PostEffectUpdate, Lib.ModEntityIDs.CROWNOFKINGSEFFECT.Variant)
+CrownOfKingsEffect:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, CrownOfKingsEffect.PostEffectUpdate, Lib.ModEntityIDs.CROWN_OF_KINGS_EFFECT.Variant)
 
 return CrownOfKingsEffect

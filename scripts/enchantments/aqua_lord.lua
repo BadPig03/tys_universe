@@ -1,11 +1,11 @@
 local Lib = TYU
-local AquaLord = Lib:NewModEnchantment("Aqua Lord", "AQUALORD")
+local AquaLord = Lib:NewModEnchantment("Aqua Lord", "AQUA_LORD")
 
 function AquaLord:EvaluateCache(player, cacheFlag)
     if player:HasCurseMistEffect() then
         return
     end
-    local count = player:GetEffects():GetNullEffectNum(Lib.ModEnchantmentIDs.AQUALORD)
+    local count = player:GetEffects():GetNullEffectNum(Lib.ModEnchantmentIDs.AQUA_LORD)
 	if count > 0 and Lib.Players.OnValidCreep(player) then
         if cacheFlag == CacheFlag.CACHE_TEARFLAG then
             player.TearFlags = player.TearFlags | TearFlags.TEAR_ACID
@@ -21,7 +21,7 @@ function AquaLord:PostPlayerUpdate(player)
     if player:HasCurseMistEffect() then
         return
     end
-    if player:GetEffects():HasNullEffect(Lib.ModEnchantmentIDs.AQUALORD) then
+    if player:GetEffects():HasNullEffect(Lib.ModEnchantmentIDs.AQUA_LORD) then
         player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY | CacheFlag.CACHE_TEARFLAG, true)
     end
 end
@@ -31,7 +31,7 @@ function AquaLord:PostEffectInit(effect)
     if Lib.GAME:GetRoom():HasCurseMist() then
         return
     end
-    local count = Lib.Players.GetNullEffectCounts(Lib.ModEnchantmentIDs.AQUALORD)
+    local count = Lib.Players.GetNullEffectCounts(Lib.ModEnchantmentIDs.AQUA_LORD)
     if count > 0 and EntityEffect.IsPlayerCreep(effect.Variant) then
         effect.Scale = effect.Scale + 0.65
     end

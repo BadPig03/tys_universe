@@ -1,4 +1,4 @@
-local BloodyDice = TYU:NewModItem("Bloody Dice", "BLOODYDICE")
+local BloodyDice = TYU:NewModItem("Bloody Dice", "BLOODY_DICE")
 local Collectibles = TYU.Collectibles
 local Players = TYU.Players
 local Utils = TYU.Utils
@@ -29,7 +29,7 @@ do
 end
 
 function BloodyDice:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
-    if Utils.HasUseFlags(useFlags, UseFlag.USE_CARBATTERY) or Utils.HasUseFlags(useFlags, UseFlag.USE_VOID) then
+    if Utils.HasFlags(useFlags, UseFlag.USE_CARBATTERY) or Utils.HasFlags(useFlags, UseFlag.USE_VOID) then
         return { Discharge = false, Remove = false, ShowAnim = false }
     end
     local collectible = Collectibles.GetNearestDevilDeal(player.Position, 1 << 12)
@@ -46,35 +46,35 @@ function BloodyDice:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
         return { Discharge = false, Remove = false, ShowAnim = true }
     end
 end
-BloodyDice:AddCallback(ModCallbacks.MC_USE_ITEM, BloodyDice.UseItem, TYU.ModItemIDs.BLOODYDICE)
+BloodyDice:AddCallback(ModCallbacks.MC_USE_ITEM, BloodyDice.UseItem, TYU.ModItemIDs.BLOODY_DICE)
 
 function BloodyDice:PostPlayerHUDRenderActiveItem(player, slot, offset, alpha, scale)
-    if not player:HasCollectible(TYU.ModItemIDs.BLOODYDICE) or slot < ActiveSlot.SLOT_PRIMARY then
+    if not player:HasCollectible(TYU.ModItemIDs.BLOODY_DICE) or slot < ActiveSlot.SLOT_PRIMARY then
         return
     end
-    local activeSlot = player:GetActiveItemSlot(TYU.ModItemIDs.BLOODYDICE)
+    local activeSlot = player:GetActiveItemSlot(TYU.ModItemIDs.BLOODY_DICE)
     local charge = GetPlayerLibData(player, "Charge") or 0
     player:GetActiveItemDesc(activeSlot).PartialCharge = charge
 end
 BloodyDice:AddCallback(ModCallbacks.MC_POST_PLAYERHUD_RENDER_ACTIVE_ITEM, BloodyDice.PostPlayerHUDRenderActiveItem)
 
 function BloodyDice:PostUpdate()
-    if not Players.AnyoneHasCollectible(TYU.ModItemIDs.BLOODSAMPLE) and not Players.AnyoneHasCollectible(TYU.ModItemIDs.BLOODYDICE) then
+    if not Players.AnyoneHasCollectible(TYU.ModItemIDs.BLOOD_SAMPLE) and not Players.AnyoneHasCollectible(TYU.ModItemIDs.BLOODY_DICE) then
         return
     end
     local room = TYU.GAME:GetRoom()
     local damage = room:GetEnemyDamageInflicted()
     for _, player in pairs(Players.GetPlayers(true)) do
-        if player:HasCollectible(TYU.ModItemIDs.BLOODSAMPLE) or player:HasCollectible(TYU.ModItemIDs.BLOODYDICE) then
+        if player:HasCollectible(TYU.ModItemIDs.BLOOD_SAMPLE) or player:HasCollectible(TYU.ModItemIDs.BLOODY_DICE) then
             local charge = GetPlayerLibData(player, "Charge") or 0
             charge = charge + damage / PrivateField.GetDamageAmount(player)
             if charge >= 1 then
                 charge = charge - 1
-                if player:HasCollectible(TYU.ModItemIDs.BLOODSAMPLE) then
-                    player:AddActiveCharge(1, player:GetActiveItemSlot(TYU.ModItemIDs.BLOODSAMPLE), true, true, true)
+                if player:HasCollectible(TYU.ModItemIDs.BLOOD_SAMPLE) then
+                    player:AddActiveCharge(1, player:GetActiveItemSlot(TYU.ModItemIDs.BLOOD_SAMPLE), true, true, true)
                 end
-                if player:HasCollectible(TYU.ModItemIDs.BLOODYDICE) then
-                    player:AddActiveCharge(1, player:GetActiveItemSlot(TYU.ModItemIDs.BLOODYDICE), true, true, true)
+                if player:HasCollectible(TYU.ModItemIDs.BLOODY_DICE) then
+                    player:AddActiveCharge(1, player:GetActiveItemSlot(TYU.ModItemIDs.BLOODY_DICE), true, true, true)
                 end
             end
             SetPlayerLibData(player, charge, "Charge")

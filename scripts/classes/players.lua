@@ -77,9 +77,9 @@ function Players.ChangeLostCurseState(player, remove)
 end
 
 function Players.GetChargeBarPosition(player, type)
-    local hasBobsStomach = player:HasCollectible(TYU.ModItemIDs.BOBSSTOMACH)
-    local hasHephaestusSoul = player:HasCollectible(TYU.ModItemIDs.HEPHAESTUSSOUL)
-    local hasOceanusSoul = player:HasCollectible(TYU.ModItemIDs.OCEANUSSOUL)
+    local hasBobsStomach = player:HasCollectible(TYU.ModItemIDs.BOBS_STOMACH)
+    local hasHephaestusSoul = player:HasCollectible(TYU.ModItemIDs.HEPHAESTUS_SOUL)
+    local hasOceanusSoul = player:HasCollectible(TYU.ModItemIDs.OCEANUS_SOUL)
     if type == 1 then
         return Vector(-21, -60)
     elseif type == 2 then

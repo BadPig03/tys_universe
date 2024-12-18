@@ -24,9 +24,9 @@ function Warfarin:EvaluateCache(player, cacheFlag)
     local effects = player:GetEffects()
     if cacheFlag == CacheFlag.CACHE_DAMAGE then
         Lib.Stat:AddFlatDamage(player, 0.2 * Lib.GAME:GetDevilRoomDeals())
-    elseif cacheFlag == CacheFlag.CACHE_FLYING and effects:HasNullEffect(Lib.ModNullItemIDs.WARFARINWINGS) and not player:HasCurseMistEffect() then
+    elseif cacheFlag == CacheFlag.CACHE_FLYING and effects:HasNullEffect(Lib.ModNullItemIDs.WARFARIN_WINGS) and not player:HasCurseMistEffect() then
         player.CanFly = true
-    elseif effects:HasNullEffect(Lib.ModNullItemIDs.WARFARINHAEMOLACRIA) then
+    elseif effects:HasNullEffect(Lib.ModNullItemIDs.WARFARIN_HAEMOLACRIA) then
         if cacheFlag == CacheFlag.CACHE_TEARFLAG then
             player.TearFlags = player.TearFlags | TearFlags.TEAR_BURSTSPLIT
         end
@@ -45,7 +45,7 @@ function Warfarin:PostFireTear(tear)
     if not player or player:GetPlayerType() ~= Lib.ModPlayerIDs.WARFARIN then
         return
     end
-    if player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.WARFARINHAEMOLACRIA) and tear.Variant == TearVariant.BLUE then
+    if player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.WARFARIN_HAEMOLACRIA) and tear.Variant == TearVariant.BLUE then
         tear:ChangeVariant(TearVariant.BLOOD)
     end
     if player:HasCollectible(CollectibleType.COLLECTIBLE_POLYPHEMUS) then
@@ -69,35 +69,35 @@ function Warfarin:PostPlayerUpdate(player)
     end
     local effects = player:GetEffects()
     local hearts = player:GetMaxHearts() + player:GetBoneHearts() * 2
-    if hearts > 6 and effects:HasNullEffect(Lib.ModNullItemIDs.WARFARINHAEMOLACRIA) then
-        effects:RemoveNullEffect(Lib.ModNullItemIDs.WARFARINHAEMOLACRIA)
+    if hearts > 6 and effects:HasNullEffect(Lib.ModNullItemIDs.WARFARIN_HAEMOLACRIA) then
+        effects:RemoveNullEffect(Lib.ModNullItemIDs.WARFARIN_HAEMOLACRIA)
         if not Lib:GetPlayerLibData(player, "BloodSample", "OutTriggered") then
-            Lib.ITEMOVERLAY.Show(Lib.ModGiantBookIDs.WARFARINOUT, 3, player)
+            Lib.ITEMOVERLAY.Show(Lib.ModGiantBookIDs.WARFARIN_OUT, 3, player)
             Lib:SetPlayerLibData(player, true, "BloodSample", "OutTriggered")
         end
-    elseif hearts <= 6 and not effects:HasNullEffect(Lib.ModNullItemIDs.WARFARINHAEMOLACRIA) then
-        effects:AddNullEffect(Lib.ModNullItemIDs.WARFARINHAEMOLACRIA)
+    elseif hearts <= 6 and not effects:HasNullEffect(Lib.ModNullItemIDs.WARFARIN_HAEMOLACRIA) then
+        effects:AddNullEffect(Lib.ModNullItemIDs.WARFARIN_HAEMOLACRIA)
         if not Lib:GetPlayerLibData(player, "BloodSample", "InTriggered") then
-            Lib.ITEMOVERLAY.Show(Lib.ModGiantBookIDs.WARFARININ, 3, player)
+            Lib.ITEMOVERLAY.Show(Lib.ModGiantBookIDs.WARFARIN_IN, 3, player)
             Lib:SetPlayerLibData(player, true, "BloodSample", "InTriggered")
         end
     end
     local collectible = Lib.Collectibles.GetNearestDevilDeal(player.Position)
     local charge = player:GetActiveCharge(ActiveSlot.SLOT_POCKET) + player:GetBatteryCharge(ActiveSlot.SLOT_POCKET)
     if collectible and Lib.GAME:GetRoom():IsClear() then
-        if player:GetActiveItem(ActiveSlot.SLOT_POCKET) == Lib.ModItemIDs.BLOODSAMPLE then
+        if player:GetActiveItem(ActiveSlot.SLOT_POCKET) == Lib.ModItemIDs.BLOOD_SAMPLE then
             if player:IsExtraAnimationFinished() then
-                player:AnimateCollectible(Lib.ModItemIDs.BLOODYDICE, "UseItem", "PlayerPickup")
+                player:AnimateCollectible(Lib.ModItemIDs.BLOODY_DICE, "UseItem", "PlayerPickup")
             end
-            player:SetPocketActiveItem(Lib.ModItemIDs.BLOODYDICE, ActiveSlot.SLOT_POCKET, true)
+            player:SetPocketActiveItem(Lib.ModItemIDs.BLOODY_DICE, ActiveSlot.SLOT_POCKET, true)
             player:SetActiveCharge(charge, ActiveSlot.SLOT_POCKET)
         end
     else
-        if player:GetActiveItem(ActiveSlot.SLOT_POCKET) == Lib.ModItemIDs.BLOODYDICE then
+        if player:GetActiveItem(ActiveSlot.SLOT_POCKET) == Lib.ModItemIDs.BLOODY_DICE then
             if player:IsExtraAnimationFinished() then
-                player:AnimateCollectible(Lib.ModItemIDs.BLOODSAMPLE, "UseItem", "PlayerPickup")
+                player:AnimateCollectible(Lib.ModItemIDs.BLOOD_SAMPLE, "UseItem", "PlayerPickup")
             end
-            player:SetPocketActiveItem(Lib.ModItemIDs.BLOODSAMPLE, ActiveSlot.SLOT_POCKET, true)
+            player:SetPocketActiveItem(Lib.ModItemIDs.BLOOD_SAMPLE, ActiveSlot.SLOT_POCKET, true)
             player:SetActiveCharge(charge, ActiveSlot.SLOT_POCKET)
         end
     end
@@ -186,49 +186,49 @@ function Warfarin:PostAddCollectible(type, charge, firstTime, slot, varData, pla
         player:AddHearts(2)
     end
     if type == CollectibleType.COLLECTIBLE_CHARM_VAMPIRE then
-        effects:RemoveNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINWINGS).ID, -1)
-        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINWINGS).ID)
+        effects:RemoveNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_WINGS).ID, -1)
+        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_WINGS).ID)
         player:AddCacheFlags(CacheFlag.CACHE_FLYING, true)
     end
     if type == CollectibleType.COLLECTIBLE_BLOOD_BAG and firstTime then
         player:AddHearts(99)
     end
     if type == CollectibleType.COLLECTIBLE_SPIRIT_OF_THE_NIGHT or type == CollectibleType.COLLECTIBLE_DEAD_DOVE then
-        effects:RemoveNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINWINGS).ID, -1)
-        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINWINGS).ID)
+        effects:RemoveNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_WINGS).ID, -1)
+        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_WINGS).ID)
     end
     if type == CollectibleType.COLLECTIBLE_MAGIC_8_BALL then
-        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINMAGIC8BALL).ID)
+        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_MAGIC_8_BALL).ID)
     end
     if type == CollectibleType.COLLECTIBLE_CEREMONIAL_ROBES then
-        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINCEREMONIALROBES).ID)
+        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_CEREMONIAL_ROBES).ID)
     end
     if type == CollectibleType.COLLECTIBLE_MOMS_WIG then
-        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINMOMSWIG).ID)
+        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_MOMS_WIG).ID)
     end
     if type == CollectibleType.COLLECTIBLE_BLACK_CANDLE then
-        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINBLACKCANDLE).ID)
+        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_BLACK_CANDLE).ID)
     end
     if type == CollectibleType.COLLECTIBLE_TAURUS then
-        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINTAURUS).ID)
+        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_TAURUS).ID)
     end
     if type == CollectibleType.COLLECTIBLE_LEO then
-        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINLEO).ID)
+        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_LEO).ID)
     end
     if type == CollectibleType.COLLECTIBLE_INTRUDER then
         Lib.Players.RemoveCostume(player, CollectibleType.COLLECTIBLE_INTRUDER)
     end
     if type == CollectibleType.COLLECTIBLE_TERRA then
-        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINFROZENHAIR3).ID)
+        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_FROZEN_HAIR_3).ID)
     end
     if type == CollectibleType.COLLECTIBLE_JUPITER then
         Lib.Players.RemoveCostume(player, CollectibleType.COLLECTIBLE_JUPITER)
     end
     if type == CollectibleType.COLLECTIBLE_URANUS then
-        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINFROZENHAIR4).ID)
+        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_FROZEN_HAIR_4).ID)
     end
     if type == CollectibleType.COLLECTIBLE_CARD_READING then
-        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARINCARDREADING).ID)
+        effects:AddNullEffect(Lib.ITEMCONFIG:GetCollectible(Lib.ModNullItemIDs.WARFARIN_CARD_READING).ID)
     end
     if type == CollectibleType.COLLECTIBLE_C_SECTION then
         Lib.Players.RemoveCostume(player, CollectibleType.COLLECTIBLE_C_SECTION)
@@ -275,7 +275,7 @@ function Warfarin:PrePlayerAddHearts(player, amount, addHealthType, _)
             end
         end
         return 0
-    elseif player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.WARFARINHAEMOLACRIA) and addHealthType & AddHealthType.RED == AddHealthType.RED and not Lib.Rewind.GlowingHourglassUsed then
+    elseif player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.WARFARIN_HAEMOLACRIA) and addHealthType & AddHealthType.RED == AddHealthType.RED and not Lib.Rewind.GlowingHourglassUsed then
         return amount * 2
     end
 end
@@ -317,7 +317,7 @@ Warfarin:AddCallback(ModCallbacks.MC_PRE_PLAYER_TAKE_DMG, Warfarin.PrePlayerTake
 function Warfarin:PreSFXPlay(id, volume, frameDelay, loop, pitch, pan)
 	if stopHurtSound then
         stopHurtSound = false
-        return {Lib.ModSoundIDs.WARFARINPLAYERHURT, volume, frameDelay, loop, pitch, pan}
+        return {Lib.ModSoundIDs.WARFARIN_PLAYER_HURT, volume, frameDelay, loop, pitch, pan}
     end
 end
 Warfarin:AddCallback(ModCallbacks.MC_PRE_SFX_PLAY, Warfarin.PreSFXPlay, SoundEffect.SOUND_ISAAC_HURT_GRUNT)
@@ -351,12 +351,12 @@ function Warfarin:PreLevelPlaceRoom(levelGeneratorRoom, roomConfigRoom, seed)
     if Lib.LEVEL:GetDimension() == Dimension.DEATH_CERTIFICATE or not Lib.Players.AnyoneIsPlayerType(Lib.ModPlayerIDs.WARFARIN) or roomConfigRoom.Type ~= RoomType.ROOM_SHOP or roomConfigRoom.Shape ~= RoomShape.ROOMSHAPE_1x1 then
         return
     end
-    if #Lib.ModRoomIDs.WARFARINBLACKMARKETS == 0 then
+    if #Lib.ModRoomIDs.WARFARIN_BLACK_MARKETS == 0 then
         Lib.SaveAndLoad.ReloadRoomData()
     end
     local rng = RNG(seed)
     local roomList = WeightedOutcomePicker()
-    for _, id in ipairs(Lib.ModRoomIDs.WARFARINBLACKMARKETS) do
+    for _, id in ipairs(Lib.ModRoomIDs.WARFARIN_BLACK_MARKETS) do
         roomList:AddOutcomeWeight(id, 1)
     end
     local newRoom = RoomConfigHolder.GetRoomByStageTypeAndVariant(StbType.SPECIAL_ROOMS, RoomType.ROOM_SECRET_EXIT, roomList:PickOutcome(rng))

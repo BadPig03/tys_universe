@@ -1,8 +1,8 @@
 local Lib = TYU
-local SinisterPact = Lib:NewModItem("Sinister Pact", "SINISTERPACT")
+local SinisterPact = Lib:NewModItem("Sinister Pact", "SINISTER_PACT")
 
 function SinisterPact:PostPickupShopPurchase(pickup, player, moneySpent)
-    if not player:HasCollectible(Lib.ModItemIDs.SINISTERPACT) or player:GetHealthType() == HealthType.LOST or Lib.Players.IsInLostCurse(player) or pickup.Variant ~= PickupVariant.PICKUP_COLLECTIBLE or moneySpent >= 0 or moneySpent <= PickupPrice.PRICE_FREE then
+    if not player:HasCollectible(Lib.ModItemIDs.SINISTER_PACT) or player:GetHealthType() == HealthType.LOST or Lib.Players.IsInLostCurse(player) or pickup.Variant ~= PickupVariant.PICKUP_COLLECTIBLE or moneySpent >= 0 or moneySpent <= PickupPrice.PRICE_FREE then
         return
     end
     local room = Lib.GAME:GetRoom()
@@ -10,7 +10,7 @@ function SinisterPact:PostPickupShopPurchase(pickup, player, moneySpent)
     if roomType ~= RoomType.ROOM_DEVIL and roomType ~= RoomType.ROOM_BLACK_MARKET and not Lib.Levels.IsRoomDevilTreasureRoom() then
         return
     end
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.SINISTERPACT)
+    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.SINISTER_PACT)
     Lib.Entities.CreateTimer(function()
         local item = Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, Lib.Collectibles.GetCollectibleFromCurrentRoom(nil, rng), pickup.Position):ToPickup()
         item:MakeShopItem(-2)

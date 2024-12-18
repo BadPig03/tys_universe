@@ -1,5 +1,5 @@
 local Lib = TYU
-local FallenSkySword = Lib:NewModEntity("Fallen Sky Sword", "FALLENSKYSWORD")
+local FallenSkySword = Lib:NewModEntity("Fallen Sky Sword", "FALLEN_SKY_SWORD")
 
 local function HarmTheEnemy(enemy, player, multiplier)
     if player:HasCollectible(CollectibleType.COLLECTIBLE_MOMS_KNIFE) then
@@ -87,6 +87,6 @@ function FallenSkySword:UpdateSword(effect)
         HarmNearbyEnemies(effect)
     end
 end
-FallenSkySword:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, FallenSkySword.UpdateSword, Lib.ModEntityIDs.FALLENSKYSWORD.Variant)
+FallenSkySword:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, FallenSkySword.UpdateSword, Lib.ModEntityIDs.FALLEN_SKY_SWORD.Variant)
 
 return FallenSkySword

@@ -1,5 +1,5 @@
 local Lib = TYU
-local MarriageCertificate = Lib:NewModItem("Marriage Certificate", "MARRIAGECERTIFICATE")
+local MarriageCertificate = Lib:NewModItem("Marriage Certificate", "MARRIAGE_CERTIFICATE")
 
 local forbidCopying = false
 
@@ -12,11 +12,11 @@ local bannedCollectibles = {
     [CollectibleType.COLLECTIBLE_STRAW_MAN] = true,
     [CollectibleType.COLLECTIBLE_INNER_CHILD] = true,
     [Lib.ModItemIDs.MAGNIFIER] = true,
-    [Lib.ModItemIDs.MARRIAGECERTIFICATE] = true
+    [Lib.ModItemIDs.MARRIAGE_CERTIFICATE] = true
 }
 
 local function IsDeadEve(player)
-    return player:GetPlayerType() == PlayerType.PLAYER_THELOST and player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.MARRIAGECERTIFICATESUBPLAYER)
+    return player:GetPlayerType() == PlayerType.PLAYER_THELOST and player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.MARRIAGE_CERTIFICATE_SUBPLAYER)
 end
 
 function MarriageCertificate:SetForbidCopying(value)
@@ -24,14 +24,14 @@ function MarriageCertificate:SetForbidCopying(value)
 end
 
 function MarriageCertificate:IsSubPlayer(player)
-    return player.Parent and player.Parent:ToPlayer() and player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.MARRIAGECERTIFICATESUBPLAYER)
+    return player.Parent and player.Parent:ToPlayer() and player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.MARRIAGE_CERTIFICATE_SUBPLAYER)
 end
 
 function MarriageCertificate:PreAddCollectible(type, charge, firstTime, slot, varData, player)
-    if type == Lib.ModItemIDs.MARRIAGECERTIFICATE then
+    if type == Lib.ModItemIDs.MARRIAGE_CERTIFICATE then
         if player:GetPlayerType() == PlayerType.PLAYER_ESAU and player:GetOtherTwin() then
             local twinPlayer = player:GetOtherTwin()
-            twinPlayer:AddCollectible(Lib.ModItemIDs.MARRIAGECERTIFICATE)
+            twinPlayer:AddCollectible(Lib.ModItemIDs.MARRIAGE_CERTIFICATE)
             return false
         end
         if player.Parent and player.Parent:ToPlayer() then
@@ -55,10 +55,10 @@ function MarriageCertificate:PostAddCollectible(type, charge, firstTime, slot, v
     newPlayer.Parent = player
     newPlayer:RemoveCollectible(CollectibleType.COLLECTIBLE_RAZOR_BLADE)
     newPlayer:AddCollectible(CollectibleType.COLLECTIBLE_BIRTHRIGHT)
-    newPlayer:GetEffects():AddNullEffect(Lib.ModNullItemIDs.MARRIAGECERTIFICATESUBPLAYER)
+    newPlayer:GetEffects():AddNullEffect(Lib.ModNullItemIDs.MARRIAGE_CERTIFICATE_SUBPLAYER)
     Lib.HUD:AssignPlayerHUDs()
 end
-MarriageCertificate:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, MarriageCertificate.PostAddCollectible, Lib.ModItemIDs.MARRIAGECERTIFICATE)
+MarriageCertificate:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, MarriageCertificate.PostAddCollectible, Lib.ModItemIDs.MARRIAGE_CERTIFICATE)
 
 function MarriageCertificate:PostTriggerCollectibleRemoved(player, type)
     for _, player2 in pairs(Lib.Players.GetPlayers(true)) do
@@ -68,11 +68,11 @@ function MarriageCertificate:PostTriggerCollectibleRemoved(player, type)
         end
     end
 end
-MarriageCertificate:AddCallback(ModCallbacks.MC_POST_TRIGGER_COLLECTIBLE_REMOVED, MarriageCertificate.PostTriggerCollectibleRemoved, Lib.ModItemIDs.MARRIAGECERTIFICATE)
+MarriageCertificate:AddCallback(ModCallbacks.MC_POST_TRIGGER_COLLECTIBLE_REMOVED, MarriageCertificate.PostTriggerCollectibleRemoved, Lib.ModItemIDs.MARRIAGE_CERTIFICATE)
 
 function MarriageCertificate:PreTriggerPlayerDeath(player)
     local effects = player:GetEffects()
-    if not effects:HasNullEffect(Lib.ModNullItemIDs.MARRIAGECERTIFICATESUBPLAYER) then
+    if not effects:HasNullEffect(Lib.ModNullItemIDs.MARRIAGE_CERTIFICATE_SUBPLAYER) then
         return
     end
     player:ChangePlayerType(PlayerType.PLAYER_THELOST)
@@ -118,7 +118,7 @@ end
 MarriageCertificate:AddCallback(ModCallbacks.MC_PRE_SLOT_COLLISION, MarriageCertificate.PreSlotCollision)
 
 function MarriageCertificate:PreUseItem(itemID, rng, player, useFlags, activeSlot, varData)
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.MARRIAGECERTIFICATE) then
+    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.MARRIAGE_CERTIFICATE) then
         return
     end
     for _, player2 in pairs(Lib.Players.GetPlayers(true)) do

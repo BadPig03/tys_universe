@@ -1,5 +1,5 @@
 local Lib = TYU
-local StickyBallTear = Lib:NewModEntity("Sticky Ball Tear", "STICKYBALLTEAR")
+local StickyBallTear = Lib:NewModEntity("Sticky Ball Tear", "STICKY_BALL_TEAR")
 
 local function GetTearScale13(tear)
 	local sprite = tear:GetSprite()
@@ -104,7 +104,7 @@ function StickyBallTear:PostTearRender(tear, offset)
     sprite:Render(Isaac.WorldToRenderPosition(tear.Position + tear.PositionOffset) + offset)
 	data.LastRenderFrame = Isaac.GetFrameCount()
 end
-StickyBallTear:AddCallback(ModCallbacks.MC_POST_TEAR_RENDER, StickyBallTear.PostTearRender, Lib.ModEntityIDs.STICKYBALLTEAR.Variant)
+StickyBallTear:AddCallback(ModCallbacks.MC_POST_TEAR_RENDER, StickyBallTear.PostTearRender, Lib.ModEntityIDs.STICKY_BALL_TEAR.Variant)
 
 function StickyBallTear:PostTearDeath(tear)
     if not tear:HasTearFlags(Lib.ModTearFlags.TEAR_STICKYBALL) then
@@ -142,22 +142,22 @@ function StickyBallTear:ApplyStickyLevel(npc, player, rng)
     end
 	if rng:RandomInt(100) < 50 then
 		if level == 0 then
-			local dip = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKYBALLDIPLEVEL1.Type, Lib.ModEntityIDs.STICKYBALLDIPLEVEL1.Variant, Lib.ModEntityIDs.STICKYBALLDIPLEVEL1.SubType, npc.Position, Vector(0, 0), player):ToNPC()
+			local dip = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKY_BALL_DIP_LEVEL_1.Type, Lib.ModEntityIDs.STICKY_BALL_DIP_LEVEL_1.Variant, Lib.ModEntityIDs.STICKY_BALL_DIP_LEVEL_1.SubType, npc.Position, Vector(0, 0), player):ToNPC()
 			dip:AddEntityFlags(EntityFlag.FLAG_FRIENDLY | EntityFlag.FLAG_CHARM)
 		elseif level == 1 then
-			local dip = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKYBALLDIPLEVEL2.Type, Lib.ModEntityIDs.STICKYBALLDIPLEVEL2.Variant, Lib.ModEntityIDs.STICKYBALLDIPLEVEL2.SubType, npc.Position, Vector(0, 0), player):ToNPC()
+			local dip = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKY_BALL_DIP_LEVEL_2.Type, Lib.ModEntityIDs.STICKY_BALL_DIP_LEVEL_2.Variant, Lib.ModEntityIDs.STICKY_BALL_DIP_LEVEL_2.SubType, npc.Position, Vector(0, 0), player):ToNPC()
 			dip:AddEntityFlags(EntityFlag.FLAG_FRIENDLY | EntityFlag.FLAG_CHARM)
 		elseif level == 2 then
-			local dip = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKYBALLDIPLEVEL3.Type, Lib.ModEntityIDs.STICKYBALLDIPLEVEL3.Variant, Lib.ModEntityIDs.STICKYBALLDIPLEVEL3.SubType, npc.Position, Vector(0, 0), player):ToNPC()
+			local dip = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKY_BALL_DIP_LEVEL_3.Type, Lib.ModEntityIDs.STICKY_BALL_DIP_LEVEL_3.Variant, Lib.ModEntityIDs.STICKY_BALL_DIP_LEVEL_3.SubType, npc.Position, Vector(0, 0), player):ToNPC()
 			dip:AddEntityFlags(EntityFlag.FLAG_FRIENDLY | EntityFlag.FLAG_CHARM)
 		elseif level == 3 then
-			local squirt = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKYBALLSQUIRTLEVEL1.Type, Lib.ModEntityIDs.STICKYBALLSQUIRTLEVEL1.Variant, Lib.ModEntityIDs.STICKYBALLSQUIRTLEVEL1.SubType, npc.Position, Vector(0, 0), player):ToNPC()
+			local squirt = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKY_BALL_SQUIRT_LEVEL_1.Type, Lib.ModEntityIDs.STICKY_BALL_SQUIRT_LEVEL_1.Variant, Lib.ModEntityIDs.STICKY_BALL_SQUIRT_LEVEL_1.SubType, npc.Position, Vector(0, 0), player):ToNPC()
 			squirt:AddEntityFlags(EntityFlag.FLAG_FRIENDLY | EntityFlag.FLAG_CHARM)
 		elseif level == 4 then
-			local squirt = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKYBALLSQUIRTLEVEL2.Type, Lib.ModEntityIDs.STICKYBALLSQUIRTLEVEL2.Variant, Lib.ModEntityIDs.STICKYBALLSQUIRTLEVEL2.SubType, npc.Position, Vector(0, 0), player):ToNPC()
+			local squirt = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKY_BALL_SQUIRT_LEVEL_2.Type, Lib.ModEntityIDs.STICKY_BALL_SQUIRT_LEVEL_2.Variant, Lib.ModEntityIDs.STICKY_BALL_SQUIRT_LEVEL_2.SubType, npc.Position, Vector(0, 0), player):ToNPC()
 			squirt:AddEntityFlags(EntityFlag.FLAG_FRIENDLY | EntityFlag.FLAG_CHARM)
 		else
-			local squirt = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKYBALLSQUIRTLEVEL3.Type, Lib.ModEntityIDs.STICKYBALLSQUIRTLEVEL3.Variant, Lib.ModEntityIDs.STICKYBALLSQUIRTLEVEL3.SubType, npc.Position, Vector(0, 0), player):ToNPC()
+			local squirt = Lib.Entities.Spawn(Lib.ModEntityIDs.STICKY_BALL_SQUIRT_LEVEL_3.Type, Lib.ModEntityIDs.STICKY_BALL_SQUIRT_LEVEL_3.Variant, Lib.ModEntityIDs.STICKY_BALL_SQUIRT_LEVEL_3.SubType, npc.Position, Vector(0, 0), player):ToNPC()
 			squirt:AddEntityFlags(EntityFlag.FLAG_FRIENDLY | EntityFlag.FLAG_CHARM)
 		end
 	end
@@ -176,7 +176,7 @@ function StickyBallTear:PostTearCollision(tear, collider, low)
         return
     end
 	local npc = collider:ToNPC()
-	local player = Lib.Entities.GetPlayerFromTear(tear)
+	local player = Lib.Utils.GetPlayerFromTear(tear)
 	StickyBallTear:ApplyStickyLevel(npc, player, tear:GetDropRNG())
 end
 StickyBallTear:AddCallback(ModCallbacks.MC_POST_TEAR_COLLISION, StickyBallTear.PostTearCollision)

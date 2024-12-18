@@ -1,11 +1,11 @@
 local Lib = TYU
-local LostBottleCap = Lib:NewModTrinket("Lost Bottle Cap", "LOSTBOTTLECAP")
+local LostBottleCap = Lib:NewModTrinket("Lost Bottle Cap", "LOST_BOTTLE_CAP")
 
 function LostBottleCap:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     if activeSlot < ActiveSlot.SLOT_PRIMARY then
         return
     end
-    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.LOSTBOTTLECAP)
+    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.LOST_BOTTLE_CAP)
     local maxCharge = player:GetActiveMaxCharge(activeSlot)
     if multiplier == 0 or rng:RandomInt(90) >= 30 * multiplier or useFlags & UseFlag.USE_OWNED ~= UseFlag.USE_OWNED or maxCharge <= 1 then
         return

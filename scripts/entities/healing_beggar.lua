@@ -1,5 +1,5 @@
 local Lib = TYU
-local HealingBeggar = Lib:NewModEntity("Healing Beggar", "HEALINGBEGGAR")
+local HealingBeggar = Lib:NewModEntity("Healing Beggar", "HEALING_BEGGAR")
 
 local function SpawnBloodEffects(entity)
 	Lib.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_EXPLOSION, 0, entity.Position)
@@ -33,7 +33,7 @@ function HealingBeggar:PreSlotCollision(slot, collider, low)
 		SpawnBloodEffects(player)
 	end
 end
-HealingBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_COLLISION, HealingBeggar.PreSlotCollision, Lib.ModEntityIDs.HEALINGBEGGAR.Variant)
+HealingBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_COLLISION, HealingBeggar.PreSlotCollision, Lib.ModEntityIDs.HEALING_BEGGAR.Variant)
 
 function HealingBeggar:PostSlotUpdate(slot)
 	local player = slot.SpawnerEntity and slot.SpawnerEntity:ToPlayer()
@@ -76,7 +76,7 @@ function HealingBeggar:PostSlotUpdate(slot)
 		slot:Remove()
 	end
 end
-HealingBeggar:AddCallback(ModCallbacks.MC_POST_SLOT_UPDATE, HealingBeggar.PostSlotUpdate, Lib.ModEntityIDs.HEALINGBEGGAR.Variant)
+HealingBeggar:AddCallback(ModCallbacks.MC_POST_SLOT_UPDATE, HealingBeggar.PostSlotUpdate, Lib.ModEntityIDs.HEALING_BEGGAR.Variant)
 
 function HealingBeggar:PreSlotCreateExplosionDrops(slot)
 	local rng = slot:GetDropRNG()
@@ -88,6 +88,6 @@ function HealingBeggar:PreSlotCreateExplosionDrops(slot)
 	slot:Remove()
     return false
 end
-HealingBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_CREATE_EXPLOSION_DROPS, HealingBeggar.PreSlotCreateExplosionDrops, Lib.ModEntityIDs.HEALINGBEGGAR.Variant)
+HealingBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_CREATE_EXPLOSION_DROPS, HealingBeggar.PreSlotCreateExplosionDrops, Lib.ModEntityIDs.HEALING_BEGGAR.Variant)
 
 return HealingBeggar

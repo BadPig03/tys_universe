@@ -1,5 +1,5 @@
 local Lib = TYU
-local CursedPenny = Lib:NewModEntity("Cursed Penny", "CURSEDPENNY")
+local CursedPenny = Lib:NewModEntity("Cursed Penny", "CURSED_PENNY")
 
 local function TriggerDifferentEffects(player, id, rng)
     local room = Lib.GAME:GetRoom()
@@ -11,7 +11,7 @@ local function TriggerDifferentEffects(player, id, rng)
     elseif id == 3 then
         Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_KEY, KeySubType.KEY_NORMAL, position)
     elseif id == 4 then
-        Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COIN, Lib.ModEntityIDs.CURSEDPENNY.SubType, position)
+        Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COIN, Lib.ModEntityIDs.CURSED_PENNY.SubType, position)
     elseif id == 5 then
         Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, HeartSubType.HEART_HALF_SOUL, position)
     elseif id == 6 then
@@ -31,7 +31,7 @@ local function TriggerDifferentEffects(player, id, rng)
 end
 
 function CursedPenny:PostPickupUpdate(pickup)
-    if pickup.SubType ~= Lib.ModEntityIDs.CURSEDPENNY.SubType then
+    if pickup.SubType ~= Lib.ModEntityIDs.CURSED_PENNY.SubType then
         return
     end
     local sprite = pickup:GetSprite()
@@ -39,16 +39,16 @@ function CursedPenny:PostPickupUpdate(pickup)
         Lib.SFXMANAGER:Play(SoundEffect.SOUND_PENNYDROP, 0.7, 2, false, 1.2)
     end
 end
-CursedPenny:AddCallback(ModCallbacks.MC_POST_PICKUP_UPDATE, CursedPenny.PostPickupUpdate, Lib.ModEntityIDs.CURSEDPENNY.Variant)
+CursedPenny:AddCallback(ModCallbacks.MC_POST_PICKUP_UPDATE, CursedPenny.PostPickupUpdate, Lib.ModEntityIDs.CURSED_PENNY.Variant)
 
 function CursedPenny:PostPickupCollision(pickup, collider, low)
-    if pickup.SubType ~= Lib.ModEntityIDs.CURSEDPENNY.SubType or (not collider:ToPlayer() and not collider:ToFamiliar() and not collider:ToNPC()) then
+    if pickup.SubType ~= Lib.ModEntityIDs.CURSED_PENNY.SubType or (not collider:ToPlayer() and not collider:ToFamiliar() and not collider:ToNPC()) then
         return
     end
     Lib.SFXMANAGER:Play(SoundEffect.SOUND_PENNYPICKUP, 0.7, 2, false, 1.2)
     if collider:ToPlayer() then
         local player = collider:ToPlayer()
-        local rng = player:GetCollectibleRNG(Lib.ModItemIDs.CURSEDTREASURE)
+        local rng = player:GetCollectibleRNG(Lib.ModItemIDs.CURSED_TREASURE)
         local effectsOutcome = WeightedOutcomePicker()
         for id = 1, 9 do
             local weight = 1
@@ -60,10 +60,10 @@ function CursedPenny:PostPickupCollision(pickup, collider, low)
         TriggerDifferentEffects(player, effectsOutcome:PickOutcome(rng), rng)
     end
 end
-CursedPenny:AddCallback(ModCallbacks.MC_POST_PICKUP_COLLISION, CursedPenny.PostPickupCollision, Lib.ModEntityIDs.CURSEDPENNY.Variant)
+CursedPenny:AddCallback(ModCallbacks.MC_POST_PICKUP_COLLISION, CursedPenny.PostPickupCollision, Lib.ModEntityIDs.CURSED_PENNY.Variant)
 
 function CursedPenny:PrePickupMorph(pickup, type, variant, subType, keepPrice, keepSeed, ignoreModifiers)
-    if pickup.Variant == Lib.ModEntityIDs.CURSEDPENNY.Variant and pickup.SubType == Lib.ModEntityIDs.CURSEDPENNY.SubType then
+    if pickup.Variant == Lib.ModEntityIDs.CURSED_PENNY.Variant and pickup.SubType == Lib.ModEntityIDs.CURSED_PENNY.SubType then
         return false
     end
 end

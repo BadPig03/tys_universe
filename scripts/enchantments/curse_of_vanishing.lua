@@ -1,8 +1,8 @@
 local Lib = TYU
-local CurseOfVanishing = Lib:NewModEnchantment("Curse Of Vanishing", "CURSEOFVANISHING")
+local CurseOfVanishing = Lib:NewModEnchantment("Curse Of Vanishing", "CURSE_OF_VANISHING")
 
 function CurseOfVanishing:PostPlayerRevive(player)
-    if player:HasCurseMistEffect() or not player:GetEffects():HasNullEffect(Lib.ModEnchantmentIDs.CURSEOFVANISHING) then
+    if player:HasCurseMistEffect() or not player:GetEffects():HasNullEffect(Lib.ModEnchantmentIDs.CURSE_OF_VANISHING) then
         return
     end
     local primaryActive = player:GetActiveItem(ActiveSlot.SLOT_PRIMARY)
