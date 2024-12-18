@@ -1,45 +1,55 @@
-local Lib = TYU
-local ChefHat = Lib:NewModItem("Chef Hat", "CHEFHAT")
+local ChefHat = TYU:NewModItem("Chef Hat", "CHEFHAT")
+local Entities = TYU.Entities
+local Players = TYU.Players
+local Utils = TYU.Utils
 
-function ChefHat:PostNewLevel()
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.CHEFHAT) then
-        return
-    end
-    local room = Lib.GAME:GetRoom()
-    local pos = Vector(520, 360)
-    if Lib.GAME:IsGreedMode() then
-        pos = Vector(520, 640)
-    end
-    local slot = Lib.Entities.Spawn(Lib.ModEntityIDs.CHEFBEGGAR.Type, Lib.ModEntityIDs.CHEFBEGGAR.Variant, Lib.ModEntityIDs.CHEFBEGGAR.SubType, room:FindFreePickupSpawnPosition(pos, 0, true, false))
-    Lib.Entities.SpawnPoof(slot.Position)
+local function SetGlobalLibData(value, ...)
+    TYU:SetGlobalLibData(value, "Foods", ...)
 end
-ChefHat:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, ChefHat.PostNewLevel)
+
+local function GetGlobalLibData(...)
+    return TYU:GetGlobalLibData("Foods", ...)
+end
 
 function ChefHat:PostNPCDeath(npc)
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.CHEFHAT) then
+    if not Players.AnyoneHasCollectible(TYU.ModItemIDs.CHEFHAT) then
         return
     end
-    local count = Lib.Players.GetNullEffectCounts(Lib.ModEnchantmentIDs.LOOTING)
+    local count = Players.GetNullEffectCounts(TYU.ModEnchantmentIDs.LOOTING)
     local rng = RNG(npc.InitSeed + npc.Index)
     if (not npc.SpawnerEntity and rng:RandomInt(100) < 6 + 2 * count) or (npc.SpawnerEntity and rng:RandomInt(100) < 3 + count) then
-        Lib.Entities.Spawn(Lib.ModEntityIDs.FOODSFOODITEM.Type, Lib.ModEntityIDs.FOODSFOODITEM.Variant, Lib.ModEntityIDs.FOODSFOODITEM.SubType, npc.Position, Vector(0, 0), nil, rng:Next()) 
+        Entities.Spawn(TYU.ModEntityIDs.FOODSFOODITEM.Type, TYU.ModEntityIDs.FOODSFOODITEM.Variant, TYU.ModEntityIDs.FOODSFOODITEM.SubType, Utils.FindFreePickupSpawnPosition(npc.Position), Vector(0, 0), nil, rng:Next())
     end
 end
 ChefHat:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, ChefHat.PostNPCDeath)
 
+function ChefHat:PostNewLevel()
+    if not Players.AnyoneHasCollectible(TYU.ModItemIDs.CHEFHAT) then
+        return
+    end
+    local room = TYU.GAME:GetRoom()
+    local pos = Vector(520, 360)
+    if TYU.GAME:IsGreedMode() then
+        pos = Vector(520, 640)
+    end
+    local slot = Entities.Spawn(TYU.ModEntityIDs.CHEFBEGGAR.Type, TYU.ModEntityIDs.CHEFBEGGAR.Variant, TYU.ModEntityIDs.CHEFBEGGAR.SubType, Utils.FindFreePickupSpawnPosition(pos))
+    Entities.SpawnPoof(slot.Position)
+end
+ChefHat:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, ChefHat.PostNewLevel)
+
 function ChefHat:PostTriggerCollectibleRemoved(player, type)
-    local bank = Lib:GetGlobalLibData("Foods", "Bank")
+    local bank = GetGlobalLibData("Bank")
     if not bank then
         return
     end
-    local room = Lib.GAME:GetRoom()
+    local room = TYU.GAME:GetRoom()
     for i = 4, 1, -1 do
         if bank[i] ~= -1 then
-            Lib.Entities.Spawn(Lib.ModEntityIDs.FOODSFOODITEM.Type, Lib.ModEntityIDs.FOODSFOODITEM.Variant, bank[i] + 1, room:FindFreePickupSpawnPosition(player.Position, 0, true, false)) 
+            Entities.Spawn(TYU.ModEntityIDs.FOODSFOODITEM.Type, TYU.ModEntityIDs.FOODSFOODITEM.Variant, bank[i] + 1, Utils.FindFreePickupSpawnPosition(player.Position)) 
         end
     end
-    Lib:SetGlobalLibData({ -1, -1, -1, -1 }, "Foods", "Bank")
+    SetGlobalLibData({ -1, -1, -1, -1 }, "Bank")
 end
-ChefHat:AddCallback(ModCallbacks.MC_POST_TRIGGER_COLLECTIBLE_REMOVED, ChefHat.PostTriggerCollectibleRemoved, Lib.ModItemIDs.CHEFHAT)
+ChefHat:AddCallback(ModCallbacks.MC_POST_TRIGGER_COLLECTIBLE_REMOVED, ChefHat.PostTriggerCollectibleRemoved, TYU.ModItemIDs.CHEFHAT)
 
 return ChefHat

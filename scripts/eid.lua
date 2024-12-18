@@ -220,13 +220,13 @@ EIDInfo.Collectibles = {
             Name = "坍缩",
             Desc = "#{{Magnetize}} 角色会吸引周围的实体"..
             "#{{HolyMantle}} 敌人无法碰撞角色，且接触角色时会受到伤害"..
-            "#免疫来自敌人的接触伤害和炸弹的爆炸伤害"
+            "#免疫来自炸弹的爆炸伤害和敌人的接触伤害"
         },
         {
             Name = "Collapse",
             Desc = "#{{Magnetize}} Isaac attracts nearby entities"..
             "#{{HolyMantle}} Enemies are not able to collide with Isaac and nearby enemies will take damage"..
-            "#Prevents contact damage from enemies and explosion damage from bombs"
+            "#Prevents explosion damage from bombs and contact damage from enemies"
         }
     },
     [Lib.ModItemIDs.CONJUNCTIVITIS] = {

@@ -61,13 +61,12 @@ do
         local bloodEffect1 = Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_EXPLOSION, 0, player.Position)
         local bloodEffect2 = Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.LARGE_BLOOD_EXPLOSION, 0, player.Position)
         local effigy = nil
-        local room = TYU.GAME:GetRoom()
         if soul then
-            effigy = Entities.Spawn(EntityType.ENTITY_SLOT, TYU.ModEntityIDs.MEATEFFIGYSOUL.Variant, 0, room:FindFreePickupSpawnPosition(player.Position, 0, true))
+            effigy = Entities.Spawn(EntityType.ENTITY_SLOT, TYU.ModEntityIDs.MEATEFFIGYSOUL.Variant, 0, Utils.FindFreePickupSpawnPosition(player.Position))
             bloodEffect1:GetSprite().Color:SetColorize(0.0235, 0.712, 1, 5)
             bloodEffect2:GetSprite().Color:SetColorize(0.0235, 0.712, 1, 5)
         else
-            effigy = Entities.Spawn(EntityType.ENTITY_SLOT, TYU.ModEntityIDs.MEATEFFIGY.Variant, 0, room:FindFreePickupSpawnPosition(player.Position, 0, true))
+            effigy = Entities.Spawn(EntityType.ENTITY_SLOT, TYU.ModEntityIDs.MEATEFFIGY.Variant, 0, Utils.FindFreePickupSpawnPosition(player.Position))
         end
         Entities.SpawnPoof(effigy.Position)
         PrivateField.AddReviveEffect(player)

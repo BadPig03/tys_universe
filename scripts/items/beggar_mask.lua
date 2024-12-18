@@ -43,7 +43,7 @@ function BeggarMask:PostNewRoom()
     if not variant then
         return
     end
-    local pos = room:FindFreePickupSpawnPosition(PrivateField.GetPositionFromRoomShape(room:GetRoomShape()), 0, true, false)
+    local pos = Utils.FindFreePickupSpawnPosition(PrivateField.GetPositionFromRoomShape(room:GetRoomShape()))
     local slot = Entities.Spawn(EntityType.ENTITY_SLOT, variant, 0, pos)
     Entities.SpawnPoof(slot.Position)
 end

@@ -6,8 +6,7 @@ local PrivateField = {}
 
 do
     function PrivateField.GetBedPositionInChallengeRoom()
-        local room = TYU.GAME:GetRoom()
-        return room:FindFreePickupSpawnPosition(Vector(520, 200), 0, true, false)
+        return Utils.FindFreePickupSpawnPosition(Vector(520, 200))
     end
 
     function PrivateField.GetBedPositionInBossRushRoom()
@@ -15,15 +14,15 @@ do
     end
 
     function PrivateField.SetWaves()
-        Ambush.SetMaxBossChallengeWaves(1)
-        Ambush.SetMaxBossrushWaves(8)
-        Ambush.SetMaxChallengeWaves(2)    
+        TYU.AMBUSH.SetMaxBossChallengeWaves(1)
+        TYU.AMBUSH.SetMaxBossrushWaves(8)
+        TYU.AMBUSH.SetMaxChallengeWaves(2)    
     end
 
     function PrivateField.ResetWaves()
-        Ambush.SetMaxBossChallengeWaves(2)
-        Ambush.SetMaxBossrushWaves(15)
-        Ambush.SetMaxChallengeWaves(3)   
+        TYU.AMBUSH.SetMaxBossChallengeWaves(2)
+        TYU.AMBUSH.SetMaxBossrushWaves(15)
+        TYU.AMBUSH.SetMaxChallengeWaves(3)   
     end
 end
 

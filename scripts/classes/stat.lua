@@ -1,13 +1,11 @@
-local Lib = TYU
-local Stat = Lib:RegisterNewClass()
-
-local Private = {}
+local Stat = TYU:RegisterNewClass()
+local PrivateField = {}
 
 local function GetPlayerData(player, ...)
-    return Lib:GetTempEntityLibData(player, "Stats", ...)
+    return TYU:GetTempEntityLibData(player, "Stats", ...)
 end
 local function SetPlayerData(player, value, ...)
-    Lib:SetTempEntityLibData(player, value, "Stats", ...)
+    TYU:SetTempEntityLibData(player, value, "Stats", ...)
 end
 
 local function AddTearsModifier(tears, value, reverse)
@@ -36,7 +34,7 @@ end
 
 do
     do
-        Private.PlayerTearsUps = {
+        PrivateField.PlayerTearsUps = {
             [PlayerType.PLAYER_SAMSON] = -0.1,
             [PlayerType.PLAYER_AZAZEL] = 0.5,
             [PlayerType.PLAYER_KEEPER] = -1.9,
@@ -51,7 +49,7 @@ do
             [PlayerType.PLAYER_JACOB_B] = 5/18,
             [PlayerType.PLAYER_JACOB2_B] = 5/18,
         }
-        Private.CollectibleTearsUps = {
+        PrivateField.CollectibleTearsUps = {
             [CollectibleType.COLLECTIBLE_SAD_ONION] = 0.7,
             [CollectibleType.COLLECTIBLE_NUMBER_ONE] = 1.5,
             [CollectibleType.COLLECTIBLE_WIRE_COAT_HANGER] = 0.7,
@@ -82,7 +80,7 @@ do
             [CollectibleType.COLLECTIBLE_SAUSAGE] = 0.5,
             -- Cannot Detect Candy Heart, Soul Locket
         }
-        Private.CollectibleTearsUps = {
+        PrivateField.CollectibleTearsUps = {
             [TrinketType.TRINKET_HOOK_WORM] = 0.4,
             [TrinketType.TRINKET_RING_WORM] = 0.4,
             [TrinketType.TRINKET_WIGGLE_WORM] = 0.4,
@@ -107,7 +105,7 @@ do
                 return 0
             end,
         }
-        Private.VanillaTearsModifiers = {
+        PrivateField.VanillaTearsModifiers = {
             {
                 function(player, tears, reverse)
                     if player:HasCollectible(CollectibleType.COLLECTIBLE_EYE_DROPS) then
@@ -344,7 +342,7 @@ do
                 end
             }
         }
-        Private.MiscTearsUps = function(player)
+        PrivateField.MiscTearsUps = function(player)
             local tearsUp = 0
             if player:GetEffects():HasCollectibleEffect(CollectibleType.COLLECTIBLE_MEGA_MUSH) then
                 tearsUp = tearsUp - 1.9
@@ -356,7 +354,7 @@ do
         end
     end
     do
-        Private.EvilItems = {
+        PrivateField.EvilItems = {
             { Type = PickupVariant.PICKUP_COLLECTIBLE, ID = CollectibleType.COLLECTIBLE_GOAT_HEAD },
             { Type = PickupVariant.PICKUP_COLLECTIBLE, ID = CollectibleType.COLLECTIBLE_CEREMONIAL_ROBES },
             { Type = PickupVariant.PICKUP_COLLECTIBLE, ID = CollectibleType.COLLECTIBLE_ABADDON },
@@ -368,7 +366,7 @@ do
             { Type = PickupVariant.PICKUP_TRINKET, ID = TrinketType.TRINKET_DAEMONS_TAIL },
             { Type = PickupVariant.PICKUP_TRINKET, ID = TrinketType.TRINKET_BLACK_LIPSTICK },
         }
-        Private.CharacterMultipliers = {
+        PrivateField.CharacterMultipliers = {
             [PlayerType.PLAYER_CAIN] = 1.2,
             [PlayerType.PLAYER_JUDAS] = 1.35,
             [PlayerType.PLAYER_XXX] = 1.05,
@@ -383,7 +381,7 @@ do
             [PlayerType.PLAYER_THEFORGOTTEN_B] = 1.5,
             [PlayerType.PLAYER_LAZARUS2_B] = 1.5,
         }
-        Private.DamageSteps1 = {
+        PrivateField.DamageSteps1 = {
             function(damage, player, reverse)
                 if player:HasCollectible(CollectibleType.COLLECTIBLE_ODD_MUSHROOM_THIN) then
                     if not reverse then
@@ -409,7 +407,7 @@ do
                 local blackFeatherNum = player:GetTrinketMultiplier(TrinketType.TRINKET_BLACK_FEATHER)
                 if blackFeatherNum > 0 then
                     local blackFeatherBoost = 0
-                    for _, evilItem in pairs(Private.EvilItems) do
+                    for _, evilItem in pairs(PrivateField.EvilItems) do
                         if evilItem.Type == PickupVariant.PICKUP_COLLECTIBLE then
                             blackFeatherBoost = blackFeatherBoost + player:GetCollectibleNum(evilItem.ID, true)
                         elseif evilItem.Type == PickupVariant.PICKUP_TRINKET then
@@ -437,7 +435,7 @@ do
                 return damage
             end,
         }
-        Private.DamageSteps2 = {
+        PrivateField.DamageSteps2 = {
             function(damage, player, reverse)
                 if player:HasCollectible(CollectibleType.COLLECTIBLE_POLYPHEMUS) then
                     if (player:HasCollectible(CollectibleType.COLLECTIBLE_INNER_EYE) or player:HasCollectible(CollectibleType.COLLECTIBLE_MUTANT_SPIDER) or player:HasWeaponType(WeaponType.WEAPON_FETUS)) then
@@ -471,7 +469,7 @@ do
                         multi = 1.2
                     end
                 else
-                    multi = Private.CharacterMultipliers[playerType] or 1
+                    multi = PrivateField.CharacterMultipliers[playerType] or 1
                 end
                 if not reverse then
                     damage = damage * multi
@@ -551,7 +549,7 @@ do
                 return damage
             end,
         }
-        Private.DamageSteps3 = {
+        PrivateField.DamageSteps3 = {
             function(damage, player, reverse)
                 local effects = player:GetEffects()
                 local lustCount = player:GetBloodLustCounter()
@@ -701,10 +699,10 @@ do
                 return damage
             end
         }
-        Private.DamageStepsList = {
-            Private.DamageSteps1,
-            Private.DamageSteps2,
-            Private.DamageSteps3
+        PrivateField.DamageStepsList = {
+            PrivateField.DamageSteps1,
+            PrivateField.DamageSteps2,
+            PrivateField.DamageSteps3
         }
     end
 end
@@ -802,7 +800,7 @@ do
                     tears = modi.Func(tears, origin)
                 end
             end
-            if player:HasCollectible(Lib.ModItemIDs.CONSERVATIVETREATMENT) and tears < 30 / 11 then
+            if player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and tears < 30 / 11 then
                 return 30 / 11
             end
             return tears
@@ -838,8 +836,8 @@ do
         end
         function Stat:GetDamageUpValue(player)
             local damage = player.Damage
-            for i = #Private.DamageStepsList, 1, -1 do
-                local steps = Private.DamageStepsList[i]
+            for i = #PrivateField.DamageStepsList, 1, -1 do
+                local steps = PrivateField.DamageStepsList[i]
                 for j = #steps, 1, -1 do
                     local step = steps[j]
                     damage = step(damage, player, true)
@@ -849,21 +847,21 @@ do
         end
         function Stat:GetEvaluatedDamage(player, damageUp, flat, multiplier)
             local damage = damageUp
-            for i = 1, #Private.DamageSteps1 do
-                local step = Private.DamageSteps1[i]
+            for i = 1, #PrivateField.DamageSteps1 do
+                local step = PrivateField.DamageSteps1[i]
                 damage = step(damage, player, false)
             end
-            for i = 1, #Private.DamageSteps2 do
-                local step = Private.DamageSteps2[i]
+            for i = 1, #PrivateField.DamageSteps2 do
+                local step = PrivateField.DamageSteps2[i]
                 damage = step(damage, player, false)
             end
             damage = damage + flat
-            for i = 1, #Private.DamageSteps3 do
-                local step = Private.DamageSteps3[i]
+            for i = 1, #PrivateField.DamageSteps3 do
+                local step = PrivateField.DamageSteps3[i]
                 damage = step(damage, player, false)
             end
             damage = damage * multiplier
-            if player:HasCollectible(Lib.ModItemIDs.CONSERVATIVETREATMENT) and damage < 3.5 then
+            if player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and damage < 3.5 then
                 return 3.5
             end
             return damage
@@ -898,7 +896,7 @@ do
             if lowerLimit >= 0 and addition < 0 then
                 addition = math.max(lowerLimit - speed, addition)
             end
-            if player:HasCollectible(Lib.ModItemIDs.CONSERVATIVETREATMENT) and speed + addition < 1 then
+            if player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and speed + addition < 1 then
                 player.MoveSpeed = 1
             else
                 player.MoveSpeed = speed + addition
@@ -907,14 +905,14 @@ do
             Stat:SetSpeedMultiplier(player, nil)
             Stat:SetSpeedLimit(player, nil)
             Stat:SetSpeedLowerLimit(player, nil)
-        elseif cache == CacheFlag.CACHE_RANGE and player:HasCollectible(Lib.ModItemIDs.CONSERVATIVETREATMENT) and player.TearRange < 260 then
+        elseif cache == CacheFlag.CACHE_RANGE and player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and player.TearRange < 260 then
             player.TearRange = 260
             player.TearHeight = -23.75
         end
-        if cache == CacheFlag.CACHE_SHOTSPEED and player:HasCollectible(Lib.ModItemIDs.CONSERVATIVETREATMENT) and player.ShotSpeed < 1 then
+        if cache == CacheFlag.CACHE_SHOTSPEED and player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and player.ShotSpeed < 1 then
             player.ShotSpeed = 1
         end
-        if cache == CacheFlag.CACHE_LUCK and player:HasCollectible(Lib.ModItemIDs.CONSERVATIVETREATMENT) and player.Luck < 0 then
+        if cache == CacheFlag.CACHE_LUCK and player:HasCollectible(TYU.ModItemIDs.CONSERVATIVETREATMENT) and player.Luck < 0 then
             player.Luck = 0
         end
     end

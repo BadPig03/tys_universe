@@ -112,7 +112,7 @@ function Collectibles.CheckFamiliarFromCollectible(player, id, variant, maxCount
 end
 
 function Collectibles.GetNearestDevilDeal(position, distance)
-    local minDistance = distance
+    local minDistance = distance or 192
     local collectible = nil
     for _, ent in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE)) do
         local pickup = ent:ToPickup()

@@ -7,24 +7,23 @@ local PrivateField = {}
 
 do
 	function PrivateField.SimulateHematemesisEffect(player)
-		local room = TYU.GAME:GetRoom()
 		local rng = player:GetCollectibleRNG(CollectibleType.COLLECTIBLE_YUM_HEART)
 		local healthType = player:GetHealthType()
 		if healthType == HealthType.RED or healthType == HealthType.BONE then
 			player:AddHearts(-99)
 			player:AddHearts(2)
 			for i = 0, rng:RandomInt(4) do
-				Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, HeartSubType.HEART_FULL, room:FindFreePickupSpawnPosition(player.Position, 0, true))
+				Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, HeartSubType.HEART_FULL, Utils.FindFreePickupSpawnPosition(player.Position))
 			end
 		elseif healthType == HealthType.COIN then
 			player:AddHearts(-99)
 			player:AddHearts(2)
 			for i = 0, rng:RandomInt(4) do
-				Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COIN, CoinSubType.COIN_PENNY, room:FindFreePickupSpawnPosition(player.Position, 0, true))
+				Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COIN, CoinSubType.COIN_PENNY, Utils.FindFreePickupSpawnPosition(player.Position))
 			end
 		else
 			for i = 0, rng:RandomInt(4) do
-				Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, HeartSubType.HEART_FULL, room:FindFreePickupSpawnPosition(player.Position, 0, true))
+				Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, HeartSubType.HEART_FULL, Utils.FindFreePickupSpawnPosition(player.Position))
 			end
 		end
 	end

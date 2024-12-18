@@ -1,9 +1,9 @@
-local Lib = TYU
-
-local classMetatable = { Mod = Lib }
+local classMetatable = {
+    Mod = TYU
+}
 classMetatable.__index = classMetatable
 
-function Lib:RegisterNewClass()
+function TYU:RegisterNewClass()
     local class = {}
     setmetatable(class, classMetatable)
     class.Callbacks = {}
@@ -11,7 +11,7 @@ function Lib:RegisterNewClass()
         self:AddPriorityCallback(callback, CallbackPriority.DEFAULT, func, param)
     end
     function class:AddPriorityCallback(callback, priority, func, param)
-        table.insert(self.Callbacks, {Mod = Lib, Callback = callback, Priority = priority, Function = func, Param = param})
+        table.insert(self.Callbacks, {Mod = TYU, Callback = callback, Priority = priority, Function = func, Param = param})
     end
     function class:Register()
         for _, callback in pairs(self.Callbacks) do

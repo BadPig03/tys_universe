@@ -1,15 +1,29 @@
-local Lib = TYU
-local ChefBeggar = Lib:NewModEntity("Chef Beggar", "CHEFBEGGAR")
+local ChefBeggar = TYU:NewModEntity("Chef Beggar", "CHEFBEGGAR")
+local Entities = TYU.Entities
+local Foods = TYU.Foods
+local Players = TYU.Players
+local Utils = TYU.Utils
+local PrivateField = {}
 
-local function AddFoodToQueue(slot, food)
-	local bank = Lib.Foods.ExtractValues(slot:GetDonationValue())
-	for i = 1, 4 do
-		if bank[i] == 0 then
-			bank[i] = food
-			break
+local function SetGlobalLibData(value, ...)
+    TYU:SetGlobalLibData(value, "Foods", ...)
+end
+
+local function GetGlobalLibData(...)
+    return TYU:GetGlobalLibData("Foods", ...)
+end
+
+do
+	function PrivateField.AddFoodToQueue(slot, food)
+		local bank = Foods.ExtractValues(slot:GetDonationValue())
+		for i = 1, 4 do
+			if bank[i] == 0 then
+				bank[i] = food
+				break
+			end
 		end
+		slot:SetDonationValue(Foods.CombineValues(bank))
 	end
-	slot:SetDonationValue(Lib.Foods.CombineValues(bank))
 end
 
 function ChefBeggar:PreSlotCollision(slot, collider, low)
@@ -24,8 +38,8 @@ function ChefBeggar:PreSlotCollision(slot, collider, low)
 	if not sprite:IsPlaying("Idle") then
 		return
 	end
-	local bank = Lib:GetGlobalLibData("Foods", "Bank")
-	if not bank or Lib.Foods.GetValidEmptySlot(slot:GetDonationValue()) == 0 then
+	local bank = GetGlobalLibData("Bank")
+	if not bank or Foods.GetValidEmptySlot(slot:GetDonationValue()) == 0 then
 		return
 	end
 	local food = -1
@@ -34,39 +48,38 @@ function ChefBeggar:PreSlotCollision(slot, collider, low)
 		if bank[i] ~= -1 then
 			food = bank[i]
 			foodIndex = i
-			Lib:SetGlobalLibData(-1, "Foods", "Bank", i)
+			SetGlobalLibData(-1, "Bank", i)
 			break
 		end
 		if i == 1 and bank[i] == -1 then
 			return
 		end
 	end
+	PrivateField.AddFoodToQueue(slot, food + 1)
+	slot:SetState(2)
 	sprite:ReplaceSpritesheet(2, "gfx/ui/foods/"..(food + 1)..".png", true)
 	sprite:Play("PayNothing", true)
-	AddFoodToQueue(slot, food + 1)
-	slot:SetState(2)
 end
-ChefBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_COLLISION, ChefBeggar.PreSlotCollision, Lib.ModEntityIDs.CHEFBEGGAR.Variant)
+ChefBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_COLLISION, ChefBeggar.PreSlotCollision, TYU.ModEntityIDs.CHEFBEGGAR.Variant)
 
 function ChefBeggar:PostSlotUpdate(slot)
 	local sprite = slot:GetSprite()
 	if sprite:IsEventTriggered("Prize") then
-		local room = Lib.GAME:GetRoom()
-		local item = Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, Lib.ModItemIDs.SUSPICIOUSSTEW, room:FindFreePickupSpawnPosition(slot.Position + Vector(0, 40))):ToPickup()
+		local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, TYU.ModItemIDs.SUSPICIOUSSTEW, Utils.FindFreePickupSpawnPosition(slot.Position + Vector(0, 40))):ToPickup()
 		item:SetVarData(slot:GetDonationValue())
 		item:RemoveCollectibleCycle()
 		item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
 		item.Price = 0
-		Lib:SetGlobalLibData(true, "WarfarinItems", tostring(item.InitSeed))
-		Lib:SetGlobalLibData(slot:GetDonationValue(), "Foods", "Effects", tostring(item.InitSeed))
-		Lib.SFXMANAGER:Play(SoundEffect.SOUND_SLOTSPAWN)
-		Lib.SFXMANAGER:Play(SoundEffect.SOUND_THUMBSUP)
+		TYU:SetGlobalLibData(true, "WarfarinItems", tostring(item.InitSeed))
+		SetGlobalLibData(slot:GetDonationValue(), "Effects", tostring(item.InitSeed))
+		TYU.SFXMANAGER:Play(SoundEffect.SOUND_SLOTSPAWN)
+		TYU.SFXMANAGER:Play(SoundEffect.SOUND_THUMBSUP)
 	end
 	if sprite:IsEventTriggered("GainItem") then
-		Lib.SFXMANAGER:Play(SoundEffect.SOUND_SCAMPER)
+		TYU.SFXMANAGER:Play(SoundEffect.SOUND_SCAMPER)
 	end
     if sprite:IsFinished("PayNothing") then
-		if Lib.Foods.GetValidEmptySlot(slot:GetDonationValue()) == 0 then
+		if Foods.GetValidEmptySlot(slot:GetDonationValue()) == 0 then
 			sprite:Play("Prize", true)
 			slot:SetState(2)
 			return
@@ -80,24 +93,24 @@ function ChefBeggar:PostSlotUpdate(slot)
 		slot:SetState(1)
 	end
 end
-ChefBeggar:AddCallback(ModCallbacks.MC_POST_SLOT_UPDATE, ChefBeggar.PostSlotUpdate, Lib.ModEntityIDs.CHEFBEGGAR.Variant)
+ChefBeggar:AddCallback(ModCallbacks.MC_POST_SLOT_UPDATE, ChefBeggar.PostSlotUpdate, TYU.ModEntityIDs.CHEFBEGGAR.Variant)
 
 function ChefBeggar:PreSlotCreateExplosionDrops(slot)
-	if Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.CHEFHAT) or Lib:GetGlobalLibData("Foods", "ChefHatSpawned") then
+	if Players.AnyoneHasCollectible(TYU.ModItemIDs.CHEFHAT) or GetGlobalLibData("ChefHatSpawned") then
 		local rng = slot:GetDropRNG()
 		for i = 0, rng:RandomInt(2) do
-			Lib.Entities.Spawn(Lib.ModEntityIDs.FOODSFOODITEM.Type, Lib.ModEntityIDs.FOODSFOODITEM.Variant, 0, slot.Position, Vector(1, 0):Resized(2 + rng:RandomFloat() * 3):Rotated(rng:RandomInt(360)))
+			Entities.Spawn(TYU.ModEntityIDs.FOODSFOODITEM.Type, TYU.ModEntityIDs.FOODSFOODITEM.Variant, 0, slot.Position, Vector(1, 0):Resized(2 + rng:RandomFloat() * 3):Rotated(rng:RandomInt(360)))
 		end
 	else
-		local item = Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, Lib.ModItemIDs.CHEFHAT, slot.Position):ToPickup()
+		local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, TYU.ModItemIDs.CHEFHAT, slot.Position):ToPickup()
 		item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
 		item.Price = 0
-		Lib:SetGlobalLibData(true, "Foods", "ChefHatSpawned")
+		SetGlobalLibData(true, "ChefHatSpawned")
 	end
 	slot:BloodExplode()
 	slot:Remove()
     return false
 end
-ChefBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_CREATE_EXPLOSION_DROPS, ChefBeggar.PreSlotCreateExplosionDrops, Lib.ModEntityIDs.CHEFBEGGAR.Variant)
+ChefBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_CREATE_EXPLOSION_DROPS, ChefBeggar.PreSlotCreateExplosionDrops, TYU.ModEntityIDs.CHEFBEGGAR.Variant)
 
 return ChefBeggar

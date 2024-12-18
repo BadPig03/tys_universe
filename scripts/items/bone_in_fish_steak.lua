@@ -1,5 +1,38 @@
-local Lib = TYU
-local BoneInFishSteak = Lib:NewModItem("Bone-in Fish Steak", "BONEINFISHSTEAK")
+local BoneInFishSteak = TYU:NewModItem("Bone-in Fish Steak", "BONEINFISHSTEAK")
+local Stat = TYU.Stat
+
+local function SetPlayerLibData(player, value, ...)
+    TYU:SetPlayerLibData(player, value, "BoneInFishSteak", ...)
+end
+
+local function GetPlayerLibData(player, ...)
+    return TYU:GetPlayerLibData(player, "BoneInFishSteak", ...)
+end
+
+function BoneInFishSteak:EvaluateCache(player, cacheFlag)
+    local count = player:GetCollectibleNum(TYU.ModItemIDs.BONEINFISHSTEAK)
+    if count == 0 then
+        return
+    end
+    if cacheFlag == CacheFlag.CACHE_FIREDELAY then
+        local count = GetPlayerLibData(player, "Counts")
+        if count and count > 0 then
+            Stat:AddFlatTears(player, 0.5 * count)
+        end
+    end
+    if player:HasCollectible(CollectibleType.COLLECTIBLE_BINGE_EATER) then
+        if cacheFlag == CacheFlag.CACHE_SPEED then
+            Stat:AddSpeedUp(player, -0.03 * count)
+        end
+        if cacheFlag == CacheFlag.CACHE_DAMAGE then
+            Stat:AddFlatDamage(player, count)
+        end
+        if cacheFlag == CacheFlag.CACHE_LUCK then
+            player.Luck = player.Luck + count
+        end
+    end
+end
+BoneInFishSteak:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, BoneInFishSteak.EvaluateCache)
 
 function BoneInFishSteak:PostAddCollectible(type, charge, firstTime, slot, varData, player)
     if firstTime then
@@ -7,43 +40,18 @@ function BoneInFishSteak:PostAddCollectible(type, charge, firstTime, slot, varDa
         player:AddHearts(2)
     end
 end
-BoneInFishSteak:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, BoneInFishSteak.PostAddCollectible, Lib.ModItemIDs.BONEINFISHSTEAK)
-
-function BoneInFishSteak:EvaluateCache(player, cacheFlag)
-    local itemCount = player:GetCollectibleNum(Lib.ModItemIDs.BONEINFISHSTEAK)
-    if itemCount == 0 then
-        return
-    end
-    if player:HasCollectible(CollectibleType.COLLECTIBLE_BINGE_EATER) then
-        if cacheFlag == CacheFlag.CACHE_SPEED then
-            Lib.Stat:AddSpeedUp(player, -0.03 * itemCount)
-        end
-        if cacheFlag == CacheFlag.CACHE_DAMAGE then
-            Lib.Stat:AddFlatDamage(player, itemCount)
-        end
-        if cacheFlag == CacheFlag.CACHE_LUCK then
-            player.Luck = player.Luck + itemCount
-        end
-    end
-    if cacheFlag == CacheFlag.CACHE_FIREDELAY then
-        local count = Lib:GetPlayerLibData(player, "BoneInFishSteak", "Counts")
-        if count and count > 0 then
-            Lib.Stat:AddFlatTears(player, 0.5 * count)
-        end
-    end
-end
-BoneInFishSteak:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, BoneInFishSteak.EvaluateCache)
+BoneInFishSteak:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, BoneInFishSteak.PostAddCollectible, TYU.ModItemIDs.BONEINFISHSTEAK)
 
 function BoneInFishSteak:PostTrinketSmelted(player, count)
-    if not player:HasCollectible(Lib.ModItemIDs.BONEINFISHSTEAK) or count < 0 then
+    if not player:HasCollectible(TYU.ModItemIDs.BONEINFISHSTEAK) or count < 0 then
         return
     end
-    local count = Lib:GetPlayerLibData(player, "BoneInFishSteak", "Counts") or 0
-    Lib:SetPlayerLibData(player, count + 1, "BoneInFishSteak", "Counts")
+    local count = GetPlayerLibData(player, "Counts") or 0
+    SetPlayerLibData(player, count + 1, "Counts")
     player:TakeDamage(1, DamageFlag.DAMAGE_RED_HEARTS | DamageFlag.DAMAGE_FAKE, EntityRef(player), 15)
     player:StopExtraAnimation()
     player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY, true)
 end
-BoneInFishSteak:AddCallback(Lib.Callbacks.TYU_POST_TRINKET_SMELTED, BoneInFishSteak.PostTrinketSmelted)
+BoneInFishSteak:AddCallback(TYU.Callbacks.TYU_POST_TRINKET_SMELTED, BoneInFishSteak.PostTrinketSmelted)
 
 return BoneInFishSteak

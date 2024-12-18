@@ -76,10 +76,39 @@ function Players.ChangeLostCurseState(player, remove)
     end
 end
 
+function Players.GetChargeBarPosition(player, type)
+    local hasBobsStomach = player:HasCollectible(TYU.ModItemIDs.BOBSSTOMACH)
+    local hasHephaestusSoul = player:HasCollectible(TYU.ModItemIDs.HEPHAESTUSSOUL)
+    local hasOceanusSoul = player:HasCollectible(TYU.ModItemIDs.OCEANUSSOUL)
+    if type == 1 then
+        return Vector(-21, -60)
+    elseif type == 2 then
+        if hasBobsStomach then
+            return Vector(-30, -43)
+        else
+            return Vector(-21, -60)
+        end
+    elseif type == 3 then
+        if hasBobsStomach and hasHephaestusSoul then
+            return Vector(-42, -60)
+        elseif (hasBobsStomach and not hasHephaestusSoul) or (not hasBobsStomach and hasHephaestusSoul) then
+            return Vector(-30, -43)
+        else
+            return Vector(-21, -60)
+        end
+    end
+end
 
-
-
-
+function Players.GetNullEffectCounts(id)
+    local count = 0
+    for _, player in pairs(Players.GetPlayers(true)) do
+        local effects = player:GetEffects()
+        if effects:HasNullEffect(id) then
+            count = count + effects:GetNullEffectNum(id)
+        end
+    end
+    return count
+end
 
 
 
@@ -148,17 +177,6 @@ function Players.RemoveCollectibles(player, id, count)
     end
 end
 
-function Players.GetNullEffectCounts(id)
-    local count = 0
-    for _, player in pairs(TYU.Players.GetPlayers(true)) do
-        local effects = player:GetEffects()
-        if effects:HasNullEffect(id) then
-            count = count + effects:GetNullEffectNum(id)
-        end
-    end
-    return count
-end
-
 function Players.OnValidCreep(player)
     local room = TYU.GAME:GetRoom()
 	local creepList = {
@@ -191,29 +209,6 @@ function Players.OnValidCreep(player)
         end
     end
     return false
-end
-
-function Players.GetChargeBarPosition(player, type)
-    local hasBobsStomach = player:HasCollectible(TYU.ModItemIDs.BOBSSTOMACH)
-    local hasHephaestusSoul = player:HasCollectible(TYU.ModItemIDs.HEPHAESTUSSOUL)
-    local hasOceanusSoul = player:HasCollectible(TYU.ModItemIDs.OCEANUSSOUL)
-    if type == 1 then
-        return Vector(-21, -60)
-    elseif type == 2 then
-        if hasBobsStomach then
-            return Vector(-30, -43)
-        else
-            return Vector(-21, -60)
-        end
-    elseif type == 3 then
-        if hasBobsStomach and hasHephaestusSoul then
-            return Vector(-42, -60)
-        elseif (hasBobsStomach and not hasHephaestusSoul) or (not hasBobsStomach and hasHephaestusSoul) then
-            return Vector(-30, -43)
-        else
-            return Vector(-21, -60)
-        end
-    end
 end
 
 function Players.IsPressingFiringButton(player)

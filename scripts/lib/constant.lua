@@ -1,5 +1,3 @@
-local Lib = TYU
-
 local function Get(num)
     if num == -1 then
         return false
@@ -7,7 +5,7 @@ local function Get(num)
     return num
 end
 
-Lib.Callbacks = {
+TYU.Callbacks = {
     TYU_POST_LOAD = "TYU_POST_LOAD",
     TYU_POST_SAVE = "TYU_POST_SAVE",
     TYU_POST_RESTART = "TYU_POST_RESTART",
@@ -16,19 +14,19 @@ Lib.Callbacks = {
     TYU_POST_NEW_ROOM_OR_LOAD = "TYU_POST_NEW_ROOM_OR_LOAD"
 }
 
-Lib.Constants = {
+TYU.Constants = {
     CHARGEBAR_PLAYBACKRATE = 190 / 141,
     GLITCHED_ITEM_ID = 4294967295
 }
 
-Lib.Colors = {
+TYU.Colors = {
     SLOWING = Color(1, 1, 1.3, 1, 0.156863, 0.156863, 0.156863),
     GREEN = Color(0.5, 0.9, 0.4, 1, 0, 0, 0),
     STICKY = Color(1, 0.65, 0.8, 0.8, 0, 0, 0),
     PINK = Color(1, 1, 1, 1, 0, 0, 0, 4, 1, 2.6, 1)
 }
 
-Lib.RainbowColors = {
+TYU.RainbowColors = {
     {1 / 12, 5 / 6, 1 / 12},
     {5 / 69, 50 / 69, 14 / 69},
     {5 / 78, 25 / 39, 23 / 78},
@@ -61,25 +59,25 @@ Lib.RainbowColors = {
     {14 / 69, 50 / 69, 5 / 69}
 }
 
-Lib.KColors = {
+TYU.KColors = {
     RED = KColor(1, 0, 0, 1),
     WHITE = KColor(1, 1, 1, 1)
 }
 
-Lib.ModAchievementIDs = {
+TYU.ModAchievementIDs = {
     PROMPTREAD = Isaac.GetAchievementIdByName("prompt_read")
 }
 
-Lib.ModBackdropIDs = {
+TYU.ModBackdropIDs = {
     ICU = Isaac.GetBackdropIdByName("tyuniverse_icu")
 }
 
-Lib.ModCardIDs = {
+TYU.ModCardIDs = {
     ENCHANTEDCARD = Get(Isaac.GetCardIdByName("Enchanted Card")) or Isaac.GetCardIdByName("附魔卡"),
     GLOWINGHOURGLASSSHARD = Get(Isaac.GetCardIdByName("Glowing Hourglass Shard")) or Isaac.GetCardIdByName("发光沙漏碎片")
 }
 
-Lib.ModFoodItemIDs = {
+TYU.ModFoodItemIDs = {
     FOODS = Isaac.GetEntitySubTypeByName("Foods (food item)"),
     APPLE = Isaac.GetEntitySubTypeByName("Apple (food item)"),
     BAKEDPOTATO = Isaac.GetEntitySubTypeByName("Baked Potato (food item)"),
@@ -104,7 +102,7 @@ Lib.ModFoodItemIDs = {
     MONSTERMEAT = Isaac.GetEntitySubTypeByName("Monster Meat (food item)")
 }
 
-Lib.ModEnchantmentIDs = {
+TYU.ModEnchantmentIDs = {
     AQUALORD = Isaac.GetNullItemIdByName("Aqua Lord"),
     BANEOFARTHROPODS = Isaac.GetNullItemIdByName("Bane Of Arthropods"),
     BLASTPROTECTION = Isaac.GetNullItemIdByName("Blast Protection"),
@@ -124,7 +122,7 @@ Lib.ModEnchantmentIDs = {
     THORNS = Isaac.GetNullItemIdByName("Thorns")
 }
 
-Lib.ModEntityIDs = {
+TYU.ModEntityIDs = {
     BLAZEFLY = {
         Type = Isaac.GetEntityTypeByName("Blaze Fly"),
         Variant = Isaac.GetEntityVariantByName("Blaze Fly"),
@@ -272,17 +270,13 @@ Lib.ModEntityIDs = {
     }
 }
 
-Lib.ModEntityFlags = {
-    FLAG_NO_PAUSE = 1 << 60
-}
-
-Lib.ModGiantBookIDs = {
+TYU.ModGiantBookIDs = {
     THEGOSPELOFJOHN = Isaac.GetGiantBookIdByName("TheGospelOfJohnGiantBook"),
     WARFARININ = Isaac.GetGiantBookIdByName("WarfarinInGiantBook"),
     WARFARINOUT = Isaac.GetGiantBookIdByName("WarfarinOutGiantBook")
 }
 
-Lib.ModItemIDs = {
+TYU.ModItemIDs = {
     ABSENCENOTE = Get(Isaac.GetItemIdByName("Absence Note")) or Isaac.GetItemIdByName("请假条"),
     ABSOLUTION = Get(Isaac.GetItemIdByName("Absolution")) or Isaac.GetItemIdByName("赦罪"),
     ANOREXIA = Get(Isaac.GetItemIdByName("Anorexia")) or Isaac.GetItemIdByName("厌食症"),
@@ -340,11 +334,11 @@ Lib.ModItemIDs = {
     WAKEUP = Get(Isaac.GetItemIdByName("Wake-up")) or Isaac.GetItemIdByName("唤醒")
 }
 
-Lib.ModItemPoolIDs = {
+TYU.ModItemPoolIDs = {
     ILLNESS = Isaac.GetPoolIdByName("tyuIllness")
 }
 
-Lib.ModNullItemIDs = {
+TYU.ModNullItemIDs = {
     BLESSEDDESTINYEFFECT = Isaac.GetNullItemIdByName("Blessed Destiny Effect"),
     BLOODSACRIFICEREVIVE = Isaac.GetNullItemIdByName("Blood Sacrifice Revive"),
     EFFERVESCENTTABLETEFFECT = Isaac.GetNullItemIdByName("Effervescent Tablet Effect"),
@@ -371,32 +365,36 @@ Lib.ModNullItemIDs = {
     WARFARINWINGS = Isaac.GetNullItemIdByName("Warfarin Wings")
 }
 
-Lib.ModPillEffectIDs = {
+TYU.ModPillEffectIDs = {
     BAITANDSWITCH = Get(Isaac.GetPillEffectByName("Bait and Switch")) or Isaac.GetPillEffectByName("偷天换日")
 }
 
-Lib.ModPlayerIDs = {
+TYU.ModPlayerIDs = {
     WARFARIN = Isaac.GetPlayerTypeByName("Warfarin")
 }
 
-Lib.ModProjectileFlags = {
+TYU.ModEntityFlags = {
+    FLAG_NO_PAUSE = 1 << 60
+}
+
+TYU.ModProjectileFlags = {
     TEAR_BELONGTOPLAYER = 1 << 60,
     TEAR_HEPHAESTUSSOUL = 1 << 61,
     TEAR_HEPHAESTUSSOUL_X = 1 << 62
 }
 
-Lib.ModRoomIDs = {
+TYU.ModRoomIDs = {
     GUILTDEVILROOMS = {},
     ICUROOMS = {},
     WARFARINBLACKMARKETS = {},
     WAKEUPMAINROOM = -1
 }
 
-Lib.ModSoundIDs = {
+TYU.ModSoundIDs = {
     WARFARINPLAYERHURT = Isaac.GetSoundIdByName("Warfarin Player Hurt")
 }
 
-Lib.ModTearFlags = {
+TYU.ModTearFlags = {
     TEAR_TRAILING = BitSet128(0, 1 << 24),
     TEAR_EXPLOSION_MASTER = BitSet128(0, 1 << 24),
     TEAR_TRAILED = BitSet128(0, 1 << 25),
@@ -404,7 +402,7 @@ Lib.ModTearFlags = {
     TEAR_STICKYBALL = BitSet128(0, 1 << 27)
 }
 
-Lib.ModTrinketIDs = {
+TYU.ModTrinketIDs = {
     BETHSSALVATION = Get(Isaac.GetTrinketIdByName("Beth's Salvation")) or Isaac.GetTrinketIdByName("伯大尼的救赎"),
     BROKENVISION = Get(Isaac.GetTrinketIdByName("Broken Vision")) or Isaac.GetTrinketIdByName("视力受损"),
     BROKENGLASSEYE = Get(Isaac.GetTrinketIdByName("Broken Glass Eye")) or Isaac.GetTrinketIdByName("损坏的玻璃眼"),
@@ -413,7 +411,7 @@ Lib.ModTrinketIDs = {
     STONECARVINGKNIFE = Get(Isaac.GetTrinketIdByName("Stone Carving Knife")) or Isaac.GetTrinketIdByName("石刻刀")
 }
 
-Lib.TearVariantPriority = {
+TYU.TearVariantPriority = {
 	[TearVariant.BOBS_HEAD] = 99999,
 	[TearVariant.CHAOS_CARD] = 99999,
 	[TearVariant.STONE] = 99999,
@@ -430,7 +428,7 @@ Lib.TearVariantPriority = {
 	[TearVariant.SWORD_BEAM] = 99999,
 	[TearVariant.TECH_SWORD_BEAM] = 99999,
 	[TearVariant.FETUS] = 99999,
-    [Lib.ModEntityIDs.STICKYBALLTEAR.Variant] = 4,
+    [TYU.ModEntityIDs.STICKYBALLTEAR.Variant] = 4,
 	[TearVariant.EGG] = 3,
 	[TearVariant.COIN] = 3,
 	[TearVariant.NEEDLE] = 3,
