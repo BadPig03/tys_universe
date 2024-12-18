@@ -3,6 +3,7 @@ local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
 local ModItemIDs = TYU.ModItemIDs
+local ModTearFlags = TYU.ModTearFlags
 local PrivateField = {}
 
 do
@@ -24,8 +25,8 @@ do
 
     function PrivateField.MakeNewCopy(tear)
         local newTear = Entities.Spawn(EntityType.ENTITY_TEAR, (tear.Variant == TearVariant.BLUE and TearVariant.BLOOD) or tear.Variant, tear.SubType, tear.Position, tear.Velocity:Normalized():Resized(0.05), tear.SpawnerEntity):ToTear()
-        newTear:AddTearFlags(tear.TearFlags | TYU.ModTearFlags.TEAR_TRAILED)
-        newTear:ClearTearFlags(TearFlags.TEAR_HOMING | TYU.ModTearFlags.TEAR_TRAILING)
+        newTear:AddTearFlags(tear.TearFlags | ModTearFlags.TEAR_TRAILED)
+        newTear:ClearTearFlags(TearFlags.TEAR_HOMING | ModTearFlags.TEAR_TRAILING)
         newTear:SetMultidimensionalTouched(true)
         newTear.ContinueVelocity = tear.ContinueVelocity
         newTear.FallingAcceleration = tear.FallingAcceleration
@@ -52,7 +53,7 @@ function Conjunctivitis:EvaluateCache(player, cacheFlag)
     if player:HasCollectible(CollectibleType.COLLECTIBLE_POP) then
         player.TearFlags = player.TearFlags ~ TearFlags.TEAR_POP
     end
-    player.TearFlags = player.TearFlags | TYU.ModTearFlags.TEAR_TRAILING | TearFlags.TEAR_PIERCING | TearFlags.TEAR_SPECTRAL
+    player.TearFlags = player.TearFlags | ModTearFlags.TEAR_TRAILING | TearFlags.TEAR_PIERCING | TearFlags.TEAR_SPECTRAL
 end
 Conjunctivitis:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, Conjunctivitis.EvaluateCache, CacheFlag.CACHE_TEARFLAG)
 
@@ -66,13 +67,13 @@ end
 Conjunctivitis:AddCallback(ModCallbacks.MC_POST_FIRE_TEAR, Conjunctivitis.PostFireTear)
 
 function Conjunctivitis:PostTearUpdate(tear)
-    if tear:HasTearFlags(TYU.ModTearFlags.TEAR_TRAILING) and not tear:HasTearFlags(TearFlags.TEAR_ABSORB) and tear.CollisionDamage >= 1 then
+    if tear:HasTearFlags(ModTearFlags.TEAR_TRAILING) and not tear:HasTearFlags(TearFlags.TEAR_ABSORB) and tear.CollisionDamage >= 1 then
         if tear.Variant == TearVariant.BLUE then
             tear:ChangeVariant(TearVariant.BLOOD)
         end
         PrivateField.MakeNewCopy(tear)
     end
-    if not tear:HasTearFlags(TYU.ModTearFlags.TEAR_TRAILED) then
+    if not tear:HasTearFlags(ModTearFlags.TEAR_TRAILED) then
         return
     end
     if tear.FrameCount >= PrivateField.GetTrailLength(tear) then
@@ -97,7 +98,7 @@ end
 Conjunctivitis:AddCallback(ModCallbacks.MC_POST_FIRE_TEAR, Conjunctivitis.PostFireTear)
 
 function Conjunctivitis:PostTearDeath(tear)
-    if Utils.HasFlags(tear.TearFlags, TYU.ModTearFlags.TEAR_TRAILED) then
+    if Utils.HasFlags(tear.TearFlags, ModTearFlags.TEAR_TRAILED) then
         return
     end
     local player = Utils.GetPlayerFromTear(tear)

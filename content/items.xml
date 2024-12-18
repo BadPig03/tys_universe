@@ -105,5 +105,6 @@
 	<trinket id="3" name="Broken Glass Eye" description="It used to be whole" gfx="trinket_broken_glass_eye.png" cache="firedelay"/>
 	<trinket id="4" name="Keeper's Core" description="Many a little makes a mickle" gfx="trinket_keepers_core.png"/>
 	<trinket id="5" name="Lost Bottle Cap" description="One more bottle!" gfx="trinket_lost_bottle_cap.png"/>
-	<trinket id="6" name="Stone Carving Knife" description="Stone sculpture" gfx="trinket_stone_carving_knife.png"/>
+	<trinket id="6" name="Meal Ticket" description="Free gift" gfx="trinket_meal_ticket.png"/>
+	<trinket id="7" name="Stone Carving Knife" description="Stone sculpture" gfx="trinket_stone_carving_knife.png"/>
 </items>

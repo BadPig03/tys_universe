@@ -9,7 +9,7 @@ if REPENTANCE_PLUS then
     return
 end
 
-include("scripts/lib/font")
+include("scripts/lib/fonts")
 
 if include("scripts/lib/repentogon") then
     return

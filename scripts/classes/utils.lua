@@ -11,7 +11,6 @@ function Utils.FindFreePickupSpawnPosition(position, initialStep, avoidActiveEnt
     return room:FindFreePickupSpawnPosition(position, initialStep, avoidActiveEntities, allowPits)
 end
     
-
 function Utils.IsRoomFirstVisit()
     local room = TYU.GAME:GetRoom()
     return room:IsFirstVisit()
@@ -58,6 +57,10 @@ function Utils.GetPlayerFromTear(tear)
         return tear.SpawnerEntity:ToFamiliar().Player:ToPlayer()
     end
     return nil
+end
+
+function Utils.AddToWarfarinItemList(seed)
+    TYU:SetGlobalLibData(true, "WarfarinItems", tostring(seed))
 end
 
 function Utils.CreateTimer(...)

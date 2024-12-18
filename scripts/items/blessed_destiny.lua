@@ -1,7 +1,10 @@
 local BlessedDestiny = TYU:NewModItem("Blessed Destiny", "BLESSED_DESTINY")
 local Players = TYU.Players
+local SaveAndLoad = TYU.SaveAndLoad
 local Utils = TYU.Utils
 local ModItemIDs = TYU.ModItemIDs
+local ModNullItemIDs = TYU.ModNullItemIDs
+local ModRoomIDs = TYU.ModRoomIDs
 local PrivateField = {}
 
 local function SetGlobalLibData(value, ...)
@@ -17,13 +20,13 @@ do
         if Utils.IsInDeathCertificate() or Utils.IsInKnifePuzzle() or TYU.LEVEL:GetStage() >= LevelStage.STAGE8 or Utils.IsRoomType(RoomType.ROOM_ANGEL) or Utils.IsRoomType(RoomType.ROOM_DEVIL) or Utils.IsRoomType(RoomType.ROOM_DUNGEON) then
             return false
         end
-        if TYU.ModRoomIDs.WAKE_UP_MAIN_ROOM == -1 then
-            TYU.SaveAndLoad.ReloadRoomData()
+        if ModRoomIDs.WAKE_UP_MAIN_ROOM == -1 then
+            SaveAndLoad.ReloadRoomData()
         end
         if Utils.IsRoomIndex(GridRooms.ROOM_DUNGEON_IDX) or Utils.IsRoomIndex(GridRooms.ROOM_MEGA_SATAN_IDX) or Utils.IsRoomIndex(GridRooms.ROOM_SECRET_EXIT_IDX) or Utils.IsRoomIndex(GridRooms.ROOM_GIDEON_DUNGEON_IDX) or Utils.IsRoomIndex(GridRooms.ROOM_GENESIS_IDX) or Utils.IsRoomIndex(GridRooms.ROOM_SECRET_SHOP_IDX) or Utils.IsRoomIndex(GridRooms.ROOM_ROTGUT_DUNGEON1_IDX) or Utils.IsRoomIndex(GridRooms.ROOM_ROTGUT_DUNGEON2_IDX) then
             return false
         end
-        if Utils.IsRoomIndex(GridRooms.ROOM_EXTRA_BOSS_IDX) and TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data and TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data.Variant == TYU.ModRoomIDs.WAKE_UP_MAIN_ROOM then
+        if Utils.IsRoomIndex(GridRooms.ROOM_EXTRA_BOSS_IDX) and TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data and TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data.Variant == ModRoomIDs.WAKE_UP_MAIN_ROOM then
             return false
         end
         return true
@@ -86,7 +89,7 @@ function BlessedDestiny:PostNewRoom()
         TYU.SFXMANAGER:Play(SoundEffect.SOUND_SUPERHOLY, 0.6)
     end
     for _, player in pairs(Players.GetPlayers(true)) do
-        player:GetEffects():AddNullEffect(TYU.ModNullItemIDs.BLESSED_DESTINY_EFFECT)
+        player:GetEffects():AddNullEffect(ModNullItemIDs.BLESSED_DESTINY_EFFECT)
     end
 end
 BlessedDestiny:AddPriorityCallback(ModCallbacks.MC_POST_NEW_ROOM, CallbackPriority.LATE, BlessedDestiny.PostNewRoom)

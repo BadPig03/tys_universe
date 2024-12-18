@@ -2,6 +2,10 @@ local BobsStomach = TYU:NewModItem("Bob's Stomach", "BOBS_STOMACH")
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+local Constants = TYU.Constants
+local ModItemIDs = TYU.ModItemIDs
+local ModEntityIDs = TYU.ModEntityIDs
+local ModEntityFlags = TYU.ModEntityFlags
 local PrivateField = {}
 
 local function SetTempEntityLibData(entity, value, ...)
@@ -14,21 +18,21 @@ end
 
 do
     function PrivateField.SpawnChargeBar(player)
-        local chargeBar = Entities.Spawn(TYU.ModEntityIDs.BOBS_STOMACH_CHARGEBAR.Type, TYU.ModEntityIDs.BOBS_STOMACH_CHARGEBAR.Variant, TYU.ModEntityIDs.BOBS_STOMACH_CHARGEBAR.SubType, player.Position + Players.GetChargeBarPosition(player, 1), player.Velocity, player):ToEffect()
+        local chargeBar = Entities.Spawn(ModEntityIDs.BOBS_STOMACH_CHARGEBAR.Type, ModEntityIDs.BOBS_STOMACH_CHARGEBAR.Variant, ModEntityIDs.BOBS_STOMACH_CHARGEBAR.SubType, player.Position + Players.GetChargeBarPosition(player, 1), player.Velocity, player):ToEffect()
         chargeBar.Parent = player
         chargeBar:FollowParent(player)
         chargeBar.DepthOffset = 102
-        chargeBar:AddEntityFlags(EntityFlag.FLAG_PERSISTENT | TYU.ModEntityFlags.FLAG_NO_PAUSE)
+        chargeBar:AddEntityFlags(EntityFlag.FLAG_PERSISTENT | ModEntityFlags.FLAG_NO_PAUSE)
         local sprite = chargeBar:GetSprite()
         sprite:Play("Charging", true)
         for i = 1, 6 do
             sprite:Update()
         end
-        sprite.PlaybackSpeed = TYU.Constants.CHARGEBAR_PLAYBACKRATE
+        sprite.PlaybackSpeed = Constants.CHARGEBAR_PLAYBACKRATE
     end
 
     function PrivateField.GetChargeBar(player)
-        for _, effect in pairs(Isaac.FindByType(TYU.ModEntityIDs.BOBS_STOMACH_CHARGEBAR.Type, TYU.ModEntityIDs.BOBS_STOMACH_CHARGEBAR.Variant, TYU.ModEntityIDs.BOBS_STOMACH_CHARGEBAR.SubType)) do
+        for _, effect in pairs(Isaac.FindByType(ModEntityIDs.BOBS_STOMACH_CHARGEBAR.Type, ModEntityIDs.BOBS_STOMACH_CHARGEBAR.Variant, ModEntityIDs.BOBS_STOMACH_CHARGEBAR.SubType)) do
             if effect.Parent and effect.Parent:ToPlayer() and GetPtrHash(effect.Parent:ToPlayer()) == GetPtrHash(player) then
                 return effect:ToEffect()
             end
@@ -61,7 +65,7 @@ do
         if tear:HasTearFlags(TearFlags.TEAR_ABSORB) then
             tear:ClearTearFlags(TearFlags.TEAR_ABSORB)
         end
-        tear.Color = TYU.Colors.GREEN
+        tear.Color = Constants.COLOR_GREEN
         tear.Scale = 1.5
         tear.FallingAcceleration = 0
         tear.FallingSpeed = 0
@@ -72,7 +76,7 @@ do
 end
 
 function BobsStomach:PostPlayerUpdate(player)
-    if not player:HasCollectible(TYU.ModItemIDs.BOBS_STOMACH) then
+    if not player:HasCollectible(ModItemIDs.BOBS_STOMACH) then
         return
     end
     local chargeBar = PrivateField.GetChargeBar(player)

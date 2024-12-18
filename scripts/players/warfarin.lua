@@ -142,14 +142,14 @@ function Warfarin:PostPickupUpdate(pickup)
     end
     local isCycled = #pickup:GetCollectibleCycle() > 0
     if pickup.FrameCount >= ((isCycled and 0) or 5) then
-        Lib:SetGlobalLibData(true, "WarfarinItems", tostring(pickup.InitSeed))
+        TYU.Utils.AddToWarfarinItemList(pickup.InitSeed)
         if not pickup:IsShopItem() then
             pickup:MakeShopItem(-2)
             Lib.Entities.SpawnPoof(pickup.Position):GetSprite().Color:SetColorize(1, 0, 0, 1)    
         end
     else
         if pickup:IsShopItem() then
-            Lib:SetGlobalLibData(true, "WarfarinItems", tostring(pickup.InitSeed))
+            TYU.Utils.AddToWarfarinItemList(pickup.InitSeed)
         end
         for _, effect in pairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.POOF01, 0)) do
             if effect.Position:Distance(pickup.Position) == 0 then
@@ -334,7 +334,7 @@ function Warfarin:PreLevelSelect(levelStage, stageType)
         for i = 0, movingBoxContents:__len() - 1 do
             local item = movingBoxContents:Get(i)
             if item:GetType() == EntityType.ENTITY_PICKUP and item:GetVariant() == PickupVariant.PICKUP_COLLECTIBLE then
-                Lib:SetGlobalLibData(true, "WarfarinItems", tostring(item:GetInitSeed()))
+                TYU.Utils.AddToWarfarinItemList(item.InitSeed)
             end
         end
     end
@@ -444,7 +444,7 @@ function Warfarin:PostPickupMorph(pickup, previousType, previousVariant, previou
     if not Lib.Players.AnyoneIsPlayerType(Lib.ModPlayerIDs.WARFARIN) or pickup.Type ~= EntityType.ENTITY_PICKUP or pickup.Variant ~= PickupVariant.PICKUP_COLLECTIBLE then
         return
     end
-    Lib:SetGlobalLibData(true, "WarfarinItems", tostring(pickup.InitSeed))
+    TYU.Utils.AddToWarfarinItemList(pickup.InitSeed)
 end
 Warfarin:AddCallback(ModCallbacks.MC_POST_PICKUP_MORPH, Warfarin.PostPickupMorph)
 

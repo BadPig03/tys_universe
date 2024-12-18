@@ -3,19 +3,21 @@ local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
 local ModItemIDs = TYU.ModItemIDs
+local ModEntityIDs = TYU.ModEntityIDs
+local ModEntityFlags = TYU.ModEntityFlags
 local PrivateField = {}
 
 do
     function PrivateField.SpawnEffect(player)
-        local effect = Entities.Spawn(TYU.ModEntityIDs.COLLAPSE_EFFECT.Type, TYU.ModEntityIDs.COLLAPSE_EFFECT.Variant, TYU.ModEntityIDs.COLLAPSE_EFFECT.SubType, player.Position, player.Velocity, player):ToEffect()
+        local effect = Entities.Spawn(ModEntityIDs.COLLAPSE_EFFECT.Type, ModEntityIDs.COLLAPSE_EFFECT.Variant, ModEntityIDs.COLLAPSE_EFFECT.SubType, player.Position, player.Velocity, player):ToEffect()
         effect.Parent = player
         effect:FollowParent(player)
         effect:AddMagnetized(EntityRef(player), 30)
-        effect:AddEntityFlags(TYU.ModEntityFlags.FLAG_NO_PAUSE)
+        effect:AddEntityFlags(ModEntityFlags.FLAG_NO_PAUSE)
     end
 
     function PrivateField.GetEffect(player)
-        for _, effect in pairs(Isaac.FindByType(TYU.ModEntityIDs.COLLAPSE_EFFECT.Type, TYU.ModEntityIDs.COLLAPSE_EFFECT.Variant, TYU.ModEntityIDs.COLLAPSE_EFFECT.SubType)) do
+        for _, effect in pairs(Isaac.FindByType(ModEntityIDs.COLLAPSE_EFFECT.Type, ModEntityIDs.COLLAPSE_EFFECT.Variant, ModEntityIDs.COLLAPSE_EFFECT.SubType)) do
             if effect.Parent and effect.Parent:ToPlayer() and GetPtrHash(effect.Parent:ToPlayer()) == GetPtrHash(player) then
                 return effect:ToEffect()
             end

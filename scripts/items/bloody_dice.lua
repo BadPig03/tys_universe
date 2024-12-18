@@ -1,7 +1,10 @@
 local BloodyDice = TYU:NewModItem("Bloody Dice", "BLOODY_DICE")
 local Collectibles = TYU.Collectibles
+local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+local ModItemIDs = TYU.ModItemIDs
+local ModPlayerIDs = TYU.ModPlayerIDs
 local PrivateField = {}
 
 local function SetPlayerLibData(player, value, ...)
@@ -19,7 +22,7 @@ do
         if player:HasCollectible(CollectibleType.COLLECTIBLE_4_5_VOLT) then
             charge = charge * 0.8
         end
-        if player:GetPlayerType() ~= TYU.ModPlayerIDs.Warfarin then
+        if player:GetPlayerType() ~= ModPlayerIDs.Warfarin then
             charge = charge * 1.6
         else
             charge = charge * 0.8
@@ -35,7 +38,7 @@ function BloodyDice:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     local collectible = Collectibles.GetNearestDevilDeal(player.Position, 1 << 12)
     if collectible then
         local newType = Collectibles.GetCollectibleFromCurrentRoom(nil, rng)
-        TYU.Entities.Morph(collectible, nil, nil, newType)
+        Entities.Morph(collectible, nil, nil, newType)
         collectible.ShopItemId = -2
         collectible.Price = 0
         collectible:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
@@ -46,35 +49,35 @@ function BloodyDice:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
         return { Discharge = false, Remove = false, ShowAnim = true }
     end
 end
-BloodyDice:AddCallback(ModCallbacks.MC_USE_ITEM, BloodyDice.UseItem, TYU.ModItemIDs.BLOODY_DICE)
+BloodyDice:AddCallback(ModCallbacks.MC_USE_ITEM, BloodyDice.UseItem, ModItemIDs.BLOODY_DICE)
 
 function BloodyDice:PostPlayerHUDRenderActiveItem(player, slot, offset, alpha, scale)
-    if not player:HasCollectible(TYU.ModItemIDs.BLOODY_DICE) or slot < ActiveSlot.SLOT_PRIMARY then
+    if not player:HasCollectible(ModItemIDs.BLOODY_DICE) or slot < ActiveSlot.SLOT_PRIMARY then
         return
     end
-    local activeSlot = player:GetActiveItemSlot(TYU.ModItemIDs.BLOODY_DICE)
+    local activeSlot = player:GetActiveItemSlot(ModItemIDs.BLOODY_DICE)
     local charge = GetPlayerLibData(player, "Charge") or 0
     player:GetActiveItemDesc(activeSlot).PartialCharge = charge
 end
 BloodyDice:AddCallback(ModCallbacks.MC_POST_PLAYERHUD_RENDER_ACTIVE_ITEM, BloodyDice.PostPlayerHUDRenderActiveItem)
 
 function BloodyDice:PostUpdate()
-    if not Players.AnyoneHasCollectible(TYU.ModItemIDs.BLOOD_SAMPLE) and not Players.AnyoneHasCollectible(TYU.ModItemIDs.BLOODY_DICE) then
+    if not Players.AnyoneHasCollectible(ModItemIDs.BLOOD_SAMPLE) and not Players.AnyoneHasCollectible(ModItemIDs.BLOODY_DICE) then
         return
     end
     local room = TYU.GAME:GetRoom()
     local damage = room:GetEnemyDamageInflicted()
     for _, player in pairs(Players.GetPlayers(true)) do
-        if player:HasCollectible(TYU.ModItemIDs.BLOOD_SAMPLE) or player:HasCollectible(TYU.ModItemIDs.BLOODY_DICE) then
+        if player:HasCollectible(ModItemIDs.BLOOD_SAMPLE) or player:HasCollectible(ModItemIDs.BLOODY_DICE) then
             local charge = GetPlayerLibData(player, "Charge") or 0
             charge = charge + damage / PrivateField.GetDamageAmount(player)
             if charge >= 1 then
                 charge = charge - 1
-                if player:HasCollectible(TYU.ModItemIDs.BLOOD_SAMPLE) then
-                    player:AddActiveCharge(1, player:GetActiveItemSlot(TYU.ModItemIDs.BLOOD_SAMPLE), true, true, true)
+                if player:HasCollectible(ModItemIDs.BLOOD_SAMPLE) then
+                    player:AddActiveCharge(1, player:GetActiveItemSlot(ModItemIDs.BLOOD_SAMPLE), true, true, true)
                 end
-                if player:HasCollectible(TYU.ModItemIDs.BLOODY_DICE) then
-                    player:AddActiveCharge(1, player:GetActiveItemSlot(TYU.ModItemIDs.BLOODY_DICE), true, true, true)
+                if player:HasCollectible(ModItemIDs.BLOODY_DICE) then
+                    player:AddActiveCharge(1, player:GetActiveItemSlot(ModItemIDs.BLOODY_DICE), true, true, true)
                 end
             end
             SetPlayerLibData(player, charge, "Charge")

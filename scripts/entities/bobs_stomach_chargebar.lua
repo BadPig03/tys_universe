@@ -1,11 +1,14 @@
 local BobsStomachChargeBar = TYU:NewModEntity("Bobs Stomach ChargeBar", "BOBS_STOMACH_CHARGEBAR")
+local Constants = TYU.Constants
+local ModEntityIDs = TYU.ModEntityIDs
+local ModItemIDs = TYU.ModItemIDs
 
 local function SetTempEntityLibData(entity, value, ...)
     TYU:SetTempEntityLibData(entity, value, "BobsStomach", ...)
 end
 
 function BobsStomachChargeBar:PostEffectUpdate(effect)
-    if not effect.Parent or not effect.Parent:ToPlayer() or not effect.Parent:ToPlayer():HasCollectible(TYU.ModItemIDs.BOBS_STOMACH) then
+    if not effect.Parent or not effect.Parent:ToPlayer() or not effect.Parent:ToPlayer():HasCollectible(ModItemIDs.BOBS_STOMACH) then
         effect:Remove()
         return
     end
@@ -14,8 +17,8 @@ function BobsStomachChargeBar:PostEffectUpdate(effect)
     if sprite:IsPlaying("Charging") then
         if not player:IsExtraAnimationFinished() and sprite.PlaybackSpeed ~= 0 then
             sprite.PlaybackSpeed = 0
-        elseif player:IsExtraAnimationFinished() and sprite.PlaybackSpeed ~= TYU.Constants.CHARGEBAR_PLAYBACKRATE then
-            sprite.PlaybackSpeed = TYU.Constants.CHARGEBAR_PLAYBACKRATE
+        elseif player:IsExtraAnimationFinished() and sprite.PlaybackSpeed ~= Constants.CHARGEBAR_PLAYBACKRATE then
+            sprite.PlaybackSpeed = Constants.CHARGEBAR_PLAYBACKRATE
         end
     end
     if sprite:IsFinished("Charging") then
@@ -32,6 +35,6 @@ function BobsStomachChargeBar:PostEffectUpdate(effect)
         effect:Remove()
 	end
 end
-BobsStomachChargeBar:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, BobsStomachChargeBar.PostEffectUpdate, TYU.ModEntityIDs.BOBS_STOMACH_CHARGEBAR.Variant)
+BobsStomachChargeBar:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, BobsStomachChargeBar.PostEffectUpdate, ModEntityIDs.BOBS_STOMACH_CHARGEBAR.Variant)
 
 return BobsStomachChargeBar

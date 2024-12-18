@@ -92,7 +92,7 @@ function WakeUp:ReplaceWakeUpMainRoomContents(isLoaded)
                 local item = Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, GetNewCollectible(rng), room:GetGridPosition(154 + 3 * i)):ToPickup()
                 item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE | EntityFlag.FLAG_GLITCH)
                 item.Price = 0
-                Lib:SetGlobalLibData(true, "WarfarinItems", tostring(item.InitSeed))
+                TYU.Utils.AddToWarfarinItemList(item.InitSeed)
                 item:RemoveCollectibleCycle()
                 if not Lib.Players.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_TMTRAINER) then
                     for j = 1, 2 do

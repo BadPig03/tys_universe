@@ -124,6 +124,10 @@ function Collectibles.GetNearestDevilDeal(position, distance)
     return collectible
 end
 
+function Collectibles.IsBlind(pickup)
+    return pickup:IsBlind() or pickup:GetSprite():GetLayer("head"):GetSpritesheetPath() == "gfx/Items/Collectibles/questionmark.png"
+end
+
 function Collectibles.GetCollectibleFromRandomPool(lowQuality, highQuality, rng)
     local itemID = CollectibleType.COLLECTIBLE_BREAKFAST
     local itemList = {}
@@ -136,6 +140,10 @@ function Collectibles.GetCollectibleFromRandomPool(lowQuality, highQuality, rng)
     TYU.ITEMPOOL:RemoveCollectible(itemID)
     return itemID
 end
+
+
+
+
 
 function Collectibles.GetFamiliarsFromItemPool(itemPoolType, rng, defaultItem)
     local itemID = 1
@@ -195,10 +203,6 @@ function Collectibles.GetOffensiveCollectibleEx(rng, angel)
         return (angel and CollectibleType.COLLECTIBLE_IMMACULATE_HEART) or CollectibleType.COLLECTIBLE_PENTAGRAM
     end
     return itemID
-end
-
-function Collectibles.IsBlind(pickup)
-    return pickup:IsBlind() or pickup:GetSprite():GetLayer("head"):GetSpritesheetPath() == "gfx/Items/Collectibles/questionmark.png"
 end
 
 return Collectibles

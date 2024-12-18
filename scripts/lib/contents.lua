@@ -269,6 +269,7 @@ do
         BrokenGlassEye = TYU:Require("scripts/trinkets/broken_glass_eye"),
         KeepersCore = TYU:Require("scripts/trinkets/keepers_core"),
         LostBottleCap = TYU:Require("scripts/trinkets/lost_bottle_cap"),
+        MealTicket = TYU:Require("scripts/trinkets/meal_ticket"),
         StoneCarvingKnife = TYU:Require("scripts/trinkets/stone_carving_knife")
     }
     TYU.ModTrinketTexts = {
@@ -277,6 +278,7 @@ do
         [TYU.ModTrinketIDs.BROKEN_GLASS_EYE] = {"损坏的玻璃眼", "它曾经是完整的"},
         [TYU.ModTrinketIDs.KEEPERS_CORE] = {"店主的核心", "积少成多"},
         [TYU.ModTrinketIDs.LOST_BOTTLE_CAP] = {"丢失的瓶盖", "再来一瓶!"},
+        [TYU.ModTrinketIDs.MEAL_TICKET] = {"餐券", "免费赠品"},
         [TYU.ModTrinketIDs.STONE_CARVING_KNIFE] = {"石刻刀", "石雕"}
     }
 end

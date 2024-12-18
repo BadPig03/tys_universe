@@ -1,5 +1,7 @@
 local BloodSample = TYU:NewModItem("Blood Sample", "BLOOD_SAMPLE")
 local Utils = TYU.Utils
+local ModItemIDs = TYU.ModItemIDs
+local ModPlayerIDs = TYU.ModPlayerIDs
 
 local function SetPlayerLibData(player, value, ...)
     TYU:SetPlayerLibData(player, value, "BloodSample", ...)
@@ -17,18 +19,18 @@ function BloodSample:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     SetPlayerLibData(player, count + 1, "Counts")
     TYU.SFXMANAGER:Play(SoundEffect.SOUND_SUPERHOLY, 0.6)
     player:AddMaxHearts(2)
-    if player:GetPlayerType() == TYU.ModPlayerIDs.WARFARIN and player:HasCollectible(CollectibleType.COLLECTIBLE_BIRTHRIGHT) then
+    if player:GetPlayerType() == ModPlayerIDs.WARFARIN and player:HasCollectible(CollectibleType.COLLECTIBLE_BIRTHRIGHT) then
         player:AddHearts(2)
     end
     return { Discharge = true, Remove = false, ShowAnim = true }
 end
-BloodSample:AddCallback(ModCallbacks.MC_USE_ITEM, BloodSample.UseItem, TYU.ModItemIDs.BLOOD_SAMPLE)
+BloodSample:AddCallback(ModCallbacks.MC_USE_ITEM, BloodSample.UseItem, ModItemIDs.BLOOD_SAMPLE)
 
 function BloodSample:PostPlayerHUDRenderActiveItem(player, slot, offset, alpha, scale)
-    if not player:HasCollectible(TYU.ModItemIDs.BLOOD_SAMPLE) or slot < ActiveSlot.SLOT_PRIMARY then
+    if not player:HasCollectible(ModItemIDs.BLOOD_SAMPLE) or slot < ActiveSlot.SLOT_PRIMARY then
         return
     end
-    local activeSlot = player:GetActiveItemSlot(TYU.ModItemIDs.BLOOD_SAMPLE)
+    local activeSlot = player:GetActiveItemSlot(ModItemIDs.BLOOD_SAMPLE)
     local charge = GetPlayerLibData(player, "Charge") or 0
     player:GetActiveItemDesc(activeSlot).PartialCharge = charge
 end

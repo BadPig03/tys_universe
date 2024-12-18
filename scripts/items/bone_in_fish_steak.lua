@@ -1,5 +1,7 @@
 local BoneInFishSteak = TYU:NewModItem("Bone-in Fish Steak", "BONE_IN_FISH_STEAK")
 local Stat = TYU.Stat
+local ModItemIDs = TYU.ModItemIDs
+local Callbacks = TYU.Callbacks
 
 local function SetPlayerLibData(player, value, ...)
     TYU:SetPlayerLibData(player, value, "BoneInFishSteak", ...)
@@ -10,7 +12,7 @@ local function GetPlayerLibData(player, ...)
 end
 
 function BoneInFishSteak:EvaluateCache(player, cacheFlag)
-    local count = player:GetCollectibleNum(TYU.ModItemIDs.BONE_IN_FISH_STEAK)
+    local count = player:GetCollectibleNum(ModItemIDs.BONE_IN_FISH_STEAK)
     if count == 0 then
         return
     end
@@ -40,10 +42,10 @@ function BoneInFishSteak:PostAddCollectible(type, charge, firstTime, slot, varDa
         player:AddHearts(2)
     end
 end
-BoneInFishSteak:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, BoneInFishSteak.PostAddCollectible, TYU.ModItemIDs.BONE_IN_FISH_STEAK)
+BoneInFishSteak:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, BoneInFishSteak.PostAddCollectible, ModItemIDs.BONE_IN_FISH_STEAK)
 
 function BoneInFishSteak:PostTrinketSmelted(player, count)
-    if not player:HasCollectible(TYU.ModItemIDs.BONE_IN_FISH_STEAK) or count < 0 then
+    if not player:HasCollectible(ModItemIDs.BONE_IN_FISH_STEAK) or count < 0 then
         return
     end
     local count = GetPlayerLibData(player, "Counts") or 0
@@ -52,6 +54,6 @@ function BoneInFishSteak:PostTrinketSmelted(player, count)
     player:StopExtraAnimation()
     player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY, true)
 end
-BoneInFishSteak:AddCallback(TYU.Callbacks.TYU_POST_TRINKET_SMELTED, BoneInFishSteak.PostTrinketSmelted)
+BoneInFishSteak:AddCallback(Callbacks.TYU_POST_TRINKET_SMELTED, BoneInFishSteak.PostTrinketSmelted)
 
 return BoneInFishSteak
