@@ -6,7 +6,7 @@ function StrangeSyringe:UseItem(itemID, rng, player, useFlags, activeSlot, varDa
         return { Discharge = false, Remove = false, ShowAnim = false }
     end
     local count = rng:Next() % 7
-    Lib.Entities.CreateTimer(function()
+    Lib.Utils.CreateTimer(function()
         player:TakeDamage(1, DamageFlag.DAMAGE_INVINCIBLE | DamageFlag.DAMAGE_NO_MODIFIERS | DamageFlag.DAMAGE_NO_PENALTIES, EntityRef(player), 15)
     end, 30, count, true)
     player:IncrementPlayerFormCounter(PlayerForm.PLAYERFORM_DRUGS, 3)

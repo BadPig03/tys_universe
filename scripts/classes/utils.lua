@@ -26,7 +26,6 @@ function Utils.IsRoomIndex(index)
 end
 
 function Utils.IsRoomBossChallenge()
-    local room = TYU.GAME:GetRoom()
     return Utils.IsRoomType(RoomType.ROOM_CHALLENGE) and TYU.LEVEL:HasBossChallenge() and TYU.LEVEL:GetCurrentRoomDesc().Data.Variant >= 16
 end
 
@@ -40,6 +39,15 @@ end
 
 function Utils.IsCathedral()
     return TYU.LEVEL:GetStage() == LevelStage.STAGE5 and TYU.LEVEL:GetStageType() == StageType.STAGETYPE_WOTL
+end
+
+function Utils.IsStartingRoom()
+    return TYU.LEVEL:GetCurrentRoomIndex() == TYU.LEVEL:GetStartingRoomIndex()
+end
+
+function Utils.IsMirrorWorld()
+    local room = TYU.GAME:GetRoom()
+    return room:IsMirrorWorld()
 end
 
 function Utils.HasFlags(useFlags, flag, reverse)

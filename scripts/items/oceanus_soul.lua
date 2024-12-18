@@ -33,7 +33,7 @@ local function DisappearChargeBar(chargeBar, player)
         sprite:Play("Disappear", true)
     end
     if player and sprite:IsPlaying("Disappear") then
-        Lib.Entities.CreateTimer(function() chargeBar.Visible = false SpawnChargeBar(player) end, 4, 0, false)
+        Lib.Utils.CreateTimer(function() chargeBar.Visible = false SpawnChargeBar(player) end, 4, 0, false)
     end
 end
 

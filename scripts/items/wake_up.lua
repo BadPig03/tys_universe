@@ -151,10 +151,10 @@ function WakeUp:PostUpdate()
         for _, player in pairs(Lib.Players.GetPlayers(true)) do
             player:AddControlsCooldown(240)
         end
-        Lib.Entities.CreateTimer(function()
+        Lib.Utils.CreateTimer(function()
             Lib.GAME:SetBloom(60, -12)
         end, 60, 0, false)
-        Lib.Entities.CreateTimer(function()
+        Lib.Utils.CreateTimer(function()
             for _, player in pairs(Lib.Players.GetPlayers(true)) do
                 player:Teleport(Vector(320, 620), false, true)
             end
@@ -184,13 +184,13 @@ function WakeUp:PostEntityKill(entity)
     entity:Remove()
     Lib:SetGlobalLibData(false, "WakeUp", "Used")
     Lib:SetGlobalLibData(true, "WakeUp", "Killed")
-    Lib.Entities.CreateTimer(function()
+    Lib.Utils.CreateTimer(function()
         Lib.GAME:SetBloom(60, -12)
         for _, player in pairs(Lib.Players.GetPlayers(true)) do
             player:AddCollectible(CollectibleType.COLLECTIBLE_DOGMA)
         end
     end, 60, 0, false)
-    Lib.Entities.CreateTimer(function()
+    Lib.Utils.CreateTimer(function()
         Lib.GAME:ChangeRoom(GridRooms.ROOM_ERROR_IDX)
         Lib.GAME:ChangeRoom(Lib.LEVEL:GetStartingRoomIndex())
     end, 80, 0, false)

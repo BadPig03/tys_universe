@@ -1,98 +1,116 @@
-local Lib = TYU
-local Guilt = Lib:NewModItem("Guilt", "GUILT")
+local Guilt = TYU:NewModItem("Guilt", "GUILT")
+local Entities = TYU.Entities
+local Players = TYU.Players
+local SaveAndLoad = TYU.SaveAndLoad
+local Utils = TYU.Utils
+local ModItemIDs = TYU.ModItemIDs
+local ModRoomIDs = TYU.ModRoomIDs
+local PrivateField = {}
 
-local qualityTranslation = {
-    [0] = "零",
-    [1] = "一",
-    [2] = "二",
-    [3] = "三",
-    [4] = "四"
-}
-
-local function RemoveItemsAndDisplay()
-    local rng = Lib.LEVEL:GetDevilAngelRoomRNG()
-    local item = Lib.ITEMPOOL:GetCollectible(ItemPoolType.POOL_DEVIL, false, rng:Next(), CollectibleType.COLLECTIBLE_SAD_ONION)
-    if item ~= CollectibleType.COLLECTIBLE_SAD_ONION then
-        local quality = Lib.ITEMCONFIG:GetCollectible(item).Quality
-        Lib.ITEMPOOL:RemoveCollectible(item)
-        if Options.Language == "zh" then
-            Lib.HUD:ShowFortuneText("一个品质"..qualityTranslation[quality].."级的道具被移除!")
-        else
-            Lib.HUD:ShowFortuneText("An item of quality "..quality ,"has been removed")
-        end
-    end
+local function SetGlobalLibData(value, ...)
+    TYU:SetGlobalLibData(value, "Guilt", ...)
 end
 
-local function ReplaceDevilRoom()
-    Lib.LEVEL:InitializeDevilAngelRoom(false, true)
-    local rng = Isaac.GetPlayer(0):GetCollectibleRNG(Lib.ModItemIDs.GUILT)
-    if #Lib.ModRoomIDs.GUILT_DEVIL_ROOMS == 0 then
-        Lib.SaveAndLoad.ReloadRoomData()
+local function GetGlobalLibData(...)
+    return TYU:GetGlobalLibData("Guilt", ...)
+end
+
+do
+    PrivateField.QualityTranslation = {
+        [0] = "零",
+        [1] = "一",
+        [2] = "二",
+        [3] = "三",
+        [4] = "四"
+    }
+
+    function PrivateField.RemoveItemsAndDisplay()
+        local rng = TYU.LEVEL:GetDevilAngelRoomRNG()
+        local item = TYU.ITEMPOOL:GetCollectible(ItemPoolType.POOL_DEVIL, false, rng:Next(), CollectibleType.COLLECTIBLE_SAD_ONION)
+        if item ~= CollectibleType.COLLECTIBLE_SAD_ONION then
+            local quality = TYU.ITEMCONFIG:GetCollectible(item).Quality
+            if Options.Language == "zh" then
+                TYU.HUD:ShowFortuneText("一个品质"..PrivateField.QualityTranslation[quality].."级的道具被移除!")
+            else
+                TYU.HUD:ShowFortuneText("An item of quality "..quality ,"has been removed")
+            end
+            TYU.ITEMPOOL:RemoveCollectible(item)
+        end
     end
-    local roomList = WeightedOutcomePicker()
-    for _, id in ipairs(Lib.ModRoomIDs.GUILT_DEVIL_ROOMS) do
-        roomList:AddOutcomeWeight(id, 1)
+
+    function PrivateField.ReplaceDevilRoom()
+        TYU.LEVEL:InitializeDevilAngelRoom(false, true)
+        local rng = Isaac.GetPlayer(0):GetCollectibleRNG(ModItemIDs.GUILT)
+        if #ModRoomIDs.GUILT_DEVIL_ROOMS == 0 then
+            SaveAndLoad.ReloadRoomData()
+        end
+        local roomList = WeightedOutcomePicker()
+        for _, id in ipairs(ModRoomIDs.GUILT_DEVIL_ROOMS) do
+            roomList:AddOutcomeWeight(id, 1)
+        end
+        local newRoom = RoomConfigHolder.GetRoomByStageTypeAndVariant(StbType.SPECIAL_ROOMS, RoomType.ROOM_DEVIL, roomList:PickOutcome(rng))
+        TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_DEVIL_IDX).Data = newRoom
     end
-    local newRoom = RoomConfigHolder.GetRoomByStageTypeAndVariant(StbType.SPECIAL_ROOMS, RoomType.ROOM_DEVIL, roomList:PickOutcome(rng))
-    Lib.LEVEL:GetRoomByIdx(GridRooms.ROOM_DEVIL_IDX).Data = newRoom
 end
 
 function Guilt:PostNewLevel()
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.GUILT) then
+    if not Players.AnyoneHasCollectible(ModItemIDs.GUILT) then
         return
     end
-    ReplaceDevilRoom()
+    PrivateField.ReplaceDevilRoom()
 end
 Guilt:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, Guilt.PostNewLevel)
 
 function Guilt:PostAddCollectible(type, charge, firstTime, slot, varData, player)
     if firstTime then
-        Lib.GAME:AddDevilRoomDeal()
-        Lib.GAME:AddDevilRoomDeal()
-        if Lib.LEVEL:GetRoomByIdx(GridRooms.ROOM_DEVIL_IDX).Data == nil then
-            ReplaceDevilRoom()
+        for i = 1, 2 do
+            TYU.GAME:AddDevilRoomDeal()
+        end
+        if TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_DEVIL_IDX).Data == nil then
+            PrivateField.ReplaceDevilRoom()
         end
     end
 end
-Guilt:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, Guilt.PostAddCollectible, Lib.ModItemIDs.GUILT)
+Guilt:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, Guilt.PostAddCollectible, ModItemIDs.GUILT)
 
 function Guilt:PostPlayerNewRoomTempEffects(player)
-    if not Lib.LEVEL:CanSpawnDevilRoom() or not player:HasCollectible(Lib.ModItemIDs.GUILT) or Lib.GAME:GetRoom():IsMirrorWorld() or Lib.LEVEL:GetCurrentRoomIndex() ~= Lib.LEVEL:GetStartingRoomIndex() or not Lib.GAME:GetRoom():IsFirstVisit() or Lib.LEVEL:IsAscent() or Isaac.GetChallenge() == Challenge.CHALLENGE_BACKASSWARDS then
+    if not TYU.LEVEL:CanSpawnDevilRoom() or not player:HasCollectible(ModItemIDs.GUILT) or Utils.IsMirrorWorld() or not Utils.IsStartingRoom() or not Utils.IsRoomFirstVisit() or TYU.LEVEL:IsAscent() or Isaac.GetChallenge() == Challenge.CHALLENGE_BACKASSWARDS then
         return
     end
-    local oldCount = Lib:GetGlobalLibData("Guilt", "Count") or 0
-    local currentCount = Lib.GAME:GetDevilRoomDeals()
+    local oldCount = GetGlobalLibData("Count") or 0
+    local currentCount = TYU.GAME:GetDevilRoomDeals()
     local differ = currentCount - oldCount
     if differ < 2 then
         for i = 1, 2 * (2 - differ) do
-            Lib.Entities.CreateTimer(function() RemoveItemsAndDisplay() end, 15 + 60 * (i - 1), 0, true)
+            Utils.CreateTimer(function()
+                PrivateField.RemoveItemsAndDisplay()
+            end, 15 + 60 * (i - 1), 0, true)
         end
     end
-    Lib:SetGlobalLibData(currentCount, "Guilt", "Count")
+    SetGlobalLibData(currentCount, "Count")
 end
 Guilt:AddCallback(ModCallbacks.MC_POST_PLAYER_NEW_ROOM_TEMP_EFFECTS, Guilt.PostPlayerNewRoomTempEffects)
 
 function Guilt:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
-    Lib:SetGlobalLibData(0, "Guilt", "Count")
+    SetGlobalLibData(0, "Count")
 end
 Guilt:AddCallback(ModCallbacks.MC_USE_ITEM, Guilt.UseItem, CollectibleType.COLLECTIBLE_R_KEY)
 
 function Guilt:PostDevilCalculate(chance)
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.GUILT) then
+    if not Players.AnyoneHasCollectible(ModItemIDs.GUILT) then
         return
     end
-    return chance + math.max(0, (Lib.GAME:GetDevilRoomDeals() - 2)) * 0.05
+    return chance + math.max(0, (TYU.GAME:GetDevilRoomDeals() - 2)) * 0.05
 end
 Guilt:AddCallback(ModCallbacks.MC_POST_DEVIL_CALCULATE, Guilt.PostDevilCalculate)
 
 function Guilt:PostNPCDeath(npc)
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.GUILT) or npc.Variant ~= 1 then
+    if not Players.AnyoneHasCollectible(ModItemIDs.GUILT) or npc.Variant ~= 1 then
         return
     end
-    local room = Lib.GAME:GetRoom()
     local rng = npc:GetDropRNG()
     for i = 1, 2 do
-        Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, Lib.ITEMPOOL:GetCollectible(ItemPoolType.POOL_DEVIL, true, rng:Next()), room:FindFreePickupSpawnPosition(npc.Position, 0, true, false))
+        Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, TYU.ITEMPOOL:GetCollectible(ItemPoolType.POOL_DEVIL, true, rng:Next()), Utils.FindFreePickupSpawnPosition(npc.Position))
     end
 end
 Guilt:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, Guilt.PostNPCDeath, EntityType.ENTITY_FALLEN)

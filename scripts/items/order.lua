@@ -68,7 +68,7 @@ function Order:PostAddCollectible(type, charge, firstTime, slot, varData, player
     Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, 0, room:FindFreePickupSpawnPosition(player.Position, 0, true))
     Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_BOMB, 0, room:FindFreePickupSpawnPosition(player.Position, 0, true))
     Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_KEY, 0, room:FindFreePickupSpawnPosition(player.Position, 0, true))
-    Lib.Entities.CreateTimer(function() DisplayItemPool() end, 30, 0, false)
+    Lib.Utils.CreateTimer(function() DisplayItemPool() end, 30, 0, false)
 end
 Order:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, Order.PostAddCollectible, Lib.ModItemIDs.ORDER)
 
@@ -76,7 +76,7 @@ function Order:PostPlayerNewRoomTempEffects(player)
     if not player:HasCollectible(Lib.ModItemIDs.ORDER) or Lib.LEVEL:GetCurrentRoomIndex() ~= Lib.LEVEL:GetStartingRoomIndex() or not Lib.GAME:GetRoom():IsFirstVisit() then
         return
     end
-    Lib.Entities.CreateTimer(function() DisplayItemPool() end, 30, 0, false)
+    Lib.Utils.CreateTimer(function() DisplayItemPool() end, 30, 0, false)
 end
 Order:AddCallback(ModCallbacks.MC_POST_PLAYER_NEW_ROOM_TEMP_EFFECTS, Order.PostPlayerNewRoomTempEffects)
 

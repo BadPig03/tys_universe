@@ -11,7 +11,7 @@ function SinisterPact:PostPickupShopPurchase(pickup, player, moneySpent)
         return
     end
     local rng = player:GetCollectibleRNG(Lib.ModItemIDs.SINISTER_PACT)
-    Lib.Entities.CreateTimer(function()
+    Lib.Utils.CreateTimer(function()
         local item = Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, Lib.Collectibles.GetCollectibleFromCurrentRoom(nil, rng), pickup.Position):ToPickup()
         item:MakeShopItem(-2)
         item.Price = Lib.ITEMCONFIG:GetCollectible(item.SubType).DevilPrice

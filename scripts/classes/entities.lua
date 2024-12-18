@@ -32,6 +32,23 @@ function Entities.SpawnPoof(position, velocity)
     return Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.POOF01, 0, position, velocity):ToEffect()
 end
 
+function Entities.SpawnFakePickupSprite(pickup, golden)
+    golden = golden or false
+    pickup:PlayPickupSound()
+    local fakePickup = Entities.Spawn(TYU.ModEntityIDs.FAKE_PICKUP.Type, TYU.ModEntityIDs.FAKE_PICKUP.Variant, TYU.ModEntityIDs.FAKE_PICKUP.SubType, pickup.Position, pickup.Velocity, pickup.SpawnerEntity, pickup.InitSeed)
+    local fakeSprite = fakePickup:GetSprite()
+    fakeSprite:Load(pickup:GetSprite():GetFilename(), true)
+    fakeSprite:Play("Collect", true)
+    if golden then
+        fakeSprite:SetRenderFlags(AnimRenderFlags.GOLDEN | AnimRenderFlags.IGNORE_GAME_TIME)
+    end
+    pickup:Remove()
+end
+
+function Entities.IsValidEnemy(enemy)
+    return enemy and enemy:ToNPC() and enemy:IsActiveEnemy() and enemy:IsVulnerableEnemy() and not enemy:HasEntityFlags(EntityFlag.FLAG_FRIENDLY) and not enemy:HasEntityFlags(EntityFlag.FLAG_CHARM)
+end
+
 
 
 
@@ -73,23 +90,6 @@ function Entities.GetCollectibles(includeShopItem, includeEmptyPedestal, exclude
         end
     end
     return entities
-end
-
-function Entities.SpawnFakePickupSprite(pickup, golden)
-    golden = golden or false
-    pickup:PlayPickupSound()
-    local fakePickup = TYU.Entities.Spawn(TYU.ModEntityIDs.FAKE_PICKUP.Type, TYU.ModEntityIDs.FAKE_PICKUP.Variant, TYU.ModEntityIDs.FAKE_PICKUP.SubType, pickup.Position, pickup.Velocity, pickup.SpawnerEntity, pickup.InitSeed)
-    local fakeSprite = fakePickup:GetSprite()
-    fakeSprite:Load(pickup:GetSprite():GetFilename(), true)
-    fakeSprite:Play("Collect", true)
-    if golden then
-        fakeSprite:SetRenderFlags(AnimRenderFlags.GOLDEN | AnimRenderFlags.IGNORE_GAME_TIME)
-    end
-    pickup:Remove()
-end
-
-function Entities.IsValidEnemy(enemy)
-    return enemy and enemy:ToNPC() and enemy:IsActiveEnemy() and enemy:IsVulnerableEnemy() and not enemy:HasEntityFlags(EntityFlag.FLAG_FRIENDLY) and not enemy:HasEntityFlags(EntityFlag.FLAG_CHARM)
 end
 
 function Entities.IsValidEnemyEvenInvicible(enemy)
@@ -178,11 +178,6 @@ function Entities.GetHighestHealthEnemy(position)
         end
     end
     return maxHealthEnemy
-end
-
-function Entities.CreateTimer(...)
-    local timer = Isaac.CreateTimer(...)
-    timer:AddEntityFlags(TYU.ModEntityFlags.FLAG_NO_PAUSE)
 end
 
 return Entities

@@ -10,7 +10,7 @@ function LostBottleCap:UseItem(itemID, rng, player, useFlags, activeSlot, varDat
     if multiplier == 0 or rng:RandomInt(90) >= 30 * multiplier or useFlags & UseFlag.USE_OWNED ~= UseFlag.USE_OWNED or maxCharge <= 1 then
         return
     end
-    Lib.Entities.CreateTimer(function()
+    Lib.Utils.CreateTimer(function()
         local active = player:GetActiveItemDesc(activeSlot)
         if active.Item ~= itemID or active.Charge == maxCharge then
             return

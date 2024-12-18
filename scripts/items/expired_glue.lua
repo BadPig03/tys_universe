@@ -1,11 +1,13 @@
-local Lib = TYU
-local ExpiredGlue = Lib:NewModItem("Expired Glue", "EXPIRED_GLUE")
+local ExpiredGlue = TYU:NewModItem("Expired Glue", "EXPIRED_GLUE")
+local Entities = TYU.Entities
+local Players = TYU.Players
+local ModItemIDs = TYU.ModItemIDs
 
 function ExpiredGlue:PostPickupInit(pickup)
-    if not Lib.Players.AnyoneHasCollectible(Lib.ModItemIDs.EXPIRED_GLUE) or pickup.SubType == CoinSubType.COIN_STICKYNICKEL then
+    if not Players.AnyoneHasCollectible(ModItemIDs.EXPIRED_GLUE) or pickup.SubType == CoinSubType.COIN_STICKYNICKEL then
         return
     end
-    Lib.Entities.Morph(pickup, nil, nil, CoinSubType.COIN_STICKYNICKEL)
+    Entities.Morph(pickup, nil, nil, CoinSubType.COIN_STICKYNICKEL)
     local rng = RNG(pickup.InitSeed)
     local timeout = math.ceil(-math.log(rng:RandomFloat()) * 900)
     pickup.Timeout = timeout
