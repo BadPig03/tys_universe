@@ -111,7 +111,28 @@ function Players.GetNullEffectCounts(id)
 end
 
 
+function Players.IsInventoryFull(player)
+    if player:GetPlayerType() == PlayerType.PLAYER_ISAAC_B then
+        local count = 0
+        local limit = 8
+        for itemID, itemCount in pairs(player:GetCollectiblesList()) do
+            if ItemConfig.Config.IsValidCollectible(itemID) and not TYU.ITEMCONFIG:GetCollectible(itemID):HasTags(ItemConfig.TAG_QUEST) and TYU.ITEMCONFIG:GetCollectible(itemID).Type ~= ItemType.ITEM_ACTIVE and itemID ~= CollectibleType.COLLECTIBLE_BIRTHRIGHT then
+                count = count + itemCount
+            end
+        end
+        if player:HasCollectible(CollectibleType.COLLECTIBLE_BIRTHRIGHT) then
+            limit = 12
+        end
+        return count >= limit
+    else
+        return false
+    end
+end
 
+function Players.IsPressingFiringButton(player)
+    local controllerIndex = player.ControllerIndex
+	return Input.IsActionPressed(ButtonAction.ACTION_SHOOTUP, controllerIndex) or Input.IsActionPressed(ButtonAction.ACTION_SHOOTDOWN, controllerIndex) or Input.IsActionPressed(ButtonAction.ACTION_SHOOTRIGHT, controllerIndex) or Input.IsActionPressed(ButtonAction.ACTION_SHOOTLEFT, controllerIndex)
+end
 
 
 
@@ -160,13 +181,6 @@ function Players.GetPlayerID(player, differ)
     return player2:GetCollectibleRNG(CollectibleType.COLLECTIBLE_SAD_ONION):GetSeed()
 end
 
-
-
-
-
-
-
-
 function Players.RemoveCollectibles(player, id, count)
     count = count or 1
     if count < 0 then
@@ -209,52 +223,6 @@ function Players.OnValidCreep(player)
         end
     end
     return false
-end
-
-function Players.IsPressingFiringButton(player)
-    local controllerIndex = player.ControllerIndex
-	return Input.IsActionPressed(ButtonAction.ACTION_SHOOTUP, controllerIndex) or Input.IsActionPressed(ButtonAction.ACTION_SHOOTDOWN, controllerIndex) or Input.IsActionPressed(ButtonAction.ACTION_SHOOTRIGHT, controllerIndex) or Input.IsActionPressed(ButtonAction.ACTION_SHOOTLEFT, controllerIndex)
-end
-
-function Players.IsInventoryFull(player)
-    if player:GetPlayerType() == PlayerType.PLAYER_ISAAC_B then
-        local count = 0
-        local limit = 8
-        for itemID, itemCount in pairs(player:GetCollectiblesList()) do
-            if ItemConfig.Config.IsValidCollectible(itemID) and not TYU.ITEMCONFIG:GetCollectible(itemID):HasTags(ItemConfig.TAG_QUEST) and TYU.ITEMCONFIG:GetCollectible(itemID).Type ~= ItemType.ITEM_ACTIVE and itemID ~= CollectibleType.COLLECTIBLE_BIRTHRIGHT then
-                count = count + itemCount
-            end
-        end
-        if player:HasCollectible(CollectibleType.COLLECTIBLE_BIRTHRIGHT) then
-            limit = 12
-        end
-        return count >= limit
-    else
-        return false
-    end
-end
-
-function Players.GetRotationAngle(player)
-    local direction = player:GetShootingInput()
-    if direction.X == 0 and direction.Y == 0 then
-        return math.pi * 0.5
-    elseif direction.X == 0 and direction.Y == -1 then
-        return math.pi * 1.5
-    elseif direction.X == 1 and direction.Y == -1 then
-        return math.pi * 1.75
-    elseif direction.X == 1 and direction.Y == 0 then
-        return 0
-    elseif direction.X == 1 and direction.Y == 1 then
-        return math.pi * 0.25
-    elseif direction.X == 0 and direction.Y == 1 then
-        return math.pi * 0.5
-    elseif direction.X == -1 and direction.Y == 1 then
-        return math.pi * 0.75
-    elseif direction.X == -1 and direction.Y == 0 then
-        return math.pi
-    elseif direction.X == -1 and direction.Y == -1 then
-        return math.pi * 1.25
-    end
 end
 
 return Players

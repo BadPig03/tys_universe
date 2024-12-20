@@ -1,14 +1,10 @@
-local Lib = TYU
-local Magnifier = Lib:NewModItem("Magnifier", "MAGNIFIER")
+local Magnifier = TYU:NewModItem("Magnifier", "MAGNIFIER")
+local Collectibles = TYU.Collectibles
+local ModEntityIDs = TYU.ModEntityIDs
+local ModItemIDs = TYU.ModItemIDs
 
 function Magnifier:EvaluateCache(player, cacheFlag)
-    local count = math.min(1, player:GetCollectibleNum(Lib.ModItemIDs.MAGNIFIER) + player:GetEffects():GetCollectibleEffectNum(Lib.ModItemIDs.MAGNIFIER))
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.MAGNIFIER)
-    for _, familiar in pairs(player:CheckFamiliarEx(Lib.ModEntityIDs.MAGNIFIER.Variant, count, RNG(rng:Next()), Lib.ITEMCONFIG:GetCollectible(Lib.ModItemIDs.MAGNIFIER))) do
-        familiar.DepthOffset = 9999
-        local sprite = familiar:GetSprite()
-        sprite:Play("Appear", true)
-    end
+    Collectibles.CheckFamiliarFromCollectible(player, ModItemIDs.MAGNIFIER, ModEntityIDs.MAGNIFIER.Variant, 1)
 end
 Magnifier:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, Magnifier.EvaluateCache, CacheFlag.CACHE_FAMILIARS)
 

@@ -1,10 +1,16 @@
-local Lib = TYU
-local HealingBeggar = Lib:NewModEntity("Healing Beggar", "HEALING_BEGGAR")
+local HealingBeggar = TYU:NewModEntity("Healing Beggar", "HEALING_BEGGAR")
+local Entities = TYU.Entities
+local Utils = TYU.Utils
+local ModEntityIDs = TYU.ModEntityIDs
+local ModItemPoolIDs = TYU.ModItemPoolIDs
+local PrivateField = {}
 
-local function SpawnBloodEffects(entity)
-	Lib.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_EXPLOSION, 0, entity.Position)
-	Lib.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_SPLAT, 0, entity.Position)
-	Lib.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.CREEP_RED, 0, entity.Position)
+do
+	function PrivateField.SpawnBloodEffects(entity)
+		Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_EXPLOSION, 0, entity.Position)
+		Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_SPLAT, 0, entity.Position)
+		Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.CREEP_RED, 0, entity.Position)
+	end
 end
 
 function HealingBeggar:PreSlotCollision(slot, collider, low)
@@ -29,11 +35,11 @@ function HealingBeggar:PreSlotCollision(slot, collider, low)
 			slot:SetState(5)
 		end
 		slot.SpawnerEntity = player
-		Lib.SFXMANAGER:Play(SoundEffect.SOUND_BAND_AID_PICK_UP)
-		SpawnBloodEffects(player)
+		TYU.SFXMANAGER:Play(SoundEffect.SOUND_BAND_AID_PICK_UP)
+		PrivateField.SpawnBloodEffects(player)
 	end
 end
-HealingBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_COLLISION, HealingBeggar.PreSlotCollision, Lib.ModEntityIDs.HEALING_BEGGAR.Variant)
+HealingBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_COLLISION, HealingBeggar.PreSlotCollision, ModEntityIDs.HEALING_BEGGAR.Variant)
 
 function HealingBeggar:PostSlotUpdate(slot)
 	local player = slot.SpawnerEntity and slot.SpawnerEntity:ToPlayer()
@@ -41,23 +47,22 @@ function HealingBeggar:PostSlotUpdate(slot)
 		return
 	end
 	local sprite = slot:GetSprite()
-	local room = Lib.GAME:GetRoom()
 	local rng = slot:GetDropRNG()
 	if sprite:IsEventTriggered("CoinInsert") then
-		Lib.SFXMANAGER:Play(SoundEffect.SOUND_SCAMPER)
+		TYU.SFXMANAGER:Play(SoundEffect.SOUND_SCAMPER)
 		player:AddCoins(-1)
 	end
 	if sprite:IsEventTriggered("GainPill") then
-		Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_PILL, 0, slot.Position, Vector(1, 0):Resized(4 + rng:RandomFloat() * 5):Rotated(rng:RandomInt(360)))
-		Lib.SFXMANAGER:Play(SoundEffect.SOUND_SLOTSPAWN)
-		Lib.SFXMANAGER:Play(SoundEffect.SOUND_THUMBS_DOWN)
+		Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_PILL, 0, slot.Position, Vector(1, 0):Resized(4 + rng:RandomFloat() * 5):Rotated(rng:RandomInt(360)))
+		TYU.SFXMANAGER:Play(SoundEffect.SOUND_SLOTSPAWN)
+		TYU.SFXMANAGER:Play(SoundEffect.SOUND_THUMBS_DOWN)
 	end
 	if sprite:IsEventTriggered("Prize") then
-		local newItem = Lib.ITEMPOOL:GetCollectible(Lib.ModItemPoolIDs.ILLNESS, true, rng:Next())
-		Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, newItem, room:FindFreePickupSpawnPosition(slot.Position + Vector(0, 60), 0, true))
-		Lib.SFXMANAGER:Play(SoundEffect.SOUND_SLOTSPAWN)
-		Lib.SFXMANAGER:Play(SoundEffect.SOUND_THUMBSUP)
-		SpawnBloodEffects(player)
+		local newItem = TYU.ITEMPOOL:GetCollectible(ModItemPoolIDs.ILLNESS, true, rng:Next())
+		Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, newItem, Utils.FindFreePickupSpawnPosition(slot.Position + Vector(0, 60)))
+		TYU.SFXMANAGER:Play(SoundEffect.SOUND_SLOTSPAWN)
+		TYU.SFXMANAGER:Play(SoundEffect.SOUND_THUMBSUP)
+		PrivateField.SpawnBloodEffects(player)
 		player:AddBrokenHearts(-1)
 		if rng:RandomInt(100) < math.min(100, slot:GetDonationValue() * 4) then
 			sprite:Play("Teleport", true)
@@ -76,18 +81,18 @@ function HealingBeggar:PostSlotUpdate(slot)
 		slot:Remove()
 	end
 end
-HealingBeggar:AddCallback(ModCallbacks.MC_POST_SLOT_UPDATE, HealingBeggar.PostSlotUpdate, Lib.ModEntityIDs.HEALING_BEGGAR.Variant)
+HealingBeggar:AddCallback(ModCallbacks.MC_POST_SLOT_UPDATE, HealingBeggar.PostSlotUpdate, ModEntityIDs.HEALING_BEGGAR.Variant)
 
 function HealingBeggar:PreSlotCreateExplosionDrops(slot)
 	local rng = slot:GetDropRNG()
 	for i = 0, rng:RandomInt(3) do
-		Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_PILL, 0, slot.Position, Vector(1, 0):Resized(2 + rng:RandomFloat() * 3):Rotated(rng:RandomInt(360)))
+		Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_PILL, 0, slot.Position, Vector(1, 0):Resized(2 + rng:RandomFloat() * 3):Rotated(rng:RandomInt(360)))
 	end
-	SpawnBloodEffects(slot)
+	PrivateField.SpawnBloodEffects(slot)
 	slot:BloodExplode()
 	slot:Remove()
     return false
 end
-HealingBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_CREATE_EXPLOSION_DROPS, HealingBeggar.PreSlotCreateExplosionDrops, Lib.ModEntityIDs.HEALING_BEGGAR.Variant)
+HealingBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_CREATE_EXPLOSION_DROPS, HealingBeggar.PreSlotCreateExplosionDrops, ModEntityIDs.HEALING_BEGGAR.Variant)
 
 return HealingBeggar

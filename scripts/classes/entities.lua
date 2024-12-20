@@ -49,6 +49,24 @@ function Entities.IsValidEnemy(enemy)
     return enemy and enemy:ToNPC() and enemy:IsActiveEnemy() and enemy:IsVulnerableEnemy() and not enemy:HasEntityFlags(EntityFlag.FLAG_FRIENDLY) and not enemy:HasEntityFlags(EntityFlag.FLAG_CHARM)
 end
 
+function Entities.GetNearestEnemy(position, includePlayer)
+    includePlayer = includePlayer or false
+	local distance = math.maxinteger
+    local nearestEnemy = nil
+    local partition = EntityPartition.ENEMY
+    if includePlayer then
+        partition = partition | EntityPartition.PLAYER
+    end
+    for _, ent in pairs(Isaac.FindInRadius(position, 8192, partition)) do
+        if ((ent:ToNPC() and Entities.IsValidEnemy(ent)) or ent:ToPlayer()) and (ent.Position - position):Length() < distance then
+            distance = (ent.Position - position):Length()
+            nearestEnemy = ent
+        end
+    end
+    return nearestEnemy
+end
+
+
 
 
 
@@ -137,35 +155,6 @@ function Entities.IsFireRelatedEnemy(enemy)
         return true
     end
     return false
-end
-
-function Entities.GetNearestEnemy(position, includePlayer)
-    includePlayer = includePlayer or false
-	local distance = 8192
-    local nearestEnemy = nil
-    local partition = EntityPartition.ENEMY
-    if includePlayer then
-        partition = partition | EntityPartition.PLAYER
-    end
-    for _, ent in pairs(Isaac.FindInRadius(position, 8192, partition)) do
-        if ((ent:ToNPC() and Entities.IsValidEnemy(ent)) or ent:ToPlayer()) and (ent.Position - position):Length() < distance then
-            distance = (ent.Position - position):Length()
-            nearestEnemy = ent
-        end
-    end
-    return nearestEnemy
-end
-
-function Entities.GetLowestHealthEnemy(position)
-    local minHealth = 8092000
-    local minHealthEnemy = nil
-    for _, ent in pairs(Isaac.FindInRadius(position, 8192, EntityPartition.ENEMY)) do
-        if Entities.IsValidEnemy(ent) and ent.HitPoints < minHealth then
-            minHealth = ent.HitPoints
-            minHealthEnemy = ent
-        end
-    end
-    return minHealthEnemy
 end
 
 function Entities.GetHighestHealthEnemy(position)

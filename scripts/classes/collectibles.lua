@@ -141,10 +141,6 @@ function Collectibles.GetCollectibleFromRandomPool(lowQuality, highQuality, rng)
     return itemID
 end
 
-
-
-
-
 function Collectibles.GetFamiliarsFromItemPool(itemPoolType, rng, defaultItem)
     local itemID = 1
     local itemList = {}
@@ -158,6 +154,8 @@ function Collectibles.GetFamiliarsFromItemPool(itemPoolType, rng, defaultItem)
     TYU.ITEMPOOL:RemoveCollectible(itemID)
     return itemID
 end
+
+
 
 function Collectibles.GetAngelRoomCollectible(rng)
     local itemID = CollectibleType.COLLECTIBLE_GUARDIAN_ANGEL

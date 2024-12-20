@@ -1,64 +1,81 @@
-local Lib = TYU
-local HadesBlade = Lib:NewModItem("Hades Blade", "HADES_BLADE")
+local HadesBlade = TYU:NewModItem("Hades Blade", "HADES_BLADE")
+local Collectibles = TYU.Collectibles
+local Entities = TYU.Entities
+local Players = TYU.Players
+local Stat = TYU.Stat
+local Utils = TYU.Utils
+local ModItemIDs = TYU.ModItemIDs
+local PrivateField = {}
 
-local function GrantsDevilFamiliar(player)
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.HADES_BLADE)
-    Lib.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_EXPLOSION, 0, player.Position)
-    Lib.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.LARGE_BLOOD_EXPLOSION, 0, player.Position)
-    player:TakeDamage(0, DamageFlag.DAMAGE_FAKE | DamageFlag.DAMAGE_SPIKES | DamageFlag.DAMAGE_NO_PENALTIES | DamageFlag.DAMAGE_INVINCIBLE, EntityRef(player), 30)
-    Lib.SFXMANAGER:Play(SoundEffect.SOUND_POWERUP1 + rng:RandomInt(2), 0.6)
-    local item = Lib.Collectibles.GetFamiliarsFromItemPool(ItemPoolType.POOL_DEVIL, rng, CollectibleType.COLLECTIBLE_DEMON_BABY)
-    local itemConfigCollectible = Lib.ITEMCONFIG:GetCollectible(item)
-    if Lib.Players.IsInventoryFull(player) then
-        local item = Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, item, Lib.GAME:GetRoom():FindFreePickupSpawnPosition(player.Position, 0, true)):ToPickup()
-        item.Price = 0
-        item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
-        item:RemoveCollectibleCycle()
-        player:AnimateCollectible(Lib.ModItemIDs.HADES_BLADE)
-    else
-        player:AnimateCollectible(item)
-        player:QueueItem(itemConfigCollectible)    
+local function SetPlayerLibData(player, value, ...)
+    TYU:SetPlayerLibData(player, value, "HadesBlade", ...)
+end
+
+local function GetPlayerLibData(player, ...)
+    return TYU:GetPlayerLibData(player, "HadesBlade", ...)
+end
+
+do
+    function PrivateField.GrantsDevilFamiliar(player)
+        Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_EXPLOSION, 0, player.Position)
+        Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.LARGE_BLOOD_EXPLOSION, 0, player.Position)
+        player:TakeDamage(0, DamageFlag.DAMAGE_FAKE | DamageFlag.DAMAGE_SPIKES | DamageFlag.DAMAGE_NO_PENALTIES | DamageFlag.DAMAGE_INVINCIBLE, EntityRef(player), 30)
+        local rng = player:GetCollectibleRNG(ModItemIDs.HADES_BLADE)
+        TYU.SFXMANAGER:Play(SoundEffect.SOUND_POWERUP1 + rng:RandomInt(2), 0.6)
+        local item = Collectibles.GetFamiliarsFromItemPool(ItemPoolType.POOL_DEVIL, rng, CollectibleType.COLLECTIBLE_DEMON_BABY)
+        local itemCollectible = TYU.ITEMCONFIG:GetCollectible(item)
+        if Players.IsInventoryFull(player) then
+            local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, item, Utils.FindFreePickupSpawnPosition(player.Position)):ToPickup()
+            item.Price = 0
+            item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
+            item:RemoveCollectibleCycle()
+            player:AnimateCollectible(ModItemIDs.HADES_BLADE)
+        else
+            player:AnimateCollectible(item)
+            player:QueueItem(itemCollectible)    
+        end
+        TYU.HUD:ShowItemText(player, itemCollectible)
+        TYU.SFXMANAGER:Play(SoundEffect.SOUND_MEATY_DEATHS)
+        if player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_BELIAL_PASSIVE) then
+            local count = GetPlayerLibData(player, "Count") or 0
+            SetPlayerLibData(player, count + 1, "Count")
+        end
     end
-    Lib.HUD:ShowItemText(player, itemConfigCollectible)
-    Lib.SFXMANAGER:Play(SoundEffect.SOUND_MEATY_DEATHS)
-    if player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_BELIAL_PASSIVE) then
-        local count = Lib:GetPlayerLibData(player, "HadesBlade", "Count") or 0
-        Lib:SetPlayerLibData(player, count + 1, "HadesBlade", "Count")
-	end
 end
 
 function HadesBlade:EvaluateCache(player, cacheFlag)
-    local count = Lib:GetPlayerLibData(player, "HadesBlade", "Count") or 0
-    Lib.Stat:AddFlatDamage(player, 0.2 * count)
+    local count = GetPlayerLibData(player, "Count") or 0
+    Stat:AddFlatDamage(player, 0.2 * count)
 end
 HadesBlade:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, HadesBlade.EvaluateCache, CacheFlag.CACHE_DAMAGE)
 
 function HadesBlade:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
-    if useFlags & UseFlag.USE_CARBATTERY == UseFlag.USE_CARBATTERY then
+    if Utils.HasFlags(useFlags, UseFlag.USE_CARBATTERY) then
         return { Discharge = false, Remove = false, ShowAnim = false }
     end
-    if player:GetHealthType() == HealthType.COIN then
+    local healthType = player:GetHealthType()
+    if healthType == HealthType.COIN then
         return { Discharge = false, Remove = false, ShowAnim = true }
-    elseif player:GetHealthType() == HealthType.LOST then
-        GrantsDevilFamiliar(player)
+    elseif healthType == HealthType.LOST then
+        PrivateField.GrantsDevilFamiliar(player)
         return { Discharge = true, Remove = true, ShowAnim = false }
     else
         if player:GetBoneHearts() >= 1 then
             player:AddBoneHearts(-1)
-            GrantsDevilFamiliar(player)
+            PrivateField.GrantsDevilFamiliar(player)
             return { Discharge = true, Remove = false, ShowAnim = false }
         elseif player:GetMaxHearts() >= 2 then
             player:AddMaxHearts(-2)
-            GrantsDevilFamiliar(player)
+            PrivateField.GrantsDevilFamiliar(player)
             return { Discharge = true, Remove = false, ShowAnim = false }
         elseif player:GetSoulHearts() >= 6 then
             player:AddSoulHearts(-6)
-            GrantsDevilFamiliar(player)
+            PrivateField.GrantsDevilFamiliar(player)
             return { Discharge = true, Remove = false, ShowAnim = false }
         end
     end
     return { Discharge = false, Remove = false, ShowAnim = true }
 end
-HadesBlade:AddCallback(ModCallbacks.MC_USE_ITEM, HadesBlade.UseItem, Lib.ModItemIDs.HADES_BLADE)
+HadesBlade:AddCallback(ModCallbacks.MC_USE_ITEM, HadesBlade.UseItem, ModItemIDs.HADES_BLADE)
 
 return HadesBlade

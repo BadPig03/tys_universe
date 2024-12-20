@@ -1,8 +1,9 @@
-local Lib = TYU
-local GuppysFood = Lib:NewModItem("Guppy's Food", "GUPPYS_FOOD")
+local GuppysFood = TYU:NewModItem("Guppy's Food", "GUPPYS_FOOD")
+local Stat = TYU.Stat
+local ModItemIDs = TYU.ModItemIDs
 
 function GuppysFood:EvaluateCache(player, cacheFlag)
-    local num = player:GetCollectibleNum(Lib.ModItemIDs.GUPPYS_FOOD)
+    local num = player:GetCollectibleNum(ModItemIDs.GUPPYS_FOOD)
     if num == 0 or not player:HasCollectible(CollectibleType.COLLECTIBLE_BINGE_EATER) then
         return
     end
@@ -10,7 +11,7 @@ function GuppysFood:EvaluateCache(player, cacheFlag)
         player.Luck = player.Luck + num
     end
     if cacheFlag == CacheFlag.CACHE_SPEED then
-        Lib.Stat:AddSpeedUp(player, -0.03 * num)
+        Stat:AddSpeedUp(player, -0.03 * num)
     end
     if cacheFlag == CacheFlag.CACHE_SHOTSPEED then
         player.ShotSpeed = player.ShotSpeed + num * 0.2
