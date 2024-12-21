@@ -148,38 +148,4 @@ function Players.RemoveCollectibles(player, id, count)
     end
 end
 
-function Players.OnValidCreep(player)
-    local room = TYU.GAME:GetRoom()
-	local creepList = {
-		[EffectVariant.CREEP_RED] = true,
-		[EffectVariant.CREEP_GREEN] = true,
-		[EffectVariant.CREEP_YELLOW] = true,
-		[EffectVariant.CREEP_WHITE] = true,
-		[EffectVariant.CREEP_BLACK] = true,
-		[EffectVariant.PLAYER_CREEP_LEMON_MISHAP] = true,
-		[EffectVariant.PLAYER_CREEP_HOLYWATER] = true,
-		[EffectVariant.PLAYER_CREEP_WHITE] = true,
-		[EffectVariant.PLAYER_CREEP_BLACK] = true,
-		[EffectVariant.PLAYER_CREEP_RED] = true,
-		[EffectVariant.PLAYER_CREEP_GREEN] = true,
-		[EffectVariant.PLAYER_CREEP_HOLYWATER_TRAIL] = true,
-		[EffectVariant.CREEP_BROWN] = true,
-		[EffectVariant.PLAYER_CREEP_LEMON_PARTY] = true,
-		[EffectVariant.PLAYER_CREEP_PUDDLE_MILK] = true,
-		[EffectVariant.CREEP_SLIPPERY_BROWN] = true,
-		[EffectVariant.CREEP_SLIPPERY_BROWN_GROWING] = true,
-		[EffectVariant.CREEP_STATIC] = true,
-		[EffectVariant.CREEP_LIQUID_POOP] = true
-	}
-    if room:HasWater() or room:GetWaterAmount() > 0 then
-        return true
-    end
-    for _, ent in pairs(Isaac.GetRoomEntities()) do
-        if ent.Type == EntityType.ENTITY_EFFECT and creepList[ent.Variant] and player.Position:Distance(ent.Position) <= ent.Size * ent:ToEffect().Scale * 1.25 then
-            return true
-        end
-    end
-    return false
-end
-
 return Players

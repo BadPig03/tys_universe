@@ -1,4 +1,5 @@
 local Utils = TYU:RegisterNewClass()
+local Players = TYU.Players
 
 function Utils.FindFreePickupSpawnPosition(position, initialStep, avoidActiveEntities, allowPits)
     initialStep = initialStep or 0
@@ -69,6 +70,19 @@ end
 
 function Utils.AddToWarfarinItemList(seed)
     TYU:SetGlobalLibData(true, "WarfarinItems", tostring(seed))
+end
+
+function Utils.HasCurseMist()
+    local room = Lib.GAME:GetRoom()
+    if room:HasCurseMist() then
+        return true
+    end
+    for _, player in pairs(Players.GetPlayers()) do
+        if player:HasCurseMistEffect() then
+            return true
+        end
+    end
+    return false
 end
 
 function Utils.CreateTimer(...)

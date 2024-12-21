@@ -1,16 +1,18 @@
-local Lib = TYU
-local BlastProtection = Lib:NewModEnchantment("Blast Protection", "BLAST_PROTECTION")
+local BlastProtection = TYU:NewModEnchantment("Blast Protection", "BLAST_PROTECTION")
+local Utils = TYU.Utils
+local ModEnchantmentIDs = TYU.ModEnchantmentIDs
+local ModItemIDs = TYU.ModItemIDs
 
 function BlastProtection:EntityTakeDamage(entity, amount, flags, source, countdown)
     local player = entity:ToPlayer()
-    if not player or player:HasCurseMistEffect() then
+    if Utils.HasCurseMist() or not player then
         return
     end
-    local count = player:GetEffects():GetNullEffectNum(Lib.ModEnchantmentIDs.BLAST_PROTECTION)
-    if (flags & DamageFlag.DAMAGE_EXPLOSION ~= DamageFlag.DAMAGE_EXPLOSION and flags & DamageFlag.DAMAGE_TNT ~= DamageFlag.DAMAGE_TNT) or amount == 0 or count == 0 then
+    local count = player:GetEffects():GetNullEffectNum(ModEnchantmentIDs.BLAST_PROTECTION)
+    if (Utils.HasFlags(flags, DamageFlag.DAMAGE_EXPLOSION, true) and Utils.HasFlags(flags, DamageFlag.DAMAGE_TNT, true)) or amount == 0 or count == 0 then
         return
     end
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.ENCHANTED_BOOK)
+    local rng = player:GetCollectibleRNG(ModItemIDs.ENCHANTED_BOOK)
     if rng:RandomInt(100) < 25 * count then
         return { Damage = 0, DamageCountdown = 30 }
     end

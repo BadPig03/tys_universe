@@ -1,12 +1,14 @@
-local Lib = TYU
-local SuperSonic = Lib:NewModEnchantment("Super Sonic", "SUPER_SONIC")
+local SuperSonic = TYU:NewModEnchantment("Super Sonic", "SUPER_SONIC")
+local Players = TYU.Players
+local Utils = TYU.Utils
+local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 
 function SuperSonic:PostUpdate()
-    if Lib.GAME:GetRoom():HasCurseMist() then
+    if Utils.HasCurseMist() then
         return
     end
-    local count = Lib.Players.GetNullEffectCounts(Lib.ModEnchantmentIDs.SUPER_SONIC)
-    if count <= 0 then
+    local count = Players.GetNullEffectCounts(ModEnchantmentIDs.SUPER_SONIC)
+    if count == 0 then
         return
     end
     local player = Isaac.GetPlayer(0)
@@ -16,9 +18,9 @@ function SuperSonic:PostUpdate()
                 if ent:GetBossStatusEffectCooldown() > 0 then
                     ent:SetBossStatusEffectCooldown(0)
                 end
-                ent:AddSlowing(EntityRef(player), 1, math.min(0.4, count * 0.075), Lib.Colors.SLOWING)
+                ent:AddSlowing(EntityRef(player), 1, math.min(0.4, count * 0.075), Color(1, 1, 1.3, 1, 0.156863, 0.156863, 0.156863))
             else
-                ent:AddSlowing(EntityRef(player), 1, math.min(0.8, count * 0.15), Lib.Colors.SLOWING)
+                ent:AddSlowing(EntityRef(player), 1, math.min(0.8, count * 0.15), Color(1, 1, 1.3, 1, 0.156863, 0.156863, 0.156863))
             end
         end
     end

@@ -1,12 +1,14 @@
-local Lib = TYU
-local Knockback = Lib:NewModEnchantment("Knockback", "KNOCKBACK")
+local Knockback = TYU:NewModEnchantment("Knockback", "KNOCKBACK")
+local Players = TYU.Players
+local Utils = TYU.Utils
+local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 
 function Knockback:PostPlayerUpdate(player)
-    local room = Lib.GAME:GetRoom()
-    if room:HasCurseMist() or room:GetFrameCount() % 30 > 0 then
+    local room = TYU.GAME:GetRoom()
+    if Utils.HasCurseMist() or room:GetFrameCount() % 30 > 0 then
         return
     end
-    local count = Lib.Players.GetNullEffectCounts(Lib.ModEnchantmentIDs.KNOCKBACK)
+    local count = Players.GetNullEffectCounts(ModEnchantmentIDs.KNOCKBACK)
     if count == 0 then
         return
     end

@@ -1,30 +1,38 @@
-local Lib = TYU
-local Thorns = Lib:NewModEnchantment("Thorns", "THORNS")
+local Thorns = TYU:NewModEnchantment("Thorns", "THORNS")
+local Utils = TYU.Utils
+local ModItemIDs = TYU.ModItemIDs
+local ModEnchantmentIDs = TYU.ModEnchantmentIDs
+local PrivateField = {}
 
-local function GetEnemyFromSource(source)
-    local directEntity = source.Entity
-    if directEntity then
-        if directEntity.SpawnerEntity and directEntity.SpawnerEntity:ToNPC() and not directEntity.SpawnerEntity:IsDead() then
-            return directEntity.SpawnerEntity and directEntity.SpawnerEntity:ToNPC()
+do
+    function PrivateField.GetEnemyFromSource(source)
+        local directEntity = source.Entity
+        if directEntity then
+            if directEntity.SpawnerEntity and directEntity.SpawnerEntity:ToNPC() and not directEntity.SpawnerEntity:IsDead() then
+                return directEntity.SpawnerEntity and directEntity.SpawnerEntity:ToNPC()
+            end
+            if directEntity:ToNPC() then
+                return directEntity:ToNPC()
+            end
         end
-        if directEntity:ToNPC() then
-            return directEntity:ToNPC()
-        end
+        return nil
     end
-    return nil
 end
 
 function Thorns:PostEntityTakeDamage(entity, amount, flags, source, countdown)
-    local player = entity:ToPlayer()
-    local enemy = GetEnemyFromSource(source)
-    if not player or player:HasCurseMistEffect() or not enemy then
+    if Utils.HasCurseMist() then
         return
     end
-    local count = player:GetEffects():GetNullEffectNum(Lib.ModEnchantmentIDs.THORNS)
+    local player = entity:ToPlayer()
+    local enemy = PrivateField.GetEnemyFromSource(source)
+    if not player or not enemy then
+        return
+    end
+    local count = player:GetEffects():GetNullEffectNum(ModEnchantmentIDs.THORNS)
     if count == 0 then
         return
     end
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.ENCHANTED_BOOK)
+    local rng = player:GetCollectibleRNG(ModItemIDs.ENCHANTED_BOOK)
     if rng:RandomInt(90) < 30 * count then
         enemy:TakeDamage(player.Damage * (1.2 + 0.6 * count) + 6 + 3 * count, DamageFlag.DAMAGE_SPIKES, EntityRef(player), 0)
     end
