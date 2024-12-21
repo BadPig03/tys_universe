@@ -1,4 +1,6 @@
 local Collectibles = TYU:RegisterNewClass()
+local Players = TYU.Players
+local ModItemIDs = TYU.ModItemIDs
 
 local wakeUpBannedItems = {
     [CollectibleType.COLLECTIBLE_SKELETON_KEY] = true,
@@ -61,15 +63,15 @@ local wakeUpBannedItems = {
     [CollectibleType.COLLECTIBLE_ABYSS] = true,
     [CollectibleType.COLLECTIBLE_FLIP] = true,
     [CollectibleType.COLLECTIBLE_SPINDOWN_DICE] = true,
-    [TYU.ModItemIDs.BEGGAR_MASK] = true,
-    [TYU.ModItemIDs.CROWN_OF_KINGS] = true,
-    [TYU.ModItemIDs.ORDER] = true,
-    [TYU.ModItemIDs.HADES_BLADE] = true,
-    [TYU.ModItemIDs.MIRRORING] = true,
-    [TYU.ModItemIDs.MIRRORING_SHARD] = true,
-    [TYU.ModItemIDs.PLANETARIUM_TELESCOPE] = true,
-    [TYU.ModItemIDs.THE_GOSPEL_OF_JOHN] = true,
-    [TYU.ModItemIDs.WAKE_UP] = true
+    [ModItemIDs.BEGGAR_MASK] = true,
+    [ModItemIDs.CROWN_OF_KINGS] = true,
+    [ModItemIDs.ORDER] = true,
+    [ModItemIDs.HADES_BLADE] = true,
+    [ModItemIDs.MIRRORING] = true,
+    [ModItemIDs.MIRRORING_SHARD] = true,
+    [ModItemIDs.PLANETARIUM_TELESCOPE] = true,
+    [ModItemIDs.THE_GOSPEL_OF_JOHN] = true,
+    [ModItemIDs.WAKE_UP] = true
 }
 
 function Collectibles.GetCollectibleFromCurrentRoom(excludeTags, rng)
@@ -82,7 +84,7 @@ function Collectibles.GetCollectibleFromCurrentRoom(excludeTags, rng)
     local itemList = {}
     local room = TYU.GAME:GetRoom()
     local itemPoolType = room:GetItemPool(rng:Next(), false)
-    if TYU.Players.AnyoneHasCollectible(TYU.ModItemIDs.ORDER) then
+    if Players.AnyoneHasCollectible(ModItemIDs.ORDER) then
         itemPoolType = TYU:GetGlobalLibData("Order")[TYU.LEVEL:GetStage()]
     end
     for _, itemTable in ipairs(TYU.ITEMPOOL:GetCollectiblesFromPool(itemPoolType)) do
@@ -112,7 +114,7 @@ function Collectibles.CheckFamiliarFromCollectible(player, id, variant, maxCount
 end
 
 function Collectibles.GetNearestDevilDeal(position, distance)
-    local minDistance = distance or 192
+    local minDistance = distance
     local collectible = nil
     for _, ent in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE)) do
         local pickup = ent:ToPickup()
@@ -128,19 +130,6 @@ function Collectibles.IsBlind(pickup)
     return pickup:IsBlind() or pickup:GetSprite():GetLayer("head"):GetSpritesheetPath() == "gfx/Items/Collectibles/questionmark.png"
 end
 
-function Collectibles.GetCollectibleFromRandomPool(lowQuality, highQuality, rng)
-    local itemID = CollectibleType.COLLECTIBLE_BREAKFAST
-    local itemList = {}
-    for i = 1, TYU.ITEMCONFIG:GetCollectibles().Size - 1 do
-        if ItemConfig.Config.IsValidCollectible(i) and TYU.ITEMCONFIG:GetCollectible(i).Quality <= highQuality and TYU.ITEMCONFIG:GetCollectible(i).Quality >= lowQuality and not TYU.ITEMCONFIG:GetCollectible(i):HasTags(ItemConfig.TAG_QUEST) and TYU.ITEMPOOL:CanSpawnCollectible(i, false) then
-            table.insert(itemList, i)
-        end
-    end
-    itemID = TYU.ITEMPOOL:GetCollectibleFromList(itemList, rng:Next())
-    TYU.ITEMPOOL:RemoveCollectible(itemID)
-    return itemID
-end
-
 function Collectibles.GetFamiliarsFromItemPool(itemPoolType, rng, defaultItem)
     local itemID = 1
     local itemList = {}
@@ -154,6 +143,8 @@ function Collectibles.GetFamiliarsFromItemPool(itemPoolType, rng, defaultItem)
     TYU.ITEMPOOL:RemoveCollectible(itemID)
     return itemID
 end
+
+
 
 
 

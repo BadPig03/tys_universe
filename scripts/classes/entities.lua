@@ -1,4 +1,19 @@
 local Entities = TYU:RegisterNewClass()
+local Constants = TYU.Constants
+local Players = TYU.Players
+local ModEntityIDs = TYU.ModEntityIDs
+
+function Entities.GetEntityID(entity)
+    local player = entity:ToPlayer()
+    if player then
+        return Players.GetPlayerID(player)
+    end
+    local tear = entity:ToTear()
+    if tear then
+        return tonumber(GetPtrHash(entity)..tear:GetDropRNG():GetSeed())
+    end
+    return GetPtrHash(entity)
+end
 
 function Entities.Spawn(type, variant, subType, position, velocity, spawner, seed)
     velocity = velocity or Vector.Zero
@@ -35,7 +50,7 @@ end
 function Entities.SpawnFakePickupSprite(pickup, golden)
     golden = golden or false
     pickup:PlayPickupSound()
-    local fakePickup = Entities.Spawn(TYU.ModEntityIDs.FAKE_PICKUP.Type, TYU.ModEntityIDs.FAKE_PICKUP.Variant, TYU.ModEntityIDs.FAKE_PICKUP.SubType, pickup.Position, pickup.Velocity, pickup.SpawnerEntity, pickup.InitSeed)
+    local fakePickup = Entities.Spawn(ModEntityIDs.FAKE_PICKUP.Type, ModEntityIDs.FAKE_PICKUP.Variant, ModEntityIDs.FAKE_PICKUP.SubType, pickup.Position, pickup.Velocity, pickup.SpawnerEntity, pickup.InitSeed)
     local fakeSprite = fakePickup:GetSprite()
     fakeSprite:Load(pickup:GetSprite():GetFilename(), true)
     fakeSprite:Play("Collect", true)
@@ -72,19 +87,7 @@ end
 
 function Entities.IsProceduralItem(entity)
     local pickup = entity:ToPickup()
-    return pickup and pickup.SubType >= TYU.Constants.GLITCHED_ITEM_ID
-end
-
-function Entities.GetEntityID(entity)
-    local player = entity:ToPlayer()
-    if player then
-        return TYU.Players.GetPlayerID(player)
-    end
-    local tear = entity:ToTear()
-    if tear then
-        return tonumber(GetPtrHash(entity)..tear:GetDropRNG():GetSeed())
-    end
-    return GetPtrHash(entity)
+    return pickup and pickup.SubType >= Constants.GLITCHED_ITEM_ID
 end
 
 function Entities.GetEntityBySeed(seed)

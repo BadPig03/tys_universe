@@ -1,4 +1,25 @@
 local Players = TYU:RegisterNewClass()
+local ModPlayerIDs = TYU.ModPlayerIDs
+local ModItemIDs = TYU.ModItemIDs
+
+function Players.GetPlayerID(player, differ)
+    differ = differ or false
+    player = player:ToPlayer()
+    if not player then
+        return -1
+    end
+    local player2 = player
+    if player:IsSubPlayer() then
+        local parent = player:GetSubPlayer()
+        if parent then
+            player2 = parent
+        end
+    end
+    if differ and player:GetPlayerType() == PlayerType.PLAYER_THESOUL then
+        return player2:GetCollectibleRNG(CollectibleType.COLLECTIBLE_SPOON_BENDER):GetSeed()
+    end
+    return player2:GetCollectibleRNG(CollectibleType.COLLECTIBLE_SAD_ONION):GetSeed()
+end
 
 function Players.AnyoneHasCollectible(id)
     return PlayerManager.AnyoneHasCollectible(id)
@@ -33,18 +54,9 @@ function Players.GetPlayers(ignoreCoopBabies)
     return playerList
 end
 
-function Players.GetNumCollectibles(id)
-    return PlayerManager.GetNumCollectibles(id)
-end
-
 function Players.IsJacobOrEsau(player)
     local playerType = player:GetPlayerType()
     return playerType == PlayerType.PLAYER_JACOB or playerType == PlayerType.PLAYER_ESAU
-end
-
-function Players.IsForgottenOrSoul(player)
-    local playerType = player:GetPlayerType()
-    return playerType == PlayerType.PLAYER_THEFORGOTTEN or playerType == PlayerType.PLAYER_THESOUL
 end
 
 function Players.IsTaintedForgottenAndSoul(player)
@@ -61,25 +73,10 @@ function Players.IsInLostCurse(player)
     return player:HasInstantDeathCurse()
 end
 
-function Players.IsRedOnlyCharacter(player)
-    local playerType = player:GetPlayerType()
-    return playerType == PlayerType.PLAYER_BETHANY or playerType == TYU.ModPlayerIDs.WARFARIN
-end
-
-function Players.ChangeLostCurseState(player, remove)
-    remove = remove or false
-    local effects = player:GetEffects()
-    if remove then
-        effects:RemoveNullEffect(NullItemID.ID_LOST_CURSE)
-    else
-        effects:AddNullEffect(NullItemID.ID_LOST_CURSE)
-    end
-end
-
 function Players.GetChargeBarPosition(player, type)
-    local hasBobsStomach = player:HasCollectible(TYU.ModItemIDs.BOBS_STOMACH)
-    local hasHephaestusSoul = player:HasCollectible(TYU.ModItemIDs.HEPHAESTUS_SOUL)
-    local hasOceanusSoul = player:HasCollectible(TYU.ModItemIDs.OCEANUS_SOUL)
+    local hasBobsStomach = player:HasCollectible(ModItemIDs.BOBS_STOMACH)
+    local hasHephaestusSoul = player:HasCollectible(ModItemIDs.HEPHAESTUS_SOUL)
+    local hasOceanusSoul = player:HasCollectible(ModItemIDs.OCEANUS_SOUL)
     if type == 1 then
         return Vector(-21, -60)
     elseif type == 2 then
@@ -110,32 +107,10 @@ function Players.GetNullEffectCounts(id)
     return count
 end
 
-
-function Players.IsInventoryFull(player)
-    if player:GetPlayerType() == PlayerType.PLAYER_ISAAC_B then
-        local count = 0
-        local limit = 8
-        for itemID, itemCount in pairs(player:GetCollectiblesList()) do
-            if ItemConfig.Config.IsValidCollectible(itemID) and not TYU.ITEMCONFIG:GetCollectible(itemID):HasTags(ItemConfig.TAG_QUEST) and TYU.ITEMCONFIG:GetCollectible(itemID).Type ~= ItemType.ITEM_ACTIVE and itemID ~= CollectibleType.COLLECTIBLE_BIRTHRIGHT then
-                count = count + itemCount
-            end
-        end
-        if player:HasCollectible(CollectibleType.COLLECTIBLE_BIRTHRIGHT) then
-            limit = 12
-        end
-        return count >= limit
-    else
-        return false
-    end
-end
-
 function Players.IsPressingFiringButton(player)
     local controllerIndex = player.ControllerIndex
 	return Input.IsActionPressed(ButtonAction.ACTION_SHOOTUP, controllerIndex) or Input.IsActionPressed(ButtonAction.ACTION_SHOOTDOWN, controllerIndex) or Input.IsActionPressed(ButtonAction.ACTION_SHOOTRIGHT, controllerIndex) or Input.IsActionPressed(ButtonAction.ACTION_SHOOTLEFT, controllerIndex)
 end
-
-
-
 
 function Players.AnyoneIsPlayerType(type)
     return PlayerManager.AnyoneIsPlayerType(type)
@@ -162,24 +137,6 @@ function Players.IsPlayerHasCard(player, card)
     return false
 end
 
-function Players.GetPlayerID(player, differ)
-    differ = differ or false
-    player = player:ToPlayer()
-    if not player then
-        return -1
-    end
-    local player2 = player
-    if player:IsSubPlayer() then
-        local parent = player:GetSubPlayer()
-        if parent then
-            player2 = parent
-        end
-    end
-    if differ and player:GetPlayerType() == PlayerType.PLAYER_THESOUL then
-        return player2:GetCollectibleRNG(CollectibleType.COLLECTIBLE_SPOON_BENDER):GetSeed()
-    end
-    return player2:GetCollectibleRNG(CollectibleType.COLLECTIBLE_SAD_ONION):GetSeed()
-end
 
 function Players.RemoveCollectibles(player, id, count)
     count = count or 1

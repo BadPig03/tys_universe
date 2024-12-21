@@ -79,6 +79,20 @@ do
         SetGlobalLibData(GetGlobalLibData("Counts") + addCount, "Counts")
     end
 
+    function PrivateField.IsRedOnlyCharacter(player)
+        local playerType = player:GetPlayerType()
+        return playerType == PlayerType.PLAYER_BETHANY or playerType == ModPlayerIDs.WARFARIN
+    end
+
+    function PrivateField.ChangeLostCurseState(player, remove)
+        local effects = player:GetEffects()
+        if remove then
+            effects:RemoveNullEffect(NullItemID.ID_LOST_CURSE)
+        else
+            effects:AddNullEffect(NullItemID.ID_LOST_CURSE)
+        end
+    end
+
     function PrivateField.SetHealthAndTeleport(data)
         local effigyTable = data[#data]
         local dimension = effigyTable.Dimension    
@@ -101,13 +115,13 @@ do
             elseif playerType == PlayerType.PLAYER_THEFORGOTTEN_B then
                 goto continue
             end
-            if Players.IsForgottenOrSoul(player) then
+            if playerType == PlayerType.PLAYER_THEFORGOTTEN or playerType == PlayerType.PLAYER_THESOUL then
                 player:AddBoneHearts(1)
                 player:AddHearts(2)
                 player:AddSoulHearts(2)
             else
                 if effigyTable.SoulState then
-                    if player:GetHealthType() == HealthType.COIN or Players.IsRedOnlyCharacter(player) then
+                    if player:GetHealthType() == HealthType.COIN or PrivateField.IsRedOnlyCharacter(player) then
                         player:AddMaxHearts(2)
                         player:AddHearts(2)
                     else
@@ -124,7 +138,7 @@ do
             end
             ::continue::
             player:AnimateTeleport(true)
-            Players.ChangeLostCurseState(player, dimension ~= Dimension.MIRROR)
+            PrivateField.ChangeLostCurseState(player, dimension ~= Dimension.MIRROR)
         end
         TYU.GAME:StartRoomTransition(effigyTable.RoomIndex, Direction.NO_DIRECTION, RoomTransitionAnim.FADE_MIRROR, Isaac.GetPlayer(0), dimension)
         TYU.SFXMANAGER:Stop(SoundEffect.SOUND_MIRROR_EXIT, 0.6)

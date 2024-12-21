@@ -16,6 +16,24 @@ local function GetPlayerLibData(player, ...)
 end
 
 do
+    function PrivateField.IsInventoryFull(player)
+        if player:GetPlayerType() == PlayerType.PLAYER_ISAAC_B then
+            local count = 0
+            local limit = 8
+            for itemID, itemCount in pairs(player:GetCollectiblesList()) do
+                if ItemConfig.Config.IsValidCollectible(itemID) and not TYU.ITEMCONFIG:GetCollectible(itemID):HasTags(ItemConfig.TAG_QUEST) and TYU.ITEMCONFIG:GetCollectible(itemID).Type ~= ItemType.ITEM_ACTIVE and itemID ~= CollectibleType.COLLECTIBLE_BIRTHRIGHT then
+                    count = count + itemCount
+                end
+            end
+            if player:HasCollectible(CollectibleType.COLLECTIBLE_BIRTHRIGHT) then
+                limit = 12
+            end
+            return count >= limit
+        else
+            return false
+        end
+    end
+
     function PrivateField.GrantsDevilFamiliar(player)
         Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_EXPLOSION, 0, player.Position)
         Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.LARGE_BLOOD_EXPLOSION, 0, player.Position)
@@ -24,7 +42,7 @@ do
         TYU.SFXMANAGER:Play(SoundEffect.SOUND_POWERUP1 + rng:RandomInt(2), 0.6)
         local item = Collectibles.GetFamiliarsFromItemPool(ItemPoolType.POOL_DEVIL, rng, CollectibleType.COLLECTIBLE_DEMON_BABY)
         local itemCollectible = TYU.ITEMCONFIG:GetCollectible(item)
-        if Players.IsInventoryFull(player) then
+        if PrivateField.IsInventoryFull(player) then
             local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, item, Utils.FindFreePickupSpawnPosition(player.Position)):ToPickup()
             item.Price = 0
             item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)

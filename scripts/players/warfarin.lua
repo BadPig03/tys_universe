@@ -82,7 +82,7 @@ function Warfarin:PostPlayerUpdate(player)
             Lib:SetPlayerLibData(player, true, "BloodSample", "InTriggered")
         end
     end
-    local collectible = Lib.Collectibles.GetNearestDevilDeal(player.Position)
+    local collectible = Lib.Collectibles.GetNearestDevilDeal(player.Position, 192)
     local charge = player:GetActiveCharge(ActiveSlot.SLOT_POCKET) + player:GetBatteryCharge(ActiveSlot.SLOT_POCKET)
     if collectible and Lib.GAME:GetRoom():IsClear() then
         if player:GetActiveItem(ActiveSlot.SLOT_POCKET) == Lib.ModItemIDs.BLOOD_SAMPLE then

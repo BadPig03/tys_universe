@@ -1,15 +1,17 @@
-local Lib = TYU
-local SaveAndLoad = Lib:RegisterNewClass()
+local SaveAndLoad = TYU:RegisterNewClass()
+local Callbacks = TYU.Callbacks
+local Players = TYU.Players
+local ModRoomIDs = TYU.ModRoomIDs
 
 function SaveAndLoad:PreGameExit(shouldSave)
     if shouldSave then
         SaveAndLoad.SaveGameState()
     else
         SaveAndLoad.RemoveGameState()
-        Isaac.RunCallback(Lib.Callbacks.TYU_POST_RESTART)
+        Isaac.RunCallback(Callbacks.TYU_POST_RESTART)
     end
-    Lib:ClearAllData()
-    Isaac.RunCallback(Lib.Callbacks.TYU_POST_EXIT, shouldSave)
+    TYU:ClearAllData()
+    Isaac.RunCallback(Callbacks.TYU_POST_EXIT, shouldSave)
 end
 SaveAndLoad:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, SaveAndLoad.PreGameExit)
 
@@ -18,63 +20,63 @@ function SaveAndLoad:PostGameStarted(continued)
         SaveAndLoad.LoadGameState()
     else
         SaveAndLoad.RemoveGameState()
-        Ambush.SetMaxBossChallengeWaves(2)
-        Ambush.SetMaxChallengeWaves(3)
+        TYU.AMBUSH.SetMaxBossChallengeWaves(2)
+        TYU.AMBUSH.SetMaxChallengeWaves(3)
     end
-    Lib.SetTempGlobalLibData(true, "_SAVEDATA", "GameStateSafe")
+    TYU.SetTempGlobalLibData(true, "_SAVEDATA", "GameStateSafe")
 end
 SaveAndLoad:AddPriorityCallback(ModCallbacks.MC_POST_GAME_STARTED, CallbackPriority.IMPORTANT, SaveAndLoad.PostGameStarted)
 
 function SaveAndLoad:PostNewRoom()
-    Isaac.RunCallbackWithParam(Lib.Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, nil, false)
+    Isaac.RunCallbackWithParam(Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, nil, false)
 end
 SaveAndLoad:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, SaveAndLoad.PostNewRoom)
 
 function SaveAndLoad.SaveGameState()
     local data = {}
-    data.Global = Lib:GetGlobalLibData()
+    data.Global = TYU:GetGlobalLibData()
     data.Players = {}
-    for _, player in pairs(Lib.Players.GetPlayers(true)) do
-        local id = Lib.Players.GetPlayerID(player)
-        data.Players[tostring(id)] = Lib:GetPlayerLibData(player)
+    for _, player in pairs(Players.GetPlayers(true)) do
+        local id = Players.GetPlayerID(player)
+        data.Players[tostring(id)] = TYU:GetPlayerLibData(player)
     end
     SaveAndLoad.WriteGameStateData(data)
-    Isaac.RunCallback(Lib.Callbacks.TYU_POST_SAVE)
+    Isaac.RunCallback(Callbacks.TYU_POST_SAVE)
 end
 
 function SaveAndLoad.LoadGameState()
-    if not Lib:HasData() then
+    if not TYU:HasData() then
         return
     end
     local data = SaveAndLoad.ReadGameStateData()
     if not data then
         return
     end
-    Lib:SetGlobalLibData(data.Global)
-    for _, player in pairs(Lib.Players.GetPlayers(true)) do
-        local id = tostring(Lib.Players.GetPlayerID(player))
-        local playerData = Lib.Table.First(data.Players, function(k, v) return id == v end)
+    TYU:SetGlobalLibData(data.Global)
+    for _, player in pairs(Players.GetPlayers(true)) do
+        local id = tostring(Players.GetPlayerID(player))
+        local playerData = TYU.Table.First(data.Players, function(k, v) return id == v end)
         if playerData then
-            Lib:SetPlayerLibData(player, playerData)
+            TYU:SetPlayerLibData(player, playerData)
         end
         player:AddCacheFlags(CacheFlag.CACHE_ALL, true)
     end
-    Isaac.RunCallback(Lib.Callbacks.TYU_POST_LOAD)
-    Isaac.RunCallbackWithParam(Lib.Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, nil, true)
+    Isaac.RunCallback(Callbacks.TYU_POST_LOAD)
+    Isaac.RunCallbackWithParam(Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, nil, true)
 end
 
 function SaveAndLoad.WriteGameStateData(data)
-    local jsonText = Lib.JSON.encode(data)
-    Lib:SaveData(jsonText)
+    local jsonText = TYU.JSON.encode(data)
+    TYU:SaveData(jsonText)
 end
 
 function SaveAndLoad.ReadGameStateData()
-    if not Lib:HasData() then
+    if not TYU:HasData() then
         return
     end
-    local jsonData = Lib:LoadData()
+    local jsonData = TYU:LoadData()
     local loadedData
-    local success = pcall(function() loadedData = Lib.JSON.decode(jsonData) end)
+    local success = pcall(function() loadedData = TYU.JSON.decode(jsonData) end)
     if success and loadedData then
         return loadedData
     end
@@ -85,7 +87,7 @@ function SaveAndLoad.RemoveGameState()
 end
 
 function SaveAndLoad.IsGameStateSafe()
-    return Lib.GetTempGlobalLibData("_SAVEDATA", "GameStateSafe")
+    return TYU.GetTempGlobalLibData("_SAVEDATA", "GameStateSafe")
 end
 
 function SaveAndLoad.ReloadRoomData()
@@ -96,17 +98,17 @@ function SaveAndLoad.ReloadRoomData()
         local name = roomConfigRoom.Name
         local variant = roomConfigRoom.Variant
         if type == RoomType.ROOM_DEVIL and name == "Guilt Devil Room" then
-            table.insert(Lib.ModRoomIDs.GUILT_DEVIL_ROOMS, variant)
+            table.insert(ModRoomIDs.GUILT_DEVIL_ROOMS, variant)
         end
         if type == RoomType.ROOM_SECRET_EXIT then
             if name == "ICU Room" then
-                table.insert(Lib.ModRoomIDs.ICU_ROOMS, variant)
+                table.insert(ModRoomIDs.ICU_ROOMS, variant)
             elseif name == "Warfarin Blackmarket" then
-                table.insert(Lib.ModRoomIDs.WARFARIN_BLACK_MARKETS, variant)
+                table.insert(ModRoomIDs.WARFARIN_BLACK_MARKETS, variant)
             end
         end
         if type == RoomType.ROOM_ERROR and name == "Wake-up Main Room" then
-            Lib.ModRoomIDs.WAKE_UP_MAIN_ROOM = variant
+            ModRoomIDs.WAKE_UP_MAIN_ROOM = variant
         end
     end
 end

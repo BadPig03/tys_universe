@@ -1,5 +1,4 @@
-local Lib = TYU
-local ModComponents = Lib:RegisterNewClass()
+local ModComponents = TYU:RegisterNewClass()
 
 local ModPart = {}
 ModComponents.ModPart = ModPart
@@ -17,35 +16,35 @@ function ModPart:New(name, dataName)
 end
 
 function ModPart:GetGlobalField(...)
-    return Lib:GetGlobalLibData(self.DataName, ...)
+    return TYU:GetGlobalLibData(self.DataName, ...)
 end
 
 function ModPart:SetGlobalField(value, ...)
-    Lib:SetGlobalLibData(value, self.DataName, ...)
+    TYU:SetGlobalLibData(value, self.DataName, ...)
 end
 
 function ModPart:GetTempGlobalField(...)
-    return Lib:GetTempGlobalLibData(self.DataName, ...)
+    return TYU:GetTempGlobalLibData(self.DataName, ...)
 end
 
 function ModPart:SetTempGlobalField(value, ...)
-    Lib:SetTempGlobalLibData(value, self.DataName, ...)
+    TYU:SetTempGlobalLibData(value, self.DataName, ...)
 end
 
 function ModPart:GetPlayerField(entity, ...)
-    return Lib:GetPlayerLibData(entity, self.DataName, ...)
+    return TYU:GetPlayerLibData(entity, self.DataName, ...)
 end
 
 function ModPart:SetPlayerField(entity, value, ...)
-    Lib:SetPlayerLibData(entity, value, self.DataName, ...)
+    TYU:SetPlayerLibData(entity, value, self.DataName, ...)
 end
 
 function ModPart:GetTempField(entity, ...)
-    return Lib:GetTempEntityLibData(entity, self.DataName, ...)
+    return TYU:GetTempEntityLibData(entity, self.DataName, ...)
 end
 
 function ModPart:SetTempField(entity, value, ...)
-    Lib:SetTempEntityLibData(entity, value, self.DataName, ...)
+    TYU:SetTempEntityLibData(entity, value, self.DataName, ...)
 end
 
 function ModPart:AddCallback(callback, func, optional)
@@ -65,7 +64,7 @@ end
 do 
     local ModItem = ModPart:NewChild()
 
-    ModItem.Mod = Lib
+    ModItem.Mod = TYU
     ModItem.ID = -1
     ModItem.Item = -1
     ModItem.Name = nil
@@ -87,7 +86,7 @@ end
 do 
     local ModEntity = ModPart:NewChild()
 
-    ModEntity.Mod = Lib
+    ModEntity.Mod = TYU
     ModEntity.ID = 0
     ModEntity.Type = 0
     ModEntity.Variant = 0
@@ -113,7 +112,7 @@ end
 do
     local ModPlayer = ModPart:NewChild()
     
-    ModPlayer.Mod = Lib
+    ModPlayer.Mod = TYU
     ModPlayer.ID = -1
     ModPlayer.Type = 0
     ModPlayer.Name = nil
@@ -135,7 +134,7 @@ end
 do
     local ModTrinket = ModPart:NewChild()
 
-    ModTrinket.Mod = Lib
+    ModTrinket.Mod = TYU
     ModTrinket.ID = -1
     ModTrinket.Trinket = -1
     ModTrinket.Name = nil
@@ -157,7 +156,7 @@ end
 do 
     local ModCard = ModPart:NewChild()
 
-    ModCard.Mod = Lib
+    ModCard.Mod = TYU
     ModCard.ID = -1
     ModCard.Name = nil
     ModCard.DataName = nil
@@ -177,7 +176,7 @@ end
 do 
     local ModPill = ModPart:NewChild()
 
-    ModPill.Mod = Lib
+    ModPill.Mod = TYU
     ModPill.ID = -1
     ModPill.Name = nil
     ModPill.DataName = nil
@@ -197,7 +196,7 @@ end
 do
     local ModEnchantment = ModPart:NewChild()
     
-    ModEnchantment.Mod = Lib
+    ModEnchantment.Mod = TYU
 
     ModEnchantment.ID = -1
     ModEnchantment.Type = 0

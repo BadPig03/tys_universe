@@ -35,7 +35,7 @@ do
     function PrivateField.GetChance()
         local count = 0
         for _, item in ipairs(TYU.ITEMCONFIG:GetTaggedItems(ItemConfig.TAG_ANGEL)) do
-            count = count + Players.GetNumCollectibles(item.ID)
+            count = count + PlayerManager.GetNumCollectibles(item.ID)
         end
         local chance = 33
         if TYU.GAME:IsGreedMode() then

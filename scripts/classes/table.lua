@@ -1,5 +1,4 @@
-local Lib = TYU
-local Table = Lib:RegisterNewClass()
+local Table = TYU:RegisterNewClass()
 
 function Table.First(list, predicate)
     predicate = predicate or function() return true end

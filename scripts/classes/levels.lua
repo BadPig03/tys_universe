@@ -1,54 +1,53 @@
-local Lib = TYU
-local Levels = Lib:RegisterNewClass()
+local Levels = TYU:RegisterNewClass()
 
 function Levels.AtHome()
-    return Lib.LEVEL:GetStage() == LevelStage.STAGE8
+    return TYU.LEVEL:GetStage() == LevelStage.STAGE8
 end
 
 function Levels.IsInDebugRoom()
-    return Lib.LEVEL:GetCurrentRoomIndex() == GridRooms.ROOM_DEBUG_IDX
+    return TYU.LEVEL:GetCurrentRoomIndex() == GridRooms.ROOM_DEBUG_IDX
 end
 
 function Levels.IsInGenesisRoom()
-    return Lib.LEVEL:GetCurrentRoomIndex() == GridRooms.ROOM_GENESIS_IDX
+    return TYU.LEVEL:GetCurrentRoomIndex() == GridRooms.ROOM_GENESIS_IDX
 end
 
 function Levels.IsInOverworld()
-    return Lib.LEVEL:GetDimension() == Dimension.NORMAL
+    return TYU.LEVEL:GetDimension() == Dimension.NORMAL
 end
 
 function Levels.IsInKnifePuzzle()
-    return Lib.LEVEL:HasAbandonedMineshaft() and Lib.LEVEL:GetDimension() == Dimension.KNIFE_PUZZLE
+    return TYU.LEVEL:HasAbandonedMineshaft() and TYU.LEVEL:GetDimension() == Dimension.KNIFE_PUZZLE
 end
 
 function Levels.IsInDeathCertificate()
-    return Lib.LEVEL:GetDimension() == Dimension.DEATH_CERTIFICATE
+    return TYU.LEVEL:GetDimension() == Dimension.DEATH_CERTIFICATE
 end
 
 function Levels.IsSatanicBibleUsedBossRoom()
-    return Lib.GAME:GetRoom():GetType() == RoomType.ROOM_BOSS and Lib.LEVEL:GetStateFlag(LevelStateFlag.STATE_SATANIC_BIBLE_USED)
+    return TYU.GAME:GetRoom():GetType() == RoomType.ROOM_BOSS and TYU.LEVEL:GetStateFlag(LevelStateFlag.STATE_SATANIC_BIBLE_USED)
 end
 
 function Levels.IsDarkRoomStartingRoom()
-    return Lib.LEVEL:GetAbsoluteStage() == LevelStage.STAGE6 and Lib.LEVEL:GetStageType() == StageType.STAGETYPE_ORIGINAL and Lib.LEVEL:GetCurrentRoomIndex() == Lib.LEVEL:GetStartingRoomIndex()
+    return TYU.LEVEL:GetAbsoluteStage() == LevelStage.STAGE6 and TYU.LEVEL:GetStageType() == StageType.STAGETYPE_ORIGINAL and TYU.LEVEL:GetCurrentRoomIndex() == TYU.LEVEL:GetStartingRoomIndex()
 end
 
 function Levels.IsBossChallengeRoom()
-    local room = Lib.GAME:GetRoom()
-    return room:GetType() == RoomType.ROOM_CHALLENGE and Lib.LEVEL:GetCurrentRoomDesc().Data.Variant >= 16 and Lib.LEVEL:HasBossChallenge()
+    local room = TYU.GAME:GetRoom()
+    return room:GetType() == RoomType.ROOM_CHALLENGE and TYU.LEVEL:GetCurrentRoomDesc().Data.Variant >= 16 and TYU.LEVEL:HasBossChallenge()
 end
 
 function Levels.IsBossRushRoom()
-    local room = Lib.GAME:GetRoom()
+    local room = TYU.GAME:GetRoom()
     return room:GetType() == RoomType.ROOM_BOSSRUSH
 end
 
 function Levels.IsLevelCathedral()
-    return Lib.LEVEL:GetStage() == LevelStage.STAGE5 and Lib.LEVEL:GetStageType() == StageType.STAGETYPE_WOTL
+    return TYU.LEVEL:GetStage() == LevelStage.STAGE5 and TYU.LEVEL:GetStageType() == StageType.STAGETYPE_WOTL
 end
 
 function Levels.IsRoomDevilTreasureRoom()
-    local room = Lib.GAME:GetRoom()
+    local room = TYU.GAME:GetRoom()
     if room:GetType() ~= RoomType.ROOM_TREASURE then
         return false
     end
@@ -62,7 +61,7 @@ function Levels.IsRoomDevilTreasureRoom()
 end
 
 function Levels.RemoveAllDecorations()
-    local room = Lib.GAME:GetRoom()
+    local room = TYU.GAME:GetRoom()
     for i = 0, room:GetGridSize() do
         local gridEntity = room:GetGridEntity(i)
         if gridEntity and gridEntity:ToDecoration() then

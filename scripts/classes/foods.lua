@@ -1,65 +1,70 @@
-local Lib = TYU
-local Foods = Lib:RegisterNewClass()
+local Foods = TYU:RegisterNewClass()
+local ModFoodItemIDs = TYU.ModFoodItemIDs
+local PrivateField = {}
 
-local foodStats = {
-    [Lib.ModFoodItemIDs.FOODS] = { 0, 0, 0, 0, 0, 0 },
-    [Lib.ModFoodItemIDs.APPLE] = { 2, 1, 1, 0, 0, 0 },
-    [Lib.ModFoodItemIDs.BAKED_POTATO] = { 2, 2, 2, 0, 0, 0 },
-    [Lib.ModFoodItemIDs.BEETROOT] = { 0, 1, 1, 2, 0, 0 },
-    [Lib.ModFoodItemIDs.BROWN_MUSHROOM] = { 0, 2, 1, 0, 2, 0 },
-    [Lib.ModFoodItemIDs.CARROT] = { 2, 2, 1, 0, 0, 0 },
-    [Lib.ModFoodItemIDs.CHORUS_FRUIT] = { 2, 1, 1, 0, 0, 0 },
-    [Lib.ModFoodItemIDs.COCOA_BEANS] = { 0, 0, 1, 2, 0, 2 },
-    [Lib.ModFoodItemIDs.DRIED_KELP] = { 0, 0, 2, 1, 0, 2 },
-    [Lib.ModFoodItemIDs.GLOW_BERRIES] = { 0, 0, 2, 2, 2, 0 },
-    [Lib.ModFoodItemIDs.GOLDEN_APPLE] = { 3, 3, 2, 0, 0, 0 },
-    [Lib.ModFoodItemIDs.GOLDEN_CARROT] = { 4, 4, 4, 0, 0, 0 },
-    [Lib.ModFoodItemIDs.MELON_SLICE] = { 0, 2, 1, 0, 1, 0 },
-    [Lib.ModFoodItemIDs.POTATO] = { 0, 0, 2, 2, 0, 2 },
-    [Lib.ModFoodItemIDs.RED_MUSHROOM] = { 0, 2, 1, 0, 2, 0 },
-    [Lib.ModFoodItemIDs.SWEET_BERRIES] = { 0, 0, 2, 2, 2, 0 },
-    [Lib.ModFoodItemIDs.WHEAT] = { 0, 1, 1, 2, 0, 0 },
-    [Lib.ModFoodItemIDs.CABBAGE] = { 0, 2, 1, 0, 1, 0 },
-    [Lib.ModFoodItemIDs.ONION] = { 0, 2, 1, 0, 1, 0 },
-    [Lib.ModFoodItemIDs.PUMPKIN_SLICE] = { 1, 1, 0, 2, 0, 0 },
-    [Lib.ModFoodItemIDs.TOMATO] = { 0, 0, 2, 2, 0, 2 },
-    [Lib.ModFoodItemIDs.MONSTER_MEAT] = { 0, 0, 0, 2, 2, 2 }
-}
+do
+    PrivateField.FoodStats = {
+        [ModFoodItemIDs.FOODS] = { 0, 0, 0, 0, 0, 0 },
+        [ModFoodItemIDs.APPLE] = { 2, 1, 1, 0, 0, 0 },
+        [ModFoodItemIDs.BAKED_POTATO] = { 2, 2, 2, 0, 0, 0 },
+        [ModFoodItemIDs.BEETROOT] = { 0, 1, 1, 2, 0, 0 },
+        [ModFoodItemIDs.BROWN_MUSHROOM] = { 0, 2, 1, 0, 2, 0 },
+        [ModFoodItemIDs.CARROT] = { 2, 2, 1, 0, 0, 0 },
+        [ModFoodItemIDs.CHORUS_FRUIT] = { 2, 1, 1, 0, 0, 0 },
+        [ModFoodItemIDs.COCOA_BEANS] = { 0, 0, 1, 2, 0, 2 },
+        [ModFoodItemIDs.DRIED_KELP] = { 0, 0, 2, 1, 0, 2 },
+        [ModFoodItemIDs.GLOW_BERRIES] = { 0, 0, 2, 2, 2, 0 },
+        [ModFoodItemIDs.GOLDEN_APPLE] = { 3, 3, 2, 0, 0, 0 },
+        [ModFoodItemIDs.GOLDEN_CARROT] = { 4, 4, 4, 0, 0, 0 },
+        [ModFoodItemIDs.MELON_SLICE] = { 0, 2, 1, 0, 1, 0 },
+        [ModFoodItemIDs.POTATO] = { 0, 0, 2, 2, 0, 2 },
+        [ModFoodItemIDs.RED_MUSHROOM] = { 0, 2, 1, 0, 2, 0 },
+        [ModFoodItemIDs.SWEET_BERRIES] = { 0, 0, 2, 2, 2, 0 },
+        [ModFoodItemIDs.WHEAT] = { 0, 1, 1, 2, 0, 0 },
+        [ModFoodItemIDs.CABBAGE] = { 0, 2, 1, 0, 1, 0 },
+        [ModFoodItemIDs.ONION] = { 0, 2, 1, 0, 1, 0 },
+        [ModFoodItemIDs.PUMPKIN_SLICE] = { 1, 1, 0, 2, 0, 0 },
+        [ModFoodItemIDs.TOMATO] = { 0, 0, 2, 2, 0, 2 },
+        [ModFoodItemIDs.MONSTER_MEAT] = { 0, 0, 0, 2, 2, 2 }
+    }
 
-local standardValues = { 0.25, 0.2, 0.1, 0.4, 0.04, 0.025 }
+    PrivateField.StandardValues = { 0.25, 0.2, 0.1, 0.4, 0.04, 0.025 }
+end
 
-local outcomes = WeightedOutcomePicker()
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.APPLE, 6)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.BAKED_POTATO, 4)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.BEETROOT, 9)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.BROWN_MUSHROOM, 8)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.CARROT, 5)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.CHORUS_FRUIT, 6)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.COCOA_BEANS, 10)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.DRIED_KELP, 10)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.GLOW_BERRIES, 9)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.GOLDEN_APPLE, 2)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.GOLDEN_CARROT, 3)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.MELON_SLICE, 8)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.POTATO, 10)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.RED_MUSHROOM, 8)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.SWEET_BERRIES, 9)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.WHEAT, 9)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.CABBAGE, 8)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.ONION, 8)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.PUMPKIN_SLICE, 7)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.TOMATO, 10)
-outcomes:AddOutcomeWeight(Lib.ModFoodItemIDs.MONSTER_MEAT, 10)
+do
+    PrivateField.Outcomes = WeightedOutcomePicker()
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.APPLE, 6)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.BAKED_POTATO, 4)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.BEETROOT, 9)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.BROWN_MUSHROOM, 8)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.CARROT, 5)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.CHORUS_FRUIT, 6)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.COCOA_BEANS, 10)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.DRIED_KELP, 10)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.GLOW_BERRIES, 9)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.GOLDEN_APPLE, 2)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.GOLDEN_CARROT, 3)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.MELON_SLICE, 8)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.POTATO, 10)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.RED_MUSHROOM, 8)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.SWEET_BERRIES, 9)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.WHEAT, 9)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.CABBAGE, 8)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.ONION, 8)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.PUMPKIN_SLICE, 7)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.TOMATO, 10)
+    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.MONSTER_MEAT, 10)
+end
 
 function Foods.ApplySpecialEffect(food, player, rng)
     local effects = player:GetEffects()
     local seed = rng:Next()
-    if food == Lib.ModFoodItemIDs.CHORUS_FRUIT then
-        Lib.GAME:MoveToRandomRoom(false, seed, player)
-    elseif food == Lib.ModFoodItemIDs.GOLDEN_APPLE then
+    if food == ModFoodItemIDs.CHORUS_FRUIT then
+        TYU.GAME:MoveToRandomRoom(false, seed, player)
+    elseif food == ModFoodItemIDs.GOLDEN_APPLE then
         player:AddHearts(4)
         player:AddSoulHearts(2)
-    elseif food == Lib.ModFoodItemIDs.MONSTER_MEAT then
+    elseif food == ModFoodItemIDs.MONSTER_MEAT then
         player:AddRottenHearts(1)
     end
 end
@@ -83,11 +88,11 @@ function Foods.ExtractValues(origin)
 end
 
 function Foods.GetStatStandardValues()
-    return standardValues
+    return PrivateField.StandardValues
 end
 
 function Foods.GetNourishmentValue(food)
-    return foodStats[food] or { 0, 0, 0, 0, 0, 0 }
+    return PrivateField.FoodStats[food] or { 0, 0, 0, 0, 0, 0 }
 end
 
 function Foods.GetValidEmptySlot(origin)
@@ -102,7 +107,7 @@ function Foods.GetValidEmptySlot(origin)
 end
 
 function Foods.GetRandomFood(rng)
-    return outcomes:PickOutcome(rng)
+    return PrivateField.Outcomes:PickOutcome(rng)
 end
 
 function Foods.GetStatsTranslation()
