@@ -1,5 +1,4 @@
 local Rewind = TYU:RegisterNewClass()
-local Table = TYU.Table
 local PrivateField = {}
 
 Rewind.LastGlowingHourglassData = {}
@@ -18,11 +17,11 @@ do
     end
     
     function PrivateField.RestoreData(data)
-        Table.ReplaceContent(TYU.GlobalData, data.GlobalData)
-        Table.ReplaceContent(TYU.PlayersData, data.PlayersData)
-        Table.ReplaceContent(TYU.TempGlobalData, data.TempGlobalData)
-        Table.ReplaceContent(TYU.EntitiesData, data.EntitiesData)
-        Table.ReplaceContent(TYU.TempPlayersData, data.TempPlayersData)
+        TYU.Table.ReplaceContent(TYU.GlobalData, data.GlobalData)
+        TYU.Table.ReplaceContent(TYU.PlayersData, data.PlayersData)
+        TYU.Table.ReplaceContent(TYU.TempGlobalData, data.TempGlobalData)
+        TYU.Table.ReplaceContent(TYU.EntitiesData, data.EntitiesData)
+        TYU.Table.ReplaceContent(TYU.TempPlayersData, data.TempPlayersData)
     end
 end
 
@@ -33,10 +32,10 @@ Rewind:AddCallback(ModCallbacks.MC_USE_ITEM, Rewind.UseItem, CollectibleType.COL
 
 function Rewind:PostGlowingHourglassSave(slot)
     if slot == 0 then
-        Rewind.LastGlowingHourglassData = Table.Clone(PrivateField.GetRewindData())
+        Rewind.LastGlowingHourglassData = TYU.Table.Clone(PrivateField.GetRewindData())
     end
     if slot == 1 then
-        Rewind.LastRewindData = Table.Clone(PrivateField.GetRewindData())
+        Rewind.LastRewindData = TYU.Table.Clone(PrivateField.GetRewindData())
     end
 end
 Rewind:AddCallback(ModCallbacks.MC_POST_GLOWING_HOURGLASS_SAVE, Rewind.PostGlowingHourglassSave)
@@ -44,10 +43,10 @@ Rewind:AddCallback(ModCallbacks.MC_POST_GLOWING_HOURGLASS_SAVE, Rewind.PostGlowi
 function Rewind:PostGlowingHourglassLoad(slot)
     if slot == 0 then
         Rewind.GlowingHourglassUsed = false
-        PrivateField.RestoreData(Table.Clone(Rewind.LastGlowingHourglassData))
+        PrivateField.RestoreData(TYU.Table.Clone(Rewind.LastGlowingHourglassData))
     end
     if slot == 1 then
-        PrivateField.RestoreData(Table.Clone(Rewind.LastRewindData))
+        PrivateField.RestoreData(TYU.Table.Clone(Rewind.LastRewindData))
     end
 end
 Rewind:AddCallback(ModCallbacks.MC_POST_GLOWING_HOURGLASS_LOAD, Rewind.PostGlowingHourglassLoad)

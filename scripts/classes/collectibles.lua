@@ -1,5 +1,4 @@
 local Collectibles = TYU:RegisterNewClass()
-local Players = TYU.Players
 local ModItemIDs = TYU.ModItemIDs
 
 local wakeUpBannedItems = {
@@ -84,7 +83,7 @@ function Collectibles.GetCollectibleFromCurrentRoom(excludeTags, rng)
     local itemList = {}
     local room = TYU.GAME:GetRoom()
     local itemPoolType = room:GetItemPool(rng:Next(), false)
-    if Players.AnyoneHasCollectible(ModItemIDs.ORDER) then
+    if TYU.Players.AnyoneHasCollectible(ModItemIDs.ORDER) then
         itemPoolType = TYU:GetGlobalLibData("Order")[TYU.LEVEL:GetStage()]
     end
     for _, itemTable in ipairs(TYU.ITEMPOOL:GetCollectiblesFromPool(itemPoolType)) do

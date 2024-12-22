@@ -13,7 +13,6 @@ function BlazeFly:FamiliarUpdate(familiar)
     local player = familiar.Player
     local sprite = familiar:GetSprite()
     local rng = familiar:GetDropRNG()
-    local multiplier = familiar:GetMultiplier()
     if sprite:IsFinished("Appear") then
         sprite:Play("Fly", true)
     end
@@ -33,7 +32,7 @@ function BlazeFly:FamiliarUpdate(familiar)
     end
     if sprite:IsEventTriggered("ShootWave") then
         for i = 0, 3 do
-            local fireWave = TYU.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.FIRE_WAVE, 0, familiar.Position, Vector(0, 0), player):ToEffect()
+            local fireWave = Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.FIRE_WAVE, 0, familiar.Position, Vector(0, 0), player):ToEffect()
             fireWave.Rotation = 90 * i + ((familiar.Coins % 2 == 0 and 45) or 0)
         end
         familiar:AddCoins(1)

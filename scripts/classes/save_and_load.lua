@@ -1,6 +1,5 @@
 local SaveAndLoad = TYU:RegisterNewClass()
 local Callbacks = TYU.Callbacks
-local Players = TYU.Players
 local ModRoomIDs = TYU.ModRoomIDs
 
 function SaveAndLoad:PreGameExit(shouldSave)
@@ -35,10 +34,10 @@ SaveAndLoad:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, SaveAndLoad.PostNewRoom)
 function SaveAndLoad.SaveGameState()
     local data = {}
     data.Global = TYU:GetGlobalLibData()
-    data.Players = {}
-    for _, player in pairs(Players.GetPlayers(true)) do
-        local id = Players.GetPlayerID(player)
-        data.Players[tostring(id)] = TYU:GetPlayerLibData(player)
+    data.TYU.Players = {}
+    for _, player in pairs(TYU.Players.GetPlayers(true)) do
+        local id = TYU.Players.GetPlayerID(player)
+        data.TYU.Players[tostring(id)] = TYU:GetPlayerLibData(player)
     end
     SaveAndLoad.WriteGameStateData(data)
     Isaac.RunCallback(Callbacks.TYU_POST_SAVE)
@@ -53,9 +52,9 @@ function SaveAndLoad.LoadGameState()
         return
     end
     TYU:SetGlobalLibData(data.Global)
-    for _, player in pairs(Players.GetPlayers(true)) do
-        local id = tostring(Players.GetPlayerID(player))
-        local playerData = TYU.Table.First(data.Players, function(k, v) return id == v end)
+    for _, player in pairs(TYU.Players.GetPlayers(true)) do
+        local id = tostring(TYU.Players.GetPlayerID(player))
+        local playerData = TYU.Table.First(data.TYU.Players, function(k, v) return id == v end)
         if playerData then
             TYU:SetPlayerLibData(player, playerData)
         end

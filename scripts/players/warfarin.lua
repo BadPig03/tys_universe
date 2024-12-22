@@ -84,7 +84,7 @@ function Warfarin:PostPlayerUpdate(player)
     end
     local collectible = Lib.Collectibles.GetNearestDevilDeal(player.Position, 192)
     local charge = player:GetActiveCharge(ActiveSlot.SLOT_POCKET) + player:GetBatteryCharge(ActiveSlot.SLOT_POCKET)
-    if collectible and Lib.GAME:GetRoom():IsClear() then
+    if collectible and Utils.IsRoomClear() then
         if player:GetActiveItem(ActiveSlot.SLOT_POCKET) == Lib.ModItemIDs.BLOOD_SAMPLE then
             if player:IsExtraAnimationFinished() then
                 player:AnimateCollectible(Lib.ModItemIDs.BLOODY_DICE, "UseItem", "PlayerPickup")
@@ -142,14 +142,14 @@ function Warfarin:PostPickupUpdate(pickup)
     end
     local isCycled = #pickup:GetCollectibleCycle() > 0
     if pickup.FrameCount >= ((isCycled and 0) or 5) then
-        TYU.Utils.AddToWarfarinItemList(pickup.InitSeed)
+        TYU.Utils.AddSeedToWarfarinItems(pickup.InitSeed)
         if not pickup:IsShopItem() then
             pickup:MakeShopItem(-2)
             Lib.Entities.SpawnPoof(pickup.Position):GetSprite().Color:SetColorize(1, 0, 0, 1)    
         end
     else
         if pickup:IsShopItem() then
-            TYU.Utils.AddToWarfarinItemList(pickup.InitSeed)
+            TYU.Utils.AddSeedToWarfarinItems(pickup.InitSeed)
         end
         for _, effect in pairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.POOF01, 0)) do
             if effect.Position:Distance(pickup.Position) == 0 then
@@ -334,7 +334,7 @@ function Warfarin:PreLevelSelect(levelStage, stageType)
         for i = 0, movingBoxContents:__len() - 1 do
             local item = movingBoxContents:Get(i)
             if item:GetType() == EntityType.ENTITY_PICKUP and item:GetVariant() == PickupVariant.PICKUP_COLLECTIBLE then
-                TYU.Utils.AddToWarfarinItemList(item.InitSeed)
+                TYU.Utils.AddSeedToWarfarinItems(item.InitSeed)
             end
         end
     end
@@ -444,7 +444,7 @@ function Warfarin:PostPickupMorph(pickup, previousType, previousVariant, previou
     if not Lib.Players.AnyoneIsPlayerType(Lib.ModPlayerIDs.WARFARIN) or pickup.Type ~= EntityType.ENTITY_PICKUP or pickup.Variant ~= PickupVariant.PICKUP_COLLECTIBLE then
         return
     end
-    TYU.Utils.AddToWarfarinItemList(pickup.InitSeed)
+    TYU.Utils.AddSeedToWarfarinItems(pickup.InitSeed)
 end
 Warfarin:AddCallback(ModCallbacks.MC_POST_PICKUP_MORPH, Warfarin.PostPickupMorph)
 

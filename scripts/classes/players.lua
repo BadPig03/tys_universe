@@ -116,14 +116,6 @@ function Players.AnyoneIsPlayerType(type)
     return PlayerManager.AnyoneIsPlayerType(type)
 end
 
-function Players.CanPickEternalHearts(player)
-    local limit = player:GetHeartLimit()
-    if player:GetMaxHearts() == limit and player:GetEternalHearts() == 1 then
-        return false
-    end
-    return true
-end
-
 function Players.GetTotalTrinketMultiplier(id)
     return PlayerManager.GetTotalTrinketMultiplier(id)
 end

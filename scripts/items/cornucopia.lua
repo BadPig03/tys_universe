@@ -199,7 +199,7 @@ function Cornucopia:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
             local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, newItem, Utils.FindFreePickupSpawnPosition(player.Position)):ToPickup()
             item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
             item.Price = 0
-            Utils.AddToWarfarinItemList(item.InitSeed)
+            Utils.AddSeedToWarfarinItems(item.InitSeed)
             if player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_VIRTUES) and rng:RandomInt(100) < 10 then
                 local angelItem = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, TYU.ITEMPOOL:GetCollectible(ItemPoolType.POOL_ANGEL, true, rng:Next()), Utils.FindFreePickupSpawnPosition(player.Position)):ToPickup()
                 angelItem:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)

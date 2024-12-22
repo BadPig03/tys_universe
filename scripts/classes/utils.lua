@@ -1,5 +1,5 @@
 local Utils = TYU:RegisterNewClass()
-local Players = TYU.Players
+local ModEntityFlags = TYU.ModEntityFlags
 
 function Utils.FindFreePickupSpawnPosition(position, initialStep, avoidActiveEntities, allowPits)
     initialStep = initialStep or 0
@@ -24,6 +24,11 @@ end
 
 function Utils.IsRoomIndex(index)
     return TYU.LEVEL:GetCurrentRoomIndex() == index
+end
+
+function Utils.IsRoomClear()
+    local room = TYU.GAME:GetRoom()
+    return room:IsClear()
 end
 
 function Utils.IsRoomBossChallenge()
@@ -51,8 +56,8 @@ function Utils.IsMirrorWorld()
     return room:IsMirrorWorld()
 end
 
-function Utils.HasFlags(useFlags, flag, reverse)
-    if reverse then
+function Utils.HasFlags(useFlags, flag, exclude)
+    if exclude then
         return useFlags & flag ~= flag
     else
         return useFlags & flag == flag
@@ -68,16 +73,12 @@ function Utils.GetPlayerFromTear(tear)
     return nil
 end
 
-function Utils.AddToWarfarinItemList(seed)
-    TYU:SetGlobalLibData(true, "WarfarinItems", tostring(seed))
-end
-
 function Utils.HasCurseMist()
-    local room = Lib.GAME:GetRoom()
+    local room = TYU.GAME:GetRoom()
     if room:HasCurseMist() then
         return true
     end
-    for _, player in pairs(Players.GetPlayers()) do
+    for _, player in pairs(TYU.Players.GetPlayers()) do
         if player:HasCurseMistEffect() then
             return true
         end
@@ -85,9 +86,27 @@ function Utils.HasCurseMist()
     return false
 end
 
+function Utils.RemoveAllDecorations()
+    local room = TYU.GAME:GetRoom()
+    for i = 0, room:GetGridSize() do
+        local gridEntity = room:GetGridEntity(i)
+        if gridEntity and gridEntity:ToDecoration() then
+            room:RemoveGridEntityImmediate(i, 0, false)
+        end
+    end
+end
+
 function Utils.CreateTimer(...)
     local timer = Isaac.CreateTimer(...)
-    timer:AddEntityFlags(TYU.ModEntityFlags.FLAG_NO_PAUSE)
+    timer:AddEntityFlags(ModEntityFlags.FLAG_NO_PAUSE)
+end
+
+function Utils.AddSeedToWarfarinItems(seed)
+    TYU:SetGlobalLibData(true, "WarfarinItems", tostring(seed))
+end
+
+function Utils.GetOrderItemPool()
+    return TYU:GetGlobalLibData("Order")[TYU.LEVEL:GetStage()]
 end
 
 return Utils

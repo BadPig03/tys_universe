@@ -72,7 +72,7 @@ function ChefBeggar:PostSlotUpdate(slot)
 		item:RemoveCollectibleCycle()
 		item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
 		item.Price = 0
-		Utils.AddToWarfarinItemList(item.InitSeed)
+		Utils.AddSeedToWarfarinItems(item.InitSeed)
 		SetGlobalLibData(slot:GetDonationValue(), "Effects", tostring(item.InitSeed))
 		TYU.SFXMANAGER:Play(SoundEffect.SOUND_SLOTSPAWN)
 		TYU.SFXMANAGER:Play(SoundEffect.SOUND_THUMBSUP)

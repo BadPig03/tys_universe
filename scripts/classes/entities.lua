@@ -1,12 +1,11 @@
 local Entities = TYU:RegisterNewClass()
 local Constants = TYU.Constants
-local Players = TYU.Players
 local ModEntityIDs = TYU.ModEntityIDs
 
 function Entities.GetEntityID(entity)
     local player = entity:ToPlayer()
     if player then
-        return Players.GetPlayerID(player)
+        return TYU.Players.GetPlayerID(player)
     end
     local tear = entity:ToTear()
     if tear then
@@ -82,9 +81,6 @@ function Entities.GetNearestEnemy(position, includePlayer)
 end
 
 
-
-
-
 function Entities.IsProceduralItem(entity)
     local pickup = entity:ToPickup()
     return pickup and pickup.SubType >= Constants.GLITCHED_ITEM_ID
@@ -111,10 +107,6 @@ function Entities.GetCollectibles(includeShopItem, includeEmptyPedestal, exclude
         end
     end
     return entities
-end
-
-function Entities.IsValidEnemyEvenInvicible(enemy)
-    return enemy and enemy:ToNPC() and enemy:IsActiveEnemy() and not enemy:HasEntityFlags(EntityFlag.FLAG_FRIENDLY) and not enemy:HasEntityFlags(EntityFlag.FLAG_CHARM)
 end
 
 function Entities.IsStationaryEnemy(enemy)

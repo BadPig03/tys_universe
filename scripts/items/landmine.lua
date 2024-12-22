@@ -138,7 +138,7 @@ function Landmine:PostUpdate(player)
     end
     local room = TYU.GAME:GetRoom()
     local rng = RNG(room:GetAwardSeed())
-    if room:IsClear() or room:GetFrameCount() % rng:RandomInt(150, 450) ~= 30 then
+    if Utils.IsRoomClear() or room:GetFrameCount() % rng:RandomInt(150, 450) ~= 30 then
         return
     end
     for _, player in pairs(Players.GetPlayers(true)) do

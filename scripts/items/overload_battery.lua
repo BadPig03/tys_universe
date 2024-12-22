@@ -1,24 +1,45 @@
-local Lib = TYU
-local OverloadBattery = Lib:NewModItem("Overload Battery", "OVERLOAD_BATTERY")
+local OverloadBattery = TYU:NewModItem("Overload Battery", "OVERLOAD_BATTERY")
+local Players = TYU.Players
+local Entities = TYU.Entities
+local ModItemIDs = TYU.ModItemIDs
+local PrivateField = {}
 
-local function TryToAddCharge(player)
-    local charge = Lib:GetPlayerLibData(player, "OverloadBattery", "Charge")
-    while charge >= 4 do
-        charge = charge - 4
-        Lib:SetPlayerLibData(player, charge, "OverloadBattery", "Charge")
-        if player:AddActiveCharge(1, ActiveSlot.SLOT_PRIMARY) == 0 then
-            if player:AddActiveCharge(1, ActiveSlot.SLOT_SECONDARY) == 0 then
-                if player:AddActiveCharge(1, ActiveSlot.SLOT_POCKET) == 0 then
-                    player:AddActiveCharge(1, ActiveSlot.SLOT_POCKET2)
+local function SetPlayerLibData(player, value, ...)
+    TYU:SetPlayerLibData(player, value, "OverloadBattery", ...)
+end
+
+local function GetPlayerLibData(player, ...)
+    return TYU:GetPlayerLibData(player, "OverloadBattery", ...)
+end
+
+do
+    function PrivateField.TryToAddCharge(player)
+        local charge = GetPlayerLibData(player, "Charge")
+        while charge >= 4 do
+            charge = charge - 4
+            SetPlayerLibData(player, charge, "Charge")
+            if player:AddActiveCharge(1, ActiveSlot.SLOT_PRIMARY) == 0 then
+                if player:AddActiveCharge(1, ActiveSlot.SLOT_SECONDARY) == 0 then
+                    if player:AddActiveCharge(1, ActiveSlot.SLOT_POCKET) == 0 then
+                        player:AddActiveCharge(1, ActiveSlot.SLOT_POCKET2)
+                    end
                 end
             end
         end
+    end
+
+    function PrivateField.CanPickEternalHearts(player)
+        local limit = player:GetHeartLimit()
+        if player:GetMaxHearts() == limit and player:GetEternalHearts() == 1 then
+            return false
+        end
+        return true
     end
 end
 
 function OverloadBattery:PrePickupCollision(pickup, collider, low)
     local player = collider:ToPlayer()
-    if not player or not player:HasCollectible(Lib.ModItemIDs.OVERLOAD_BATTERY) or pickup:IsShopItem() then
+    if not player or not player:HasCollectible(ModItemIDs.OVERLOAD_BATTERY) or pickup:IsShopItem() then
         return
     end
     local needsCharge = false
@@ -30,7 +51,7 @@ function OverloadBattery:PrePickupCollision(pickup, collider, low)
     if not needsCharge then
         return
     end
-    local charge = Lib:GetPlayerLibData(player, "OverloadBattery", "Charge") or 0
+    local charge = GetPlayerLibData(player, "Charge") or 0
     local subType = pickup.SubType
     local pickedUp = false
     if not player:CanPickRedHearts() then
@@ -70,15 +91,15 @@ function OverloadBattery:PrePickupCollision(pickup, collider, low)
         charge = charge + 4
         pickedUp = true
     end
-    if (not player:CanPickGoldenHearts() and subType == HeartSubType.HEART_GOLDEN) or (not Lib.Players.CanPickEternalHearts(player) and subType == HeartSubType.HEART_ETERNAL) then
+    if (not player:CanPickGoldenHearts() and subType == HeartSubType.HEART_GOLDEN) or (not PrivateField.CanPickEternalHearts(player) and subType == HeartSubType.HEART_ETERNAL) then
         charge = charge + 48
         pickedUp = true
     end
     if pickedUp then
-        Lib:SetPlayerLibData(player, charge, "OverloadBattery", "Charge")
-        Lib.SFXMANAGER:Play(SoundEffect.SOUND_BATTERYCHARGE, 0.7)
-        Lib.Entities.SpawnFakePickupSprite(pickup)
-        TryToAddCharge(player)
+        SetPlayerLibData(player, charge, "Charge")
+        TYU.SFXMANAGER:Play(SoundEffect.SOUND_BATTERYCHARGE, 0.7)
+        Entities.SpawnFakePickupSprite(pickup)
+        PrivateField.TryToAddCharge(player)
         return { Collide = true, SkipCollisionEffects = true }    
     end
 end

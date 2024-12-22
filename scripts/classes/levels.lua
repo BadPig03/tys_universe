@@ -60,14 +60,4 @@ function Levels.IsRoomDevilTreasureRoom()
     return false
 end
 
-function Levels.RemoveAllDecorations()
-    local room = TYU.GAME:GetRoom()
-    for i = 0, room:GetGridSize() do
-        local gridEntity = room:GetGridEntity(i)
-        if gridEntity and gridEntity:ToDecoration() then
-            room:RemoveGridEntityImmediate(i, 0, false)
-        end
-    end
-end
-
 return Levels
