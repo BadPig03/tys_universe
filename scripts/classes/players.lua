@@ -1,6 +1,4 @@
 local Players = TYU:RegisterNewClass()
-local ModPlayerIDs = TYU.ModPlayerIDs
-local ModItemIDs = TYU.ModItemIDs
 
 function Players.GetPlayerID(player, differ)
     differ = differ or false
@@ -74,9 +72,9 @@ function Players.IsInLostCurse(player)
 end
 
 function Players.GetChargeBarPosition(player, type)
-    local hasBobsStomach = player:HasCollectible(ModItemIDs.BOBS_STOMACH)
-    local hasHephaestusSoul = player:HasCollectible(ModItemIDs.HEPHAESTUS_SOUL)
-    local hasOceanusSoul = player:HasCollectible(ModItemIDs.OCEANUS_SOUL)
+    local hasBobsStomach = player:HasCollectible(TYU.ModItemIDs.BOBS_STOMACH)
+    local hasHephaestusSoul = player:HasCollectible(TYU.ModItemIDs.HEPHAESTUS_SOUL)
+    local hasOceanusSoul = player:HasCollectible(TYU.ModItemIDs.OCEANUS_SOUL)
     if type == 1 then
         return Vector(-21, -60)
     elseif type == 2 then

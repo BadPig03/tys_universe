@@ -1,5 +1,5 @@
 TYU = RegisterMod("ty's Universe", 1)
-TYU.VERSION = "Alpha Test v1"
+TYU.VERSION = "Alpha Test v2"
 TYU.REPTENTOGONVERSION = "1.0.12e"
 
 if REPENTANCE_PLUS then

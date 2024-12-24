@@ -1,31 +1,30 @@
 local Foods = TYU:RegisterNewClass()
-local ModFoodItemIDs = TYU.ModFoodItemIDs
 local PrivateField = {}
 
 do
     PrivateField.FoodStats = {
-        [ModFoodItemIDs.FOODS] = { 0, 0, 0, 0, 0, 0 },
-        [ModFoodItemIDs.APPLE] = { 2, 1, 1, 0, 0, 0 },
-        [ModFoodItemIDs.BAKED_POTATO] = { 2, 2, 2, 0, 0, 0 },
-        [ModFoodItemIDs.BEETROOT] = { 0, 1, 1, 2, 0, 0 },
-        [ModFoodItemIDs.BROWN_MUSHROOM] = { 0, 2, 1, 0, 2, 0 },
-        [ModFoodItemIDs.CARROT] = { 2, 2, 1, 0, 0, 0 },
-        [ModFoodItemIDs.CHORUS_FRUIT] = { 2, 1, 1, 0, 0, 0 },
-        [ModFoodItemIDs.COCOA_BEANS] = { 0, 0, 1, 2, 0, 2 },
-        [ModFoodItemIDs.DRIED_KELP] = { 0, 0, 2, 1, 0, 2 },
-        [ModFoodItemIDs.GLOW_BERRIES] = { 0, 0, 2, 2, 2, 0 },
-        [ModFoodItemIDs.GOLDEN_APPLE] = { 3, 3, 2, 0, 0, 0 },
-        [ModFoodItemIDs.GOLDEN_CARROT] = { 4, 4, 4, 0, 0, 0 },
-        [ModFoodItemIDs.MELON_SLICE] = { 0, 2, 1, 0, 1, 0 },
-        [ModFoodItemIDs.POTATO] = { 0, 0, 2, 2, 0, 2 },
-        [ModFoodItemIDs.RED_MUSHROOM] = { 0, 2, 1, 0, 2, 0 },
-        [ModFoodItemIDs.SWEET_BERRIES] = { 0, 0, 2, 2, 2, 0 },
-        [ModFoodItemIDs.WHEAT] = { 0, 1, 1, 2, 0, 0 },
-        [ModFoodItemIDs.CABBAGE] = { 0, 2, 1, 0, 1, 0 },
-        [ModFoodItemIDs.ONION] = { 0, 2, 1, 0, 1, 0 },
-        [ModFoodItemIDs.PUMPKIN_SLICE] = { 1, 1, 0, 2, 0, 0 },
-        [ModFoodItemIDs.TOMATO] = { 0, 0, 2, 2, 0, 2 },
-        [ModFoodItemIDs.MONSTER_MEAT] = { 0, 0, 0, 2, 2, 2 }
+        [TYU.ModFoodItemIDs.FOODS] = { 0, 0, 0, 0, 0, 0 },
+        [TYU.ModFoodItemIDs.APPLE] = { 2, 1, 1, 0, 0, 0 },
+        [TYU.ModFoodItemIDs.BAKED_POTATO] = { 2, 2, 2, 0, 0, 0 },
+        [TYU.ModFoodItemIDs.BEETROOT] = { 0, 1, 1, 2, 0, 0 },
+        [TYU.ModFoodItemIDs.BROWN_MUSHROOM] = { 0, 2, 1, 0, 2, 0 },
+        [TYU.ModFoodItemIDs.CARROT] = { 2, 2, 1, 0, 0, 0 },
+        [TYU.ModFoodItemIDs.CHORUS_FRUIT] = { 2, 1, 1, 0, 0, 0 },
+        [TYU.ModFoodItemIDs.COCOA_BEANS] = { 0, 0, 1, 2, 0, 2 },
+        [TYU.ModFoodItemIDs.DRIED_KELP] = { 0, 0, 2, 1, 0, 2 },
+        [TYU.ModFoodItemIDs.GLOW_BERRIES] = { 0, 0, 2, 2, 2, 0 },
+        [TYU.ModFoodItemIDs.GOLDEN_APPLE] = { 3, 3, 2, 0, 0, 0 },
+        [TYU.ModFoodItemIDs.GOLDEN_CARROT] = { 4, 4, 4, 0, 0, 0 },
+        [TYU.ModFoodItemIDs.MELON_SLICE] = { 0, 2, 1, 0, 1, 0 },
+        [TYU.ModFoodItemIDs.POTATO] = { 0, 0, 2, 2, 0, 2 },
+        [TYU.ModFoodItemIDs.RED_MUSHROOM] = { 0, 2, 1, 0, 2, 0 },
+        [TYU.ModFoodItemIDs.SWEET_BERRIES] = { 0, 0, 2, 2, 2, 0 },
+        [TYU.ModFoodItemIDs.WHEAT] = { 0, 1, 1, 2, 0, 0 },
+        [TYU.ModFoodItemIDs.CABBAGE] = { 0, 2, 1, 0, 1, 0 },
+        [TYU.ModFoodItemIDs.ONION] = { 0, 2, 1, 0, 1, 0 },
+        [TYU.ModFoodItemIDs.PUMPKIN_SLICE] = { 1, 1, 0, 2, 0, 0 },
+        [TYU.ModFoodItemIDs.TOMATO] = { 0, 0, 2, 2, 0, 2 },
+        [TYU.ModFoodItemIDs.MONSTER_MEAT] = { 0, 0, 0, 2, 2, 2 }
     }
 
     PrivateField.StandardValues = { 0.25, 0.2, 0.1, 0.4, 0.04, 0.025 }
@@ -33,38 +32,38 @@ end
 
 do
     PrivateField.Outcomes = WeightedOutcomePicker()
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.APPLE, 6)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.BAKED_POTATO, 4)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.BEETROOT, 9)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.BROWN_MUSHROOM, 8)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.CARROT, 5)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.CHORUS_FRUIT, 6)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.COCOA_BEANS, 10)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.DRIED_KELP, 10)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.GLOW_BERRIES, 9)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.GOLDEN_APPLE, 2)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.GOLDEN_CARROT, 3)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.MELON_SLICE, 8)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.POTATO, 10)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.RED_MUSHROOM, 8)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.SWEET_BERRIES, 9)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.WHEAT, 9)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.CABBAGE, 8)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.ONION, 8)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.PUMPKIN_SLICE, 7)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.TOMATO, 10)
-    PrivateField.Outcomes:AddOutcomeWeight(ModFoodItemIDs.MONSTER_MEAT, 10)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.APPLE, 6)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.BAKED_POTATO, 4)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.BEETROOT, 9)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.BROWN_MUSHROOM, 8)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.CARROT, 5)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.CHORUS_FRUIT, 6)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.COCOA_BEANS, 10)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.DRIED_KELP, 10)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.GLOW_BERRIES, 9)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.GOLDEN_APPLE, 2)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.GOLDEN_CARROT, 3)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.MELON_SLICE, 8)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.POTATO, 10)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.RED_MUSHROOM, 8)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.SWEET_BERRIES, 9)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.WHEAT, 9)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.CABBAGE, 8)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.ONION, 8)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.PUMPKIN_SLICE, 7)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.TOMATO, 10)
+    PrivateField.Outcomes:AddOutcomeWeight(TYU.ModFoodItemIDs.MONSTER_MEAT, 10)
 end
 
 function Foods.ApplySpecialEffect(food, player, rng)
     local effects = player:GetEffects()
     local seed = rng:Next()
-    if food == ModFoodItemIDs.CHORUS_FRUIT then
+    if food == TYU.ModFoodItemIDs.CHORUS_FRUIT then
         TYU.GAME:MoveToRandomRoom(false, seed, player)
-    elseif food == ModFoodItemIDs.GOLDEN_APPLE then
+    elseif food == TYU.ModFoodItemIDs.GOLDEN_APPLE then
         player:AddHearts(4)
         player:AddSoulHearts(2)
-    elseif food == ModFoodItemIDs.MONSTER_MEAT then
+    elseif food == TYU.ModFoodItemIDs.MONSTER_MEAT then
         player:AddRottenHearts(1)
     end
 end

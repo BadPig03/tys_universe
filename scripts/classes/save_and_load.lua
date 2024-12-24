@@ -1,16 +1,14 @@
 local SaveAndLoad = TYU:RegisterNewClass()
-local Callbacks = TYU.Callbacks
-local ModRoomIDs = TYU.ModRoomIDs
 
 function SaveAndLoad:PreGameExit(shouldSave)
     if shouldSave then
         SaveAndLoad.SaveGameState()
     else
         SaveAndLoad.RemoveGameState()
-        Isaac.RunCallback(Callbacks.TYU_POST_RESTART)
+        Isaac.RunCallback(TYU.Callbacks.TYU_POST_RESTART)
     end
     TYU:ClearAllData()
-    Isaac.RunCallback(Callbacks.TYU_POST_EXIT, shouldSave)
+    Isaac.RunCallback(TYU.Callbacks.TYU_POST_EXIT, shouldSave)
 end
 SaveAndLoad:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, SaveAndLoad.PreGameExit)
 
@@ -27,7 +25,7 @@ end
 SaveAndLoad:AddPriorityCallback(ModCallbacks.MC_POST_GAME_STARTED, CallbackPriority.IMPORTANT, SaveAndLoad.PostGameStarted)
 
 function SaveAndLoad:PostNewRoom()
-    Isaac.RunCallbackWithParam(Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, nil, false)
+    Isaac.RunCallbackWithParam(TYU.Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, nil, false)
 end
 SaveAndLoad:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, SaveAndLoad.PostNewRoom)
 
@@ -40,7 +38,7 @@ function SaveAndLoad.SaveGameState()
         data.Players[tostring(id)] = TYU:GetPlayerLibData(player)
     end
     SaveAndLoad.WriteGameStateData(data)
-    Isaac.RunCallback(Callbacks.TYU_POST_SAVE)
+    Isaac.RunCallback(TYU.Callbacks.TYU_POST_SAVE)
 end
 
 function SaveAndLoad.LoadGameState()
@@ -60,8 +58,8 @@ function SaveAndLoad.LoadGameState()
         end
         player:AddCacheFlags(CacheFlag.CACHE_ALL, true)
     end
-    Isaac.RunCallback(Callbacks.TYU_POST_LOAD)
-    Isaac.RunCallbackWithParam(Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, nil, true)
+    Isaac.RunCallback(TYU.Callbacks.TYU_POST_LOAD)
+    Isaac.RunCallbackWithParam(TYU.Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, nil, true)
 end
 
 function SaveAndLoad.WriteGameStateData(data)
@@ -97,17 +95,17 @@ function SaveAndLoad.ReloadRoomData()
         local name = roomConfigRoom.Name
         local variant = roomConfigRoom.Variant
         if type == RoomType.ROOM_DEVIL and name == "Guilt Devil Room" then
-            table.insert(ModRoomIDs.GUILT_DEVIL_ROOMS, variant)
+            table.insert(TYU.ModRoomIDs.GUILT_DEVIL_ROOMS, variant)
         end
         if type == RoomType.ROOM_SECRET_EXIT then
             if name == "ICU Room" then
-                table.insert(ModRoomIDs.ICU_ROOMS, variant)
+                table.insert(TYU.ModRoomIDs.ICU_ROOMS, variant)
             elseif name == "Warfarin Blackmarket" then
-                table.insert(ModRoomIDs.WARFARIN_BLACK_MARKETS, variant)
+                table.insert(TYU.ModRoomIDs.WARFARIN_BLACK_MARKETS, variant)
             end
         end
         if type == RoomType.ROOM_ERROR and name == "Wake-up Main Room" then
-            ModRoomIDs.WAKE_UP_MAIN_ROOM = variant
+            TYU.ModRoomIDs.WAKE_UP_MAIN_ROOM = variant
         end
     end
 end

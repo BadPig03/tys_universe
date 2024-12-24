@@ -1,5 +1,4 @@
 local Utils = TYU:RegisterNewClass()
-local ModEntityFlags = TYU.ModEntityFlags
 
 function Utils.FindFreePickupSpawnPosition(position, initialStep, avoidActiveEntities, allowPits)
     initialStep = initialStep or 0
@@ -102,7 +101,7 @@ end
 
 function Utils.CreateTimer(...)
     local timer = Isaac.CreateTimer(...)
-    timer:AddEntityFlags(ModEntityFlags.FLAG_NO_PAUSE)
+    timer:AddEntityFlags(TYU.ModEntityFlags.FLAG_NO_PAUSE)
 end
 
 function Utils.AddSeedToWarfarinItems(seed)

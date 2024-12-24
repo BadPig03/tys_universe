@@ -1,6 +1,4 @@
 local Entities = TYU:RegisterNewClass()
-local Constants = TYU.Constants
-local ModEntityIDs = TYU.ModEntityIDs
 
 function Entities.GetEntityID(entity)
     local player = entity:ToPlayer()
@@ -49,7 +47,7 @@ end
 function Entities.SpawnFakePickupSprite(pickup, golden)
     golden = golden or false
     pickup:PlayPickupSound()
-    local fakePickup = Entities.Spawn(ModEntityIDs.FAKE_PICKUP.Type, ModEntityIDs.FAKE_PICKUP.Variant, ModEntityIDs.FAKE_PICKUP.SubType, pickup.Position, pickup.Velocity, pickup.SpawnerEntity, pickup.InitSeed)
+    local fakePickup = Entities.Spawn(TYU.ModEntityIDs.FAKE_PICKUP.Type, TYU.ModEntityIDs.FAKE_PICKUP.Variant, TYU.ModEntityIDs.FAKE_PICKUP.SubType, pickup.Position, pickup.Velocity, pickup.SpawnerEntity, pickup.InitSeed)
     local fakeSprite = fakePickup:GetSprite()
     fakeSprite:Load(pickup:GetSprite():GetFilename(), true)
     fakeSprite:Play("Collect", true)
@@ -83,7 +81,7 @@ end
 
 function Entities.IsProceduralItem(entity)
     local pickup = entity:ToPickup()
-    return pickup and pickup.SubType >= Constants.GLITCHED_ITEM_ID
+    return pickup and pickup.SubType >= TYU.Constants.GLITCHED_ITEM_ID
 end
 
 function Entities.GetEntityBySeed(seed)

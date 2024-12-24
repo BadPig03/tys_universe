@@ -42,4 +42,12 @@ function ExplosionMaster:PrePlayerTakeDamage(player, amount, flags, source, coun
 end
 ExplosionMaster:AddCallback(ModCallbacks.MC_PRE_PLAYER_TAKE_DMG, ExplosionMaster.PrePlayerTakeDamage)
 
+function ExplosionMaster:EntityTakeDamage(entity, amount, flags, source, countdown)
+	if not source or not source.Entity or not source.Entity:ToBomb() or not source.Entity:ToBomb():HasTearFlags(ModTearFlags.TEAR_EXPLOSION_MASTER) or entity.Variant ~= FamiliarVariant.LOST_SOUL then
+        return
+    end
+    return false
+end
+ExplosionMaster:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, ExplosionMaster.EntityTakeDamage, EntityType.ENTITY_FAMILIAR)
+
 return ExplosionMaster

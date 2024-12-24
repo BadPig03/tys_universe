@@ -1,5 +1,4 @@
 local Collectibles = TYU:RegisterNewClass()
-local ModItemIDs = TYU.ModItemIDs
 
 function Collectibles.GetCollectibleFromCurrentRoom(excludeTags, rng)
     if excludeTags == nil then
@@ -11,7 +10,7 @@ function Collectibles.GetCollectibleFromCurrentRoom(excludeTags, rng)
     local itemList = {}
     local room = TYU.GAME:GetRoom()
     local itemPoolType = room:GetItemPool(rng:Next(), false)
-    if TYU.Players.AnyoneHasCollectible(ModItemIDs.ORDER) then
+    if TYU.Players.AnyoneHasCollectible(TYU.ModItemIDs.ORDER) then
         itemPoolType = TYU.Utils.GetOrderItemPool()
     end
     for _, itemTable in ipairs(TYU.ITEMPOOL:GetCollectiblesFromPool(itemPoolType)) do
