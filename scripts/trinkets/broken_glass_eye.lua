@@ -1,15 +1,16 @@
-local Lib = TYU
-local BrokenGlassEye = Lib:NewModTrinket("Broken Glass Eye", "BROKEN_GLASS_EYE")
+local BrokenGlassEye = TYU:NewModTrinket("Broken Glass Eye", "BROKEN_GLASS_EYE")
+local Stat = TYU.Stat
+local ModTrinketIDs = TYU.ModTrinketIDs
 
 function BrokenGlassEye:EvaluateCache(player, cacheFlag)
-    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BROKEN_GLASS_EYE)
+    local multiplier = player:GetTrinketMultiplier(ModTrinketIDs.BROKEN_GLASS_EYE)
     if multiplier == 0 then
         return
     end
     if player:HasCollectible(CollectibleType.COLLECTIBLE_INNER_EYE) or player:HasCollectible(CollectibleType.COLLECTIBLE_MUTANT_SPIDER) then
-        Lib.Stat:AddTearsMultiplier(player, math.min(1, 0.1 * multiplier + 0.8))
+        Stat:AddTearsMultiplier(player, math.min(1, 0.1 * multiplier + 0.8))
     else
-        Lib.Stat:AddTearsMultiplier(player, math.min(1, 0.15 * multiplier + 0.45))
+        Stat:AddTearsMultiplier(player, math.min(1, 0.15 * multiplier + 0.45))
     end
 end
 BrokenGlassEye:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, BrokenGlassEye.EvaluateCache, CacheFlag.CACHE_FIREDELAY)
@@ -19,7 +20,7 @@ function BrokenGlassEye:PostPlayerGetMultiShotParams(player)
     if not weapon then
         return
     end
-    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BROKEN_GLASS_EYE)
+    local multiplier = player:GetTrinketMultiplier(ModTrinketIDs.BROKEN_GLASS_EYE)
     if multiplier == 0 then
         return
     end

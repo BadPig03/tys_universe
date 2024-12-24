@@ -108,17 +108,17 @@ function CrownOfKings:PreSpawnCleanAward(rng, spawnPosition)
     for _, player in pairs(Players.GetPlayers(true)) do
         if player:HasCollectible(ModItemIDs.CROWN_OF_KINGS) and GetPlayerLibData(player, "BossFound") then
             if Utils.IsRoomType(RoomType.ROOM_CHALLENGE) and GetPlayerLibData(player, "IsBossChallenge") then
-                Isaac.CreateTimer(function()
+                Utils.CreateTimer(function()
                     Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, PrivateField.GetCollectibleFromRandomPool(1, 3, rng), Utils.FindFreePickupSpawnPosition(room:GetCenterPos() + Vector(0, 40))) 
                 end, 1, 0, false)
                 SetPlayerLibData(player, false, "IsBossChallenge")
             elseif Utils.IsRoomType(RoomType.ROOM_BOSSRUSH) and GetPlayerLibData(player, "IsBossRush") then
-                Isaac.CreateTimer(function()
+                Utils.CreateTimer(function()
                     Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, PrivateField.GetCollectibleFromRandomPool(3, 3, rng), Utils.FindFreePickupSpawnPosition(room:GetCenterPos() + Vector(0, 40))) 
                 end, 1, 0, false)
                 SetPlayerLibData(player, false, "IsBossRush")
             else
-                Isaac.CreateTimer(function()
+                Utils.CreateTimer(function()
                     Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, PrivateField.GetCollectibleFromRandomPool(0, 3, rng), Utils.FindFreePickupSpawnPosition(room:GetCenterPos() + Vector(0, 40))) 
                 end, 1, 0, false)
             end

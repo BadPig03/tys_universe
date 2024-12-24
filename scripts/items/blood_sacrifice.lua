@@ -246,7 +246,7 @@ function BloodSacrifice:PreTriggerPlayerDeath(player)
         return
     end
     PrivateField.RevivePlayer(player)
-    Isaac.CreateTimer(function()
+    Utils.CreateTimer(function()
         PrivateField.SetHealthAndTeleport(data)
     end, 1, 0, false)
 end

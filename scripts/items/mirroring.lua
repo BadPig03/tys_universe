@@ -118,7 +118,7 @@ function Mirroring:PostUpdate()
     if targetPos then
         local rng = Isaac.GetPlayer(0):GetCollectibleRNG(ModItemIDs.MIRRORING)
         if rng:RandomInt(100) < 25 then
-            Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, ModItemIDs.MIRRORINGBROKEN, room:FindFreePickupSpawnPosition(targetPos))
+            Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, ModItemIDs.MIRRORINGBROKEN, Utils.FindFreePickupSpawnPosition(targetPos))
         end
     end
     SetGlobalLibData(true)

@@ -1,23 +1,35 @@
-local Lib = TYU
-local KeepersCore = Lib:NewModTrinket("Keeper's Core", "KEEPERS_CORE")
+local KeepersCore = TYU:NewModTrinket("Keeper's Core", "KEEPERS_CORE")
+local Players = TYU.Players
+local ModTrinketIDs = TYU.ModTrinketIDs
+local PrivateField = {}
 
-local chestTable = {
-    [PickupVariant.PICKUP_CHEST] = true,
-    [PickupVariant.PICKUP_BOMBCHEST] = true,
-    [PickupVariant.PICKUP_SPIKEDCHEST] = true,
-    [PickupVariant.PICKUP_MIMICCHEST] = true,
-    [PickupVariant.PICKUP_OLDCHEST] = true,
-    [PickupVariant.PICKUP_WOODENCHEST] = true,
-    [PickupVariant.PICKUP_MEGACHEST] = true,
-    [PickupVariant.PICKUP_HAUNTEDCHEST] = true,
-    [PickupVariant.PICKUP_LOCKEDCHEST] = true,
-    [PickupVariant.PICKUP_GRAB_BAG] = true,
-    [PickupVariant.PICKUP_REDCHEST] = true,
-    [PickupVariant.PICKUP_MOMSCHEST] = true
-}
+local function GetGlobalLibData(...)
+    return TYU:GetGlobalLibData("KeepersCore", ...)
+end
+
+local function SetGlobalLibData(value, ...)
+    TYU:SetGlobalLibData(value, "KeepersCore", ...)
+end
+
+do
+    PrivateField.ChestTable = {
+        [PickupVariant.PICKUP_CHEST] = true,
+        [PickupVariant.PICKUP_BOMBCHEST] = true,
+        [PickupVariant.PICKUP_SPIKEDCHEST] = true,
+        [PickupVariant.PICKUP_MIMICCHEST] = true,
+        [PickupVariant.PICKUP_OLDCHEST] = true,
+        [PickupVariant.PICKUP_WOODENCHEST] = true,
+        [PickupVariant.PICKUP_MEGACHEST] = true,
+        [PickupVariant.PICKUP_HAUNTEDCHEST] = true,
+        [PickupVariant.PICKUP_LOCKEDCHEST] = true,
+        [PickupVariant.PICKUP_GRAB_BAG] = true,
+        [PickupVariant.PICKUP_REDCHEST] = true,
+        [PickupVariant.PICKUP_MOMSCHEST] = true
+    }
+end
 
 function KeepersCore:PostPickupInit(pickup)
-    if not chestTable[pickup.Variant] or (Lib:GetGlobalLibData("KeepersCore", "LootTable") and Lib:GetGlobalLibData("KeepersCore", "LootTable")[tostring(pickup.InitSeed)]) then
+    if not PrivateField.ChestTable[pickup.Variant] or (GetGlobalLibData("LootTable") and GetGlobalLibData("LootTable")[tostring(pickup.InitSeed)]) then
         return
     end
     local lootList = pickup:GetLootList():GetEntries()
@@ -31,15 +43,15 @@ function KeepersCore:PostPickupInit(pickup)
         end
         table.insert(lootTable, {Type = lootListEntry:GetType(), Variant = lootListEntry:GetVariant(), SubType = lootListEntry:GetSubType(), Seed = lootListEntry:GetSeed(), RNG = rng})
     end
-    Lib:SetGlobalLibData(lootTable, "KeepersCore", "LootTable", tostring(pickup.InitSeed))
+    SetGlobalLibData(lootTable, "LootTable", tostring(pickup.InitSeed))
     pickup:UpdatePickupGhosts()
 end
 KeepersCore:AddCallback(ModCallbacks.MC_POST_PICKUP_INIT, KeepersCore.PostPickupInit)
 
 function KeepersCore:PrePickupGetLootList(pickup, shouldAdvance)
-    local multiplier = Lib.Players.GetTotalTrinketMultiplier(Lib.ModTrinketIDs.KEEPERS_CORE)
-    local lootTable = Lib:GetGlobalLibData("KeepersCore", "LootTable") and Lib:GetGlobalLibData("KeepersCore", "LootTable")[tostring(pickup.InitSeed)]
-    if multiplier == 0 or not lootTable or not chestTable[pickup.Variant] then
+    local multiplier = Players.GetTotalTrinketMultiplier(ModTrinketIDs.KEEPERS_CORE)
+    local lootTable = GetGlobalLibData("LootTable") and GetGlobalLibData("LootTable")[tostring(pickup.InitSeed)]
+    if multiplier == 0 or not lootTable or not PrivateField.ChestTable[pickup.Variant] then
         return
     end
     local lootList = LootList()
@@ -60,17 +72,16 @@ end
 KeepersCore:AddCallback(ModCallbacks.MC_PRE_PICKUP_GET_LOOT_LIST, KeepersCore.PrePickupGetLootList)
 
 function KeepersCore:PostTriggerTrinketChanged(player, trinket, _)
-    if trinket ~= Lib.ModTrinketIDs.KEEPERS_CORE and trinket ~= Lib.ModTrinketIDs.KEEPERS_CORE | TrinketType.TRINKET_GOLDEN_FLAG then
+    if trinket ~= ModTrinketIDs.KEEPERS_CORE and trinket ~= ModTrinketIDs.KEEPERS_CORE | TrinketType.TRINKET_GOLDEN_FLAG then
         return
     end
-    local room = Lib.GAME:GetRoom()
-    room:InvalidatePickupVision()
+    TYU.GAME:GetRoom():InvalidatePickupVision()
 end
 KeepersCore:AddCallback(ModCallbacks.MC_POST_TRIGGER_TRINKET_ADDED, KeepersCore.PostTriggerTrinketChanged)
 KeepersCore:AddCallback(ModCallbacks.MC_POST_TRIGGER_TRINKET_REMOVED, KeepersCore.PostTriggerTrinketChanged)
 
 function KeepersCore:PostNewLevel()
-    Lib:SetGlobalLibData({}, "KeepersCore", "LootTable")
+    SetGlobalLibData({}, "LootTable")
 end
 KeepersCore:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, KeepersCore.PostNewLevel)
 

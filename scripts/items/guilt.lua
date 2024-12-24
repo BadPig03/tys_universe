@@ -74,7 +74,7 @@ end
 Guilt:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, Guilt.PostAddCollectible, ModItemIDs.GUILT)
 
 function Guilt:PostPlayerNewRoomTempEffects(player)
-    if not TYU.LEVEL:CanSpawnDevilRoom() or not player:HasCollectible(ModItemIDs.GUILT) or Utils.IsMirrorWorld() or not Utils.IsStartingRoom() or not Utils.IsRoomFirstVisit() or TYU.LEVEL:IsAscent() or Isaac.GetChallenge() == Challenge.CHALLENGE_BACKASSWARDS then
+    if not TYU.LEVEL:CanSpawnDevilRoom() or not player:HasCollectible(ModItemIDs.GUILT) or Utils.IsMirrorWorld() or not Utils.IsStartingRoom() or not Utils.IsRoomFirstVisit() or Utils.IsAscent() or Isaac.GetChallenge() == Challenge.CHALLENGE_BACKASSWARDS then
         return
     end
     local oldCount = GetGlobalLibData("Count") or 0

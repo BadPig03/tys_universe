@@ -1,9 +1,10 @@
 local BaitAndSwitch = TYU:NewModPill("Bait And Switch", "BAIT_AND_SWITCH")
 local Players = TYU.Players
+local Utils = TYU.Utils
 local ModPillEffectIDs = TYU.ModPillEffectIDs
 
 function BaitAndSwitch:UsePill(pillEffect, player, useFlags, pillColor)
-    if pillColor & PillColor.PILL_GIANT_FLAG == PillColor.PILL_GIANT_FLAG then
+    if Utils.HasFlags(pillColor, PillColor.PILL_GIANT_FLAG) then
         Players.AddShield(player, 60)
     end
     player:TeleportToRandomPosition()

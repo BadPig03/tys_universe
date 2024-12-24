@@ -23,7 +23,7 @@ do
     PrivateField.ItemPoolFlag = true
 
     function PrivateField.IsInvalid()
-        return TYU.LEVEL:IsAscent() or Utils.IsInDeathCertificate() or TYU.LEVEL:GetStage() >= LevelStage.STAGE7
+        return Utils.IsAscent() or Utils.IsInDeathCertificate() or TYU.LEVEL:GetStage() >= LevelStage.STAGE7
     end
 end
 
@@ -72,7 +72,7 @@ function NoticeOfCriticalCondition:PreNewRoom(room, roomDesc)
     end
     local itemPool = ModItemPoolIDs.ILLNESS
     if Players.AnyoneHasCollectible(ModItemIDs.ORDER) then
-        itemPool = TYU:GetGlobalLibData("Order")[TYU.LEVEL:GetStage()]
+        itemPool = Utils.GetOrderItemPool()
     end
     room:SetItemPool(itemPool)
 end
@@ -101,17 +101,18 @@ function NoticeOfCriticalCondition:ReplaceICUDoorSprite()
     end
     if Utils.IsRoomIndex(ICURoomIndex) then
         room:SetBackdropType(ModBackdropIDs.ICU, 1)
-        if room:IsFirstVisit() then
-            for _, slot in pairs(Isaac.FindByType(EntityType.ENTITY_SLOT, SlotVariant.MOMS_DRESSING_TABLE)) do
-                Entities.Spawn(ModEntityIDs.HEALING_BEGGAR.Type, ModEntityIDs.HEALING_BEGGAR.Variant, ModEntityIDs.HEALING_BEGGAR.SubType, slot.Position)
-                slot:Remove()
-            end
-            for _, bed in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_BED)) do
-                Entities.Spawn(ModEntityIDs.ICU_BED.Type, ModEntityIDs.ICU_BED.Variant, ModEntityIDs.ICU_BED.SubType, bed.Position)
-                bed:Remove()
-            end
-            Utils.RemoveAllDecorations()
+        if not Utils.IsRoomFirstVisit() then
+            return
         end
+        for _, slot in pairs(Isaac.FindByType(EntityType.ENTITY_SLOT, SlotVariant.MOMS_DRESSING_TABLE)) do
+            Entities.Spawn(ModEntityIDs.HEALING_BEGGAR.Type, ModEntityIDs.HEALING_BEGGAR.Variant, ModEntityIDs.HEALING_BEGGAR.SubType, slot.Position)
+            slot:Remove()
+        end
+        for _, bed in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_BED)) do
+            Entities.Spawn(ModEntityIDs.ICU_BED.Type, ModEntityIDs.ICU_BED.Variant, ModEntityIDs.ICU_BED.SubType, bed.Position)
+            bed:Remove()
+        end
+        Utils.RemoveAllDecorations()
     end
 end
 NoticeOfCriticalCondition:AddCallback(Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, NoticeOfCriticalCondition.ReplaceICUDoorSprite)

@@ -1,14 +1,10 @@
-local Lib = TYU
-local ToolBox = Lib:NewModItem("Tool Box", "TOOL_BOX")
+local ToolBox = TYU:NewModItem("Tool Box", "TOOL_BOX")
+local Collectibles = TYU.Collectibles
+local ModItemIDs = TYU.ModItemIDs
+local ModEntityIDs = TYU.ModEntityIDs
 
 function ToolBox:EvaluateCache(player, cacheFlag)
-    local count = player:GetCollectibleNum(Lib.ModItemIDs.TOOL_BOX) + player:GetEffects():GetCollectibleEffectNum(Lib.ModItemIDs.TOOL_BOX)
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.TOOL_BOX)
-    for _, familiar in pairs(player:CheckFamiliarEx(Lib.ModEntityIDs.TOOL_BOX.Variant, count, RNG(rng:Next()), Lib.ITEMCONFIG:GetCollectible(Lib.ModItemIDs.TOOL_BOX))) do
-        local sprite = familiar:GetSprite()
-        sprite:Play("Appear", true)
-        familiar:AddToFollowers()
-    end
+    Collectibles.CheckFamiliarFromCollectible(player, ModItemIDs.TOOL_BOX, ModEntityIDs.TOOL_BOX.Variant)
 end
 ToolBox:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, ToolBox.EvaluateCache, CacheFlag.CACHE_FAMILIARS)
 

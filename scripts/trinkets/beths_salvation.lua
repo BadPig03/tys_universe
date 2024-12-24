@@ -1,30 +1,34 @@
-local Lib = TYU
-local BethsSalvation = Lib:NewModTrinket("Beth's Salvation", "BETHS_SALVATION")
+local BethsSalvation = TYU:NewModTrinket("Beth's Salvation", "BETHS_SALVATION")
+local Players = TYU.Players
+local Utils = TYU.Utils
+local ModTrinketIDs = TYU.ModTrinketIDs
+local PrivateField = {}
 
-local function CanNotTeleportToAngelRoom(player)
-    if Lib.Players.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_EUCHARIST) then
-        return false
-    elseif player:GetTrinketRNG(Lib.ModTrinketIDs.BETHS_SALVATION):RandomInt(100) < 50 then
-        return false
+do
+    function PrivateField.CanNotTeleportToAngelRoom(player)
+        if Players.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_EUCHARIST) then
+            return false
+        elseif player:GetTrinketRNG(ModTrinketIDs.BETHS_SALVATION):RandomInt(100) < 50 then
+            return false
+        end
+        return true
     end
-    return true
 end
 
 function BethsSalvation:PostPlayerNewRoomTempEffects(player)
-    local room = Lib.GAME:GetRoom()
-    if Lib.LEVEL:GetCurrentRoomIndex() ~= Lib.LEVEL:GetStartingRoomIndex() or not room:IsFirstVisit() or Lib.LEVEL:IsAscent() or Isaac.GetChallenge() == Challenge.CHALLENGE_BACKASSWARDS then
+    if not Utils.IsStartingRoom() or not Utils.IsRoomFirstVisit() or Utils.IsAscent() or Isaac.GetChallenge() == Challenge.CHALLENGE_BACKASSWARDS then
         return
     end
-    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BETHS_SALVATION)
+    local multiplier = player:GetTrinketMultiplier(ModTrinketIDs.BETHS_SALVATION)
     if multiplier == 0 then
         return
     end
-    if CanNotTeleportToAngelRoom(player) then
+    if PrivateField.CanNotTeleportToAngelRoom(player) then
         return
     end
-    Isaac.CreateTimer(function()
-        Lib.LEVEL:InitializeDevilAngelRoom(true, false)
-        Lib.GAME:StartRoomTransition(GridRooms.ROOM_DEVIL_IDX, Direction.NO_DIRECTION, RoomTransitionAnim.TELEPORT, player, Dimension.CURRENT)
+    Utils.CreateTimer(function()
+        TYU.LEVEL:InitializeDevilAngelRoom(true, false)
+        TYU.GAME:StartRoomTransition(GridRooms.ROOM_DEVIL_IDX, Direction.NO_DIRECTION, RoomTransitionAnim.TELEPORT, player, Dimension.CURRENT)
     end, 1, 0, false)
 end
 BethsSalvation:AddCallback(ModCallbacks.MC_POST_PLAYER_NEW_ROOM_TEMP_EFFECTS, BethsSalvation.PostPlayerNewRoomTempEffects)

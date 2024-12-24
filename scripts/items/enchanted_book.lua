@@ -48,11 +48,11 @@ EnchantedBook:AddCallback(ModCallbacks.MC_POST_PLAYERHUD_RENDER_ACTIVE_ITEM, Enc
 function EnchantedBook:PostPickupRender(pickup, offset)
     local layer = pickup:GetSprite():GetLayer("head")
     if pickup.SubType == ModItemIDs.ENCHANTED_BOOK and not Collectibles.IsBlind(pickup) then
-        if layer:GetRenderFlags() & AnimRenderFlags.GOLDEN ~= AnimRenderFlags.GOLDEN then
+        if Utils.HasFlags(layer:GetRenderFlags(), AnimRenderFlags.GOLDEN, true) then
             layer:SetRenderFlags(AnimRenderFlags.GOLDEN | AnimRenderFlags.IGNORE_GAME_TIME)
         end
     else
-        if layer:GetRenderFlags() & AnimRenderFlags.GOLDEN == AnimRenderFlags.GOLDEN then
+        if Utils.HasFlags(layer:GetRenderFlags(), AnimRenderFlags.GOLDEN) then
             layer:SetRenderFlags(~AnimRenderFlags.GOLDEN | ~AnimRenderFlags.IGNORE_GAME_TIME)
         end
     end

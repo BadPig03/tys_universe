@@ -5,7 +5,6 @@ do
         Enchantments = "enchantments",
         Entities = "entities",
         Foods = "foods",
-        Levels = "levels",
         ModComponents = "mod_components",
         Players = "players",
         Rewind = "rewind",

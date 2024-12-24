@@ -167,7 +167,7 @@ function Rewind:PostNewRoom()
             door.TargetRoomIndex = TYU.LEVEL:GetStartingRoomIndex()
         end
     end
-    if roomType == RoomType.ROOM_BLACK_MARKET then
+    if Utils.IsRoomType(RoomType.ROOM_BLACK_MARKET) then
         if TYU.LEVEL:MakeRedRoomDoor(GridRooms.ROOM_DEBUG_IDX, DoorSlot.LEFT0) then
             local door = room:GetDoor(DoorSlot.LEFT0)
             door.TargetRoomIndex = TYU.LEVEL:GetStartingRoomIndex()
@@ -175,7 +175,7 @@ function Rewind:PostNewRoom()
             Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_FOOL, Vector(200, 280))
         end
     end
-    if roomType == RoomType.ROOM_CHALLENGE and TYU.LEVEL:GetCurrentRoomDesc().Data.Variant >= 16 then
+    if Utils.IsRoomType(RoomType.ROOM_CHALLENGE) and TYU.LEVEL:GetCurrentRoomDesc().Data.Variant >= 16 then
         for i = 0, 7 do
             local door = room:GetDoor(i)
             if door then

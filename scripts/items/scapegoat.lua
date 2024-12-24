@@ -1,34 +1,40 @@
-local Lib = TYU
-local Scapegoat = Lib:NewModItem("Scapegoat", "SCAPEGOAT")
+local Scapegoat = TYU:NewModItem("Scapegoat", "SCAPEGOAT")
+local Entities = TYU.Entities
+local Players = TYU.Players
+local ModNullItemIDs = TYU.ModNullItemIDs
+local ModItemIDs = TYU.ModItemIDs
+local PrivateField = {}
 
-local function AddReviveEffect(player)
-    player:GetEffects():AddNullEffect(Lib.ModNullItemIDs.SCAPEGOAT_REVIVE)
-    if (Lib.Players.IsJacobOrEsau(player) or Lib.Players.IsTaintedForgottenAndSoul(player)) and player:GetOtherTwin() then
-        player:GetOtherTwin():GetEffects():AddNullEffect(Lib.ModNullItemIDs.SCAPEGOAT_REVIVE)
+do
+    function PrivateField.AddReviveEffect(player)
+        player:GetEffects():AddNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
+        if (Players.IsJacobOrEsau(player) or Players.IsTaintedForgottenAndSoul(player)) and player:GetOtherTwin() then
+            player:GetOtherTwin():GetEffects():AddNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
+        end
+        if Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then
+            player:GetFlippedForm():GetEffects():AddNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
+        end
     end
-    if Lib.Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then
-        player:GetFlippedForm():GetEffects():AddNullEffect(Lib.ModNullItemIDs.SCAPEGOAT_REVIVE)
-    end
-end
 
-local function RevivePlayerWithDamageCooldown(player)
-    player:Revive()
-    player:SetMinDamageCooldown(120)
-    player.Visible = true
-    player:GetEffects():RemoveNullEffect(Lib.ModNullItemIDs.SCAPEGOAT_REVIVE)
-    if (Lib.Players.IsJacobOrEsau(player) or Lib.Players.IsTaintedForgottenAndSoul(player)) and player:GetOtherTwin() then
-        local player2 = player:GetOtherTwin()
-        player2:Revive()
-        player2:SetMinDamageCooldown(120)
-        player2.Visible = true
-        player2:GetEffects():RemoveNullEffect(Lib.ModNullItemIDs.SCAPEGOAT_REVIVE)
-    end
-    if Lib.Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then
-        local player2 = player:GetFlippedForm()
-        player2:Revive()
-        player2:SetMinDamageCooldown(120)
-        player2.Visible = true
-        player2:GetEffects():RemoveNullEffect(Lib.ModNullItemIDs.SCAPEGOAT_REVIVE)
+    function PrivateField.RevivePlayer(player)
+        player:Revive()
+        player:SetMinDamageCooldown(120)
+        player.Visible = true
+        player:GetEffects():RemoveNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
+        if (Players.IsJacobOrEsau(player) or Players.IsTaintedForgottenAndSoul(player)) and player:GetOtherTwin() then
+            local otherTwin = player:GetOtherTwin()
+            otherTwin:Revive()
+            otherTwin:SetMinDamageCooldown(120)
+            otherTwin.Visible = true
+            otherTwin:GetEffects():RemoveNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
+        end
+        if Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then
+            local flippedForm = player:GetFlippedForm()
+            flippedForm:Revive()
+            flippedForm:SetMinDamageCooldown(120)
+            flippedForm.Visible = true
+            flippedForm:GetEffects():RemoveNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
+        end
     end
 end
 
@@ -36,25 +42,25 @@ function Scapegoat:PostAddCollectible(type, charge, firstTime, slot, varData, pl
     if not firstTime then
         return
     end
-    AddReviveEffect(player)
+    PrivateField.AddReviveEffect(player)
 end
-Scapegoat:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, Scapegoat.PostAddCollectible, Lib.ModItemIDs.SCAPEGOAT)
+Scapegoat:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, Scapegoat.PostAddCollectible, ModItemIDs.SCAPEGOAT)
 
 function Scapegoat:TriggerPlayerDeathPostCheckRevives(player)
-    if not player:GetEffects():HasNullEffect(Lib.ModNullItemIDs.SCAPEGOAT_REVIVE) then
+    if not player:GetEffects():HasNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE) then
         return
     end
-    player:RemoveCollectible(Lib.ModItemIDs.SCAPEGOAT)
-    player:AnimateCollectible(Lib.ModItemIDs.SCAPEGOAT, "UseItem")
-    RevivePlayerWithDamageCooldown(player)
+    player:RemoveCollectible(ModItemIDs.SCAPEGOAT)
+    player:AnimateCollectible(ModItemIDs.SCAPEGOAT, "UseItem")
+    PrivateField.RevivePlayer(player)
     local playerType = player:GetPlayerType()
     if playerType == PlayerType.PLAYER_AZAZEL_B then
-        player:QueueItem(Lib.ITEMCONFIG:GetCollectible(CollectibleType.COLLECTIBLE_LORD_OF_THE_PIT))
+        player:QueueItem(TYU.ITEMCONFIG:GetCollectible(CollectibleType.COLLECTIBLE_LORD_OF_THE_PIT))
     elseif playerType == PlayerType.PLAYER_ESAU then
         local twinPlayer = player:GetOtherTwin()
         if twinPlayer then
-            twinPlayer:RemoveCollectible(Lib.ModItemIDs.SCAPEGOAT)
-            twinPlayer:AnimateCollectible(Lib.ModItemIDs.SCAPEGOAT, "UseItem")
+            twinPlayer:RemoveCollectible(ModItemIDs.SCAPEGOAT)
+            twinPlayer:AnimateCollectible(ModItemIDs.SCAPEGOAT, "UseItem")
             twinPlayer:ChangePlayerType(PlayerType.PLAYER_AZAZEL)
             twinPlayer:AddBlackHearts(2)
         else
@@ -65,10 +71,10 @@ function Scapegoat:TriggerPlayerDeathPostCheckRevives(player)
         player:ChangePlayerType(PlayerType.PLAYER_AZAZEL)
         player:AddBlackHearts(2)
     end
-    Lib.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.POOF02, 3, player.Position)
-    Lib.Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.POOF02, 4, player.Position)
-    Lib.SFXMANAGER:Play(SoundEffect.SOUND_UNHOLY, 0.6)
-    Lib.SFXMANAGER:Play(SoundEffect.SOUND_FLASHBACK, 0.6)
+    Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.POOF02, 3, player.Position)
+    Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.POOF02, 4, player.Position)
+    TYU.SFXMANAGER:Play(SoundEffect.SOUND_UNHOLY, 0.6)
+    TYU.SFXMANAGER:Play(SoundEffect.SOUND_FLASHBACK, 0.6)
 end
 Scapegoat:AddCallback(ModCallbacks.MC_TRIGGER_PLAYER_DEATH_POST_CHECK_REVIVES, Scapegoat.TriggerPlayerDeathPostCheckRevives)
 

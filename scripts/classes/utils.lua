@@ -56,6 +56,10 @@ function Utils.IsMirrorWorld()
     return room:IsMirrorWorld()
 end
 
+function Utils.IsAscent()
+    return TYU.LEVEL:IsAscent()
+end
+
 function Utils.HasFlags(useFlags, flag, exclude)
     if exclude then
         return useFlags & flag ~= flag

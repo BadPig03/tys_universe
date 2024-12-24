@@ -129,7 +129,7 @@ do
             return charge
         elseif pickup.Variant == PickupVariant.PICKUP_TRINKET then
             if TYU.ITEMCONFIG:GetTrinket(pickup.SubType):IsTrinket() then
-                if pickup.SubType & TrinketType.TRINKET_GOLDEN_FLAG == TrinketType.TRINKET_GOLDEN_FLAG then
+                if Utils.HasFlags(pickup.SubType, TrinketType.TRINKET_GOLDEN_FLAG) then
                     return 12
                 else
                     return 6

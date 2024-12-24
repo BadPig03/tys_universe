@@ -1,35 +1,38 @@
-local Lib = TYU
-local BrokenVision = Lib:NewModTrinket("Broken Vision", "BROKEN_VISION")
+local BrokenVision = TYU:NewModTrinket("Broken Vision", "BROKEN_VISION")
+local ModTrinketIDs = TYU.ModTrinketIDs
+local PrivateField = {}
 
-local function GetLastPassiveItem(player)
-    local historyItems = player:GetHistory():GetCollectiblesHistory()
-    local lastItemID = CollectibleType.COLLECTIBLE_NULL
-    for i = #historyItems, 1, -1 do
-        if not historyItems[i]:IsTrinket() then
-            local itemID = historyItems[i]:GetItemID()
-            local itemConfig = Lib.ITEMCONFIG:GetCollectible(itemID)
-            if not itemConfig:HasTags(ItemConfig.TAG_QUEST) and itemConfig.Type ~= ItemType.ITEM_ACTIVE then
-                lastItemID = itemID
-                break
+do
+    function PrivateField.GetLastPassiveItem(player)
+        local historyItems = player:GetHistory():GetCollectiblesHistory()
+        local lastItemID = CollectibleType.COLLECTIBLE_NULL
+        for i = #historyItems, 1, -1 do
+            if not historyItems[i]:IsTrinket() then
+                local itemID = historyItems[i]:GetItemID()
+                local itemConfig = TYU.ITEMCONFIG:GetCollectible(itemID)
+                if not itemConfig:HasTags(ItemConfig.TAG_QUEST) and itemConfig.Type ~= ItemType.ITEM_ACTIVE then
+                    lastItemID = itemID
+                    break
+                end
             end
         end
+        return lastItemID
     end
-    return lastItemID
 end
 
 function BrokenVision:PreAddCollectible(type, charge, firstTime, slot, varData, player)
-    if type <= 0 or Lib.ITEMCONFIG:GetCollectible(type).Type == ItemType.ITEM_ACTIVE or Lib.ITEMCONFIG:GetCollectible(type):HasTags(ItemConfig.TAG_QUEST) then
+    if type <= 0 or TYU.ITEMCONFIG:GetCollectible(type).Type == ItemType.ITEM_ACTIVE or TYU.ITEMCONFIG:GetCollectible(type):HasTags(ItemConfig.TAG_QUEST) then
         return
     end
-    local multiplier = player:GetTrinketMultiplier(Lib.ModTrinketIDs.BROKEN_VISION)
+    local multiplier = player:GetTrinketMultiplier(ModTrinketIDs.BROKEN_VISION)
     if multiplier == 0 then
         return
     end
-    local rng = player:GetTrinketRNG(Lib.ModTrinketIDs.BROKEN_VISION)
+    local rng = player:GetTrinketRNG(ModTrinketIDs.BROKEN_VISION)
     if not (rng:RandomInt(100) < 60 + multiplier * 10) then
         return
     end
-    local lastItemID = GetLastPassiveItem(player)
+    local lastItemID = PrivateField.GetLastPassiveItem(player)
     if lastItemID == CollectibleType.COLLECTIBLE_NULL then
         return
     end

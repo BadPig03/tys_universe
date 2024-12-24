@@ -1,15 +1,10 @@
-local Lib = TYU
-local TwilightFox = Lib:NewModItem("Twilight Fox", "TWILIGHT_FOX")
+local TwilightFox = TYU:NewModItem("Twilight Fox", "TWILIGHT_FOX")
+local Collectibles = TYU.Collectibles
+local ModItemIDs = TYU.ModItemIDs
+local ModEntityIDs = TYU.ModEntityIDs
 
 function TwilightFox:EvaluateCache(player, cacheFlag)
-    local count = player:GetCollectibleNum(Lib.ModItemIDs.TWILIGHT_FOX) + player:GetEffects():GetCollectibleEffectNum(Lib.ModItemIDs.TWILIGHT_FOX)
-    local rng = player:GetCollectibleRNG(Lib.ModItemIDs.TWILIGHT_FOX)
-    for _, familiar in pairs(player:CheckFamiliarEx(Lib.ModEntityIDs.TWILIGHT_FOX.Variant, count, RNG(rng:Next()), Lib.ITEMCONFIG:GetCollectible(Lib.ModItemIDs.TWILIGHT_FOX))) do
-        local sprite = familiar:GetSprite()
-        sprite:Play("Idle", true)
-        familiar:AddToFollowers()
-        familiar.DepthOffset = 9998
-    end
+    Collectibles.CheckFamiliarFromCollectible(player, ModItemIDs.TWILIGHT_FOX, ModEntityIDs.TWILIGHT_FOX.Variant)
 end
 TwilightFox:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, TwilightFox.EvaluateCache, CacheFlag.CACHE_FAMILIARS)
 

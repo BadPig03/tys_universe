@@ -1,129 +1,244 @@
-local Lib = TYU
-local WakeUp = Lib:NewModItem("Wake-up", "WAKE_UP")
+local WakeUp = TYU:NewModItem("Wake-up", "WAKE_UP")
+local Callbacks = TYU.Callbacks
+local Entities = TYU.Entities
+local Players = TYU.Players
+local Utils = TYU.Utils
+local SaveAndLoad = TYU.SaveAndLoad
+local ModRoomIDs = TYU.ModRoomIDs
+local ModItemIDs = TYU.ModItemIDs
+local PrivateField = {}
 
-local function IsInvalidRoom()
-    if Lib.LEVEL:GetCurrentRoomIndex() ~= GridRooms.ROOM_EXTRA_BOSS_IDX or not Lib.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data then
-        return true
-    end
-    if Lib.ModRoomIDs.WAKE_UP_MAIN_ROOM == -1 then
-        Lib.SaveAndLoad.ReloadRoomData()
-    end
-    if Lib.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data.Variant ~= Lib.ModRoomIDs.WAKE_UP_MAIN_ROOM then
-        return true
-    end
-    return false
+local function GetGlobalLibData(...)
+    return TYU:GetGlobalLibData("WakeUp", ...)
 end
 
-local function DisplayEscapeText()
-    local language = Options.Language
-    if language == "zh" then
-        Lib.HUD:ShowFortuneText("你无法逃离…")
-    else
-        Lib.HUD:ShowFortuneText("YOU CAN'T ESCAPE...")
-    end
-    Lib:SetGlobalLibData(true, "WakeUp", "Escaped")
-    Lib.GAME:Darken(1, 120)
-    Lib.GAME:ShakeScreen(150)
-    Lib.SFXMANAGER:Play(SoundEffect.SOUND_DEATH_SKULL_SUMMON_END, 0.6, 2, false, 0.85)
+local function SetGlobalLibData(value, ...)
+    TYU:SetGlobalLibData(value, "WakeUp", ...)
 end
 
-local function GetNewCollectible(rng)
-    local newItem = nil
-    if Lib:GetGlobalLibData("WakeUp", "Devil") then
-        newItem = Lib.Collectibles.GetOffensiveCollectibleEx(rng, false)
-    elseif Lib:GetGlobalLibData("WakeUp", "Angel") then
-        newItem = Lib.Collectibles.GetOffensiveCollectibleEx(rng, true)
-    else
-        newItem = Lib.Collectibles.GetOffensiveCollectible(rng)
+do
+    PrivateField.WakeUpBannedItems = {
+        [CollectibleType.COLLECTIBLE_SKELETON_KEY] = true,
+        [CollectibleType.COLLECTIBLE_DOLLAR] = true,
+        [CollectibleType.COLLECTIBLE_BOOK_OF_SHADOWS] = true,
+        [CollectibleType.COLLECTIBLE_FORGET_ME_NOW] = true,
+        [CollectibleType.COLLECTIBLE_CRYSTAL_BALL] = true,
+        [CollectibleType.COLLECTIBLE_PYRO] = true,
+        [CollectibleType.COLLECTIBLE_MOMS_KEY] = true,
+        [CollectibleType.COLLECTIBLE_HUMBLEING_BUNDLE] = true,
+        [CollectibleType.COLLECTIBLE_GOAT_HEAD] = true,
+        [CollectibleType.COLLECTIBLE_CONTRACT_FROM_BELOW] = true,
+        [CollectibleType.COLLECTIBLE_THERES_OPTIONS] = true,
+        [CollectibleType.COLLECTIBLE_BLACK_CANDLE] = true,
+        [CollectibleType.COLLECTIBLE_D100] = true,
+        [CollectibleType.COLLECTIBLE_MIND] = true,
+        [CollectibleType.COLLECTIBLE_DIPLOPIA] = true,
+        [CollectibleType.COLLECTIBLE_CAR_BATTERY] = true,
+        [CollectibleType.COLLECTIBLE_CHARGED_BABY] = true,
+        [CollectibleType.COLLECTIBLE_RUNE_BAG] = true,
+        [CollectibleType.COLLECTIBLE_CHAOS] = true,
+        [CollectibleType.COLLECTIBLE_MORE_OPTIONS] = true,
+        [CollectibleType.COLLECTIBLE_TELEPORT_2] = true,
+        [CollectibleType.COLLECTIBLE_GLOWING_HOUR_GLASS] = true,
+        [CollectibleType.COLLECTIBLE_SACK_HEAD] = true,
+        [CollectibleType.COLLECTIBLE_EDENS_SOUL] = true,
+        [CollectibleType.COLLECTIBLE_EUCHARIST] = true,
+        [CollectibleType.COLLECTIBLE_SACK_OF_SACKS] = true,
+        [CollectibleType.COLLECTIBLE_MYSTERY_GIFT] = true,
+        [CollectibleType.COLLECTIBLE_JUMPER_CABLES] = true,
+        [CollectibleType.COLLECTIBLE_MR_ME] = true,
+        [CollectibleType.COLLECTIBLE_SCHOOLBAG] = true,
+        [CollectibleType.COLLECTIBLE_BOOK_OF_THE_DEAD] = true,
+        [CollectibleType.COLLECTIBLE_ROCK_BOTTOM] = true,
+        [CollectibleType.COLLECTIBLE_RED_KEY] = true,
+        [CollectibleType.COLLECTIBLE_BOOK_OF_VIRTUES] = true,
+        [CollectibleType.COLLECTIBLE_STAIRWAY] = true,
+        [CollectibleType.COLLECTIBLE_MERCURIUS] = true,
+        [CollectibleType.COLLECTIBLE_ETERNAL_D6] = true,
+        [CollectibleType.COLLECTIBLE_BIRTHRIGHT] = true,
+        [CollectibleType.COLLECTIBLE_GENESIS] = true,
+        [CollectibleType.COLLECTIBLE_CARD_READING] = true,
+        [CollectibleType.COLLECTIBLE_ECHO_CHAMBER] = true,
+        [CollectibleType.COLLECTIBLE_ISAACS_TOMB] = true,
+        [CollectibleType.COLLECTIBLE_BAG_OF_CRAFTING] = true,
+        [CollectibleType.COLLECTIBLE_KEEPERS_SACK] = true,
+        [CollectibleType.COLLECTIBLE_EVERYTHING_JAR] = true,
+        [CollectibleType.COLLECTIBLE_ANIMA_SOLA] = true,
+        [CollectibleType.COLLECTIBLE_D6] = true,
+        [CollectibleType.COLLECTIBLE_VOID] = true,
+        [CollectibleType.COLLECTIBLE_D_INFINITY] = true,
+        [CollectibleType.COLLECTIBLE_BROKEN_SHOVEL_1] = true,
+        [CollectibleType.COLLECTIBLE_BROKEN_SHOVEL_2] = true,
+        [CollectibleType.COLLECTIBLE_MOMS_SHOVEL] = true,
+        [CollectibleType.COLLECTIBLE_DEATH_CERTIFICATE] = true,
+        [CollectibleType.COLLECTIBLE_R_KEY] = true,
+        [CollectibleType.COLLECTIBLE_URN_OF_SOULS] = true,
+        [CollectibleType.COLLECTIBLE_GLITCHED_CROWN] = true,
+        [CollectibleType.COLLECTIBLE_SACRED_ORB] = true,
+        [CollectibleType.COLLECTIBLE_ABYSS] = true,
+        [CollectibleType.COLLECTIBLE_FLIP] = true,
+        [CollectibleType.COLLECTIBLE_SPINDOWN_DICE] = true,
+        [ModItemIDs.BEGGAR_MASK] = true,
+        [ModItemIDs.CROWN_OF_KINGS] = true,
+        [ModItemIDs.ORDER] = true,
+        [ModItemIDs.HADES_BLADE] = true,
+        [ModItemIDs.MIRRORING] = true,
+        [ModItemIDs.MIRRORING_SHARD] = true,
+        [ModItemIDs.PLANETARIUM_TELESCOPE] = true,
+        [ModItemIDs.THE_GOSPEL_OF_JOHN] = true,
+        [ModItemIDs.WAKE_UP] = true
+    }
+end
+
+do
+    function PrivateField.IsInvalidRoom()
+        if not Utils.IsRoomIndex(GridRooms.ROOM_EXTRA_BOSS_IDX) or not TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data then
+            return true
+        end
+        if ModRoomIDs.WAKE_UP_MAIN_ROOM == -1 then
+            SaveAndLoad.ReloadRoomData()
+        end
+        if TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data.Variant ~= ModRoomIDs.WAKE_UP_MAIN_ROOM then
+            return true
+        end
+        return false
     end
-    return newItem
+
+    function PrivateField.GetOffensiveCollectible(rng)
+        local itemID = CollectibleType.COLLECTIBLE_BREAKFAST
+        local itemList = {}
+        for i = 1, TYU.ITEMCONFIG:GetCollectibles().Size - 1 do
+            if ItemConfig.Config.IsValidCollectible(i) and TYU.ITEMCONFIG:GetCollectible(i).Quality >= 3 and TYU.ITEMCONFIG:GetCollectible(i):HasTags(ItemConfig.TAG_OFFENSIVE) and TYU.ITEMCONFIG:GetCollectible(i).Type ~= ItemType.ITEM_ACTIVE and not PrivateField.WakeUpBannedItems[i] and TYU.ITEMPOOL:CanSpawnCollectible(i, false) then
+                table.insert(itemList, i)
+            end
+        end
+        itemID = TYU.ITEMPOOL:GetCollectibleFromList(itemList, rng:Next())
+        if itemID == CollectibleType.COLLECTIBLE_BREAKFAST then
+            return CollectibleType.COLLECTIBLE_PENTAGRAM
+        end
+        TYU.ITEMPOOL:RemoveCollectible(itemID)
+        return itemID
+    end
+    
+    function PrivateField.GetOffensiveCollectibleEx(rng, angel)
+        local itemPoolType = (angel and ItemPoolType.POOL_ANGEL) or ItemPoolType.POOL_DEVIL
+        local itemID = CollectibleType.COLLECTIBLE_BREAKFAST
+        local itemList = {}
+        for _, itemTable in ipairs(TYU.ITEMPOOL:GetCollectiblesFromPool(itemPoolType)) do
+            local itemID = itemTable.itemID
+            if TYU.ITEMPOOL:HasCollectible(itemID) and TYU.ITEMCONFIG:GetCollectible(itemID) and TYU.ITEMCONFIG:GetCollectible(itemID).Quality >= 3 and not TYU.ITEMCONFIG:GetCollectible(itemID):HasTags(ItemConfig.TAG_QUEST) and TYU.ITEMCONFIG:GetCollectible(itemID):HasTags(ItemConfig.TAG_OFFENSIVE) and TYU.ITEMCONFIG:GetCollectible(itemID).Type ~= ItemType.ITEM_ACTIVE and not PrivateField.WakeUpBannedItems[itemID] and TYU.ITEMPOOL:CanSpawnCollectible(itemID, false) then
+                table.insert(itemList, itemID)
+            end
+        end
+        itemID = TYU.ITEMPOOL:GetCollectibleFromList(itemList, rng:Next())
+        if itemID == CollectibleType.COLLECTIBLE_BREAKFAST then
+            return (angel and CollectibleType.COLLECTIBLE_IMMACULATE_HEART) or CollectibleType.COLLECTIBLE_PENTAGRAM
+        end
+        return itemID
+    end
+
+    function PrivateField.GetNewCollectible(rng)
+        local newItem = nil
+        if GetGlobalLibData("Devil") then
+            newItem = PrivateField.GetOffensiveCollectibleEx(rng, false)
+        elseif GetGlobalLibData("Angel") then
+            newItem = PrivateField.GetOffensiveCollectibleEx(rng, true)
+        else
+            newItem = PrivateField.GetOffensiveCollectible(rng)
+        end
+        return newItem
+    end
 end
 
 function WakeUp:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
-    if useFlags & UseFlag.USE_CARBATTERY == UseFlag.USE_CARBATTERY or useFlags & UseFlag.USE_VOID == UseFlag.USE_VOID then
+    if Utils.HasFlags(useFlags, UseFlag.USE_CARBATTERY) or Utils.HasFlags(useFlags, UseFlag.USE_VOID) then
         return { Discharge = false, Remove = false, ShowAnim = false }
     end
-    if Lib:GetGlobalLibData("WakeUp", "Used") or Lib:GetGlobalLibData("WakeUp", "Killed") or Lib:GetGlobalLibData("WakeUp", "Escaped") or Lib.GAME:IsGreedMode() or Lib.LEVEL:GetAbsoluteStage() >= LevelStage.STAGE5 or Lib.LEVEL:IsAscent() or Lib.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data then
+    if GetGlobalLibData("Used") or GetGlobalLibData("Killed") or GetGlobalLibData("Escaped") or TYU.GAME:IsGreedMode() or TYU.LEVEL:GetAbsoluteStage() >= LevelStage.STAGE5 or Utils.IsAscent() or TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data then
         return { Discharge = false, Remove = false, ShowAnim = true }
     end
-    if Lib.ModRoomIDs.WAKE_UP_MAIN_ROOM == -1 then
-        Lib.SaveAndLoad.ReloadRoomData()
+    if ModRoomIDs.WAKE_UP_MAIN_ROOM == -1 then
+        SaveAndLoad.ReloadRoomData()
     end
     player:UseCard(Card.CARD_REVERSE_EMPEROR, 0)
-    local newRoom = RoomConfigHolder.GetRoomByStageTypeAndVariant(StbType.SPECIAL_ROOMS, RoomType.ROOM_ERROR, Lib.ModRoomIDs.WAKE_UP_MAIN_ROOM)
-    Lib.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data = newRoom
-    Lib.GAME:StartRoomTransition(GridRooms.ROOM_EXTRA_BOSS_IDX, Direction.UP, RoomTransitionAnim.DEATH_CERTIFICATE, Isaac.GetPlayer(0), 0)
-    Lib:SetGlobalLibData(true, "WakeUp", "Used")
-    Lib:SetGlobalLibData(true, "WakeUp", "CurrentLevelUsed")
-    Lib:SetGlobalLibData(player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_VIRTUES), "WakeUp", "Angel")
-    Lib:SetGlobalLibData(player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_BELIAL_PASSIVE), "WakeUp", "Devil")
+    local newRoom = RoomConfigHolder.GetRoomByStageTypeAndVariant(StbType.SPECIAL_ROOMS, RoomType.ROOM_ERROR, ModRoomIDs.WAKE_UP_MAIN_ROOM)
+    TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_EXTRA_BOSS_IDX).Data = newRoom
+    TYU.GAME:StartRoomTransition(GridRooms.ROOM_EXTRA_BOSS_IDX, Direction.UP, RoomTransitionAnim.DEATH_CERTIFICATE, Isaac.GetPlayer(0), 0)
+    SetGlobalLibData(true, "Used")
+    SetGlobalLibData(true, "CurrentLevelUsed")
+    SetGlobalLibData(player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_VIRTUES), "Angel")
+    SetGlobalLibData(player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_BELIAL_PASSIVE), "Devil")
 	return { Discharge = true, Remove = true, ShowAnim = true }
 end
-WakeUp:AddCallback(ModCallbacks.MC_USE_ITEM, WakeUp.UseItem, Lib.ModItemIDs.WAKE_UP)
+WakeUp:AddCallback(ModCallbacks.MC_USE_ITEM, WakeUp.UseItem, ModItemIDs.WAKE_UP)
 
 function WakeUp:PostNewLevel()
-    if Lib:GetGlobalLibData("WakeUp", "CurrentLevelUsed") then
-        Lib:SetGlobalLibData(false, "WakeUp", "CurrentLevelUsed")
+    if GetGlobalLibData("CurrentLevelUsed") then
+        SetGlobalLibData(false, "CurrentLevelUsed")
     end
 end
 WakeUp:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, WakeUp.PostNewLevel)
 
 function WakeUp:ReplaceWakeUpMainRoomContents(isLoaded)
-    if not Lib:GetGlobalLibData("WakeUp", "Used") then
+    if not GetGlobalLibData("Used") then
         return
     end
-    if IsInvalidRoom() and not Lib:GetGlobalLibData("WakeUp", "Escaped") then
-        DisplayEscapeText()
-        Lib:SetGlobalLibData(false, "WakeUp", "Used")
+    if PrivateField.IsInvalidRoom() and not GetGlobalLibData("Escaped") then
+        local text = (Options.Language == "zh" and "你无法逃离…") or "YOU CAN'T ESCAPE..."
+        TYU.HUD:ShowFortuneText(text)
+        TYU.GAME:Darken(1, 120)
+        TYU.GAME:ShakeScreen(150)
+        TYU.SFXMANAGER:Play(SoundEffect.SOUND_DEATH_SKULL_SUMMON_END, 0.6, 2, false, 0.85)
+        SetGlobalLibData(true, "Escaped")
+        SetGlobalLibData(false, "Used")
     end
-    if isLoaded and not IsInvalidRoom() and not Lib:GetGlobalLibData("WakeUp", "Escaped") then
-        Lib.GAME:StartRoomTransition(Lib.LEVEL:GetStartingRoomIndex(), Direction.UP, RoomTransitionAnim.DEATH_CERTIFICATE, Isaac.GetPlayer(0), 0)
+    if isLoaded and not PrivateField.IsInvalidRoom() and not GetGlobalLibData("Escaped") then
+        TYU.GAME:StartRoomTransition(TYU.LEVEL:GetStartingRoomIndex(), Direction.UP, RoomTransitionAnim.DEATH_CERTIFICATE, Isaac.GetPlayer(0), 0)
     end
-    if not IsInvalidRoom() then
-        local room = Lib.GAME:GetRoom()
+    if not PrivateField.IsInvalidRoom() then
+        local room = TYU.GAME:GetRoom()
         room:SetBackdropType(BackdropType.DOGMA, 1)
         room:RemoveDoor(DoorSlot.DOWN0)
         room:RemoveGridEntityImmediate(37, 0, false)
-        Lib.Levels.RemoveAllDecorations()
-        if room:IsFirstVisit() then
-            Lib.Entities.Spawn(EntityType.ENTITY_GENERIC_PROP, 4, 0, Vector(320, 420))
-            local rng = RNG(room:GetAwardSeed())
-            for i = 0, 2 do
-                local item = Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, GetNewCollectible(rng), room:GetGridPosition(154 + 3 * i)):ToPickup()
-                item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE | EntityFlag.FLAG_GLITCH)
-                item.Price = 0
-                TYU.Utils.AddSeedToWarfarinItems(item.InitSeed)
-                item:RemoveCollectibleCycle()
-                if not Lib.Players.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_TMTRAINER) then
-                    for j = 1, 2 do
-                        item:AddCollectibleCycle(GetNewCollectible(rng))
-                    end
+        Utils.RemoveAllDecorations()
+        if not Utils.IsRoomFirstVisit() then
+            return
+        end
+        Entities.Spawn(EntityType.ENTITY_GENERIC_PROP, 4, 0, Vector(320, 420))
+        local rng = RNG(room:GetAwardSeed())
+        for i = 0, 2 do
+            local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, PrivateField.GetNewCollectible(rng), room:GetGridPosition(154 + 3 * i)):ToPickup()
+            item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE | EntityFlag.FLAG_GLITCH)
+            item.Price = 0
+            Utils.AddSeedToWarfarinItems(item.InitSeed)
+            item:RemoveCollectibleCycle()
+            if not Players.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_TMTRAINER) then
+                for j = 1, 2 do
+                    item:AddCollectibleCycle(PrivateField.GetNewCollectible(rng))
                 end
             end
         end
     end
 end
-WakeUp:AddCallback(Lib.Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, WakeUp.ReplaceWakeUpMainRoomContents)
+WakeUp:AddCallback(Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, WakeUp.ReplaceWakeUpMainRoomContents)
 
 function WakeUp:PostUpdate()
-    local room = Lib.GAME:GetRoom()
-    if Lib:GetGlobalLibData("WakeUp", "Escaped") then
-        if room:GetFrameCount() % 300 == 30 then
-            local rng = Isaac.GetPlayer(0):GetCollectibleRNG(Lib.ModItemIDs.WAKE_UP)
-            local angelBaby = Lib.Entities.Spawn(EntityType.ENTITY_DOGMA, 10, 0, room:GetGridPosition(room:GetRandomTileIndex(rng:Next())))
-            angelBaby:SetInvincible(true)
-            angelBaby:AddEntityFlags(EntityFlag.FLAG_AMBUSH | EntityFlag.FLAG_NO_STATUS_EFFECTS)
-            Lib.Entities.SpawnPoof(angelBaby.Position):GetSprite().Color:SetColorize(2, 2, 2, 1)    
-        end
+    local room = TYU.GAME:GetRoom()
+    if GetGlobalLibData("Escaped") and room:GetFrameCount() % 300 == 30 then
+        local rng = Isaac.GetPlayer(0):GetCollectibleRNG(ModItemIDs.WAKE_UP)
+        local angelBaby = Entities.Spawn(EntityType.ENTITY_DOGMA, 10, 0, room:GetGridPosition(room:GetRandomTileIndex(rng:Next())))
+        angelBaby:SetInvincible(true)
+        angelBaby:AddEntityFlags(EntityFlag.FLAG_AMBUSH | EntityFlag.FLAG_NO_STATUS_EFFECTS)
+        Entities.SpawnPoof(angelBaby.Position):GetSprite().Color:SetColorize(2, 2, 2, 1)    
     end
-    if IsInvalidRoom() or not Lib:GetGlobalLibData("WakeUp", "Used") then
+    if PrivateField.IsInvalidRoom() or not GetGlobalLibData("Used") then
         return
     end
     if room:GetBackdropType() ~= BackdropType.DOGMA then
         room:SetBackdropType(BackdropType.DOGMA, 1)
     end
-    Lib.GAME:Darken(1, 30)
-    if Lib:GetGlobalLibData("WakeUp", "Taken") then
+    TYU.GAME:Darken(1, 30)
+    if GetGlobalLibData("Taken") then
         return
     end
     local anyCollectibleFound = false
@@ -134,80 +249,75 @@ function WakeUp:PostUpdate()
         end
     end
     if not anyCollectibleFound then
-        local language = Options.Language
-        if language == "zh" then
-            Lib.HUD:ShowFortuneText("深入梦魇…")
-        else
-            Lib.HUD:ShowFortuneText("DEEP IN A NIGHTMARE...")
-        end
-        Lib.GAME:Darken(1, 120)
-        Lib.GAME:ShakeScreen(120)
+        local text = (Options.Language == "zh" and "深入梦魇…") or "DEEP IN A NIGHTMARE..."
+        TYU.HUD:ShowFortuneText(text)
+        TYU.GAME:Darken(1, 120)
+        TYU.GAME:ShakeScreen(120)
         room:RemoveGridEntityImmediate(37, 0, false)
-        Lib.SFXMANAGER:Play(SoundEffect.SOUND_MOTHERSHADOW_DASH, 0.6, 2, false, 0.5)
+        TYU.SFXMANAGER:Play(SoundEffect.SOUND_MOTHERSHADOW_DASH, 0.6, 2, false, 0.5)
         for _, ent in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE)) do
-            Lib.Entities.SpawnPoof(ent.Position)
+            Entities.SpawnPoof(ent.Position)
             ent:Remove()
         end
-        for _, player in pairs(Lib.Players.GetPlayers(true)) do
+        for _, player in pairs(Players.GetPlayers(true)) do
             player:AddControlsCooldown(240)
         end
-        Lib.Utils.CreateTimer(function()
-            Lib.GAME:SetBloom(60, -12)
+        Utils.CreateTimer(function()
+            TYU.GAME:SetBloom(60, -12)
         end, 60, 0, false)
-        Lib.Utils.CreateTimer(function()
-            for _, player in pairs(Lib.Players.GetPlayers(true)) do
+        Utils.CreateTimer(function()
+            for _, player in pairs(Players.GetPlayers(true)) do
                 player:Teleport(Vector(320, 620), false, true)
             end
             for _, tv in pairs(Isaac.FindByType(EntityType.ENTITY_GENERIC_PROP, 4)) do
                 tv:Remove()
             end
-            Lib.Entities.Spawn(EntityType.ENTITY_DOGMA, 0, 0, Vector(320, 420))
-            Lib:SetGlobalLibData(true, "WakeUp", "Spawned")    
+            Entities.Spawn(EntityType.ENTITY_DOGMA, 0, 0, Vector(320, 420))
+            SetGlobalLibData(true, "Spawned")    
         end, 110, 0, false)
-        Lib:SetGlobalLibData(true, "WakeUp", "Taken")
+        SetGlobalLibData(true, "Taken")
     end
 end
 WakeUp:AddCallback(ModCallbacks.MC_POST_UPDATE, WakeUp.PostUpdate)
 
 function WakeUp:PostEntityKill(entity)
-    if IsInvalidRoom() or not Lib:GetGlobalLibData("WakeUp", "Spawned") or entity.Variant ~= 2 then
+    if PrivateField.IsInvalidRoom() or not GetGlobalLibData("Spawned") or entity.Variant ~= 2 then
         return
     end
-    local dogma = Lib.Entities.Spawn(EntityType.ENTITY_DOGMA, 2, 0, entity.Position)
+    local dogma = Entities.Spawn(EntityType.ENTITY_DOGMA, 2, 0, entity.Position)
     dogma.DepthOffset = 9999
     dogma:AddHealth(-dogma.MaxHitPoints)
-    Lib.SFXMANAGER:Play(SoundEffect.SOUND_DOGMA_DEATH, 0.6, 2, false, 0.65)
-    Lib.SFXMANAGER:Play(SoundEffect.SOUND_DOGMA_LIGHT_RAY_FIRE, 0.6, 2, false, 0.65)
-    Lib.SFXMANAGER:Play(SoundEffect.SOUND_DOGMA_LIGHT_RAY_CHARGE, 0.6, 2, false, 0.65)
-    Lib.GAME:ShakeScreen(89)
+    TYU.SFXMANAGER:Play(SoundEffect.SOUND_DOGMA_DEATH, 0.6, 2, false, 0.65)
+    TYU.SFXMANAGER:Play(SoundEffect.SOUND_DOGMA_LIGHT_RAY_FIRE, 0.6, 2, false, 0.65)
+    TYU.SFXMANAGER:Play(SoundEffect.SOUND_DOGMA_LIGHT_RAY_CHARGE, 0.6, 2, false, 0.65)
+    TYU.GAME:ShakeScreen(89)
     dogma:Die()
     entity:Remove()
-    Lib:SetGlobalLibData(false, "WakeUp", "Used")
-    Lib:SetGlobalLibData(true, "WakeUp", "Killed")
-    Lib.Utils.CreateTimer(function()
-        Lib.GAME:SetBloom(60, -12)
-        for _, player in pairs(Lib.Players.GetPlayers(true)) do
+    SetGlobalLibData(false, "Used")
+    SetGlobalLibData(true, "Killed")
+    Utils.CreateTimer(function()
+        TYU.GAME:SetBloom(60, -12)
+        for _, player in pairs(Players.GetPlayers(true)) do
             player:AddCollectible(CollectibleType.COLLECTIBLE_DOGMA)
         end
     end, 60, 0, false)
-    Lib.Utils.CreateTimer(function()
-        Lib.GAME:ChangeRoom(GridRooms.ROOM_ERROR_IDX)
-        Lib.GAME:ChangeRoom(Lib.LEVEL:GetStartingRoomIndex())
+    Utils.CreateTimer(function()
+        TYU.GAME:ChangeRoom(GridRooms.ROOM_ERROR_IDX)
+        TYU.GAME:ChangeRoom(TYU.LEVEL:GetStartingRoomIndex())
     end, 80, 0, false)
 end
 WakeUp:AddCallback(ModCallbacks.MC_POST_ENTITY_KILL, WakeUp.PostEntityKill, EntityType.ENTITY_DOGMA)
 
 function WakeUp:PreUseCard(card, player, useFlags)
-    if card == Card.CARD_REVERSE_EMPEROR and Lib:GetGlobalLibData("WakeUp", "CurrentLevelUsed") then
-        local room = Lib.GAME:GetRoom()
-        Lib.Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_REVERSE_EMPEROR, room:FindFreePickupSpawnPosition(player.Position, 0, true))
+    if card == Card.CARD_REVERSE_EMPEROR and GetGlobalLibData("CurrentLevelUsed") then
+        Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_REVERSE_EMPEROR, Utils.FindFreePickupSpawnPosition(player.Position, 0, true))
         return true
     end
 end
 WakeUp:AddCallback(ModCallbacks.MC_PRE_USE_CARD, WakeUp.PreUseCard)
 
 function WakeUp:PreUseItem(itemID, rng, player, useFlags, activeSlot, varData)
-    if IsInvalidRoom() then
+    if PrivateField.IsInvalidRoom() then
         return
     end
     return true

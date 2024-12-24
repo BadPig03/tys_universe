@@ -97,7 +97,7 @@ do
     function PrivateField.SpawnALandmine(player)
         local rng = player:GetCollectibleRNG(ModItemIDs.LANDMINE)
         local room = TYU.GAME:GetRoom()
-        local position = room:FindFreePickupSpawnPosition(room:GetGridPosition(room:GetRandomTileIndex(rng:Next())), 0, true, false) + Vector(0, 10)
+        local position = Utils.FindFreePickupSpawnPosition(room:GetGridPosition(room:GetRandomTileIndex(rng:Next()))) + Vector(0, 10)
         local landmine = Entities.Spawn(ModEntityIDs.LANDMINE.Type, ModEntityIDs.LANDMINE.Variant, ModEntityIDs.LANDMINE.SubType, position):ToSlot()
         local data = {}
         data.Glitter = player:HasCollectible(CollectibleType.COLLECTIBLE_GLITTER_BOMBS)
