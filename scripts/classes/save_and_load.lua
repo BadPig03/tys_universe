@@ -17,8 +17,6 @@ function SaveAndLoad:PostGameStarted(continued)
         SaveAndLoad.LoadGameState()
     else
         SaveAndLoad.RemoveGameState()
-        TYU.AMBUSH.SetMaxBossChallengeWaves(2)
-        TYU.AMBUSH.SetMaxChallengeWaves(3)
     end
     TYU.SetTempGlobalLibData(true, "_SAVEDATA", "GameStateSafe")
 end

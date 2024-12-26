@@ -6,7 +6,7 @@ local ModNullItemIDs = TYU.ModNullItemIDs
 local ModItemIDs = TYU.ModItemIDs
 
 local function GetPlayerLibData(player, ...)
-    return TYU:GetPlayerLibData(player, "StiSuspiciousStewckyBall", ...)
+    return TYU:GetPlayerLibData(player, "SuspiciousStew", ...)
 end
 
 local function SetPlayerLibData(player, value, ...)
