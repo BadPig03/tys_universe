@@ -1,7 +1,6 @@
 local StickyBall = TYU:NewModItem("Sticky Ball", "STICKY_BALL")
 local Entities = TYU.Entities
 local ModItemIDs = TYU.ModItemIDs
-local ModEntities = TYU.ModEntities
 local ModEntityIDs = TYU.ModEntityIDs
 local ModTearFlags = TYU.ModTearFlags
 local PrivateField = {}
@@ -155,7 +154,7 @@ function StickyBall:PostBombUpdate(bomb)
     end
     for _, enemy in pairs(Isaac.FindInRadius(bomb.Position, bomb.RadiusMultiplier * player.TearRange / 4, EntityPartition.ENEMY)) do
         if Entities.IsValidEnemy(enemy) and PrivateField.ValidatePossibility(player, bomb:GetDropRNG(), (bomb.IsFetus and 2.5) or 100) then
-            ModEntities.StickyBallTear:ApplyStickyLevel(enemy:ToNPC(), player, enemy:GetDropRNG())
+            TYU.ModEntities.StickyBallTear:ApplyStickyLevel(enemy:ToNPC(), player, enemy:GetDropRNG())
         end
     end
 end
@@ -168,7 +167,7 @@ function StickyBall:PostRocketEffectUpdate(rocket)
     end
     for _, enemy in pairs(Isaac.FindInRadius(rocket.Position, player.TearRange / 4, EntityPartition.ENEMY)) do
         if Entities.IsValidEnemy(enemy) and PrivateField.ValidatePossibility(player, rocket:GetDropRNG(), 2.5) then
-            ModEntities.StickyBallTear:ApplyStickyLevel(enemy:ToNPC(), player, enemy:GetDropRNG())
+            TYU.ModEntities.StickyBallTear:ApplyStickyLevel(enemy:ToNPC(), player, enemy:GetDropRNG())
         end
     end
 end
@@ -182,7 +181,7 @@ function StickyBall:PostLaserCollision(laser, collider, low)
     if not PrivateField.ValidatePossibility(player, laser:GetDropRNG()) then
         return
     end
-    ModEntities.StickyBallTear:ApplyStickyLevel(collider:ToNPC(), player, collider:GetDropRNG())
+    TYU.ModEntities.StickyBallTear:ApplyStickyLevel(collider:ToNPC(), player, collider:GetDropRNG())
 end
 StickyBall:AddCallback(ModCallbacks.MC_POST_LASER_COLLISION, StickyBall.PostLaserCollision)
 
@@ -194,12 +193,12 @@ function StickyBall:PostKnifeCollision(knife, collider, low)
     if knife.Variant == KnifeVariant.MOMS_KNIFE or knife.Variant == KnifeVariant.SUMPTORIUM then
         local triggerChance = (knife:IsFlying() and knife:GetKnifeDistance() / knife.MaxDistance < 0.8 and 1) or 0.6
         if PrivateField.ValidatePossibility(player, knife:GetDropRNG(), triggerChance) then
-            ModEntities.StickyBallTear:ApplyStickyLevel(collider:ToNPC(), player, collider:GetDropRNG())
+            TYU.ModEntities.StickyBallTear:ApplyStickyLevel(collider:ToNPC(), player, collider:GetDropRNG())
         end
     else
         local triggerChance = (knife:GetIsSwinging() and 1) or 0
         if PrivateField.ValidatePossibility(player, knife:GetDropRNG(), triggerChance) then
-            ModEntities.StickyBallTear:ApplyStickyLevel(collider:ToNPC(), player, collider:GetDropRNG())
+            TYU.ModEntities.StickyBallTear:ApplyStickyLevel(collider:ToNPC(), player, collider:GetDropRNG())
         end
     end
 end
