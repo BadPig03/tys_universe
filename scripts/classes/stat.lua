@@ -1,4 +1,5 @@
 local Stat = TYU:RegisterNewClass()
+
 local PrivateField = {}
 
 local function GetPlayerData(player, ...)

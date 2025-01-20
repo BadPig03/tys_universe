@@ -1,6 +1,9 @@
 local GlowingHourglassShard = TYU:NewModCard("Glowing Hourglass Shard", "GLOWING_HOURGLASS_SHARD")
+
 local Players = TYU.Players
+
 local ModCardIDs = TYU.ModCardIDs
+
 local PrivateField = {}
 
 do
@@ -28,7 +31,7 @@ function GlowingHourglassShard:PostNewRoom()
     if not PrivateField.Used then
         return
     end
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         for i = ActiveSlot.SLOT_PRIMARY, ActiveSlot.SLOT_POCKET2 do
             local card = player:GetCard(i)
             if card == ModCardIDs.GLOWING_HOURGLASS_SHARD then

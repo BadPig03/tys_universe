@@ -476,7 +476,9 @@ EIDInfo.Collectibles = {
         },
         {
             Name = "Landmine",
-            Desc = "#"
+            Desc = "#Spawns some landmines when entering a new room"..
+            "#Landmines will be continuously spawned in uncleared rooms"..
+            "#{{Warning}} Landmines won't do damage to Isaac"
         }
     },
     [ModItemIDs.LASER_BLASTER] = {
@@ -495,6 +497,18 @@ EIDInfo.Collectibles = {
             BookOfVirtues = "The damage of laser orb increases by 25%",
             BookOfBelial = "The damage of laser orb increases by 50%",
             CarBattery = "The damage of laser orb increases by 100%"
+        }
+    },
+    [ModItemIDs.LIGHT_SWITCH] = {
+        {
+            Name = "光开关",
+            Desc = "#{{CurseDarkness}} 使所在房间内陷入黑暗，仅保留角色周围视野"..
+            "#{{Freezing}} 黑暗中的敌人会始终处于石化状态"
+        },
+        {
+            Name = "Light Switch",
+            Desc = "#{{CurseDarkness}} Cause the room to fall into darkness, leaving only Isaac's surrounding vision"..
+            "#{{Freezing}} Enemies in the darkness will always be petrified"
         }
     },
     [ModItemIDs.MAGNIFIER] = {

@@ -1,11 +1,14 @@
 local FoodItem = TYU:NewModEntity("Foods (food item)", "FOODS")
+
 local Entities = TYU.Entities
 local Foods = TYU.Foods
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModFoodItemIDs = TYU.ModFoodItemIDs
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 local function SetGlobalLibData(value, ...)

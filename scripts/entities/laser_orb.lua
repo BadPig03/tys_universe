@@ -1,7 +1,10 @@
 local LaserOrb = TYU:NewModEntity("Laser Orb", "LASER_ORB")
+
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModEntityIDs = TYU.ModEntityIDs
+
 local PrivateField = {}
 
 local function SetTempEntityLibData(entity, value, ...)
@@ -176,12 +179,13 @@ function LaserOrb:PostEffectUpdate(effect)
         local scaleAdjustment = (Utils.HasFlags(type, 1 << 6) and 0.004) or 0.006
         sprite.Scale = Vector(1, 1):Resized(math.max(0, (1.6 - effectData.Time * scaleAdjustment)) * math.sqrt(2))
     end
-    if effect.FrameCount % 5 == 0 then
-        for _, entity in pairs(Isaac.FindInRadius(effect.Position, effect.Size * sprite.Scale.X, EntityPartition.ENEMY)) do
-            if Entities.IsValidEnemy(entity) then
-                entity:TakeDamage(player.Damage, DamageFlag.DAMAGE_LASER, EntityRef(player), 0)
-            end
-        end    
+    if effect.FrameCount % 5 ~= 0 then
+        return
+    end
+    for _, entity in pairs(Isaac.FindInRadius(effect.Position, effect.Size * sprite.Scale.X, EntityPartition.ENEMY)) do
+        if Entities.IsValidEnemy(entity) then
+            entity:TakeDamage(player.Damage, DamageFlag.DAMAGE_LASER, EntityRef(player), 0)
+        end
     end
 end
 LaserOrb:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, LaserOrb.PostEffectUpdate, ModEntityIDs.LASER_ORB.Variant)

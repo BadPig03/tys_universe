@@ -1,8 +1,11 @@
 local Looting = TYU:NewModEnchantment("Looting", "LOOTING")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
+
 local PrivateField = {}
 
 do

@@ -1,7 +1,10 @@
 local OverloadBattery = TYU:NewModItem("Overload Battery", "OVERLOAD_BATTERY")
+
 local Players = TYU.Players
 local Entities = TYU.Entities
+
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 local function SetPlayerLibData(player, value, ...)
@@ -18,13 +21,17 @@ do
         while charge >= 4 do
             charge = charge - 4
             SetPlayerLibData(player, charge, "Charge")
-            if player:AddActiveCharge(1, ActiveSlot.SLOT_PRIMARY) == 0 then
-                if player:AddActiveCharge(1, ActiveSlot.SLOT_SECONDARY) == 0 then
-                    if player:AddActiveCharge(1, ActiveSlot.SLOT_POCKET) == 0 then
-                        player:AddActiveCharge(1, ActiveSlot.SLOT_POCKET2)
-                    end
-                end
+            if player:AddActiveCharge(1, ActiveSlot.SLOT_PRIMARY) ~= 0 then
+                goto continue
             end
+            if player:AddActiveCharge(1, ActiveSlot.SLOT_SECONDARY) ~= 0 then
+                goto continue
+            end
+            if player:AddActiveCharge(1, ActiveSlot.SLOT_POCKET) ~= 0 then
+                goto continue
+            end
+            player:AddActiveCharge(1, ActiveSlot.SLOT_POCKET2)
+            ::continue::
         end
     end
 
@@ -95,13 +102,14 @@ function OverloadBattery:PrePickupCollision(pickup, collider, low)
         charge = charge + 48
         pickedUp = true
     end
-    if pickedUp then
-        SetPlayerLibData(player, charge, "Charge")
-        TYU.SFXMANAGER:Play(SoundEffect.SOUND_BATTERYCHARGE, 0.7)
-        Entities.SpawnFakePickupSprite(pickup)
-        PrivateField.TryToAddCharge(player)
-        return { Collide = true, SkipCollisionEffects = true }    
+    if not pickedUp then
+        return
     end
+    SetPlayerLibData(player, charge, "Charge")
+    TYU.SFXMANAGER:Play(SoundEffect.SOUND_BATTERYCHARGE, 0.7)
+    Entities.SpawnFakePickupSprite(pickup)
+    PrivateField.TryToAddCharge(player)
+    return { Collide = true, SkipCollisionEffects = true }
 end
 OverloadBattery:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, OverloadBattery.PrePickupCollision, PickupVariant.PICKUP_HEART)
 

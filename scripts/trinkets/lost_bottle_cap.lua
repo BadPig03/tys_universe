@@ -1,5 +1,7 @@
 local LostBottleCap = TYU:NewModTrinket("Lost Bottle Cap", "LOST_BOTTLE_CAP")
+
 local Utils = TYU.Utils
+
 local ModTrinketIDs = TYU.ModTrinketIDs
 
 function LostBottleCap:UseItem(itemID, rng, player, useFlags, activeSlot, varData)

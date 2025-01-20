@@ -1,7 +1,9 @@
 local ChefHat = TYU:NewModItem("Chef Hat", "CHEF_HAT")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
@@ -30,7 +32,6 @@ function ChefHat:PostNewLevel()
     if not Players.AnyoneHasCollectible(ModItemIDs.CHEF_HAT) then
         return
     end
-    local room = TYU.GAME:GetRoom()
     local pos = Vector(520, 360)
     if TYU.GAME:IsGreedMode() then
         pos = Vector(520, 640)

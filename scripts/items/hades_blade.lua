@@ -1,10 +1,13 @@
 local HadesBlade = TYU:NewModItem("Hades Blade", "HADES_BLADE")
+
 local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Stat = TYU.Stat
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 local function SetPlayerLibData(player, value, ...)
@@ -62,7 +65,10 @@ do
 end
 
 function HadesBlade:EvaluateCache(player, cacheFlag)
-    local count = GetPlayerLibData(player, "Count") or 0
+    local count = GetPlayerLibData(player, "Count")
+    if not count or count == 0 then
+        return
+    end
     Stat:AddFlatDamage(player, 0.2 * count)
 end
 HadesBlade:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, HadesBlade.EvaluateCache, CacheFlag.CACHE_DAMAGE)

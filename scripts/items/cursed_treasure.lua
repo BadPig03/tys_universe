@@ -1,7 +1,9 @@
 local CursedTreasure = TYU:NewModItem("Cursed Treasure", "CURSED_TREASURE")
+
 local Players = TYU.Players
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 

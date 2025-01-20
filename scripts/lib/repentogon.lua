@@ -17,7 +17,7 @@ if REPENTOGON then
     do
         TYU.GENERICPROMPT:Initialize()
         if zh then
-            TYU.GENERICPROMPT:SetText("<<ty的宇宙>>", "欢迎你的到来，朋友!", "由于目前仍处于测试阶段", "祝你玩的愉快!")
+            TYU.GENERICPROMPT:SetText("<<ty的宇宙>>", "欢迎你的到来，朋友!", "祝你玩的愉快!")
         else
             TYU.GENERICPROMPT:SetText("Welcome to", "ty's Universe!", "Thanks for playing!", "Have fun!")
         end

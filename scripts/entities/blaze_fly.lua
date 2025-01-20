@@ -1,6 +1,8 @@
 local BlazeFly = TYU:NewModEntity("Blaze Fly", "BLAZE_FLY")
+
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModEntityIDs = TYU.ModEntityIDs
 
 function BlazeFly:FamiliarInit(familiar)
@@ -51,6 +53,14 @@ function BlazeFly:PrePlayerTakeDamage(player, amount, flags, source, countdown)
     return false
 end
 BlazeFly:AddCallback(ModCallbacks.MC_PRE_PLAYER_TAKE_DMG, BlazeFly.PrePlayerTakeDamage)
+
+function BlazeFly:EntityTakeDamage(entity, amount, flags, source, countdown)
+	if not source or not source.Entity or not source.Entity:ToEffect() or source.Entity.Variant ~= EffectVariant.FIRE_JET or not source.Entity.SpawnerEntity or not source.Entity.SpawnerEntity:ToPlayer() or entity.Variant ~= FamiliarVariant.LOST_SOUL then
+        return
+    end
+    return false
+end
+BlazeFly:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, BlazeFly.EntityTakeDamage, EntityType.ENTITY_FAMILIAR)
 
 function BlazeFly:PreFamiliarCollision(familiar, collider, low)
     local player = familiar.Player

@@ -1,7 +1,10 @@
 local Ruby = TYU:NewModItem("Ruby", "RUBY")
+
 local Players = TYU.Players
+
 local ModItemIDs = TYU.ModItemIDs
 local ModNullItemIDs = TYU.ModNullItemIDs
+
 local PrivateField = {}
 
 do

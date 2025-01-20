@@ -1,5 +1,7 @@
 local StrangeSyringe = TYU:NewModItem("Strange Syringe", "STRANGE_SYRINGE")
+
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 
 function StrangeSyringe:UseItem(itemID, rng, player, useFlags, activeSlot, varData)

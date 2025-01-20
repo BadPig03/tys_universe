@@ -1,7 +1,10 @@
 local BethsSalvation = TYU:NewModTrinket("Beth's Salvation", "BETHS_SALVATION")
+
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModTrinketIDs = TYU.ModTrinketIDs
+
 local PrivateField = {}
 
 do

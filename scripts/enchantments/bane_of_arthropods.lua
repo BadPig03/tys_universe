@@ -1,7 +1,10 @@
 local BaneOfArthropods = TYU:NewModEnchantment("Bane Of Arthropods", "BANE_OF_ARTHROPODS")
+
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
+
 local PrivateField = {}
 
 do

@@ -1,5 +1,7 @@
 local TwilightFoxHalo = TYU:NewModEntity("Twilight Fox Halo", "TWILIGHT_FOX_HALO")
+
 local Entities = TYU.Entities
+
 local ModEntityIDs = TYU.ModEntityIDs
 
 function TwilightFoxHalo:PostEffectUpdate(effect)
@@ -23,16 +25,17 @@ function TwilightFoxHalo:PostEffectUpdate(effect)
             end
         end
     end
-    if effect.SubType == ModEntityIDs.TWILIGHT_FOX_HALO.SubType then
-        for _, ent in pairs(Isaac.FindInRadius(effect.Position + Vector(0, -5), 52, EntityPartition.BULLET | EntityPartition.ENEMY)) do
-            if ent:ToProjectile() then
-                familiar.Hearts = familiar.Hearts + 1
-                familiar.Keys = 60
-                ent:Die()
-            end
-            if ent:ToNPC() then
-                ent:AddVelocity((ent.Position - effect.Position):Normalized():Resized(5))
-            end
+    if effect.SubType ~= ModEntityIDs.TWILIGHT_FOX_HALO.SubType then
+        return
+    end
+    for _, ent in pairs(Isaac.FindInRadius(effect.Position + Vector(0, -5), 52, EntityPartition.BULLET | EntityPartition.ENEMY)) do
+        if ent:ToProjectile() then
+            familiar.Hearts = familiar.Hearts + 1
+            familiar.Keys = 60
+            ent:Die()
+        end
+        if ent:ToNPC() then
+            ent:AddVelocity((ent.Position - effect.Position):Normalized():Resized(5))
         end
     end
 end

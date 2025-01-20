@@ -1,5 +1,7 @@
 local ToolBox = TYU:NewModItem("Tool Box", "TOOL_BOX")
+
 local Collectibles = TYU.Collectibles
+
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 

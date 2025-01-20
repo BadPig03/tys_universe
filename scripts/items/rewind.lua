@@ -1,8 +1,11 @@
 local Rewind = TYU:NewModItem("Rewind", "REWIND")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 local function SetGlobalLibData(value, ...)
@@ -233,24 +236,22 @@ function Rewind:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
         return { Discharge = true, Remove = false, ShowAnim = true }
     end
     local restartTime = 0
-    ::restart::
-    if restartTime >= 6 then
-        return { Discharge = false, Remove = false, ShowAnim = true }
-    end
-    local roomOutcomes = WeightedOutcomePicker()
-    for roomType, count in pairs(rooms) do
-        roomOutcomes:AddOutcomeWeight(tonumber(roomType), count)
-    end
-    local result = roomOutcomes:PickOutcome(rng)
-    local currentCount = GetGlobalLibData("Rooms", tostring(result))
-    if currentCount >= 2 then
-        SetGlobalLibData(currentCount - 1, "Rooms", tostring(result))
-    end
-    if PrivateField.TeleportToRoom(result, player, rng) == -1 then
+    while restartTime < 8 do
+        local roomOutcomes = WeightedOutcomePicker()
+        for roomType, count in pairs(rooms) do
+            roomOutcomes:AddOutcomeWeight(tonumber(roomType), count)
+        end
+        local result = roomOutcomes:PickOutcome(rng)
+        local currentCount = GetGlobalLibData("Rooms", tostring(result))
+        if currentCount >= 2 then
+            SetGlobalLibData(currentCount - 1, "Rooms", tostring(result))
+        end
+        if PrivateField.TeleportToRoom(result, player, rng) ~= -1 then
+            return { Discharge = true, Remove = false, ShowAnim = true }
+        end
         restartTime = restartTime + 1
-        goto restart
     end
-	return { Discharge = true, Remove = false, ShowAnim = true }
+    return { Discharge = false, Remove = false, ShowAnim = true }
 end
 Rewind:AddCallback(ModCallbacks.MC_USE_ITEM, Rewind.UseItem, ModItemIDs.REWIND)
 

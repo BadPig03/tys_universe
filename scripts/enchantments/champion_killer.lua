@@ -1,6 +1,8 @@
 local ChampionKiller = TYU:NewModEnchantment("Champion Killer", "CHAMPION_KILLER")
+
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 
 function ChampionKiller:TakeDamage(entity, amount, flags, source, countdown)

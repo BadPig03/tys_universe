@@ -1,5 +1,7 @@
 local BlazeFly = TYU:NewModItem("Blaze Fly", "BLAZE_FLY")
+
 local Collectibles = TYU.Collectibles
+
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 

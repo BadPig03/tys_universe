@@ -33,9 +33,9 @@
 	<costume id="25" anm2path="costume_fallen_sky.anm2" type="passive" hasSkinAlt="true"/>
 	<costume id="26" anm2path="costume_guilt.anm2" type="passive"/>
 	<costume id="29" anm2path="costume_hephaestus_soul.anm2" type="passive" isFlying="true" hasOverlay="true"/>
-	<costume id="33" anm2path="costume_marriage_certificate.anm2" type="passive" hasSkinAlt="true"/>
-	<costume id="37" anm2path="costume_oceanus_soul.anm2" type="passive" isFlying="true"/>
-	<costume id="43" anm2path="costume_recon_vision.anm2" type="passive" priority="1"/>
-	<costume id="46" anm2path="costume_scapegoat.anm2" type="passive" priority="96" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
-	<costume id="48" anm2path="costume_sticky_ball.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="34" anm2path="costume_marriage_certificate.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="38" anm2path="costume_oceanus_soul.anm2" type="passive" isFlying="true"/>
+	<costume id="44" anm2path="costume_recon_vision.anm2" type="passive" priority="1"/>
+	<costume id="47" anm2path="costume_scapegoat.anm2" type="passive" priority="96" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
+	<costume id="49" anm2path="costume_sticky_ball.anm2" type="passive" hasSkinAlt="true"/>
 </costumes>

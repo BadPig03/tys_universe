@@ -1,7 +1,10 @@
 local SpikeProtection = TYU:NewModEnchantment("Spike Protection", "SPIKE_PROTECTION")
+
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 do
@@ -32,9 +35,10 @@ function SpikeProtection:EntityTakeDamage(entity, amount, flags, source, countdo
         return
     end
     local rng = player:GetCollectibleRNG(ModItemIDs.ENCHANTED_BOOK)
-    if rng:RandomInt(100) < 25 * count then
-        return { Damage = 0, DamageCountdown = 30 }
+    if rng:RandomInt(100) >= 25 * count then
+        return
     end
+    return { Damage = 0, DamageCountdown = 30 }
 end
 SpikeProtection:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, SpikeProtection.EntityTakeDamage, EntityType.ENTITY_PLAYER)
 

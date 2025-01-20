@@ -57,9 +57,14 @@ function Players.IsJacobOrEsau(player)
     return playerType == PlayerType.PLAYER_JACOB or playerType == PlayerType.PLAYER_ESAU
 end
 
-function Players.IsTaintedForgottenAndSoul(player)
+function Players.IsTaintedForgottenOrSoul(player)
     local playerType = player:GetPlayerType()
     return playerType == PlayerType.PLAYER_THEFORGOTTEN_B or playerType == PlayerType.PLAYER_THESOUL_B
+end
+
+function Players.IsForgottenOrSoul(player)
+    local playerType = player:GetPlayerType()
+    return playerType == PlayerType.PLAYER_THEFORGOTTEN or playerType == PlayerType.PLAYER_THESOUL
 end
 
 function Players.IsTaintedLazarusOrFlippedLazarus(player)
@@ -96,7 +101,7 @@ end
 
 function Players.GetNullEffectCounts(id)
     local count = 0
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         local effects = player:GetEffects()
         if effects:HasNullEffect(id) then
             count = count + effects:GetNullEffectNum(id)

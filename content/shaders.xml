@@ -1,0 +1,152 @@
+<shaders>
+    <shader name="LightSwitchDarkness">
+		<parameters>
+			<param name="ActiveIn" type="float"/>
+			<param name="TargetPositionOne" type="vec4"/>
+            <param name="TargetPositionTwo" type="vec4"/>
+            <param name="FadePositions" type="vec4"/>
+            <param name="WarpCheck" type="vec2"/>
+		</parameters>
+        <vertex><![CDATA[
+            attribute vec3 Position;
+            attribute vec4 Color;
+            attribute vec2 TexCoord;
+            attribute vec4 RenderData;
+            attribute float Scale;
+
+            varying vec4 Color0;
+            varying vec2 TexCoord0;
+            varying vec4 RenderDataOut;
+            varying float ScaleOut;
+
+            attribute float ActiveIn;
+            varying float Active;
+
+            attribute vec4 TargetPositionOne;
+            attribute vec4 TargetPositionTwo;
+            varying vec4 TargetPositions;
+
+            attribute vec4 FadePositions;
+            varying vec4 Distance;
+
+            attribute vec2 WarpCheck;
+            varying float YWarping;
+
+            uniform mat4 Transform;
+
+            void main(void)
+            {
+                RenderDataOut = RenderData;
+                Color0 = Color;
+                TexCoord0 = TexCoord;
+
+                gl_Position = Transform * vec4(Position.xyz, 1);
+
+                Active = ActiveIn;
+
+                if (Active == 0)
+                {
+                    return;
+                }
+                else
+                {
+                    vec4 TargetPosOne;
+                    TargetPosOne.xy = (TargetPositionOne.xy / RenderData.zw) * Scale;
+                    TargetPosOne.zw = (TargetPositionOne.zw / RenderData.zw) * Scale;
+
+                    vec4 TargetPosTwo;
+                    TargetPosTwo.xy = (TargetPositionTwo.xy / RenderData.zw) * Scale;
+                    TargetPosTwo.zw = (TargetPositionTwo.zw / RenderData.zw) * Scale;
+
+                    vec4 FixedFadePositions;
+                    FixedFadePositions.xy = (FadePositions.xy / RenderData.zw) * Scale;
+                    FixedFadePositions.zw = (FadePositions.zw / RenderData.zw) * Scale;
+
+                    TargetPositions.xy = TargetPosOne.xy;
+                    TargetPositions.zw = TargetPosTwo.xy;
+
+                    Distance.x = distance(TargetPosOne.xy, TargetPosOne.zw);
+                    Distance.y = distance(TargetPosTwo.xy, TargetPosTwo.zw);
+                    Distance.z = distance(TargetPosOne.xy, FixedFadePositions.xy);
+                    Distance.w = distance(TargetPosTwo.xy, FixedFadePositions.zw);
+
+                    vec2 WarpChecker = (WarpCheck.xy / RenderData.zw) * Scale;
+                    float xDistance = distance(vec2(WarpChecker.x, TargetPosOne.y), TargetPosOne.xy);
+                    float yDistance = distance(vec2(TargetPosOne.x, WarpChecker.y), TargetPosOne.xy);
+                    YWarping = xDistance / yDistance;
+                }
+            }
+        ]]></vertex>
+        <fragment><![CDATA[
+            varying vec4 Color0;
+            varying vec2 TexCoord0;
+            varying vec4 RenderDataOut;
+            varying float ScaleOut;
+            uniform sampler2D Texture0;
+
+            varying float Active;
+            varying vec4 TargetPositions;
+            varying vec4 Distance;
+            varying float ColorPulse;
+            varying float YWarping;
+
+            float MinNoiseBrightness = 0.12;
+            float MaxNoiseBrightness = 1.0;
+            float MinNoiseStrength = 0.05;
+            float MaxNoiseStrength = 1.0;
+
+            float warpedDistance(vec2 a, vec2 b)
+            {
+                vec2 diff = a - b;
+                return sqrt((diff.x * diff.x) + (diff.y * diff.y * YWarping * YWarping));
+            }
+
+            void main(void)
+            {
+                vec4 Color = Color0 * texture2D(Texture0, TexCoord0);
+
+                if (Active == 0)
+                {
+                    gl_FragColor = Color;
+                    return;
+                }
+
+                float distA = warpedDistance(TexCoord0, TargetPositions.xy);
+                float distB = warpedDistance(TexCoord0, TargetPositions.zw);
+                float brightness = MaxNoiseBrightness;
+                float noiseStrength = MinNoiseStrength;
+                if (distA > Distance.x && distB > Distance.y)
+                {
+                    brightness = MinNoiseBrightness;
+                    noiseStrength = MaxNoiseStrength;
+                }
+                else if (distA > Distance.z && distB > Distance.w)
+                {
+                    float percent = 2.0;
+                    if (distA <= Distance.x)
+                    {
+                        float percentA = (distA - Distance.z) / (Distance.x - Distance.z);
+                        percent = min(percent, percentA);
+                    };
+                    if (distB <= Distance.y)
+                    {
+                        float percentB = (distB - Distance.w) / (Distance.y - Distance.w);
+                        percent = min(percent, percentB);
+                    };
+                    if (percent != 2.0)
+                    {
+                        percent = pow(1.0 - percent, 2.0);
+                        percent = 1.0 - percent;
+                        brightness = mix(MaxNoiseBrightness, MinNoiseBrightness, percent);
+                        noiseStrength = mix(MinNoiseStrength, MaxNoiseStrength, percent);
+                    };
+                };
+
+                float noise = -(1 - TexCoord0.x) * TexCoord0.x * brightness;
+                float desaturated = (min(Color.r, min(Color.g, Color.b)) + max(Color.r, max(Color.g, Color.b))) * 0.5;
+                Color = mix(Color, vec4(desaturated, desaturated, desaturated, Color.a), 0.1);
+                gl_FragColor = mix(Color, vec4(noise, noise, noise, 1.0), noiseStrength * Active);
+            }
+        ]]></fragment>
+    </shader>
+</shaders>

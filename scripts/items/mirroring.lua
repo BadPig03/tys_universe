@@ -1,9 +1,12 @@
 local Mirroring = TYU:NewModItem("Mirroring", "MIRRORING")
+
 local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModPlayerIDs = TYU.ModPlayerIDs
+
 local PrivateField = {}
 
 local function SetPlayerLibData(player, value, ...)
@@ -118,7 +121,7 @@ function Mirroring:PostUpdate()
     if targetPos then
         local rng = Isaac.GetPlayer(0):GetCollectibleRNG(ModItemIDs.MIRRORING)
         if rng:RandomInt(100) < 25 then
-            Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, ModItemIDs.MIRRORINGBROKEN, Utils.FindFreePickupSpawnPosition(targetPos))
+            Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, ModItemIDs.MIRRORING_SHARD, Utils.FindFreePickupSpawnPosition(targetPos))
         end
     end
     SetGlobalLibData(true)

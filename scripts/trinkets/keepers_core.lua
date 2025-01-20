@@ -1,6 +1,9 @@
 local KeepersCore = TYU:NewModTrinket("Keeper's Core", "KEEPERS_CORE")
+
 local Players = TYU.Players
+
 local ModTrinketIDs = TYU.ModTrinketIDs
+
 local PrivateField = {}
 
 local function GetGlobalLibData(...)
@@ -75,7 +78,8 @@ function KeepersCore:PostTriggerTrinketChanged(player, trinket, _)
     if trinket ~= ModTrinketIDs.KEEPERS_CORE and trinket ~= ModTrinketIDs.KEEPERS_CORE | TrinketType.TRINKET_GOLDEN_FLAG then
         return
     end
-    TYU.GAME:GetRoom():InvalidatePickupVision()
+    local room = TYU.GAME:GetRoom()
+    room:InvalidatePickupVision()
 end
 KeepersCore:AddCallback(ModCallbacks.MC_POST_TRIGGER_TRINKET_ADDED, KeepersCore.PostTriggerTrinketChanged)
 KeepersCore:AddCallback(ModCallbacks.MC_POST_TRIGGER_TRINKET_REMOVED, KeepersCore.PostTriggerTrinketChanged)

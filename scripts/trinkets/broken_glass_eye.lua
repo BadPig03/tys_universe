@@ -1,5 +1,7 @@
 local BrokenGlassEye = TYU:NewModTrinket("Broken Glass Eye", "BROKEN_GLASS_EYE")
+
 local Stat = TYU.Stat
+
 local ModTrinketIDs = TYU.ModTrinketIDs
 
 function BrokenGlassEye:EvaluateCache(player, cacheFlag)

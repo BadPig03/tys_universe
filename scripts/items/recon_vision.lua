@@ -1,9 +1,11 @@
 local ReconVision = TYU:NewModItem("Recon Vision", "RECON_VISION")
+
 local Constants = TYU.Constants
 local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 
 if EID then

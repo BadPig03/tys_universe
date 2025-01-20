@@ -1,8 +1,10 @@
 local ChocolatePancake = TYU:NewModItem("Chocolate Pancake", "CHOCOLATE_PANCAKE")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Stat = TYU.Stat
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 
 function ChocolatePancake:PostNPCDeath(npc)

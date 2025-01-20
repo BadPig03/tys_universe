@@ -1,11 +1,14 @@
 local WakeUp = TYU:NewModItem("Wake-up", "WAKE_UP")
+
 local Callbacks = TYU.Callbacks
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
 local SaveAndLoad = TYU.SaveAndLoad
+
 local ModRoomIDs = TYU.ModRoomIDs
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 local function GetGlobalLibData(...)
@@ -173,9 +176,10 @@ end
 WakeUp:AddCallback(ModCallbacks.MC_USE_ITEM, WakeUp.UseItem, ModItemIDs.WAKE_UP)
 
 function WakeUp:PostNewLevel()
-    if GetGlobalLibData("CurrentLevelUsed") then
-        SetGlobalLibData(false, "CurrentLevelUsed")
+    if not GetGlobalLibData("CurrentLevelUsed") then
+        return
     end
+    SetGlobalLibData(false, "CurrentLevelUsed")
 end
 WakeUp:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, WakeUp.PostNewLevel)
 
@@ -195,27 +199,28 @@ function WakeUp:ReplaceWakeUpMainRoomContents(isLoaded)
     if isLoaded and not PrivateField.IsInvalidRoom() and not GetGlobalLibData("Escaped") then
         TYU.GAME:StartRoomTransition(TYU.LEVEL:GetStartingRoomIndex(), Direction.UP, RoomTransitionAnim.DEATH_CERTIFICATE, Isaac.GetPlayer(0), 0)
     end
-    if not PrivateField.IsInvalidRoom() then
-        local room = TYU.GAME:GetRoom()
-        room:SetBackdropType(BackdropType.DOGMA, 1)
-        room:RemoveDoor(DoorSlot.DOWN0)
-        room:RemoveGridEntityImmediate(37, 0, false)
-        Utils.RemoveAllDecorations()
-        if not Utils.IsRoomFirstVisit() then
-            return
-        end
-        Entities.Spawn(EntityType.ENTITY_GENERIC_PROP, 4, 0, Vector(320, 420))
-        local rng = RNG(room:GetAwardSeed())
-        for i = 0, 2 do
-            local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, PrivateField.GetNewCollectible(rng), room:GetGridPosition(154 + 3 * i)):ToPickup()
-            item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE | EntityFlag.FLAG_GLITCH)
-            item.Price = 0
-            Utils.AddSeedToWarfarinItems(item.InitSeed)
-            item:RemoveCollectibleCycle()
-            if not Players.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_TMTRAINER) then
-                for j = 1, 2 do
-                    item:AddCollectibleCycle(PrivateField.GetNewCollectible(rng))
-                end
+    if PrivateField.IsInvalidRoom() then
+        return
+    end
+    local room = TYU.GAME:GetRoom()
+    room:SetBackdropType(BackdropType.DOGMA, 1)
+    room:RemoveDoor(DoorSlot.DOWN0)
+    room:RemoveGridEntityImmediate(37, 0, false)
+    Utils.RemoveAllDecorations()
+    if not Utils.IsRoomFirstVisit() then
+        return
+    end
+    Entities.Spawn(EntityType.ENTITY_GENERIC_PROP, 4, 0, Vector(320, 420))
+    local rng = RNG(room:GetAwardSeed())
+    for i = 0, 2 do
+        local item = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, PrivateField.GetNewCollectible(rng), room:GetGridPosition(154 + 3 * i)):ToPickup()
+        item:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE | EntityFlag.FLAG_GLITCH)
+        item.Price = 0
+        Utils.AddSeedToWarfarinItems(item.InitSeed)
+        item:RemoveCollectibleCycle()
+        if not Players.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_TMTRAINER) then
+            for j = 1, 2 do
+                item:AddCollectibleCycle(PrivateField.GetNewCollectible(rng))
             end
         end
     end
@@ -248,35 +253,36 @@ function WakeUp:PostUpdate()
             anyCollectibleFound = true
         end
     end
-    if not anyCollectibleFound then
-        local text = (Options.Language == "zh" and "深入梦魇…") or "DEEP IN A NIGHTMARE..."
-        TYU.HUD:ShowFortuneText(text)
-        TYU.GAME:Darken(1, 120)
-        TYU.GAME:ShakeScreen(120)
-        room:RemoveGridEntityImmediate(37, 0, false)
-        TYU.SFXMANAGER:Play(SoundEffect.SOUND_MOTHERSHADOW_DASH, 0.6, 2, false, 0.5)
-        for _, ent in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE)) do
-            Entities.SpawnPoof(ent.Position)
-            ent:Remove()
-        end
-        for _, player in pairs(Players.GetPlayers(true)) do
-            player:AddControlsCooldown(240)
-        end
-        Utils.CreateTimer(function()
-            TYU.GAME:SetBloom(60, -12)
-        end, 60, 0, false)
-        Utils.CreateTimer(function()
-            for _, player in pairs(Players.GetPlayers(true)) do
-                player:Teleport(Vector(320, 620), false, true)
-            end
-            for _, tv in pairs(Isaac.FindByType(EntityType.ENTITY_GENERIC_PROP, 4)) do
-                tv:Remove()
-            end
-            Entities.Spawn(EntityType.ENTITY_DOGMA, 0, 0, Vector(320, 420))
-            SetGlobalLibData(true, "Spawned")    
-        end, 110, 0, false)
-        SetGlobalLibData(true, "Taken")
+    if anyCollectibleFound then
+        return
     end
+    local text = (Options.Language == "zh" and "深入梦魇…") or "DEEP IN A NIGHTMARE..."
+    TYU.HUD:ShowFortuneText(text)
+    TYU.GAME:Darken(1, 120)
+    TYU.GAME:ShakeScreen(120)
+    room:RemoveGridEntityImmediate(37, 0, false)
+    TYU.SFXMANAGER:Play(SoundEffect.SOUND_MOTHERSHADOW_DASH, 0.6, 2, false, 0.5)
+    for _, ent in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE)) do
+        Entities.SpawnPoof(ent.Position)
+        ent:Remove()
+    end
+    for _, player in ipairs(Players.GetPlayers(true)) do
+        player:AddControlsCooldown(240)
+    end
+    Utils.CreateTimer(function()
+        TYU.GAME:SetBloom(60, -12)
+    end, 60, 0, false)
+    Utils.CreateTimer(function()
+        for _, player in ipairs(Players.GetPlayers(true)) do
+            player:Teleport(Vector(320, 620), false, true)
+        end
+        for _, tv in pairs(Isaac.FindByType(EntityType.ENTITY_GENERIC_PROP, 4)) do
+            tv:Remove()
+        end
+        Entities.Spawn(EntityType.ENTITY_DOGMA, 0, 0, Vector(320, 420))
+        SetGlobalLibData(true, "Spawned")    
+    end, 110, 0, false)
+    SetGlobalLibData(true, "Taken")
 end
 WakeUp:AddCallback(ModCallbacks.MC_POST_UPDATE, WakeUp.PostUpdate)
 
@@ -297,7 +303,7 @@ function WakeUp:PostEntityKill(entity)
     SetGlobalLibData(true, "Killed")
     Utils.CreateTimer(function()
         TYU.GAME:SetBloom(60, -12)
-        for _, player in pairs(Players.GetPlayers(true)) do
+        for _, player in ipairs(Players.GetPlayers(true)) do
             player:AddCollectible(CollectibleType.COLLECTIBLE_DOGMA)
         end
     end, 60, 0, false)
@@ -309,10 +315,11 @@ end
 WakeUp:AddCallback(ModCallbacks.MC_POST_ENTITY_KILL, WakeUp.PostEntityKill, EntityType.ENTITY_DOGMA)
 
 function WakeUp:PreUseCard(card, player, useFlags)
-    if card == Card.CARD_REVERSE_EMPEROR and GetGlobalLibData("CurrentLevelUsed") then
-        Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_REVERSE_EMPEROR, Utils.FindFreePickupSpawnPosition(player.Position, 0, true))
-        return true
+    if card ~= Card.CARD_REVERSE_EMPEROR or not GetGlobalLibData("CurrentLevelUsed") then
+        return
     end
+    Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, Card.CARD_REVERSE_EMPEROR, Utils.FindFreePickupSpawnPosition(player.Position, 0, true))
+    return true
 end
 WakeUp:AddCallback(ModCallbacks.MC_PRE_USE_CARD, WakeUp.PreUseCard)
 

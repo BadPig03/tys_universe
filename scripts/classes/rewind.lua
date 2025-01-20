@@ -1,9 +1,6 @@
 local Rewind = TYU:RegisterNewClass()
-local PrivateField = {}
 
-Rewind.LastGlowingHourglassData = {}
-Rewind.LastRewindData = {}
-Rewind.GlowingHourglassUsed = false
+local PrivateField = {}
 
 do
     function PrivateField.GetRewindData()
@@ -23,6 +20,12 @@ do
         TYU.Table.ReplaceContent(TYU.EntitiesData, data.EntitiesData)
         TYU.Table.ReplaceContent(TYU.TempPlayersData, data.TempPlayersData)
     end
+end
+
+do
+    Rewind.LastGlowingHourglassData = {}
+    Rewind.LastRewindData = {}
+    Rewind.GlowingHourglassUsed = false
 end
 
 function Rewind:UseItem(itemID, rng, player, useFlags, activeSlot, varData)

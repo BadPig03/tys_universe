@@ -1,5 +1,7 @@
 local BlastProtection = TYU:NewModEnchantment("Blast Protection", "BLAST_PROTECTION")
+
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 local ModItemIDs = TYU.ModItemIDs
 
@@ -13,9 +15,10 @@ function BlastProtection:EntityTakeDamage(entity, amount, flags, source, countdo
         return
     end
     local rng = player:GetCollectibleRNG(ModItemIDs.ENCHANTED_BOOK)
-    if rng:RandomInt(100) < 25 * count then
-        return { Damage = 0, DamageCountdown = 30 }
+    if rng:RandomInt(100) >= 25 * count then
+        return
     end
+    return { Damage = 0, DamageCountdown = 30 }
 end
 BlastProtection:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, BlastProtection.EntityTakeDamage, EntityType.ENTITY_PLAYER)
 

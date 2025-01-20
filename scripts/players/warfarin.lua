@@ -1,4 +1,5 @@
 local Warfarin = TYU:NewModPlayer("Warfarin", false, "WARFARIN")
+
 local Callbacks = TYU.Callbacks
 local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
@@ -7,12 +8,14 @@ local Stat = TYU.Stat
 local SaveAndLoad = TYU.SaveAndLoad
 local Rewind = TYU.Rewind
 local Utils = TYU.Utils
+
 local ModPlayerIDs = TYU.ModPlayerIDs
 local ModGiantBookIDs = TYU.ModGiantBookIDs
 local ModNullItemIDs = TYU.ModNullItemIDs
 local ModItemIDs = TYU.ModItemIDs
 local ModSoundIDs = TYU.ModSoundIDs
 local ModRoomIDs = TYU.ModRoomIDs
+
 local PrivateField = {}
 
 local function GetPlayerLibData(player, ...)
@@ -88,17 +91,18 @@ function Warfarin:PostFireTear(tear)
     if player:GetEffects():HasNullEffect(ModNullItemIDs.WARFARIN_HAEMOLACRIA) and tear.Variant == TearVariant.BLUE then
         tear:ChangeVariant(TearVariant.BLOOD)
     end
-    if player:HasCollectible(CollectibleType.COLLECTIBLE_POLYPHEMUS) then
-        local angle = tear.Velocity:GetAngleDegrees()
-        if angle == 0 then
-            tear.Position = tear.Position + Vector(0, 4)
-        elseif angle == 90 then
-            tear.Position = tear.Position + Vector(-10, 0)
-        elseif angle == 180 then
-            tear.Position = tear.Position + Vector(0, -4)
-        elseif angle == -90 then
-            tear.Position = tear.Position + Vector(10, 0)
-        end
+    if not player:HasCollectible(CollectibleType.COLLECTIBLE_POLYPHEMUS) then
+        return
+    end
+    local angle = tear.Velocity:GetAngleDegrees()
+    if angle == 0 then
+        tear.Position = tear.Position + Vector(0, 4)
+    elseif angle == 90 then
+        tear.Position = tear.Position + Vector(-10, 0)
+    elseif angle == 180 then
+        tear.Position = tear.Position + Vector(0, -4)
+    elseif angle == -90 then
+        tear.Position = tear.Position + Vector(10, 0)
     end
 end
 Warfarin:AddCallback(ModCallbacks.MC_POST_FIRE_TEAR, Warfarin.PostFireTear)
@@ -122,7 +126,7 @@ function Warfarin:PostPlayerUpdate(player)
             SetPlayerLibData(player, true, "InTriggered")
         end
     end
-    local collectible = Collectibles.GetNearestDevilDeal(player.Position, 192)
+    local collectible = Collectibles.GetNearestDevilDeal(player.Position, 128)
     local charge = player:GetActiveCharge(ActiveSlot.SLOT_POCKET) + player:GetBatteryCharge(ActiveSlot.SLOT_POCKET)
     if collectible and Utils.IsRoomClear() then
         if player:GetActiveItem(ActiveSlot.SLOT_POCKET) == ModItemIDs.BLOOD_SAMPLE then
@@ -146,7 +150,7 @@ end
 Warfarin:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, Warfarin.PostPlayerUpdate, 0)
 
 function Warfarin:PostHUDUpdate()
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         if player:GetPlayerType() == ModPlayerIDs.WARFARIN then
             if PlayerManager.GetEsauJrState(player:GetPlayerIndex()) and player:GetBlackHearts() > 0 then
                 player:AddMaxHearts(2)
@@ -161,7 +165,7 @@ end
 Warfarin:AddCallback(ModCallbacks.MC_POST_HUD_UPDATE, Warfarin.PostHUDUpdate)
 
 function Warfarin:PostNewRoom()
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         if player:GetPlayerType() == ModPlayerIDs.WARFARIN then
             SetPlayerLibData(player, false, "OutTriggered")
             SetPlayerLibData(player, false, "InTriggered")
@@ -203,13 +207,14 @@ function Warfarin:PostPickupInit(pickup)
     if not Players.AnyoneIsPlayerType(ModPlayerIDs.WARFARIN) then
         return
     end
-    if pickup.SubType == HeartSubType.HEART_BLENDED then
-        local rng = pickup:GetDropRNG()
-        if rng:RandomInt(100) < 50 then
-            Entities.Morph(pickup, nil, nil, HeartSubType.HEART_SOUL, true, true, true, false)
-        else
-            Entities.Morph(pickup, nil, nil, HeartSubType.HEART_FULL, true, true, true, false)
-        end
+    if pickup.SubType ~= HeartSubType.HEART_BLENDED then
+        return
+    end
+    local rng = pickup:GetDropRNG()
+    if rng:RandomInt(100) < 50 then
+        Entities.Morph(pickup, nil, nil, HeartSubType.HEART_SOUL, true, true, true, false)
+    else
+        Entities.Morph(pickup, nil, nil, HeartSubType.HEART_FULL, true, true, true, false)
     end
 end
 Warfarin:AddCallback(ModCallbacks.MC_POST_PICKUP_INIT, Warfarin.PostPickupInit, PickupVariant.PICKUP_HEART)
@@ -277,9 +282,10 @@ Warfarin:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, Warfarin.PostAddColle
 
 function Warfarin:PlayerGetHeartLimit(player, limit, isKeeper)
     local heartLimit = (player:HasCollectible(CollectibleType.COLLECTIBLE_BIRTHRIGHT) and 18) or 12
-    if player:GetMaxHearts() + 2 * player:GetBoneHearts() >= heartLimit and player:GetBrokenHearts() <= (24 - heartLimit) / 2 then
-        return heartLimit
+    if (player:GetMaxHearts() + 2 * player:GetBoneHearts() < heartLimit) or (player:GetBrokenHearts() > (24 - heartLimit) / 2) then
+        return
     end
+    return heartLimit
 end
 Warfarin:AddCallback(ModCallbacks.MC_PLAYER_GET_HEART_LIMIT, Warfarin.PlayerGetHeartLimit, ModPlayerIDs.WARFARIN)
 
@@ -323,11 +329,12 @@ function Warfarin:PostPlayerRevive(player)
     if player:GetPlayerType() ~= ModPlayerIDs.WARFARIN then
         return
     end
-    if player:GetSoulHearts() == 1 and player:GetMaxHearts() + player:GetBoneHearts() == 0 then
-        player:AddSoulHearts(-1)
-        player:AddMaxHearts(2)
-        player:AddHearts(2)
+    if player:GetSoulHearts() ~= 1 or player:GetMaxHearts() + player:GetBoneHearts() ~= 0 then
+        return
     end
+    player:AddSoulHearts(-1)
+    player:AddMaxHearts(2)
+    player:AddHearts(2)
 end
 Warfarin:AddCallback(ModCallbacks.MC_POST_PLAYER_REVIVE, Warfarin.PostPlayerRevive)
 
@@ -367,7 +374,7 @@ function Warfarin:PreLevelSelect(levelStage, stageType)
     SetGlobalLibData({}, "RoomIndices")
     SetGlobalLibData(false, "Spawned")
     TYU:SetGlobalLibData({}, "WarfarinItems")
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         local movingBoxContents = player:GetMovingBoxContents()
         for i = 0, movingBoxContents:__len() - 1 do
             local item = movingBoxContents:Get(i)
@@ -455,12 +462,14 @@ function Warfarin:ReplaceBlackmarketDoorSprite()
             end
         end
     end
-    if Utils.IsRoomIndex(blackmarketRoomIndex) then
-        room:SetBackdropType(BackdropType.GEHENNA, 1)
-        if Utils.IsRoomFirstVisit() then
-            room:TrySpawnSecretShop(true)
-        end
+    if not Utils.IsRoomIndex(blackmarketRoomIndex) then
+        return
     end
+    room:SetBackdropType(BackdropType.GEHENNA, 1)
+    if not Utils.IsRoomFirstVisit() then
+        return
+    end
+    room:TrySpawnSecretShop(true)
 end
 Warfarin:AddCallback(Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, Warfarin.ReplaceBlackmarketDoorSprite)
 

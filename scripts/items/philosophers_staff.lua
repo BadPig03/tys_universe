@@ -1,7 +1,9 @@
 local PhilosophersStaff = TYU:NewModItem("Philosopher's Staff", "PHILOSOPHERS_STAFF")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModFoodItemIDs = TYU.ModFoodItemIDs
 
@@ -75,9 +77,10 @@ function PhilosophersStaff:PostNPCDeath(npc)
         return
     end
     local rng = RNG(npc.InitSeed)
-    if (not npc.SpawnerEntity and rng:RandomInt(100) < 4) or (npc.SpawnerEntity and rng:RandomInt(100) < 2) then
-        Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET, 0, npc.Position) 
+    if (npc.SpawnerEntity and rng:RandomInt(100) >= 4) or (not npc.SpawnerEntity and rng:RandomInt(100) >= 2) then
+        return
     end
+    Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TRINKET, 0, npc.Position) 
 end
 PhilosophersStaff:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, PhilosophersStaff.PostNPCDeath)
 

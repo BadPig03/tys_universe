@@ -1,7 +1,10 @@
 local MealTicket = TYU:NewModTrinket("Meal Ticket", "MEAL_TICKET")
+
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModTrinketIDs = TYU.ModTrinketIDs
+
 local PrivateField = {}
 
 do

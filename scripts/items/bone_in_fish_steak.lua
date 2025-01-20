@@ -1,7 +1,10 @@
 local BoneInFishSteak = TYU:NewModItem("Bone-in Fish Steak", "BONE_IN_FISH_STEAK")
-local Stat = TYU.Stat
-local ModItemIDs = TYU.ModItemIDs
+
 local Callbacks = TYU.Callbacks
+local Stat = TYU.Stat
+
+local ModItemIDs = TYU.ModItemIDs
+
 
 local function SetPlayerLibData(player, value, ...)
     TYU:SetPlayerLibData(player, value, "BoneInFishSteak", ...)
@@ -37,10 +40,11 @@ end
 BoneInFishSteak:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, BoneInFishSteak.EvaluateCache)
 
 function BoneInFishSteak:PostAddCollectible(type, charge, firstTime, slot, varData, player)
-    if firstTime then
-        player:AddBoneHearts(1)
-        player:AddHearts(2)
+    if not firstTime then
+        return
     end
+    player:AddBoneHearts(1)
+    player:AddHearts(2)
 end
 BoneInFishSteak:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, BoneInFishSteak.PostAddCollectible, ModItemIDs.BONE_IN_FISH_STEAK)
 

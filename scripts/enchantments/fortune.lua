@@ -1,7 +1,9 @@
 local Fortune = TYU:NewModEnchantment("Fortune", "FORTUNE")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 local ModItemIDs = TYU.ModItemIDs
 
@@ -18,9 +20,10 @@ function Fortune:PostGridRockDestroy(rock, type, immediate)
     end
     local seed = rock:GetSaveState().SpawnSeed
     local rng = RNG(seed)
-    if rng:RandomInt(100) < count * 25 then
-        Entities.Spawn(EntityType.ENTITY_PICKUP, 0, 1, rock.Position, Vector(1, 0):Resized(3 + rng:RandomFloat() * 4):Rotated(rng:RandomInt(360)), nil, seed)
+    if rng:RandomInt(100) >= count * 25 then
+        return
     end
+    Entities.Spawn(EntityType.ENTITY_PICKUP, 0, 1, rock.Position, Vector(1, 0):Resized(3 + rng:RandomFloat() * 4):Rotated(rng:RandomInt(360)), nil, seed)
 end
 Fortune:AddCallback(ModCallbacks.MC_POST_GRID_ROCK_DESTROY, Fortune.PostGridRockDestroy)
 

@@ -1,5 +1,7 @@
 local StickyBallSquirt = TYU:NewModEntity("Sticky Ball Squirt Level 2", "STICKY_BALL_SQUIRT_LEVEL_2")
+
 local Entities = TYU.Entities
+
 local ModEntityIDs = TYU.ModEntityIDs
 
 function StickyBallSquirt:PostNPCDeath(npc)

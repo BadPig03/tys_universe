@@ -1,5 +1,7 @@
 local CurseOfVanishing = TYU:NewModEnchantment("Curse Of Vanishing", "CURSE_OF_VANISHING")
+
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 
 function CurseOfVanishing:PostPlayerRevive(player)

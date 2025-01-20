@@ -1,10 +1,13 @@
 local MeatEffigy = TYU:NewModEntity("Meat Effigy", "MEAT_EFFIGY")
 local MeatEffigySoul = TYU:NewModEntity("Meat Effigy Soul", "MEAT_EFFIGY_SOUL")
 local MeatEffigyBroken = TYU:NewModEntity("Meat Effigy Broken", "MEAT_EFFIGY_BROKEN")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModNullItemIDs = TYU.ModNullItemIDs
+
 local PrivateField = {}
 
 local function GetGlobalLibData(...)
@@ -27,9 +30,9 @@ function MeatEffigy:PreSlotCreateExplosionDrops(effigy)
         return
     end
     PrivateField.RemoveEffigyData(effigy.InitSeed)
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         player:GetEffects():RemoveNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE, 1)
-        if (Players.IsJacobOrEsau(player) or Players.IsTaintedForgottenAndSoul(player)) and player:GetOtherTwin() then
+        if (Players.IsJacobOrEsau(player) or Players.IsTaintedForgottenOrSoul(player)) and player:GetOtherTwin() then
             player:GetOtherTwin():GetEffects():RemoveNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE, 1)
         end
         if Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then

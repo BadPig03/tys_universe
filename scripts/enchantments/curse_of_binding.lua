@@ -1,5 +1,7 @@
 local CurseOfBinding = TYU:NewModEnchantment("Curse Of Binding", "CURSE_OF_BINDING")
+
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 
 function CurseOfBinding:PrePickupCollision(pickup, collider, low)

@@ -1,5 +1,7 @@
 local OceanusSoulChargeBar = TYU:NewModEntity("Oceanus Soul ChargeBar", "OCEANUS_SOUL_CHARGEBAR")
+
 local Constants = TYU.Constants
+
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 

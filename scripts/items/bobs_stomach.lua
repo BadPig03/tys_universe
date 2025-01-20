@@ -3,9 +3,11 @@ local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
 local Constants = TYU.Constants
+
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 local ModEntityFlags = TYU.ModEntityFlags
+
 local PrivateField = {}
 
 local function SetTempEntityLibData(entity, value, ...)

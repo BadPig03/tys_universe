@@ -1,6 +1,8 @@
 local Knockback = TYU:NewModEnchantment("Knockback", "KNOCKBACK")
+
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 
 function Knockback:PostPlayerUpdate(player)

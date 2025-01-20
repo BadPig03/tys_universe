@@ -1,9 +1,12 @@
 local Conjunctivitis = TYU:NewModItem("Conjunctivitis", "CONJUNCTIVITIS")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModTearFlags = TYU.ModTearFlags
+
 local PrivateField = {}
 
 do
@@ -38,11 +41,19 @@ do
         newTear.CollisionDamage = tear.CollisionDamage / 2
     end
 
-    function PrivateField.SetSpriteAlpha(sprite, tear)
+    function PrivateField.SetSpriteAlpha(tear)
+        local sprite = tear:GetSprite()
         local oldColor = sprite.Color
         local oldColorize = oldColor:GetColorize()
         oldColor:SetColorize(oldColorize.R, oldColorize.G, oldColorize.B, oldColorize.A)
         oldColor:SetTint(tear.Color.R, tear.Color.G, tear.Color.B, 1 - math.sqrt(tear.FrameCount / PrivateField.GetTrailLength(tear)))
+    end
+
+    function PrivateField.SetTearAlpha(tear, alpha)
+        tear:GetTearEffectSprite().Color:SetTint(1, 1, 1, alpha)
+        tear:GetTearHaloSprite().Color:SetTint(1, 1, 1, alpha)
+        tear:GetDeadEyeSprite().Color:SetTint(1, 1, 1, alpha)
+        tear:SetShadowSize(0)
     end
 end
 
@@ -79,12 +90,8 @@ function Conjunctivitis:PostTearUpdate(tear)
     if tear.FrameCount >= PrivateField.GetTrailLength(tear) then
         tear:Remove()
     end
-    PrivateField.SetSpriteAlpha(tear:GetSprite(), tear)
-    local alpha = 1 - math.sqrt(tear.FrameCount / PrivateField.GetTrailLength(tear))
-    tear:GetTearEffectSprite().Color:SetTint(1, 1, 1, alpha)
-    tear:GetTearHaloSprite().Color:SetTint(1, 1, 1, alpha)
-    tear:GetDeadEyeSprite().Color:SetTint(1, 1, 1, alpha)
-    tear:SetShadowSize(0)
+    PrivateField.SetSpriteAlpha(tear)
+    PrivateField.SetTearAlpha(tear, 1 - math.sqrt(tear.FrameCount / PrivateField.GetTrailLength(tear)))
 end
 Conjunctivitis:AddCallback(ModCallbacks.MC_POST_TEAR_UPDATE, Conjunctivitis.PostTearUpdate)
 

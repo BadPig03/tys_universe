@@ -176,14 +176,15 @@ function FallenSky:PostNPCRender(npc, offset)
     if parent == nil and #PrivateField.GetChainedEnemies(npc) > 0 then
         PrivateField.ChainSprite:RenderLayer(0, Isaac.WorldToScreen(enemyPos))
     end
-    if parent and parent:ToNPC() and parent:Exists() then
-        local differVector = parent.Position - enemyPos
-        local beam = Beam(PrivateField.ChainSprite, "chain", false, false)
-        beam:Add(Isaac.WorldToScreen(enemyPos), 0)
-        beam:Add(Isaac.WorldToScreen(parent.Position), differVector:Length())
-        beam:Render()
-        PrivateField.ChainSprite:RenderLayer(0, Isaac.WorldToScreen(enemyPos))
+    if not parent or not parent:ToNPC() or not parent:Exists() then
+        return
     end
+    local differVector = parent.Position - enemyPos
+    local beam = Beam(PrivateField.ChainSprite, "chain", false, false)
+    beam:Add(Isaac.WorldToScreen(enemyPos), 0)
+    beam:Add(Isaac.WorldToScreen(parent.Position), differVector:Length())
+    beam:Render()
+    PrivateField.ChainSprite:RenderLayer(0, Isaac.WorldToScreen(enemyPos))
 end
 FallenSky:AddCallback(ModCallbacks.MC_POST_NPC_RENDER, FallenSky.PostNPCRender)
 

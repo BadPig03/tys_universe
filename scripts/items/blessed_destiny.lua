@@ -1,10 +1,13 @@
 local BlessedDestiny = TYU:NewModItem("Blessed Destiny", "BLESSED_DESTINY")
+
 local Players = TYU.Players
 local SaveAndLoad = TYU.SaveAndLoad
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModNullItemIDs = TYU.ModNullItemIDs
 local ModRoomIDs = TYU.ModRoomIDs
+
 local PrivateField = {}
 
 local function SetGlobalLibData(value, ...)
@@ -88,7 +91,7 @@ function BlessedDestiny:PostNewRoom()
         room:SetBackdropType(BackdropType.CATHEDRAL, 1)
         TYU.SFXMANAGER:Play(SoundEffect.SOUND_SUPERHOLY, 0.6)
     end
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         player:GetEffects():AddNullEffect(ModNullItemIDs.BLESSED_DESTINY_EFFECT)
     end
 end

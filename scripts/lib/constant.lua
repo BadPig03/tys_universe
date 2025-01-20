@@ -187,6 +187,7 @@ TYU.ModItemIDs = {
     HEPHAESTUS_SOUL = GetItemInfo("Hephaestus' Soul", "赫菲斯托斯之魂"),
     LANDMINE = GetItemInfo("Landmine", "地雷"),
     LASER_BLASTER = GetItemInfo("Laser Blaster", "激光发射器"),
+    LIGHT_SWITCH = GetItemInfo("Light Switch", "光开关"),
     MAGNIFIER = GetItemInfo("Magnifier", "放大镜"),
     MARRIAGE_CERTIFICATE = GetItemInfo("Marriage Certificate", "结婚证明"),
     MIRRORING_SHARD = GetItemInfo("Mirroring Shard", "镜像碎块"),

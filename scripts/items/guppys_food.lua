@@ -1,5 +1,7 @@
 local GuppysFood = TYU:NewModItem("Guppy's Food", "GUPPYS_FOOD")
+
 local Stat = TYU.Stat
+
 local ModItemIDs = TYU.ModItemIDs
 
 function GuppysFood:EvaluateCache(player, cacheFlag)

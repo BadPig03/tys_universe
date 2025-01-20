@@ -1,8 +1,11 @@
 local Order = TYU:NewModItem("Order", "ORDER")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 local function SetGlobalLibData(value, ...)
@@ -111,12 +114,13 @@ function Order:PreGetCollectible(itemPoolType, decrease, seed)
     end
     local stage = TYU.LEVEL:GetStage()
     local itemPoolList = GetGlobalLibData() or PrivateField.GetItemPools()
-    if PrivateField.ItemPoolFlag and itemPoolType ~= itemPoolList[stage] then
-        PrivateField.ItemPoolFlag = false
-        local id = TYU.ITEMPOOL:GetCollectible(itemPoolList[stage], decrease, seed)
-        PrivateField.ItemPoolFlag = true
-        return id
+    if not PrivateField.ItemPoolFlag or itemPoolType == itemPoolList[stage] then
+        return
     end
+    PrivateField.ItemPoolFlag = false
+    local id = TYU.ITEMPOOL:GetCollectible(itemPoolList[stage], decrease, seed)
+    PrivateField.ItemPoolFlag = true
+    return id
 end
 Order:AddPriorityCallback(ModCallbacks.MC_PRE_GET_COLLECTIBLE, CallbackPriority.LATE, Order.PreGetCollectible)
 

@@ -1,7 +1,10 @@
 local TwilightFox = TYU:NewModEntity("Twilight Fox", "TWILIGHT_FOX")
+
 local Entities = TYU.Entities
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModEntityFlags = TYU.ModEntityFlags
+
 local PrivateField = {}
 
 do
@@ -34,10 +37,11 @@ do
     end
     
     function PrivateField.ClearHalo(familiar, subType)
-        local halo = GetHalo(familiar, subType)
-        if halo then
-            halo:Remove()
+        local halo = PrivateField.GetHalo(familiar, subType)
+        if not halo then
+            return
         end
+        halo:Remove()
     end
 end
 

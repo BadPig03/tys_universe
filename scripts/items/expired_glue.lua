@@ -1,6 +1,8 @@
 local ExpiredGlue = TYU:NewModItem("Expired Glue", "EXPIRED_GLUE")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
+
 local ModItemIDs = TYU.ModItemIDs
 
 function ExpiredGlue:PostPickupInit(pickup)

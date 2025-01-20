@@ -1,14 +1,17 @@
 local PlanetariumTelescope = TYU:NewModItem("Planetarium Telescope", "PLANETARIUM_TELESCOPE")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 do
     function PrivateField.GetAvarageLuck()
         local luck = 0
-        for _, player in pairs(Players.GetPlayers(true)) do
+        for _, player in ipairs(Players.GetPlayers(true)) do
             luck = luck + player.Luck
         end
         return luck / #Players.GetPlayers(true)
@@ -27,7 +30,11 @@ function PlanetariumTelescope:EvaluateCache(player, cacheFlag)
     if not player:HasCollectible(ModItemIDs.PLANETARIUM_TELESCOPE) then
         return
     end
-    player.Luck = player.Luck + 2 * PrivateField.GetItemCount(player)
+    local count = PrivateField.GetItemCount(player)
+    if count == 0 then
+        return
+    end
+    player.Luck = player.Luck + 2 * count
 end
 PlanetariumTelescope:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, PlanetariumTelescope.EvaluateCache, CacheFlag.CACHE_LUCK)
 

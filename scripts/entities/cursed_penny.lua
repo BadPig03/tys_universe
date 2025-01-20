@@ -1,8 +1,11 @@
 local CursedPenny = TYU:NewModEntity("Cursed Penny", "CURSED_PENNY")
+
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 do

@@ -1,6 +1,9 @@
 local FallenSkySword = TYU:NewModEntity("Fallen Sky Sword", "FALLEN_SKY_SWORD")
+
 local Entities = TYU.Entities
+
 local ModEntityIDs = TYU.ModEntityIDs
+
 local PrivateField = {}
 
 local function SetTempEntityLibData(entity, value, ...)
@@ -63,10 +66,10 @@ do
                 end
             end
         end
-        TYU.SFXMANAGER:Play(SoundEffect.SOUND_GOOATTACH0, 0.6)
         if enemyFound then
             TYU.SFXMANAGER:Play(SoundEffect.SOUND_MEATY_DEATHS, 0.6)
         end
+        TYU.SFXMANAGER:Play(SoundEffect.SOUND_GOOATTACH0, 0.6)
     end
 end
 

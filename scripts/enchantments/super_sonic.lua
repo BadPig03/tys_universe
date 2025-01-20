@@ -1,6 +1,8 @@
 local SuperSonic = TYU:NewModEnchantment("Super Sonic", "SUPER_SONIC")
+
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 
 function SuperSonic:PostUpdate()

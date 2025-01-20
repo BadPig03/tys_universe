@@ -1,5 +1,7 @@
 local EffervescentTablet = TYU:NewModItem("Effervescent Tablet", "EFFERVESCENT_TABLET")
+
 local Stat = TYU.Stat
+
 local ModNullItemIDs = TYU.ModNullItemIDs
 local ModItemIDs = TYU.ModItemIDs
 

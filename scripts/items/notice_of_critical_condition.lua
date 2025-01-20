@@ -1,14 +1,17 @@
 local NoticeOfCriticalCondition = TYU:NewModItem("Notice of Critical Condition", "NOTICE_OF_CRITICAL_CONDITION")
+
 local Callbacks = TYU.Callbacks
 local Entities = TYU.Entities
 local Players = TYU.Players
 local SaveAndLoad = TYU.SaveAndLoad
 local Utils = TYU.Utils
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemIDs = TYU.ModItemIDs
 local ModRoomIDs = TYU.ModRoomIDs
 local ModItemPoolIDs = TYU.ModItemPoolIDs
 local ModBackdropIDs = TYU.ModBackdropIDs
+
 local PrivateField = {}
 
 local function SetGlobalLibData(value, ...)
@@ -32,7 +35,7 @@ function NoticeOfCriticalCondition:PostNewLevel()
         return
     end
     SetGlobalLibData({ RoomIndex = -1, Spawned = false })
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
 		if player:HasCollectible(ModItemIDs.NOTICE_OF_CRITICAL_CONDITION) then
             local type = player:GetPlayerType()
             if type == PlayerType.PLAYER_THEFORGOTTEN or type == PlayerType.PLAYER_THESOUL then
@@ -51,6 +54,9 @@ function NoticeOfCriticalCondition:PostNewLevel()
         roomList:AddOutcomeWeight(id, 1)
     end
     local newRoom = RoomConfigHolder.GetRoomByStageTypeAndVariant(StbType.SPECIAL_ROOMS, RoomType.ROOM_SECRET_EXIT, roomList:PickOutcome(rng))
+    if not newRoom then
+        return
+    end
     local gridIndices = TYU.LEVEL:FindValidRoomPlacementLocations(newRoom, -1, false, false)
     if #gridIndices == 0 then
         return
@@ -83,10 +89,10 @@ function NoticeOfCriticalCondition:ReplaceICUDoorSprite()
         return
     end
     local room = TYU.GAME:GetRoom()
-    local ICURoomIndex =  GetGlobalLibData("RoomIndex")
+    local ICURoomIndex = GetGlobalLibData("RoomIndex")
     for slot = DoorSlot.LEFT0, DoorSlot.DOWN1 do
         local door = room:GetDoor(slot)
-        if door and ((door.TargetRoomIndex == ICURoomIndex and door.CurrentRoomType ~= RoomType.ROOM_SECRET and door.CurrentRoomType ~= RoomType.ROOM_SUPERSECRET and door.CurrentRoomType ~= RoomType.ROOM_ULTRASECRET) or (currentRoomIndex == ICURoomIndex and door.TargetRoomType ~= RoomType.ROOM_SECRET and door.TargetRoomType ~= RoomType.ROOM_SUPERSECRET and door.TargetRoomType ~= RoomType.ROOM_ULTRASECRET)) then
+        if door and ((door.TargetRoomIndex == ICURoomIndex and door.CurrentRoomType ~= RoomType.ROOM_SECRET and door.CurrentRoomType ~= RoomType.ROOM_SUPERSECRET and door.CurrentRoomType ~= RoomType.ROOM_ULTRASECRET) or (Utils.IsRoomIndex(ICURoomIndex) and door.TargetRoomType ~= RoomType.ROOM_SECRET and door.TargetRoomType ~= RoomType.ROOM_SUPERSECRET and door.TargetRoomType ~= RoomType.ROOM_ULTRASECRET)) then
             local doorSprite = door:GetSprite()
             doorSprite:Load("gfx/grid/icu_door.anm2", true)
             if door:IsLocked() then
@@ -99,21 +105,22 @@ function NoticeOfCriticalCondition:ReplaceICUDoorSprite()
             end
         end
     end
-    if Utils.IsRoomIndex(ICURoomIndex) then
-        room:SetBackdropType(ModBackdropIDs.ICU, 1)
-        if not Utils.IsRoomFirstVisit() then
-            return
-        end
-        for _, slot in pairs(Isaac.FindByType(EntityType.ENTITY_SLOT, SlotVariant.MOMS_DRESSING_TABLE)) do
-            Entities.Spawn(ModEntityIDs.HEALING_BEGGAR.Type, ModEntityIDs.HEALING_BEGGAR.Variant, ModEntityIDs.HEALING_BEGGAR.SubType, slot.Position)
-            slot:Remove()
-        end
-        for _, bed in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_BED)) do
-            Entities.Spawn(ModEntityIDs.ICU_BED.Type, ModEntityIDs.ICU_BED.Variant, ModEntityIDs.ICU_BED.SubType, bed.Position)
-            bed:Remove()
-        end
-        Utils.RemoveAllDecorations()
+    if not Utils.IsRoomIndex(ICURoomIndex) then
+        return
     end
+    room:SetBackdropType(ModBackdropIDs.ICU, 1)
+    if not Utils.IsRoomFirstVisit() then
+        return
+    end
+    for _, slot in pairs(Isaac.FindByType(EntityType.ENTITY_SLOT, SlotVariant.MOMS_DRESSING_TABLE)) do
+        Entities.Spawn(ModEntityIDs.HEALING_BEGGAR.Type, ModEntityIDs.HEALING_BEGGAR.Variant, ModEntityIDs.HEALING_BEGGAR.SubType, slot.Position)
+        slot:Remove()
+    end
+    for _, bed in pairs(Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_BED)) do
+        Entities.Spawn(ModEntityIDs.ICU_BED.Type, ModEntityIDs.ICU_BED.Variant, ModEntityIDs.ICU_BED.SubType, bed.Position)
+        bed:Remove()
+    end
+    Utils.RemoveAllDecorations()
 end
 NoticeOfCriticalCondition:AddCallback(Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, NoticeOfCriticalCondition.ReplaceICUDoorSprite)
 
@@ -123,10 +130,11 @@ function NoticeOfCriticalCondition:UsePill(pillEffect, player, useFlags, pillCol
     end
     local rng = player:GetCollectibleRNG(ModItemIDs.NOTICE_OF_CRITICAL_CONDITION)
     local pillConfig = TYU.ITEMCONFIG:GetPillEffect(pillEffect)
-    if pillConfig.EffectSubClass == 1 and player:GetBrokenHearts() >= 1 and rng:RandomInt(100) < 25 then
-        TYU.SFXMANAGER:Play(SoundEffect.SOUND_BAND_AID_PICK_UP, 0.6)
-        player:AddBrokenHearts(-1)
+    if pillConfig.EffectSubClass ~= 1 or player:GetBrokenHearts() == 0 or rng:RandomInt(100) >= 25 then
+        return
     end
+    TYU.SFXMANAGER:Play(SoundEffect.SOUND_BAND_AID_PICK_UP, 0.6)
+    player:AddBrokenHearts(-1)
 end
 NoticeOfCriticalCondition:AddCallback(ModCallbacks.MC_USE_PILL, NoticeOfCriticalCondition.UsePill)
 

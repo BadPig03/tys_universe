@@ -1,5 +1,7 @@
 local Magnifier = TYU:NewModItem("Magnifier", "MAGNIFIER")
+
 local Collectibles = TYU.Collectibles
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemIDs = TYU.ModItemIDs
 

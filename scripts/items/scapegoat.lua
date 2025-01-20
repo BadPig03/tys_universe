@@ -1,40 +1,50 @@
 local Scapegoat = TYU:NewModItem("Scapegoat", "SCAPEGOAT")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
+
 local ModNullItemIDs = TYU.ModNullItemIDs
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
+if EID then
+    EID:AddPlayerConditional(ModItemIDs.SCAPEGOAT, PlayerType.PLAYER_AZAZEL_B, "Tainted Revive")
+end
+
 do
-    function PrivateField.AddReviveEffect(player)
-        player:GetEffects():AddNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
-        if (Players.IsJacobOrEsau(player) or Players.IsTaintedForgottenAndSoul(player)) and player:GetOtherTwin() then
-            player:GetOtherTwin():GetEffects():AddNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
+    function PrivateField.GetAffectedTwins(player)
+        if (Players.IsJacobOrEsau(player) or Players.IsTaintedForgottenOrSoul(player)) and player:GetOtherTwin() then
+            return player:GetOtherTwin()
+        elseif Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then
+            return player:GetFlippedForm()
         end
-        if Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then
-            player:GetFlippedForm():GetEffects():AddNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
-        end
+        return nil
     end
 
-    function PrivateField.RevivePlayer(player)
+    function PrivateField.AddReviveEffect(player)
+        player:GetEffects():AddNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
+        local twin = PrivateField.GetAffectedTwins(player)
+        if not twin then
+            return
+        end
+        twin:GetEffects():AddNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
+    end
+
+    function PrivateField.RevivePlayerEx(player)
         player:Revive()
         player:SetMinDamageCooldown(120)
         player.Visible = true
         player:GetEffects():RemoveNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
-        if (Players.IsJacobOrEsau(player) or Players.IsTaintedForgottenAndSoul(player)) and player:GetOtherTwin() then
-            local otherTwin = player:GetOtherTwin()
-            otherTwin:Revive()
-            otherTwin:SetMinDamageCooldown(120)
-            otherTwin.Visible = true
-            otherTwin:GetEffects():RemoveNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
+    end
+
+    function PrivateField.RevivePlayer(player)
+        PrivateField.RevivePlayerEx(player)
+        local twin = PrivateField.GetAffectedTwins(player)
+        if not twin then
+            return
         end
-        if Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then
-            local flippedForm = player:GetFlippedForm()
-            flippedForm:Revive()
-            flippedForm:SetMinDamageCooldown(120)
-            flippedForm.Visible = true
-            flippedForm:GetEffects():RemoveNullEffect(ModNullItemIDs.SCAPEGOAT_REVIVE)
-        end
+        PrivateField.RevivePlayerEx(twin)
     end
 end
 

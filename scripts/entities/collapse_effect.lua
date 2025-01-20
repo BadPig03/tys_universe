@@ -1,4 +1,5 @@
 local CollapseEffect = TYU:NewModEntity("Collapse Effect", "COLLAPSE_EFFECT")
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemIDs = TYU.ModItemIDs
 

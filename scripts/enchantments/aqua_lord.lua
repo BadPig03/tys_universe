@@ -1,8 +1,11 @@
 local AquaLord = TYU:NewModEnchantment("Aqua Lord", "AQUA_LORD")
+
 local Players = TYU.Players
 local Stat = TYU.Stat
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
+
 local PrivateField = {}
 
 do
@@ -62,9 +65,10 @@ function AquaLord:PostPlayerUpdate(player)
     if player:HasCurseMistEffect() then
         return
     end
-    if player:GetEffects():HasNullEffect(ModEnchantmentIDs.AQUA_LORD) then
-        player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY | CacheFlag.CACHE_TEARFLAG, true)
+    if not player:GetEffects():HasNullEffect(ModEnchantmentIDs.AQUA_LORD) then
+        return
     end
+    player:AddCacheFlags(CacheFlag.CACHE_FIREDELAY | CacheFlag.CACHE_TEARFLAG, true)
 end
 AquaLord:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, AquaLord.PostPlayerUpdate, 0)
 

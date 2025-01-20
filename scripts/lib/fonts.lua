@@ -10,6 +10,7 @@ local pfTempestaSevenCondensed = Font()
 pfTempestaSevenCondensed:Load("font/pftempestasevencondensed.fnt")
 local mplus12b = Font()
 mplus12b:Load("font/mplus_12b.fnt")
+
 TYU.Fonts = {
     TeamMeatFont10 = teamMeatFont10,
     TeamMeatFontExtended10 = teamMeatFontExtended10,

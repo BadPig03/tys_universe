@@ -1,7 +1,9 @@
 local CursedDice = TYU:NewModItem("Cursed Dice", "CURSED_DICE")
+
 local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemIDs = TYU.ModItemIDs
 

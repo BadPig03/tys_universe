@@ -1,12 +1,15 @@
 local Cornucopia = TYU:NewModItem("Cornucopia", "CORNUCOPIA")
+
 local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
 local Fonts = TYU.Fonts
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModFoodItemIDs = TYU.ModFoodItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 local function SetPlayerLibData(player, value, ...)
@@ -141,7 +144,7 @@ do
     end
 
     function PrivateField.IsAnyoneHoldingItem()
-        for _, player in pairs(Players.GetPlayers(true)) do
+        for _, player in ipairs(Players.GetPlayers(true)) do
             if player:HasCollectible(ModItemIDs.CORNUCOPIA) and GetPlayerLibData(player, "Lifted") then
                 return true
             end
@@ -232,12 +235,13 @@ function Cornucopia:PostPickupRender(pickup)
     end
     local pos = Isaac.WorldToScreen(pickup.Position)
     local charge = PrivateField.GetPickupCharge(pickup)
-    if charge then
-        if charge < 0 then
-            charge = "?"
-        end
-        Fonts.PFTempestaSevenCondensed:DrawString(charge, pos.X - 3, pos.Y - 3, KColor(1, 1, 1, 1), 5, true)
+    if not charge then
+        return
     end
+    if charge < 0 then
+        charge = "?"
+    end
+    Fonts.PFTempestaSevenCondensed:DrawString(charge, pos.X - 3, pos.Y - 3, KColor(1, 1, 1, 1), 5, true)
 end
 Cornucopia:AddCallback(ModCallbacks.MC_POST_PICKUP_RENDER, Cornucopia.PostPickupRender)
 

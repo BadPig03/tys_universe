@@ -1,10 +1,13 @@
 local BloodyDice = TYU:NewModItem("Bloody Dice", "BLOODY_DICE")
+
 local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModPlayerIDs = TYU.ModPlayerIDs
+
 local PrivateField = {}
 
 local function SetPlayerLibData(player, value, ...)
@@ -36,18 +39,17 @@ function BloodyDice:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
         return { Discharge = false, Remove = false, ShowAnim = false }
     end
     local collectible = Collectibles.GetNearestDevilDeal(player.Position, 1 << 12)
-    if collectible then
-        local newType = Collectibles.GetCollectibleFromCurrentRoom(nil, rng)
-        Entities.Morph(collectible, nil, nil, newType)
-        collectible.ShopItemId = -2
-        collectible.Price = 0
-        collectible:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
-        local count = GetPlayerLibData(player, "Counts") or 0
-        SetPlayerLibData(player, count + 1, "Counts")
-        return { Discharge = true, Remove = false, ShowAnim = true }
-    else
+    if not collectible then
         return { Discharge = false, Remove = false, ShowAnim = true }
     end
+    local newType = Collectibles.GetCollectibleFromCurrentRoom(nil, rng)
+    Entities.Morph(collectible, nil, nil, newType)
+    collectible.ShopItemId = -2
+    collectible.Price = 0
+    collectible:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
+    local count = GetPlayerLibData(player, "Counts") or 0
+    SetPlayerLibData(player, count + 1, "Counts")
+    return { Discharge = true, Remove = false, ShowAnim = true }
 end
 BloodyDice:AddCallback(ModCallbacks.MC_USE_ITEM, BloodyDice.UseItem, ModItemIDs.BLOODY_DICE)
 
@@ -67,7 +69,7 @@ function BloodyDice:PostUpdate()
     end
     local room = TYU.GAME:GetRoom()
     local damage = room:GetEnemyDamageInflicted()
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         if player:HasCollectible(ModItemIDs.BLOOD_SAMPLE) or player:HasCollectible(ModItemIDs.BLOODY_DICE) then
             local charge = GetPlayerLibData(player, "Charge") or 0
             charge = charge + damage / PrivateField.GetDamageAmount(player)

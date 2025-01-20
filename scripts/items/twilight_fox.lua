@@ -1,5 +1,7 @@
 local TwilightFox = TYU:NewModItem("Twilight Fox", "TWILIGHT_FOX")
+
 local Collectibles = TYU.Collectibles
+
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 

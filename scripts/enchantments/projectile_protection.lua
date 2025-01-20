@@ -1,7 +1,10 @@
 local ProjectileProtection = TYU:NewModEnchantment("Projectile Protection", "PROJECTILE_PROTECTION")
+
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 do
@@ -28,9 +31,10 @@ function ProjectileProtection:EntityTakeDamage(entity, amount, flags, source, co
         return
     end
     local rng = player:GetCollectibleRNG(ModItemIDs.ENCHANTED_BOOK)
-    if rng:RandomInt(100) < 20 * count then
-        return { Damage = 0, DamageCountdown = 30 }
+    if rng:RandomInt(100) >= 20 * count then
+        return
     end
+    return { Damage = 0, DamageCountdown = 30 }
 end
 ProjectileProtection:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, ProjectileProtection.EntityTakeDamage, EntityType.ENTITY_PLAYER)
 

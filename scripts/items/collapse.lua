@@ -1,10 +1,13 @@
 local Collapse = TYU:NewModItem("Collapse", "COLLAPSE")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 local ModEntityFlags = TYU.ModEntityFlags
+
 local PrivateField = {}
 
 do
@@ -38,7 +41,7 @@ function Collapse:PostUpdate()
     if not Players.AnyoneHasCollectible(ModItemIDs.COLLAPSE) then
         return
     end
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         if player:HasCollectible(ModItemIDs.COLLAPSE) and not PrivateField.GetEffect(player) then
             PrivateField.SpawnEffect(player)
         end

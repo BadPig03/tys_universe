@@ -1,10 +1,13 @@
 local EnchantedBook = TYU:NewModItem("Enchanted Book", "ENCHANTED_BOOK")
+
 local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
 local Enchantments = TYU.Enchantments
 local Utils = TYU.Utils
+
 local ModCardIDs = TYU.ModCardIDs
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 do

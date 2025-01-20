@@ -1,8 +1,11 @@
 local MirroringShard = TYU:NewModItem("Mirroring Shard", "MIRRORING_SHARD")
+
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModPlayerIDs = TYU.ModPlayerIDs
+
 local PrivateField = {}
 
 local function GetPlayerLibData(player, ...)

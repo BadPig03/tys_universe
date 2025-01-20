@@ -1,7 +1,9 @@
 local SuspiciousStew = TYU:NewModItem("Suspicious Stew", "SUSPICIOUS_STEW")
+
 local Foods = TYU.Foods
 local Stat = TYU.Stat
 local Utils = TYU.Utils
+
 local ModNullItemIDs = TYU.ModNullItemIDs
 local ModItemIDs = TYU.ModItemIDs
 

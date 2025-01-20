@@ -1,4 +1,5 @@
 local CrownOfKingsEffect = TYU:NewModEntity("Crown Of Kings Effect", "CROWN_OF_KINGS_EFFECT")
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemIDs = TYU.ModItemIDs
 

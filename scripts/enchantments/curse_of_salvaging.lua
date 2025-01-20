@@ -13,12 +13,13 @@ function CurseOfSalvaging:PrePickupCollision(pickup, collider, low)
         return
     end
     local rng = player:GetCollectibleRNG(ModItemIDs.ENCHANTED_BOOK)
-    if rng:RandomInt(100) < 5 then
-        Entities.SpawnPoof(pickup.Position)
-        player:SalvageCollectible(pickup)
-        TYU.SFXMANAGER:Play(SoundEffect.SOUND_THUMBS_DOWN)
-        return { Collide = true, SkipCollisionEffects = true }
+    if rng:RandomInt(100) >= 5 then
+        return
     end
+    Entities.SpawnPoof(pickup.Position)
+    player:SalvageCollectible(pickup)
+    TYU.SFXMANAGER:Play(SoundEffect.SOUND_THUMBS_DOWN)
+    return { Collide = true, SkipCollisionEffects = true }
 end
 CurseOfSalvaging:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, CurseOfSalvaging.PrePickupCollision, PickupVariant.PICKUP_COLLECTIBLE)
 

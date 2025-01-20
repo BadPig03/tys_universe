@@ -1,7 +1,10 @@
 local Smite = TYU:NewModEnchantment("Smite", "SMITE")
+
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
+
 local PrivateField = {}
 
 do

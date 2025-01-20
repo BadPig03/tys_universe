@@ -17,6 +17,7 @@
         <Item Name="Guppy's Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Landmine" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Laser Blaster" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Light Switch" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Magnifier" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Marriage Certificate" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Peeled Banana" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -26,6 +27,7 @@
         <Item Name="Sticky Ball" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Strange Syringe" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Tool Box" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Twilight Fox" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="shop">
         <Item Name="Absence Note" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
@@ -121,6 +123,7 @@
         <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Guppy's Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Laser Blaster" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Light Switch" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Magnifier" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Marriage Certificate" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Peeled Banana" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -128,10 +131,10 @@
         <Item Name="Sticky Ball" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Strange Syringe" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Tool Box" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Twilight Fox" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="greedDevil">
         <Item Name="Fallen Sky" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-        <Item Name="Guilt" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Hades Blade" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Scapegoat" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Sinister Pact" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -174,6 +177,7 @@
 	</Pool>
     <Pool Name="babyShop">
         <Item Name="Blaze Fly" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Twilight Fox" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="batteryBum">
         <Item Name="Overload Battery" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
@@ -184,6 +188,7 @@
     </Pool>
     <Pool Name="craneGame">
         <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="0.1" RemoveOn="0.1"/>
+        <Item Name="Light Switch" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Magnifier" Weight="1" DecreaseBy="0.1" RemoveOn="0.1"/>
         <Item Name="Overload Battery" Weight="1" DecreaseBy="0.1" RemoveOn="0.1"/>
         <Item Name="Tool Box" Weight="1" DecreaseBy="0.1" RemoveOn="0.1"/>
@@ -236,7 +241,7 @@
         <Item Id="553" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Id="558" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Id="600" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-        <Item Id="628" Weight="0.1" DecreaseBy="0.1" RemoveOn="0.01"/>
+        <Item Id="628" Weight="0.01" DecreaseBy="0.01" RemoveOn="0.001"/>
         <Item Id="637" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Id="645" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Id="654" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>

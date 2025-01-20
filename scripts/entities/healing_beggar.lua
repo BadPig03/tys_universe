@@ -1,8 +1,11 @@
 local HealingBeggar = TYU:NewModEntity("Healing Beggar", "HEALING_BEGGAR")
+
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemPoolIDs = TYU.ModItemPoolIDs
+
 local PrivateField = {}
 
 do
@@ -23,21 +26,22 @@ function HealingBeggar:PreSlotCollision(slot, collider, low)
 	end
 	local sprite = slot:GetSprite()
 	local rng = slot:GetDropRNG()
-	if sprite:IsPlaying("Idle") and player:GetBrokenHearts() >= 1 and player:GetNumCoins() >= 2 then
-		local donationValue = slot:GetDonationValue()
-		if rng:RandomInt(100) < math.min(100, donationValue * 9) then
-			slot:SetDonationValue(donationValue - 1)
-			sprite:Play("PayPrize", true)
-			slot:SetState(2)
-		else
-			slot:SetDonationValue(donationValue + 1)
-			sprite:Play("PayNothing", true)
-			slot:SetState(5)
-		end
-		slot.SpawnerEntity = player
-		TYU.SFXMANAGER:Play(SoundEffect.SOUND_BAND_AID_PICK_UP)
-		PrivateField.SpawnBloodEffects(player)
+	if not sprite:IsPlaying("Idle") or player:GetBrokenHearts() == 0 or player:GetNumCoins() <= 1 then
+		return
 	end
+	local donationValue = slot:GetDonationValue()
+	if rng:RandomInt(100) < math.min(100, donationValue * 9) then
+		slot:SetDonationValue(donationValue - 1)
+		sprite:Play("PayPrize", true)
+		slot:SetState(2)
+	else
+		slot:SetDonationValue(donationValue + 1)
+		sprite:Play("PayNothing", true)
+		slot:SetState(5)
+	end
+	slot.SpawnerEntity = player
+	TYU.SFXMANAGER:Play(SoundEffect.SOUND_BAND_AID_PICK_UP)
+	PrivateField.SpawnBloodEffects(player)
 end
 HealingBeggar:AddCallback(ModCallbacks.MC_PRE_SLOT_COLLISION, HealingBeggar.PreSlotCollision, ModEntityIDs.HEALING_BEGGAR.Variant)
 

@@ -1,6 +1,6 @@
 TYU = RegisterMod("ty's Universe", 1)
-TYU.VERSION = "Alpha Test v4"
-TYU.REPTENTOGONVERSION = "1.0.12e"
+TYU.VERSION = "Alpha Test v5"
+TYU.REPENTOGONVERSION = "1.0.12e"
 
 if REPENTANCE_PLUS then
     local zh = Options.Language == "zh"

@@ -1,4 +1,5 @@
 local Enchantments = TYU:RegisterNewClass()
+
 local PrivateField = {}
 
 do

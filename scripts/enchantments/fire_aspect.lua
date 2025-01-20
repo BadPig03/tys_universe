@@ -1,6 +1,8 @@
 local FireAspect = TYU:NewModEnchantment("Fire Aspect", "FIRE_ASPECT")
+
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEnchantmentIDs = TYU.ModEnchantmentIDs
 
 function FireAspect:PostPlayerUpdate(player)

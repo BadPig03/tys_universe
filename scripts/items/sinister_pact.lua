@@ -1,9 +1,12 @@
 local SinisterPact = TYU:NewModItem("Sinister Pact", "SINISTER_PACT")
+
 local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 do
@@ -35,15 +38,16 @@ function SinisterPact:PostPickupShopPurchase(pickup, player, moneySpent)
         item:MakeShopItem(-2)
         item.Price = TYU.ITEMCONFIG:GetCollectible(item.SubType).DevilPrice
     end, 29, 0, false)
-    if pickup.SubType > 0 then
-        local oldItem = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, pickup.SubType, Utils.FindFreePickupSpawnPosition(pickup.Position), Vector(0, 0), nil, pickup.InitSeed):ToPickup()
-        oldItem:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE | EntityFlag.FLAG_APPEAR)
-        oldItem.Touched = pickup.Touched
-        oldItem.Charge = pickup.Charge
-        oldItem:SetNewOptionsPickupIndex(pickup.OptionsPickupIndex)
-        oldItem:SetVarData(pickup:GetVarData())
-        pickup:Remove()
+    if pickup.SubType == CollectibleType.COLLECTIBLE_NULL then
+        return
     end
+    local oldItem = Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, pickup.SubType, Utils.FindFreePickupSpawnPosition(pickup.Position), Vector(0, 0), nil, pickup.InitSeed):ToPickup()
+    oldItem:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE | EntityFlag.FLAG_APPEAR)
+    oldItem.Touched = pickup.Touched
+    oldItem.Charge = pickup.Charge
+    oldItem:SetNewOptionsPickupIndex(pickup.OptionsPickupIndex)
+    oldItem:SetVarData(pickup:GetVarData())
+    pickup:Remove()
 end
 SinisterPact:AddCallback(ModCallbacks.MC_POST_PICKUP_SHOP_PURCHASE, SinisterPact.PostPickupShopPurchase)
 

@@ -1,10 +1,13 @@
 local MarriageCertificate = TYU:NewModItem("Marriage Certificate", "MARRIAGE_CERTIFICATE")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Stat = TYU.Stat
 local Utils = TYU.Utils
+
 local ModNullItemIDs = TYU.ModNullItemIDs
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 do
@@ -67,7 +70,7 @@ end
 MarriageCertificate:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, MarriageCertificate.PostAddCollectible, ModItemIDs.MARRIAGE_CERTIFICATE)
 
 function MarriageCertificate:PostTriggerCollectibleRemoved(player, type)
-    for _, player2 in pairs(Players.GetPlayers(true)) do
+    for _, player2 in ipairs(Players.GetPlayers(true)) do
         if PrivateField.IsSubPlayer(player2) and GetPtrHash(player) == GetPtrHash(player2.Parent:ToPlayer()) then
             PlayerManager.RemoveCoPlayer(player2)
             return
@@ -127,7 +130,7 @@ function MarriageCertificate:PreUseItem(itemID, rng, player, useFlags, activeSlo
     if not Players.AnyoneHasCollectible(ModItemIDs.MARRIAGE_CERTIFICATE) then
         return
     end
-    for _, player2 in pairs(Players.GetPlayers(true)) do
+    for _, player2 in ipairs(Players.GetPlayers(true)) do
         if PrivateField.IsSubPlayer(player2) and GetPtrHash(player) == GetPtrHash(player2.Parent:ToPlayer()) then
             PlayerManager.RemoveCoPlayer(player2)
         end
@@ -139,7 +142,7 @@ function MarriageCertificate:PostNewRoom()
     if not Utils.IsInKnifePuzzle() then
         return
     end
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         if PrivateField.IsSubPlayer(player) and player:GetPlayerType() ~= PlayerType.PLAYER_THELOST then
             player:ChangePlayerType(PlayerType.PLAYER_THELOST)
         end

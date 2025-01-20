@@ -1,11 +1,14 @@
 local CrownOfKings = TYU:NewModItem("Crown of Kings", "CROWN_OF_KINGS")
+
 local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEntityFlags = TYU.ModEntityFlags
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 local function SetPlayerLibData(player, value, ...)
@@ -67,21 +70,29 @@ do
         TYU.ITEMPOOL:RemoveCollectible(itemID)
         return itemID
     end
+
+    function PrivateField.CreateItem(rng, low)
+        local room = TYU.GAME:GetRoom()
+        Utils.CreateTimer(function()
+            Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, PrivateField.GetCollectibleFromRandomPool(low, 3, rng), Utils.FindFreePickupSpawnPosition(room:GetCenterPos() + Vector(0, 40))) 
+        end, 1, 0, false)
+    end
 end
 
 function CrownOfKings:PostPlayerUpdate(player)
     if not player:HasCollectible(ModItemIDs.CROWN_OF_KINGS) then
         return
     end
-    if not PrivateField.GetEffect(player) then
-        PrivateField.SpawnEffect(player)
+    if PrivateField.GetEffect(player) then
+        return
     end
+    PrivateField.SpawnEffect(player)
 end
 CrownOfKings:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, CrownOfKings.PostPlayerUpdate, 0)
 
 function CrownOfKings:PostNewRoom()
     local room = TYU.GAME:GetRoom()
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         local bossFound = false
         if player:HasCollectible(ModItemIDs.CROWN_OF_KINGS) then
             for _, ent in pairs(Isaac.GetRoomEntities()) do
@@ -104,23 +115,16 @@ end
 CrownOfKings:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, CrownOfKings.PostNewRoom)
 
 function CrownOfKings:PreSpawnCleanAward(rng, spawnPosition)
-    local room = TYU.GAME:GetRoom()
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         if player:HasCollectible(ModItemIDs.CROWN_OF_KINGS) and GetPlayerLibData(player, "BossFound") then
             if Utils.IsRoomType(RoomType.ROOM_CHALLENGE) and GetPlayerLibData(player, "IsBossChallenge") then
-                Utils.CreateTimer(function()
-                    Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, PrivateField.GetCollectibleFromRandomPool(1, 3, rng), Utils.FindFreePickupSpawnPosition(room:GetCenterPos() + Vector(0, 40))) 
-                end, 1, 0, false)
+                PrivateField.CreateItem(rng, 1)
                 SetPlayerLibData(player, false, "IsBossChallenge")
             elseif Utils.IsRoomType(RoomType.ROOM_BOSSRUSH) and GetPlayerLibData(player, "IsBossRush") then
-                Utils.CreateTimer(function()
-                    Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, PrivateField.GetCollectibleFromRandomPool(3, 3, rng), Utils.FindFreePickupSpawnPosition(room:GetCenterPos() + Vector(0, 40))) 
-                end, 1, 0, false)
+                PrivateField.CreateItem(rng, 3)
                 SetPlayerLibData(player, false, "IsBossRush")
             else
-                Utils.CreateTimer(function()
-                    Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, PrivateField.GetCollectibleFromRandomPool(0, 3, rng), Utils.FindFreePickupSpawnPosition(room:GetCenterPos() + Vector(0, 40))) 
-                end, 1, 0, false)
+                PrivateField.CreateItem(rng, 0)
             end
             SetPlayerLibData(player, false, "BossFound")
             player:AnimateHappy()

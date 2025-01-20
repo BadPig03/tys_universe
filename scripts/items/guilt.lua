@@ -1,10 +1,13 @@
 local Guilt = TYU:NewModItem("Guilt", "GUILT")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local SaveAndLoad = TYU.SaveAndLoad
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModRoomIDs = TYU.ModRoomIDs
+
 local PrivateField = {}
 
 local function SetGlobalLibData(value, ...)
@@ -27,15 +30,16 @@ do
     function PrivateField.RemoveItemsAndDisplay()
         local rng = TYU.LEVEL:GetDevilAngelRoomRNG()
         local item = TYU.ITEMPOOL:GetCollectible(ItemPoolType.POOL_DEVIL, false, rng:Next(), CollectibleType.COLLECTIBLE_SAD_ONION)
-        if item ~= CollectibleType.COLLECTIBLE_SAD_ONION then
-            local quality = TYU.ITEMCONFIG:GetCollectible(item).Quality
-            if Options.Language == "zh" then
-                TYU.HUD:ShowFortuneText("一个品质"..PrivateField.QualityTranslation[quality].."级的道具被移除!")
-            else
-                TYU.HUD:ShowFortuneText("An item of quality "..quality ,"has been removed")
-            end
-            TYU.ITEMPOOL:RemoveCollectible(item)
+        if item == CollectibleType.COLLECTIBLE_SAD_ONION then
+            return
         end
+        local quality = TYU.ITEMCONFIG:GetCollectible(item).Quality
+        if Options.Language == "zh" then
+            TYU.HUD:ShowFortuneText("一个品质"..PrivateField.QualityTranslation[quality].."级的道具被移除!")
+        else
+            TYU.HUD:ShowFortuneText("An item of quality "..quality ,"has been removed")
+        end
+        TYU.ITEMPOOL:RemoveCollectible(item)
     end
 
     function PrivateField.ReplaceDevilRoom()
@@ -54,7 +58,7 @@ do
 end
 
 function Guilt:PostNewLevel()
-    if not Players.AnyoneHasCollectible(ModItemIDs.GUILT) then
+    if not Players.AnyoneHasCollectible(ModItemIDs.GUILT) or TYU.GAME:IsGreedMode() then
         return
     end
     PrivateField.ReplaceDevilRoom()
@@ -62,19 +66,23 @@ end
 Guilt:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, Guilt.PostNewLevel)
 
 function Guilt:PostAddCollectible(type, charge, firstTime, slot, varData, player)
-    if firstTime then
-        for i = 1, 2 do
-            TYU.GAME:AddDevilRoomDeal()
-        end
-        if TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_DEVIL_IDX).Data == nil then
-            PrivateField.ReplaceDevilRoom()
-        end
+    if TYU.GAME:IsGreedMode() then
+        return
+    end
+    if not firstTime then
+        return
+    end
+    for i = 1, 2 do
+        TYU.GAME:AddDevilRoomDeal()
+    end
+    if TYU.LEVEL:GetRoomByIdx(GridRooms.ROOM_DEVIL_IDX).Data == nil then
+        PrivateField.ReplaceDevilRoom()
     end
 end
 Guilt:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, Guilt.PostAddCollectible, ModItemIDs.GUILT)
 
 function Guilt:PostPlayerNewRoomTempEffects(player)
-    if not TYU.LEVEL:CanSpawnDevilRoom() or not player:HasCollectible(ModItemIDs.GUILT) or Utils.IsMirrorWorld() or not Utils.IsStartingRoom() or not Utils.IsRoomFirstVisit() or Utils.IsAscent() or Isaac.GetChallenge() == Challenge.CHALLENGE_BACKASSWARDS then
+    if not TYU.LEVEL:CanSpawnDevilRoom() or not player:HasCollectible(ModItemIDs.GUILT) or Utils.IsMirrorWorld() or not Utils.IsStartingRoom() or not Utils.IsRoomFirstVisit() or Utils.IsAscent() or Isaac.GetChallenge() == Challenge.CHALLENGE_BACKASSWARDS or TYU.GAME:IsGreedMode() then
         return
     end
     local oldCount = GetGlobalLibData("Count") or 0

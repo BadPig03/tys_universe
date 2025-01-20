@@ -1,11 +1,15 @@
 local BloodSacrifice = TYU:NewModItem("Blood Sacrifice", "BLOOD_SACRIFICE")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Stat = TYU.Stat
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
+local ModPlayerIDs = TYU.ModPlayerIDs
 local ModNullItemIDs = TYU.ModNullItemIDs
+
 local PrivateField = {}
 
 local function SetGlobalLibData(value, ...)
@@ -19,45 +23,62 @@ end
 do
     PrivateField.Teleported = false
 
+    PrivateField.RedOnlyCharacterList = {
+        [PlayerType.PLAYER_BETHANY] = true,
+        [ModPlayerIDs.WARFARIN] = true
+    }
+end
+
+do
+    function PrivateField.GetAffectedTwins(player)
+        if (Players.IsJacobOrEsau(player) or Players.IsTaintedForgottenOrSoul(player)) and player:GetOtherTwin() then
+            return player:GetOtherTwin()
+        elseif Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then
+            return player:GetFlippedForm()
+        end
+        return nil
+    end
+
     function PrivateField.AddReviveEffect(player)
         player:GetEffects():AddNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE)
-        if (Players.IsJacobOrEsau(player) or Players.IsTaintedForgottenAndSoul(player)) and player:GetOtherTwin() then
-            player:GetOtherTwin():GetEffects():AddNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE)
+        local twin = PrivateField.GetAffectedTwins(player)
+        if not twin then
+            return
         end
-        if Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then
-            player:GetFlippedForm():GetEffects():AddNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE)
-        end
+        twin:GetEffects():AddNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE)
     end
 
     function PrivateField.RemoveReviveEffect(player, count)
         player:GetEffects():RemoveNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE, count)
-        if (Players.IsJacobOrEsau(player) or Players.IsTaintedForgottenAndSoul(player)) and player:GetOtherTwin() then
-            player:GetOtherTwin():GetEffects():RemoveNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE, count)
+        local twin = PrivateField.GetAffectedTwins(player)
+        if not twin then
+            return
         end
-        if Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then
-            player:GetFlippedForm():GetEffects():RemoveNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE, count)
-        end
+        twin:GetEffects():RemoveNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE, count)
     end
 
-    function PrivateField.RevivePlayer(player)
+    function PrivateField.RevivePlayerEx(player)
         player:Revive()
         player:SetMinDamageCooldown(120)
         player.Visible = true
         player:GetEffects():RemoveNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE)
-        if (Players.IsJacobOrEsau(player) or Players.IsTaintedForgottenAndSoul(player)) and player:GetOtherTwin() then
-            local otherTwin = player:GetOtherTwin()
-            otherTwin:Revive()
-            otherTwin:SetMinDamageCooldown(120)
-            otherTwin.Visible = true
-            otherTwin:GetEffects():RemoveNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE)
+    end
+
+    function PrivateField.RevivePlayer(player)
+        PrivateField.RevivePlayerEx(player)
+        local twin = PrivateField.GetAffectedTwins(player)
+        if not twin then
+            return
         end
-        if Players.IsTaintedLazarusOrFlippedLazarus(player) and player:GetFlippedForm() then
-            local flippedForm = player:GetFlippedForm()
-            flippedForm:Revive()
-            flippedForm:SetMinDamageCooldown(120)
-            flippedForm.Visible = true
-            flippedForm:GetEffects():RemoveNullEffect(ModNullItemIDs.BLOOD_SACRIFICE_REVIVE)
-        end
+        PrivateField.RevivePlayerEx(twin)
+    end
+
+    function PrivateField.SetBlueColor(color)
+        color:SetColorize(0.0235, 0.712, 1, 5)
+    end
+
+    function PrivateField.IsRedOnlyCharacter(player)
+        return PrivateField.RedOnlyCharacterList[player:GetPlayerType()]
     end
 
     function PrivateField.SpawnMeatEffigy(player, soul)
@@ -66,8 +87,8 @@ do
         local effigy = nil
         if soul then
             effigy = Entities.Spawn(EntityType.ENTITY_SLOT, ModEntityIDs.MEAT_EFFIGY_SOUL.Variant, 0, Utils.FindFreePickupSpawnPosition(player.Position))
-            bloodEffect1:GetSprite().Color:SetColorize(0.0235, 0.712, 1, 5)
-            bloodEffect2:GetSprite().Color:SetColorize(0.0235, 0.712, 1, 5)
+            PrivateField.SetBlueColor(bloodEffect1:GetSprite().Color)
+            PrivateField.SetBlueColor(bloodEffect2:GetSprite().Color)
         else
             effigy = Entities.Spawn(EntityType.ENTITY_SLOT, ModEntityIDs.MEAT_EFFIGY.Variant, 0, Utils.FindFreePickupSpawnPosition(player.Position))
         end
@@ -77,11 +98,6 @@ do
         table.insert(data, { PositionX = effigy.Position.X, PositionY = effigy.Position.Y, RoomIndex = TYU.LEVEL:GetCurrentRoomIndex(), Dimension = TYU.LEVEL:GetDimension(), InitSeed = effigy.InitSeed, SoulState = (effigy.Variant == ModEntityIDs.MEAT_EFFIGY_SOUL.Variant) })
         local addCount = (player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_BELIAL_PASSIVE)) and 2 or 1
         SetGlobalLibData(GetGlobalLibData("Counts") + addCount, "Counts")
-    end
-
-    function PrivateField.IsRedOnlyCharacter(player)
-        local playerType = player:GetPlayerType()
-        return playerType == PlayerType.PLAYER_BETHANY or playerType == ModPlayerIDs.WARFARIN
     end
 
     function PrivateField.ChangeLostCurseState(player, remove)
@@ -96,7 +112,7 @@ do
     function PrivateField.SetHealthAndTeleport(data)
         local effigyTable = data[#data]
         local dimension = effigyTable.Dimension    
-        for _, player in pairs(Players.GetPlayers(true)) do
+        for _, player in ipairs(Players.GetPlayers(true)) do
             local playerType = player:GetPlayerType()
             if playerType ~= PlayerType.PLAYER_BETHANY then
                 player:AddSoulHearts(-99)
@@ -115,7 +131,7 @@ do
             elseif playerType == PlayerType.PLAYER_THEFORGOTTEN_B then
                 goto continue
             end
-            if playerType == PlayerType.PLAYER_THEFORGOTTEN or playerType == PlayerType.PLAYER_THESOUL then
+            if Players.IsForgottenOrSoul(player) then
                 player:AddBoneHearts(1)
                 player:AddHearts(2)
                 player:AddSoulHearts(2)
@@ -150,46 +166,55 @@ do
     function PrivateField.BreakEffigy(data)
         local effigyTable = data[#data]
         local effigy = effigyTable and Entities.GetEntityBySeed(effigyTable.InitSeed)
-        if effigy then
-            for _, player in pairs(Players.GetPlayers(true)) do
-                player:Teleport(Vector(effigyTable.PositionX, effigyTable.PositionY), false, true)
-                local bloodEffect1 = Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_SPLAT, 0, player.Position)
-                local bloodEffect2 = Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_EXPLOSION, 0, player.Position)
-                local bloodEffect3 = Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.LARGE_BLOOD_EXPLOSION, 0, player.Position)
-                local brokenEffigy = Entities.Spawn(ModEntityIDs.MEAT_EFFIGY_BROKEN.Type, ModEntityIDs.MEAT_EFFIGY_BROKEN.Variant, ModEntityIDs.MEAT_EFFIGY_BROKEN.SubType, effigy.Position)
+        if not effigy then
+            goto continue
+        end
+        for _, player in ipairs(Players.GetPlayers(true)) do
+            player:Teleport(Vector(effigyTable.PositionX, effigyTable.PositionY), false, true)
+            local bloodEffect1 = Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_SPLAT, 0, player.Position)
+            local bloodEffect2 = Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_EXPLOSION, 0, player.Position)
+            local bloodEffect3 = Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.LARGE_BLOOD_EXPLOSION, 0, player.Position)
+            local brokenEffigy = Entities.Spawn(ModEntityIDs.MEAT_EFFIGY_BROKEN.Type, ModEntityIDs.MEAT_EFFIGY_BROKEN.Variant, ModEntityIDs.MEAT_EFFIGY_BROKEN.SubType, effigy.Position)
+            brokenEffigy.DepthOffset = -1
+            if effigy.Variant == ModEntityIDs.MEAT_EFFIGY_SOUL.Variant then
                 local brokenSprite = brokenEffigy:GetSprite()
-                brokenEffigy.DepthOffset = -1
-                if effigy.Variant == ModEntityIDs.MEAT_EFFIGY_SOUL.Variant then
-                    brokenSprite:ReplaceSpritesheet(0, "gfx/items/slots/meat_effigy_soul.png", true)
-                    bloodEffect1:GetSprite().Color:SetColorize(0.0235, 0.712, 1, 5)
-                    bloodEffect2:GetSprite().Color:SetColorize(0.0235, 0.712, 1, 5)
-                    bloodEffect3:GetSprite().Color:SetColorize(0.0235, 0.712, 1, 5)
-                    local color = Color(1, 0, 0, 1)
-                    color:SetColorize(0.0235, 0.712, 1, 5)
-                    TYU.GAME:SpawnParticles(player.Position, EffectVariant.BLOOD_PARTICLE, 150, 2, color)
-                    if player:GetPlayerType() == PlayerType.PLAYER_THEFORGOTTEN then
-                        player:SwapForgottenForm(true, true)
-                    end
-                else
-                    TYU.GAME:SpawnParticles(player.Position, EffectVariant.BLOOD_PARTICLE, 150, 2)
-                    if player:GetPlayerType() == PlayerType.PLAYER_THESOUL then
-                        player:SwapForgottenForm(true, true)
-                    end
+                brokenSprite:ReplaceSpritesheet(0, "gfx/items/slots/meat_effigy_soul.png", true)
+                PrivateField.SetBlueColor(bloodEffect1:GetSprite().Color)
+                PrivateField.SetBlueColor(bloodEffect2:GetSprite().Color)
+                PrivateField.SetBlueColor(bloodEffect3:GetSprite().Color)
+                TYU.GAME:SpawnParticles(player.Position, EffectVariant.BLOOD_PARTICLE, 150, 2, Color(1, 0, 0, 1, 0, 0, 0, 0.0235, 0.712, 1, 5))
+                if player:GetPlayerType() == PlayerType.PLAYER_THEFORGOTTEN then
+                    player:SwapForgottenForm(true, true)
+                end
+            else
+                TYU.GAME:SpawnParticles(player.Position, EffectVariant.BLOOD_PARTICLE, 150, 2)
+                if player:GetPlayerType() == PlayerType.PLAYER_THESOUL then
+                    player:SwapForgottenForm(true, true)
                 end
             end
-            TYU.SFXMANAGER:Play(SoundEffect.SOUND_DEMON_HIT, 0.6)
-            effigy:Remove()
-            table.remove(data)
         end
+        TYU.SFXMANAGER:Play(SoundEffect.SOUND_DEMON_HIT, 0.6)
+        effigy:Remove()
+        table.remove(data)
+        ::continue::
         PrivateField.Teleported = false
+    end
+end
+
+do
+    function BloodSacrifice.AddRedOnlyCharacter(playerType)
+        if not PrivateField.RedOnlyCharacterList[playerType] then
+            PrivateField.RedOnlyCharacterList[playerType] = true
+        end
     end
 end
 
 function BloodSacrifice:EvaluateCache(player, cacheFlag)
 	local count = GetGlobalLibData("Counts")
-	if count and count > 0 then
-		Stat:AddFlatDamage(player, 0.4 * count)
+	if not count or count == 0 then
+        return
 	end
+    Stat:AddFlatDamage(player, 0.4 * count)
 end
 BloodSacrifice:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, BloodSacrifice.EvaluateCache, CacheFlag.CACHE_DAMAGE)
 
@@ -198,7 +223,7 @@ function BloodSacrifice:PostNewLevel()
     if GetGlobalLibData("Counts") == nil then
         SetGlobalLibData(0, "Counts")
     end
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         PrivateField.RemoveReviveEffect(player, -1)
     end
 end

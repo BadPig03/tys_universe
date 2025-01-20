@@ -1,15 +1,17 @@
 local PeeledBanana = TYU:NewModItem("Peeled Banana", "PEELED_BANANA")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Stat = TYU.Stat
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 
 function PeeledBanana:PostNewRoom()
     if not Utils.IsRoomFirstVisit() or not Players.AnyoneHasCollectible(ModItemIDs.PEELED_BANANA) then
         return
     end
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         if player:HasCollectible(ModItemIDs.PEELED_BANANA) and player:GetCollectibleRNG(ModItemIDs.PEELED_BANANA):RandomInt(100) < 25 * player:GetCollectibleNum(ModItemIDs.PEELED_BANANA) then
             player:AddHearts(1)
             local effect = Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.HEART, 0, player.Position - Vector(0, 38))

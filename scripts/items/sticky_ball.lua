@@ -1,8 +1,11 @@
 local StickyBall = TYU:NewModItem("Sticky Ball", "STICKY_BALL")
+
 local Entities = TYU.Entities
+
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 local ModTearFlags = TYU.ModTearFlags
+
 local PrivateField = {}
 
 local function GetTempEntityLibData(entity, ...)
@@ -113,9 +116,9 @@ function StickyBall:PostNPCUpdate(npc)
     if level == 0 then
         return
     end
-    local Timeout = data.Timeout
-    if Timeout > 0 then
-        SetTempEntityLibData(npc, Timeout - 1, "Timeout")
+    local timeout = data.Timeout
+    if timeout > 0 then
+        SetTempEntityLibData(npc, timeout - 1, "Timeout")
         npc:SetColor(Color(1, 0.65, 0.8, 0.8, 0, 0, 0), 2, 1, false, true)
     else
         SetTempEntityLibData(npc, 0, "Level")

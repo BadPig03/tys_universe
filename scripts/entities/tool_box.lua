@@ -1,9 +1,12 @@
 local ToolBox = TYU:NewModEntity("Tool Box", "TOOL_BOX")
+
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModCardIDs = TYU.ModCardIDs
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
+
 local PrivateField = {}
 
 do
@@ -52,12 +55,13 @@ function ToolBox:FamiliarUpdate(familiar)
     if familiar:GetMultiplier() > 1 then
         limit = 4
     end
-    if familiar.Coins >= limit then
-        local rng = player:GetCollectibleRNG(ModItemIDs.TOOL_BOX)
-        Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, PrivateField.GetOutcomes(rng), Utils.FindFreePickupSpawnPosition(familiar.Position))
-        familiar.Coins = 0
-        sprite:Play("Appear", true)
+    if familiar.Coins < limit then
+        return
     end
+    local rng = player:GetCollectibleRNG(ModItemIDs.TOOL_BOX)
+    Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_TAROTCARD, PrivateField.GetOutcomes(rng), Utils.FindFreePickupSpawnPosition(familiar.Position))
+    familiar.Coins = 0
+    sprite:Play("Appear", true)
 end
 ToolBox:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, ToolBox.FamiliarUpdate, ModEntityIDs.TOOL_BOX.Variant)
 

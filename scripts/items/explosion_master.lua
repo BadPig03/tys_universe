@@ -1,6 +1,8 @@
 local ExplosionMaster = TYU:NewModItem("Explosion Master", "EXPLOSION_MASTER")
+
 local Entities = TYU.Entities
 local Players = TYU.Players
+
 local ModItemIDs = TYU.ModItemIDs
 local ModProjectileFlags = TYU.ModProjectileFlags
 local ModTearFlags = TYU.ModTearFlags
@@ -10,18 +12,19 @@ function ExplosionMaster:PostProjectileUpdate(projectile)
         return
     end
     local rng = RNG(projectile.InitSeed)
-    if rng:RandomInt(100) < 20 and projectile.FrameCount <= 1 then
-        local bomb = Entities.Spawn(EntityType.ENTITY_BOMB, BombVariant.BOMB_SAD_BLOOD, 0, projectile.Position, projectile.Velocity * 2, nil):ToBomb()
-        bomb.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
-        bomb:SetExplosionCountdown(bomb:GetExplosionCountdown() * 2)
-        bomb:SetScale(0.75)
-        bomb.RadiusMultiplier = 0.75
-        bomb.ExplosionDamage = 50
-        bomb:AddTearFlags(ModTearFlags.TEAR_EXPLOSION_MASTER)
-        local poof = Entities.SpawnPoof(bomb.Position)
-        poof.SpriteScale = projectile.SpriteScale
-        projectile:Remove()
+    if rng:RandomInt(100) >= 20 or projectile.FrameCount > 1 then
+        return
     end
+    local bomb = Entities.Spawn(EntityType.ENTITY_BOMB, BombVariant.BOMB_SAD_BLOOD, 0, projectile.Position, projectile.Velocity * 2, nil):ToBomb()
+    bomb.EntityCollisionClass = EntityCollisionClass.ENTCOLL_PLAYERONLY
+    bomb:SetExplosionCountdown(bomb:GetExplosionCountdown() * 2)
+    bomb:SetScale(0.75)
+    bomb.RadiusMultiplier = 0.75
+    bomb.ExplosionDamage = 50
+    bomb:AddTearFlags(ModTearFlags.TEAR_EXPLOSION_MASTER)
+    local poof = Entities.SpawnPoof(bomb.Position)
+    poof.SpriteScale = projectile.SpriteScale
+    projectile:Remove()
 end
 ExplosionMaster:AddCallback(ModCallbacks.MC_POST_PROJECTILE_UPDATE, ExplosionMaster.PostProjectileUpdate)
 

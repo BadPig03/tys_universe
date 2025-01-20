@@ -1,5 +1,7 @@
 local BrokenVision = TYU:NewModTrinket("Broken Vision", "BROKEN_VISION")
+
 local ModTrinketIDs = TYU.ModTrinketIDs
+
 local PrivateField = {}
 
 do

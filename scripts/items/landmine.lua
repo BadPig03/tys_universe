@@ -125,7 +125,7 @@ function Landmine:PostNewRoom()
         return
     end
     for i = 1, TYU.LEVEL:GetStage() do
-        for _, player in pairs(Players.GetPlayers(true)) do
+        for _, player in ipairs(Players.GetPlayers(true)) do
             PrivateField.SpawnALandmine(player)
         end
     end
@@ -141,7 +141,7 @@ function Landmine:PostUpdate(player)
     if Utils.IsRoomClear() or room:GetFrameCount() % rng:RandomInt(150, 450) ~= 30 then
         return
     end
-    for _, player in pairs(Players.GetPlayers(true)) do
+    for _, player in ipairs(Players.GetPlayers(true)) do
         PrivateField.SpawnALandmine(player)
     end
 end

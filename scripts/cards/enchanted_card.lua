@@ -1,8 +1,11 @@
 local EnchantedCard = TYU:NewModCard("Enchanted Card", "ENCHANTED_CARD")
+
 local Enchantments = TYU.Enchantments
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModCardIDs = TYU.ModCardIDs
+
 local PrivateField = {}
 
 do

@@ -1,11 +1,14 @@
 local OceanusSoul = TYU:NewModItem("Oceanus' Soul", "OCEANUS_SOUL")
+
 local Constants = TYU.Constants
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModEntityFlags = TYU.ModEntityFlags
 local ModItemIDs = TYU.ModItemIDs
+
 local PrivateField = {}
 
 local function SetTempEntityLibData(entity, value, ...)
@@ -26,6 +29,39 @@ end
 
 do
     PrivateField.StopFlushSound = false
+
+    PrivateField.RainbowColors = {
+        {1 / 12, 5 / 6, 1 / 12},
+        {5 / 69, 50 / 69, 14 / 69},
+        {5 / 78, 25 / 39, 23 / 78},
+        {5 / 87, 50 / 87, 32 / 87},
+        {5 / 96, 25 / 48, 41 / 96},
+        {1 / 21, 10 / 21, 10 / 21},
+        {5 / 96, 41 / 96, 25 / 48},
+        {5 / 87, 32 / 87, 50 / 87},
+        {5 / 78, 23 / 78, 25 / 39},
+        {5 / 69, 14 / 69, 50 / 69},
+        {1 / 12, 1 / 12, 5 / 6},
+        {14 / 69, 5 / 69, 50 / 69},
+        {23 / 78, 5 / 78, 25 / 39},
+        {32 / 87, 5 / 87, 50 / 87},
+        {41 / 96, 5 / 96, 25 / 48},
+        {10 / 21, 1 / 21, 10 / 21},
+        {25 / 48, 5 / 96, 41 / 96},
+        {50 / 87, 5 / 87, 32 / 87},
+        {25 / 39, 5 / 78, 23 / 78},
+        {50 / 69, 5 / 69, 14 / 69},
+        {5 / 6, 1 / 12, 1 / 12},
+        {50 / 69, 14 / 69, 5 / 69},
+        {25 / 39, 23 / 78, 5 / 78},
+        {50 / 87, 32 / 87, 5 / 87},
+        {25 / 48, 41 / 96, 5 / 96},
+        {10 / 21, 10 / 21, 1 / 21},
+        {41 / 96, 25 / 48, 5 / 96},
+        {32 / 87, 50 / 87, 5 / 87},
+        {23 / 78, 25 / 39, 5 / 78},
+        {14 / 69, 50 / 69, 5 / 69}
+    }
 
     function PrivateField.SpawnChargeBar(player)
         local chargeBar = Entities.Spawn(ModEntityIDs.OCEANUS_SOUL_CHARGEBAR.Type, ModEntityIDs.OCEANUS_SOUL_CHARGEBAR.Variant, ModEntityIDs.OCEANUS_SOUL_CHARGEBAR.SubType, player.Position + Players.GetChargeBarPosition(player, 3), player.Velocity, player):ToEffect()
@@ -49,7 +85,6 @@ do
         end
         return nil
     end
-
     
     function PrivateField.DisappearChargeBar(chargeBar, player)
         local sprite = chargeBar:GetSprite()
@@ -57,12 +92,13 @@ do
             sprite.PlaybackSpeed = 1
             sprite:Play("Disappear", true)
         end
-        if player and sprite:IsPlaying("Disappear") then
-            Utils.CreateTimer(function()
-                chargeBar.Visible = false
-                PrivateField.SpawnChargeBar(player)
-            end, 4, 0, false)
+        if not player or not sprite:IsPlaying("Disappear") then
+            return
         end
+        Utils.CreateTimer(function()
+            chargeBar.Visible = false
+            PrivateField.SpawnChargeBar(player)
+        end, 4, 0, false)
     end
     
     function PrivateField.IsStageHasWater()
@@ -105,14 +141,14 @@ do
         TYU.SFXMANAGER:Play(SoundEffect.SOUND_BOSS2INTRO_WATER_EXPLOSION, 0.75)
         local room = TYU.GAME:GetRoom()
         room:SetWaterColorMultiplier(KColor(1, 1, 1, 1))
+        if player:HasCollectible(CollectibleType.COLLECTIBLE_SULFURIC_ACID) then
+            PrivateField.DestroyAllRocks()
+        end
         for _, ent in pairs(Isaac.FindInRadius(player.Position, 8192, EntityPartition.ENEMY)) do
             local npc = ent:ToNPC()
             if npc and PrivateField.IsValidEnemyEvenInvicible(npc) then
                 npc:AddConfusion(EntityRef(player), 60, false)
             end
-        end
-        if player:HasCollectible(CollectibleType.COLLECTIBLE_SULFURIC_ACID) then
-            PrivateField.DestroyAllRocks()
         end
     end
 
@@ -161,39 +197,6 @@ do
             npc:AddMagnetized(ref, 30)
         end
     end
-
-    PrivateField.RainbowColors = {
-        {1 / 12, 5 / 6, 1 / 12},
-        {5 / 69, 50 / 69, 14 / 69},
-        {5 / 78, 25 / 39, 23 / 78},
-        {5 / 87, 50 / 87, 32 / 87},
-        {5 / 96, 25 / 48, 41 / 96},
-        {1 / 21, 10 / 21, 10 / 21},
-        {5 / 96, 41 / 96, 25 / 48},
-        {5 / 87, 32 / 87, 50 / 87},
-        {5 / 78, 23 / 78, 25 / 39},
-        {5 / 69, 14 / 69, 50 / 69},
-        {1 / 12, 1 / 12, 5 / 6},
-        {14 / 69, 5 / 69, 50 / 69},
-        {23 / 78, 5 / 78, 25 / 39},
-        {32 / 87, 5 / 87, 50 / 87},
-        {41 / 96, 5 / 96, 25 / 48},
-        {10 / 21, 1 / 21, 10 / 21},
-        {25 / 48, 5 / 96, 41 / 96},
-        {50 / 87, 5 / 87, 32 / 87},
-        {25 / 39, 5 / 78, 23 / 78},
-        {50 / 69, 5 / 69, 14 / 69},
-        {5 / 6, 1 / 12, 1 / 12},
-        {50 / 69, 14 / 69, 5 / 69},
-        {25 / 39, 23 / 78, 5 / 78},
-        {50 / 87, 32 / 87, 5 / 87},
-        {25 / 48, 41 / 96, 5 / 96},
-        {10 / 21, 10 / 21, 1 / 21},
-        {41 / 96, 25 / 48, 5 / 96},
-        {32 / 87, 50 / 87, 5 / 87},
-        {23 / 78, 25 / 39, 5 / 78},
-        {14 / 69, 50 / 69, 5 / 69}
-    }
 end
 
 function OceanusSoul:EvaluateCache(player, cacheFlag)
@@ -256,10 +259,11 @@ function OceanusSoul:PostNewRoom()
     room:SetWaterCurrent(Vector(1 / 10000, 0))
     local currentRoomIndex = TYU.LEVEL:GetCurrentRoomIndex()
     local roomDesc = TYU.LEVEL:GetRoomByIdx(currentRoomIndex)
-    if Utils.IsRoomFirstVisit() and roomDesc.HasWater then
-        roomDesc.HasWater = false
-        TYU.GAME:ChangeRoom(currentRoomIndex)
+    if not Utils.IsRoomFirstVisit() or not roomDesc.HasWater then
+        return
     end
+    roomDesc.HasWater = false
+    TYU.GAME:ChangeRoom(currentRoomIndex)
 end
 OceanusSoul:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, OceanusSoul.PostNewRoom)
 
@@ -286,36 +290,38 @@ function OceanusSoul:PostUpdate()
         local frame = room:GetFrameCount()
         for _, ent in pairs(Isaac.FindInRadius(player.Position, 8192, EntityPartition.ENEMY)) do
             local npc = ent:ToNPC()
-            if npc and PrivateField.IsValidEnemyEvenInvicible(npc) then
-                if Entities.IsFireRelatedEnemy(npc) then
-                    npc:Die()
+            if not npc or not PrivateField.IsValidEnemyEvenInvicible(npc) then
+                goto continue
+            end
+            if Entities.IsFireRelatedEnemy(npc) then
+                npc:Die()
+            end
+            if room:IsPositionInRoom(npc.Position, 0) then
+                npc:AddVelocity(room:GetWaterCurrent() * 2.56)
+            end
+            if frame % 60 == 30 then
+                PrivateField.AddStatueEffects(npc, player)
+            end
+            if frame % 30 == 15 then
+                if player:HasCollectible(CollectibleType.COLLECTIBLE_AQUARIUS) then
+                    player:SpawnAquariusCreep().Position = npc.Position
                 end
-                if room:IsPositionInRoom(npc.Position, 0) then
-                    npc:AddVelocity(room:GetWaterCurrent() * 2.56)
+                if player:HasCollectible(CollectibleType.COLLECTIBLE_MYSTERIOUS_LIQUID) then
+                    Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.PLAYER_CREEP_GREEN, 0, npc.Position, Vector(0, 0), player)
                 end
-                if frame % 60 == 30 then
-                    PrivateField.AddStatueEffects(npc, player)
+            end
+            if frame % 4 == 2 then
+                if npc:CollidesWithGrid() or Entities.IsStationaryEnemy(npc) then
+                    npc:TakeDamage((player.Damage + 12 + 2 * (TYU.LEVEL:GetStage() - 1)) / 3, DamageFlag.DAMAGE_CRUSH | DamageFlag.DAMAGE_IGNORE_ARMOR, EntityRef(player), 0)
                 end
-                if frame % 30 == 15 then
-                    if player:HasCollectible(CollectibleType.COLLECTIBLE_AQUARIUS) then
-                        player:SpawnAquariusCreep().Position = npc.Position
-                    end
-                    if player:HasCollectible(CollectibleType.COLLECTIBLE_MYSTERIOUS_LIQUID) then
-                        Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.PLAYER_CREEP_GREEN, 0, npc.Position, Vector(0, 0), player)
-                    end
-                end
-                if frame % 4 == 2 then
-                    if npc:CollidesWithGrid() or Entities.IsStationaryEnemy(npc) then
+                if Entities.IsForcedMovingEnemy(npc) then
+                    npc:AddWeakness(EntityRef(player), 6)
+                    if not room:IsPositionInRoom(npc.Position, 0) then
                         npc:TakeDamage((player.Damage + 12 + 2 * (TYU.LEVEL:GetStage() - 1)) / 3, DamageFlag.DAMAGE_CRUSH | DamageFlag.DAMAGE_IGNORE_ARMOR, EntityRef(player), 0)
-                    end
-                    if Entities.IsForcedMovingEnemy(npc) then
-                        npc:AddWeakness(EntityRef(player), 6)
-                        if not room:IsPositionInRoom(npc.Position, 0) then
-                            npc:TakeDamage((player.Damage + 12 + 2 * (TYU.LEVEL:GetStage() - 1)) / 3, DamageFlag.DAMAGE_CRUSH | DamageFlag.DAMAGE_IGNORE_ARMOR, EntityRef(player), 0)
-                        end
                     end
                 end
             end
+            ::continue::
         end
     end
     if Players.AnyoneHasCollectible(CollectibleType.COLLECTIBLE_PLAYDOUGH_COOKIE) then

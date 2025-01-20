@@ -1,8 +1,11 @@
 local Landmine = TYU:NewModEntity("Landmine", "LANDMINE")
+
 local Callbacks = TYU.Callbacks
 local Entities = TYU.Entities
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModTearFlags = TYU.ModTearFlags
+
 local PrivateField = {}
 
 local function GetTempEntityLibData(entity, ...)
@@ -94,9 +97,10 @@ function Landmine:PostSlotUpdate(landmine)
         end
     end
     local maxTouch = data.Fast and 2 or 10
-    if landmine:GetTouch() >= maxTouch then
-        PrivateField.Explode(landmine)
+    if landmine:GetTouch() < maxTouch then
+        return
     end
+    PrivateField.Explode(landmine)
 end
 Landmine:AddCallback(ModCallbacks.MC_POST_SLOT_UPDATE, Landmine.PostSlotUpdate, ModEntityIDs.LANDMINE.Variant)
 

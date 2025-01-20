@@ -1,8 +1,11 @@
 local StickyBallTear = TYU:NewModEntity("Sticky Ball Tear", "STICKY_BALL_TEAR")
+
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModTearFlags = TYU.ModTearFlags
 local ModEntityIDs = TYU.ModEntityIDs
+
 local PrivateField  = {}
 
 local function SetTempEntityLibData(entity, value, ...)

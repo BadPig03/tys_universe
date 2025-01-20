@@ -1,4 +1,5 @@
 local Foods = TYU:RegisterNewClass()
+
 local PrivateField = {}
 
 do

@@ -1,5 +1,7 @@
 local BobsStomachChargeBar = TYU:NewModEntity("Bobs Stomach ChargeBar", "BOBS_STOMACH_CHARGEBAR")
+
 local Constants = TYU.Constants
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemIDs = TYU.ModItemIDs
 

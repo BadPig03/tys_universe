@@ -1,10 +1,12 @@
 local LaserBlaster = TYU:NewModItem("Laser Blaster", "LASER_BLASTER")
+
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemIDs = TYU.ModItemIDs
-local PrivateField = {}
 
+local PrivateField = {}
 
 local function SetTempEntityLibData(entity, value, ...)
     TYU:SetTempEntityLibData(entity, value, "LaserBlaster", ...)
@@ -26,9 +28,10 @@ do
     function PrivateField.SetEntityColor(effect, laser)
         local sprite = effect:GetSprite()
         local laserColor = laser.Color:GetColorize()
-        if math.abs(laserColor.R) + math.abs(laserColor.G) + math.abs(laserColor.B) > 0 then
-            sprite.Color = Color(laserColor.R / 3, laserColor.G / 3, laserColor.B / 3, 1)
+        if math.abs(laserColor.R) + math.abs(laserColor.G) + math.abs(laserColor.B) == 0 then
+            return
         end
+        sprite.Color = Color(laserColor.R / 3, laserColor.G / 3, laserColor.B / 3, 1)
     end
 
     function PrivateField.GetRotationAngle(player)
@@ -202,12 +205,13 @@ function LaserBlaster:PostPlayerUpdate(player)
         player:AnimateCollectible(ModItemIDs.LASER_BLASTER, "HideItem")
     end
     local direction = player:GetShootingInput()
-    if GetPlayerLibData(player, "Lifted") and not (direction.X == 0 and direction.Y == 0) then
-        PrivateField.FireLaserOrb(player, direction)
-        player:DischargeActiveItem(ActiveSlot.SLOT_PRIMARY)
-        player:AnimateCollectible(ModItemIDs.LASER_BLASTER, "HideItem")
-        SetPlayerLibData(player, false, "Lifted")
+    if not GetPlayerLibData(player, "Lifted") or (direction.X == 0 and direction.Y == 0) then
+        return
     end
+    PrivateField.FireLaserOrb(player, direction)
+    player:DischargeActiveItem(ActiveSlot.SLOT_PRIMARY)
+    player:AnimateCollectible(ModItemIDs.LASER_BLASTER, "HideItem")
+    SetPlayerLibData(player, false, "Lifted")
 end
 LaserBlaster:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, LaserBlaster.PostPlayerUpdate, 0)
 

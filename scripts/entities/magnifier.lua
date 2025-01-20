@@ -1,6 +1,9 @@
 local Magnifier = TYU:NewModEntity("Magnifier", "MAGNIFIER")
+
 local Entities = TYU.Entities
+
 local ModEntityIDs = TYU.ModEntityIDs
+
 local PrivateField = {}
 
 local function SetTempEntityLibData(entity, value, ...)

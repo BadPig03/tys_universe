@@ -1,5 +1,7 @@
 local HephaestusSoulChargeBar = TYU:NewModEntity("Hephaestus Soul ChargeBar", "HEPHAESTUS_SOUL_CHARGEBAR")
+
 local Constants = TYU.Constants
+
 local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 

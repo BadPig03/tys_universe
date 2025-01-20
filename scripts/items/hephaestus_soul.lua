@@ -1,14 +1,16 @@
 local HephaestusSoul = TYU:NewModItem("Hephaestus' Soul", "HEPHAESTUS_SOUL")
+
 local Constants = TYU.Constants
 local Entities = TYU.Entities
 local Players = TYU.Players
 local Utils = TYU.Utils
+
 local ModEntityIDs = TYU.ModEntityIDs
 local ModEntityFlags = TYU.ModEntityFlags
 local ModItemIDs = TYU.ModItemIDs
 local ModProjectileFlags = TYU.ModProjectileFlags
-local PrivateField = {}
 
+local PrivateField = {}
 
 local function SetTempEntityLibData(entity, value, ...)
     return TYU:SetTempEntityLibData(entity, value, "HephaestusSoul", ...)

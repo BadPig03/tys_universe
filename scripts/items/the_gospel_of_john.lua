@@ -1,8 +1,11 @@
 local TheGospelOfJohn = TYU:NewModItem("The Gospel of John", "THE_GOSPEL_OF_JOHN")
+
 local Entities = TYU.Entities
 local Utils = TYU.Utils
+
 local ModItemIDs = TYU.ModItemIDs
 local ModGiantBookIDs = TYU.ModGiantBookIDs
+
 local PrivateField = {}
 
 do
@@ -48,7 +51,7 @@ function TheGospelOfJohn:UseItem(itemID, rng, player, useFlags, activeSlot, varD
         return { Discharge = false, Remove = false, ShowAnim = true }
     end
     if Utils.HasFlags(useFlags, UseFlag.USE_VOID, true) then
-        ItemOverlay.Show(ModGiantBookIDs.THE_GOSPEL_OF_JOHN, 3, player)
+        TYU.ITEMOVERLAY.Show(ModGiantBookIDs.THE_GOSPEL_OF_JOHN, 3, player)
     end
     if not foundAnyCollectible then
         player:AddBrokenHearts(-1)
