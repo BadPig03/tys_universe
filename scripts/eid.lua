@@ -501,7 +501,7 @@ EIDInfo.Collectibles = {
     },
     [ModItemIDs.LIGHT_SWITCH] = {
         {
-            Name = "光开关",
+            Name = "灯光开关",
             Desc = "#{{CurseDarkness}} 使所在房间内陷入黑暗，仅保留角色周围视野"..
             "#{{Freezing}} 黑暗中的敌人会始终处于石化状态"
         },

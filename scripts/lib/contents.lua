@@ -126,7 +126,7 @@ do
         [TYU.ModItemIDs.HEPHAESTUS_SOUL] = {"赫菲斯托斯之魂", "火焰化身"},
         [TYU.ModItemIDs.LANDMINE] = {"地雷", "一触即爆"},
         [TYU.ModItemIDs.LASER_BLASTER] = {"激光发射器", "未来科技"},
-        [TYU.ModItemIDs.LIGHT_SWITCH] = {"灯开关", "关闭灯光"},
+        [TYU.ModItemIDs.LIGHT_SWITCH] = {"灯光开关", "关闭灯光"},
         [TYU.ModItemIDs.MAGNIFIER] = {"放大镜", "放大你的敌人"},
         [TYU.ModItemIDs.MARRIAGE_CERTIFICATE] = {"结婚证明", "见证坚定不移的爱情"},
         [TYU.ModItemIDs.MIRRORING_SHARD] = {"镜像碎块", "另一个我"},
