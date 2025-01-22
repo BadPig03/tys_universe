@@ -16,12 +16,12 @@ do
         halo:FollowParent(familiar)
         halo:AddEntityFlags(ModEntityFlags.FLAG_NO_PAUSE)
         if subType == ModEntityIDs.TWILIGHT_FOX_HALO.SubType then
-            sprite.Color = Color(1, 0.5, 1, 1)
             sprite.PlaybackSpeed = 0.8
         else
             local multiplier = math.min((0.6 + 0.01 * familiar.Hearts), 2)
             sprite.Scale = Vector(1, 1) * multiplier
             halo.ParentOffset = Vector(0, -24)
+            sprite:GetLayer(0):GetBlendMode():SetMode(BlendType.OVERLAY)
         end
         return halo
     end

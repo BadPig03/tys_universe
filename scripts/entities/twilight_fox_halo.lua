@@ -10,13 +10,13 @@ function TwilightFoxHalo:PostEffectUpdate(effect)
     end
     local familiar = effect.SpawnerEntity and effect.SpawnerEntity:ToFamiliar()
     if not familiar or familiar.SubType ~= ModEntityIDs.TWILIGHT_FOX.SubType or not effect.IsFollowing then
-        effect:Remove()
         return
     end
     if effect.SubType == 3 then
-        local scale = effect:GetSprite().Scale
+        local sprite = effect:GetSprite()
+        local scale = sprite.Scale
         local multiplier = math.min((0.6 + 0.01 * familiar.Hearts), 2)
-        effect:GetSprite().Scale = Vector(1, 1) * multiplier
+        sprite.Scale = Vector(1, 1) * multiplier
         for _, ent in pairs(Isaac.FindInRadius(effect.Position + Vector(0, 18), 64 * multiplier, EntityPartition.ENEMY)) do
             if Entities.IsValidEnemy(ent) then
                 if ent:GetWeaknessCountdown() < 2 then

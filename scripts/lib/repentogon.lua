@@ -48,8 +48,8 @@ if REPENTOGON then
     return false
 else
     TYU:AddCallback(ModCallbacks.MC_POST_RENDER, function()
-        local font = (zh and TYU.Fonts.LanaPixel) or TYU.Fonts.PFTempestaSevenCondense
-        local text = (zh and TYU.Name.."需要前置API REPENTOGON 来运行!") or (TYU.Name.."requires the mod API REPENTOGON to work properly!") 
+        local font = (zh and TYU.Fonts.LanaPixel) or TYU.Fonts.PFTempestaSevenCondensed
+        local text = (zh and TYU.Name.."需要前置API REPENTOGON 来运行!") or (TYU.Name.." requires the mod API REPENTOGON to work properly!") 
         local width = font:GetStringWidthUTF8(text)
         font:DrawStringUTF8(text, (Isaac.GetScreenWidth() - width) / 2, (Isaac.GetScreenHeight() - 40) / 2, KColor(1, 0, 0, 1), width, true)
     end)

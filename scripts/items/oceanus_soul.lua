@@ -339,6 +339,9 @@ end
 OceanusSoul:AddCallback(ModCallbacks.MC_POST_UPDATE, OceanusSoul.PostUpdate)
 
 function OceanusSoul:PostAddCollectible(type, charge, firstTime, slot, varData, player)
+    if PrivateField.IsInvalid() then
+        return
+    end
     local room = TYU.GAME:GetRoom()
     room:SetWaterAmount(1 / 100)
     room:SetWaterCurrent(Vector(1 / 10000, 0))

@@ -27,7 +27,7 @@ local meetsVersion = MeetsVersion(TYU.REPENTOGONVERSION)
 TYU:AddCallback(ModCallbacks.MC_POST_RENDER, function()
     local zh = Options.Language == "zh"
     local font = (zh and TYU.Fonts.LanaPixel) or TYU.Fonts.PFTempestaSevenCondensed
-    local text = (zh and "请更新Repentogon的版本至"..TYU.REPENTOGONVERSION.."!") or ("Please update the Repentogon to version "..TYU.REPTENTOGONVERSION.."!")
+    local text = (zh and "请更新Repentogon的版本至"..TYU.REPENTOGONVERSION.."!") or ("Please update the Repentogon to version "..TYU.REPENTOGONVERSION.."!")
     local screenWidth = Isaac.GetScreenWidth()
     local screenHeight = Isaac.GetScreenHeight()
     if meetsVersion then
