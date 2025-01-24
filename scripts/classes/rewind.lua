@@ -49,6 +49,7 @@ function Rewind:PostGlowingHourglassLoad(slot)
         PrivateField.RestoreData(TYU.Table.Clone(Rewind.LastGlowingHourglassData))
     end
     if slot == 1 then
+        Rewind.GlowingHourglassUsed = false
         PrivateField.RestoreData(TYU.Table.Clone(Rewind.LastRewindData))
     end
 end

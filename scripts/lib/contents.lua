@@ -186,12 +186,13 @@ do
         LaserOrb = TYU:Require("scripts/entities/laser_orb"),
         Magnifier = TYU:Require("scripts/entities/magnifier"),
         MeatEffigy = TYU:Require("scripts/entities/meat_effigy"),
+        OceanusSoulChargeBar = TYU:Require("scripts/entities/oceanus_soul_chargebar"),
         StickyBallSquirt = TYU:Require("scripts/entities/sticky_ball_squirt"),
         StickyBallTear = TYU:Require("scripts/entities/sticky_ball_tear"),
         ToolBox = TYU:Require("scripts/entities/tool_box"),
         TwilightFox = TYU:Require("scripts/entities/twilight_fox"),
         TwilightFoxHalo = TYU:Require("scripts/entities/twilight_fox_halo"),
-        OceanusSoulChargeBar = TYU:Require("scripts/entities/oceanus_soul_chargebar")
+        WarfarinBlackmarketCrawlspace = TYU:Require("scripts/entities/warfarin_blackmarket_crawlspace")
     }
 end
 

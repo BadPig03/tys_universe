@@ -32,10 +32,13 @@ do
 end
 
 function LightSwitch:GetShaderParams(shaderName)
+    if shaderName ~= "LightSwitchDarkness" then
+        return
+    end
     local pos, pos2 = Isaac.GetPlayer().Position, Isaac.GetPlayer(1).Position
     local distances = {192, 192, 96, 96}
     local active = 0
-	if not PrivateField.IsRoomValid() or not Players.AnyoneHasCollectible(ModItemIDs.LIGHT_SWITCH) or shaderName ~= "LightSwitchDarkness" then
+	if not PrivateField.IsRoomValid() or not Players.AnyoneHasCollectible(ModItemIDs.LIGHT_SWITCH) then
         return { ActiveIn = 0 }
     end
     local room = TYU.GAME:GetRoom()

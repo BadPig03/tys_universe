@@ -26,6 +26,9 @@ function Ruby:PostPickupUpdate(pickup)
     if not Players.AnyoneHasCollectible(ModItemIDs.RUBY) or not pickup:IsShopItem() or (pickup.Price <= 0 and pickup.Price > PickupPrice.PRICE_FREE and pickup.Price ~= PickupPrice.PRICE_SPIKES) then
         return
     end
+    if Players.AnyoneHasTrinket(TrinketType.TRINKET_STORE_CREDIT) then
+        return
+    end
     local room = TYU.GAME:GetRoom()
     local rng = RNG(pickup.InitSeed + pickup.ShopItemId)
     local price = room:TryGetShopDiscount(pickup.ShopItemId, room:GetShopItemPrice(pickup.Variant, pickup.SubType, pickup.ShopItemId))

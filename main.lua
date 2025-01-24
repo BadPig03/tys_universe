@@ -1,5 +1,5 @@
 TYU = RegisterMod("ty's Universe", 1)
-TYU.VERSION = "03w01b"
+TYU.VERSION = "03w01c"
 TYU.REPENTOGONVERSION = "1.0.12e"
 
 if REPENTANCE_PLUS or (FontRenderSettings ~= nil) then

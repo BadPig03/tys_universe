@@ -141,6 +141,7 @@ TYU.ModEntityIDs = {
     MEAT_EFFIGY = GetEntityInfos("Meat Effigy"),
     MEAT_EFFIGY_SOUL = GetEntityInfos("Meat Effigy Soul"),
     MEAT_EFFIGY_BROKEN = GetEntityInfos("Meat Effigy Broken"),
+    OCEANUS_SOUL_CHARGEBAR = GetEntityInfos("Oceanus Soul ChargeBar"),
     STICKY_BALL_TEAR = GetEntityInfos("Sticky Ball Tear"),
     STICKY_BALL_DIP_LEVEL_1 = GetEntityInfos("Sticky Ball Dip Level 1"),
     STICKY_BALL_DIP_LEVEL_2 = GetEntityInfos("Sticky Ball Dip Level 2"),
@@ -151,7 +152,7 @@ TYU.ModEntityIDs = {
     TOOL_BOX = GetEntityInfos("Tool Box"),
     TWILIGHT_FOX = GetEntityInfos("Twilight Fox"),
     TWILIGHT_FOX_HALO = GetEntityInfos("Twilight Fox Halo"),
-    OCEANUS_SOUL_CHARGEBAR = GetEntityInfos("Oceanus Soul ChargeBar")
+    WARFARIN_BLACKMARKET_CRAWLSPACE = GetEntityInfos("Warfarin Blackmarket Crawlspace")
 }
 
 TYU.ModItemIDs = {

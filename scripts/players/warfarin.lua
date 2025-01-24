@@ -9,6 +9,7 @@ local SaveAndLoad = TYU.SaveAndLoad
 local Rewind = TYU.Rewind
 local Utils = TYU.Utils
 
+local ModEntityIDs = TYU.ModEntityIDs
 local ModPlayerIDs = TYU.ModPlayerIDs
 local ModGiantBookIDs = TYU.ModGiantBookIDs
 local ModNullItemIDs = TYU.ModNullItemIDs
@@ -164,15 +165,11 @@ function Warfarin:PostHUDUpdate()
 end
 Warfarin:AddCallback(ModCallbacks.MC_POST_HUD_UPDATE, Warfarin.PostHUDUpdate)
 
-function Warfarin:PostNewRoom()
-    for _, player in ipairs(Players.GetPlayers(true)) do
-        if player:GetPlayerType() == ModPlayerIDs.WARFARIN then
-            SetPlayerLibData(player, false, "OutTriggered")
-            SetPlayerLibData(player, false, "InTriggered")
-        end
-    end
+function Warfarin:PostPlayerNewRoomTempEffects(player)
+    SetPlayerLibData(player, false, "OutTriggered")
+    SetPlayerLibData(player, false, "InTriggered")
 end
-Warfarin:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, Warfarin.PostNewRoom)
+Warfarin:AddCallback(ModCallbacks.MC_POST_PLAYER_NEW_ROOM_TEMP_EFFECTS, Warfarin.PostPlayerNewRoomTempEffects, ModPlayerIDs.WARFARIN)
 
 function Warfarin:PostPickupUpdate(pickup)
     local itemConfig = TYU.ITEMCONFIG:GetCollectible(pickup.SubType)
@@ -429,17 +426,6 @@ function Warfarin:PreNewRoom(room, roomDesc)
 end
 Warfarin:AddPriorityCallback(ModCallbacks.MC_PRE_NEW_ROOM, 50, Warfarin.PreNewRoom)
 
-function Warfarin:PostNewRoom()
-    if not Players.AnyoneIsPlayerType(ModPlayerIDs.WARFARIN) or not GetGlobalLibData("Spawned") or not Utils.IsRoomFirstVisit() or not Utils.IsRoomIndex(GridRooms.ROOM_SECRET_SHOP_IDX) then
-        return
-    end
-    local roomIndicesTable = GetGlobalLibData("RoomIndices")
-    local blackmarketRoomIndex = roomIndicesTable[#roomIndicesTable]
-    TYU.GAME:ChangeRoom(blackmarketRoomIndex)
-    TYU.GAME:ChangeRoom(TYU.LEVEL:GetCurrentRoomIndex())
-end
-Warfarin:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, Warfarin.PostNewRoom)
-
 function Warfarin:ReplaceBlackmarketDoorSprite()
     local room = TYU.GAME:GetRoom()
     if Utils.IsInDeathCertificate() or not Players.AnyoneIsPlayerType(ModPlayerIDs.WARFARIN) or not GetGlobalLibData("Spawned") or Utils.IsRoomType(RoomType.ROOM_SECRET) then
@@ -469,7 +455,7 @@ function Warfarin:ReplaceBlackmarketDoorSprite()
     if not Utils.IsRoomFirstVisit() then
         return
     end
-    room:TrySpawnSecretShop(true)
+    Entities.Spawn(ModEntityIDs.WARFARIN_BLACKMARKET_CRAWLSPACE.Type, ModEntityIDs.WARFARIN_BLACKMARKET_CRAWLSPACE.Variant, ModEntityIDs.WARFARIN_BLACKMARKET_CRAWLSPACE.SubType, Vector(440, 160))
 end
 Warfarin:AddCallback(Callbacks.TYU_POST_NEW_ROOM_OR_LOAD, Warfarin.ReplaceBlackmarketDoorSprite)
 

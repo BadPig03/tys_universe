@@ -23,6 +23,7 @@
     <entity anm2path="effects/twilight_fox_halo.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" id="1000" name="Twilight Fox Halo" numGridCollisionPoints="0" shadowSize="0" stageHP="0" variant="123" subtype="10">
         <gibs amount="0" blood="0" bone="0" eye="0" gut="0" large="0" />
     </entity>
+    <entity anm2path="effects/warfarin_blackmarket_crawlspace.anm2" baseHP="0" boss="0" champion="0" collisionDamage="20" collisionMass="0" collisionRadius="0" friction="1" name="Warfarin Blackmarket Crawlspace" numGridCollisionPoints="0" shadowSize="0" stageHP="0" id="1000" variant="74" subtype="3"/>
 
     <!--Charge Bars-->
     <entity anm2path="effects/bobs_stomach_chargebar.anm2" baseHP="0" boss="0" champion="0" collisionDamage="0" collisionMass="0" collisionRadius="0" friction="1" name="Bobs Stomach ChargeBar" numGridCollisionPoints="1" shadowSize="0" stageHP="0" id="1000"/>
