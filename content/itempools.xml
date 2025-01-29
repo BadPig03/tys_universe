@@ -15,6 +15,7 @@
         <Item Name="Crown of Kings" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Guppy's Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Hypnosis Perfume" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Landmine" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Laser Blaster" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Light Switch" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -122,6 +123,7 @@
         <Item Name="Cornucopia" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Guppy's Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Hypnosis Perfume" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Laser Blaster" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Light Switch" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Magnifier" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -185,6 +187,9 @@
     <Pool Name="woodenChest">
         <Item Name="Mirroring" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Mirroring Shard" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="oldChest">
+        <Item Name="Hypnosis Perfume" Weight="1" DecreaseBy="0.4" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="craneGame">
         <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="0.1" RemoveOn="0.1"/>

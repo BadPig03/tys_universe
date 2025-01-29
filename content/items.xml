@@ -73,32 +73,33 @@
 	<passive id="27" quality="2" craftquality="2" description="Not expired yet" gfx="collectibles_guppys_food.png" maxhearts="2" hearts="4" name="Guppy's Food" cache="luck speed range" tags="food nocantrip nolostbr guppy summonable"/>
 	<active id="28" quality="3" craftquality="3" description="Sinister motive" gfx="collectibles_hades_blade.png" name="Hades Blade" maxcharges="6" cooldown="60" cache="damage" tags="offensive nokeeper" customtags="nometronome"/>
 	<passive id="29" quality="4" craftquality="4" description="God of fire" gfx="collectibles_hephaestus_soul.png" name="Hephaestus' Soul" devilprice="2" shopprice="30" cache="flying" tags="nocantrip offensive lazarusshared summonable"/>
-	<passive id="30" quality="3" craftquality="3" description="Touch to explode" gfx="collectibles_landmine.png" name="Landmine" tags="nocantrip offensive summonable"/>
-	<active	id="31" quality="3" craftquality="3" description="Future technology" gfx="collectibles_laser_blaster.png" name="Laser Blaster" maxcharges="300" chargetype="timed" cooldown="60" tags="tech nocantrip offensive" customtags="nometronome"/>
-	<passive id="32" quality="0" craftquality="0" description="Turn off the light" gfx="collectibles_light_switch.png" name="Light Switch" tags="nocantrip lazarusshared nochallenge noeden offensive"/>
-	<familiar id="33" quality="2" craftquality="2" description="Enlarge your enemies" gfx="collectibles_magnifier.png" name="Magnifier" cache="familiars" tags="nocantrip offensive uniquefamiliar summonable"/>
-	<passive id="34" quality="3" craftquality="-1" description="The witness of unswerving love" gfx="collectibles_marriage_certificate.png" name="Marriage Certificate" tags="nocantrip mom offensive lazarusshared" customtags="nometronome"/>
-	<active id="35" quality="3" craftquality="3" description="Another me" gfx="collectibles_mirroring_shard.png" name="Mirroring Shard" maxcharges="6" cooldown="60" tags="offensive nochallenge" customtags="nometronome"/>
-	<active id="36" quality="3" craftquality="3" description="Another me" gfx="collectibles_mirroring.png" name="Mirroring" maxcharges="6" cooldown="60" tags="offensive nochallenge" customtags="nometronome"/>
-	<passive id="37" quality="3" craftquality="3" description="Uncertain fate" gfx="collectibles_notice_of_critical_condition.png" name="Notice of Critical Condition" tags="nocantrip nolostbr nogreed nokeeper lazarusshared" customtags="nometronome"/>
-	<passive id="38" quality="4" craftquality="4" description="Master of ocean" gfx="collectibles_oceanus_soul.png" name="Oceanus' Soul" cache="flying" devilprice="2" shopprice="30" tags="nocantrip offensive lazarusshared summonable"/>
-	<passive id="39" quality="3" craftquality="3" description="???" gfx="collectibles_order.png" name="Order" tags="nocantrip offensive summonable"/>
-	<passive id="40" quality="2" craftquality="2" description="<3 = Charge" gfx="collectibles_overload_battery.png" name="Overload Battery" tags="battery nocantrip nokeeper summonable"/>
-	<passive id="41" quality="2" craftquality="2" description="Sweet sensation" gfx="collectibles_peeled_banana.png" name="Peeled Banana" maxhearts="2" hearts="2" tags="food nocantrip nolostbr summonable" cache="luck range"/>
-	<active id="42" quality="2" craftquality="2" description="Don't touch it!" gfx="collectibles_philosophers_staff.png" name="Philosopher's Staff" maxcharges="5" cooldown="60" tags="offensive"/>
-	<passive id="43" quality="3" craftquality="3" description="Distant observation" gfx="collectibles_planetarium_telescope.png" name="Planetarium Telescope" cache="luck" tags="lazarusshared nocantrip nogreed offensive stars summonable"/>
-	<passive id="44" quality="2" craftquality="2" description="See through everything" gfx="collectibles_recon_vision.png" name="Recon Vision" tags="lazarusshared offensive summonable"/>
-	<active id="45" quality="4" craftquality="4" description="Seems to have met before" gfx="collectibles_rewind.png" name="Rewind" maxcharges="6" cooldown="440" tags="nogreed offensive"/>
-	<passive id="46" quality="2" craftquality="2" description="Symbol of wealth" gfx="collectibles_ruby.png" name="Ruby" shopprice="20" tags="lazarusshared nocantrip offensive summonable"/>
-	<passive id="47" quality="3" craftquality="3" description="Takes on all impurities and sins" gfx="collectibles_scapegoat.png" name="Scapegoat" tags="nocantrip nolostbr nochallenge" customtags="nometronome"/>
-	<passive id="48" quality="3" craftquality="3" description="He craves your pledge" gfx="collectibles_sinister_pact.png" name="Sinister Pact" blackhearts="2" tags="devil nocantrip nokeeper nolostbr summonable"/>
-	<passive id="49" quality="3" craftquality="3" description="So sticky" gfx="collectibles_sticky_ball.png" name="Sticky Ball" tags="nocantrip offensive summonable"/>
-	<active id="50" quality="2" craftquality="2" description="Spun?" gfx="collectibles_strange_syringe.png" name="Strange Syringe" maxcharges="0" cooldown="60" tags="nolostbr" customtags="nometronome"/>
-	<active id="51" quality="2" craftquality="-1" description="So weird" gfx="collectibles_suspicious_stew.png" name="Suspicious Stew" maxcharges="0" cooldown="60" hidden="true" tags="offensive" customtags="nometronome"/>
-	<active	id="52" quality="4" craftquality="4" description="Aspiration of the future" gfx="collectibles_the_gospel_of_john.png" name="The Gospel of John" maxcharges="4" devilprice="2" shopprice="30" cooldown="60" tags="angel book offensive nokeeper"/>
-	<familiar id="53" quality="3" craftquality="3" description="What's inside?" gfx="collectibles_tool_box.png" name="Tool Box" cache="familiars" tags="nocantrip offensive summonable"/>
-	<familiar id="54" quality="3" craftquality="3" description="Silent protector" gfx="collectibles_twilight_fox.png" name="Twilight Fox" cache="familiars" tags="nocantrip offensive summonable"/>
-	<active id="55" quality="3" craftquality="-1" description="Is it a dream?" gfx="collectibles_wake_up.png" name="Wake-up" maxcharges="0" shopprice="20" cooldown="60" tags="nocantrip nogreed offensive"/>
+	<passive id="30" quality="2" craftquality="2" description="Deadly temptation" gfx="collectibles_hypnosis_perfume.png" name="Hypnosis Perfume" tags="nocantrip offensive summonable"/>
+	<passive id="31" quality="3" craftquality="3" description="Touch to explode" gfx="collectibles_landmine.png" name="Landmine" tags="nocantrip offensive summonable"/>
+	<active	id="32" quality="3" craftquality="3" description="Future technology" gfx="collectibles_laser_blaster.png" name="Laser Blaster" maxcharges="300" chargetype="timed" cooldown="60" tags="tech nocantrip offensive" customtags="nometronome"/>
+	<passive id="33" quality="0" craftquality="0" description="Turn off the light" gfx="collectibles_light_switch.png" name="Light Switch" tags="nocantrip lazarusshared nochallenge noeden offensive"/>
+	<familiar id="34" quality="2" craftquality="2" description="Enlarge your enemies" gfx="collectibles_magnifier.png" name="Magnifier" cache="familiars" tags="nocantrip offensive uniquefamiliar summonable"/>
+	<passive id="35" quality="3" craftquality="-1" description="The witness of unswerving love" gfx="collectibles_marriage_certificate.png" name="Marriage Certificate" tags="nocantrip mom offensive lazarusshared" customtags="nometronome"/>
+	<active id="36" quality="3" craftquality="3" description="Another me" gfx="collectibles_mirroring_shard.png" name="Mirroring Shard" maxcharges="6" cooldown="60" tags="offensive nochallenge" customtags="nometronome"/>
+	<active id="37" quality="3" craftquality="3" description="Another me" gfx="collectibles_mirroring.png" name="Mirroring" maxcharges="6" cooldown="60" tags="offensive nochallenge" customtags="nometronome"/>
+	<passive id="38" quality="3" craftquality="3" description="Uncertain fate" gfx="collectibles_notice_of_critical_condition.png" name="Notice of Critical Condition" tags="nocantrip nolostbr nogreed nokeeper lazarusshared" customtags="nometronome"/>
+	<passive id="39" quality="4" craftquality="4" description="Master of ocean" gfx="collectibles_oceanus_soul.png" name="Oceanus' Soul" cache="flying" devilprice="2" shopprice="30" tags="nocantrip offensive lazarusshared summonable"/>
+	<passive id="40" quality="3" craftquality="3" description="???" gfx="collectibles_order.png" name="Order" tags="nocantrip offensive summonable"/>
+	<passive id="41" quality="2" craftquality="2" description="<3 = Charge" gfx="collectibles_overload_battery.png" name="Overload Battery" tags="battery nocantrip nokeeper summonable"/>
+	<passive id="42" quality="2" craftquality="2" description="Sweet sensation" gfx="collectibles_peeled_banana.png" name="Peeled Banana" maxhearts="2" hearts="2" tags="food nocantrip nolostbr summonable" cache="luck range"/>
+	<active id="43" quality="2" craftquality="2" description="Don't touch it!" gfx="collectibles_philosophers_staff.png" name="Philosopher's Staff" maxcharges="5" cooldown="60" tags="offensive"/>
+	<passive id="44" quality="3" craftquality="3" description="Distant observation" gfx="collectibles_planetarium_telescope.png" name="Planetarium Telescope" cache="luck" tags="lazarusshared nocantrip nogreed offensive stars summonable"/>
+	<passive id="45" quality="2" craftquality="2" description="See through everything" gfx="collectibles_recon_vision.png" name="Recon Vision" tags="lazarusshared offensive summonable"/>
+	<active id="46" quality="4" craftquality="4" description="Seems to have met before" gfx="collectibles_rewind.png" name="Rewind" maxcharges="6" cooldown="440" tags="nogreed offensive"/>
+	<passive id="47" quality="2" craftquality="2" description="Symbol of wealth" gfx="collectibles_ruby.png" name="Ruby" shopprice="20" tags="lazarusshared nocantrip offensive summonable"/>
+	<passive id="48" quality="3" craftquality="3" description="Takes on all impurities and sins" gfx="collectibles_scapegoat.png" name="Scapegoat" tags="nocantrip nolostbr nochallenge" customtags="nometronome"/>
+	<passive id="49" quality="3" craftquality="3" description="He craves your pledge" gfx="collectibles_sinister_pact.png" name="Sinister Pact" blackhearts="2" tags="devil nocantrip nokeeper nolostbr summonable"/>
+	<passive id="50" quality="3" craftquality="3" description="So sticky" gfx="collectibles_sticky_ball.png" name="Sticky Ball" tags="nocantrip offensive summonable"/>
+	<active id="51" quality="2" craftquality="2" description="Spun?" gfx="collectibles_strange_syringe.png" name="Strange Syringe" maxcharges="0" cooldown="60" tags="nolostbr" customtags="nometronome"/>
+	<active id="52" quality="2" craftquality="-1" description="So weird" gfx="collectibles_suspicious_stew.png" name="Suspicious Stew" maxcharges="0" cooldown="60" hidden="true" tags="offensive" customtags="nometronome"/>
+	<active	id="53" quality="4" craftquality="4" description="Aspiration of the future" gfx="collectibles_the_gospel_of_john.png" name="The Gospel of John" maxcharges="4" devilprice="2" shopprice="30" cooldown="60" tags="angel book offensive nokeeper"/>
+	<familiar id="54" quality="3" craftquality="3" description="What's inside?" gfx="collectibles_tool_box.png" name="Tool Box" cache="familiars" tags="nocantrip offensive summonable"/>
+	<familiar id="55" quality="3" craftquality="3" description="Silent protector" gfx="collectibles_twilight_fox.png" name="Twilight Fox" cache="familiars" tags="nocantrip offensive summonable"/>
+	<active id="56" quality="3" craftquality="-1" description="Is it a dream?" gfx="collectibles_wake_up.png" name="Wake-up" maxcharges="0" shopprice="20" cooldown="60" tags="nocantrip nogreed offensive"/>
 
 	<!--Trinkets-->
 	<trinket id="1" name="Beth's Salvation" description="Deliverance from sin" gfx="trinket_beths_salvation.png"/>

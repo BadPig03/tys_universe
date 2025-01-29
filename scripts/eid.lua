@@ -467,6 +467,18 @@ EIDInfo.Collectibles = {
             "#Grants flight and is immune to fire damage"
         }
     },
+    [ModItemIDs.HYPNOSIS_PERFUME] = {
+        {
+            Name = "魅惑香水",
+            Desc = "#{{Charm}} 当敌人死亡时，有10%概率留下存在10秒的魅惑雾"..
+            "#{{Charm}} 接触魅惑雾的非头目敌人会变为友好敌人，头目敌人则会被魅惑10秒"
+        },
+        {
+            Name = "Hypnosis Perfume",
+            Desc = "#{{Charm}} Enemies have a 10% chance to leave a charming smoke cloud that lasts for 10 seconds upon death"..
+            "#{{Charm}} Non-boss enemies that come into contact with the charming smoke cloud will become friendly enemies, while boss enemies will be charmed for 10 seconds"
+        }
+    },
     [ModItemIDs.LANDMINE] = {
         {
             Name = "地雷",

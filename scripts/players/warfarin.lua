@@ -302,7 +302,7 @@ end
 Warfarin:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, Warfarin.PrePickupCollision, PickupVariant.PICKUP_HEART)
 
 function Warfarin:PrePlayerAddHearts(player, amount, addHealthType, _)
-    if player:GetPlayerType() ~= ModPlayerIDs.WARFARIN or amount <= 0 or TYU.GAME:GetRoom():GetFrameCount() <= 0 then
+    if player:GetPlayerType() ~= ModPlayerIDs.WARFARIN or amount <= 0 then
         return
     end
     if Utils.HasFlags(addHealthType, AddHealthType.SOUL) or Utils.HasFlags(addHealthType, AddHealthType.BLACK) then
@@ -316,7 +316,7 @@ function Warfarin:PrePlayerAddHearts(player, amount, addHealthType, _)
             end
         end
         return 0
-    elseif player:GetEffects():HasNullEffect(ModNullItemIDs.WARFARIN_HAEMOLACRIA) and Utils.HasFlags(addHealthType, AddHealthType.RED) and not Rewind.GlowingHourglassUsed then
+    elseif player:GetEffects():HasNullEffect(ModNullItemIDs.WARFARIN_HAEMOLACRIA) and Utils.HasFlags(addHealthType, AddHealthType.RED) and not (Rewind.GlowingHourglassUsed and TYU.GAME:GetRoom():GetFrameCount() <= 0) then
         return amount * 2
     end
 end

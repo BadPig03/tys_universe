@@ -1,5 +1,5 @@
 <AnimatedActor>
-	<Info CreatedBy="ty" CreatedOn="2025/1/20 0:05:35" Version="63" Fps="10"/>
+	<Info CreatedBy="ty" CreatedOn="2025/1/25 11:52:59" Version="64" Fps="10"/>
 	<Content>
 		<Spritesheets>
 			<Spritesheet Path="items_death_pausescreen.png" Id="0"/>
@@ -11,9 +11,9 @@
 		<Events/>
 	</Content>
 	<Animations DefaultAnimation="Death Items">
-		<Animation Name="Death Items" FrameNum="56" Loop="false">
+		<Animation Name="Death Items" FrameNum="57" Loop="false">
 			<RootAnimation>
-				<Frame XPosition="0" YPosition="0" XScale="100" YScale="100" Delay="56" Visible="true" RedTint="255" GreenTint="255" BlueTint="255" AlphaTint="255" RedOffset="0" GreenOffset="0" BlueOffset="0" Rotation="0" Interpolated="false"/>
+				<Frame XPosition="0" YPosition="0" XScale="100" YScale="100" Delay="57" Visible="true" RedTint="255" GreenTint="255" BlueTint="255" AlphaTint="255" RedOffset="0" GreenOffset="0" BlueOffset="0" Rotation="0" Interpolated="false"/>
 			</RootAnimation>
 			<LayerAnimations>
 				<LayerAnimation LayerId="0" Visible="true">
@@ -73,6 +73,7 @@
 					<Frame XPosition="0" YPosition="0" XPivot="8" YPivot="8" XCrop="208" YCrop="32" Width="16" Height="16" XScale="100" YScale="100" Delay="1" Visible="true" RedTint="255" GreenTint="255" BlueTint="255" AlphaTint="255" RedOffset="0" GreenOffset="0" BlueOffset="0" Rotation="0" Interpolated="false"/>
 					<Frame XPosition="0" YPosition="0" XPivot="8" YPivot="8" XCrop="224" YCrop="32" Width="16" Height="16" XScale="100" YScale="100" Delay="1" Visible="true" RedTint="255" GreenTint="255" BlueTint="255" AlphaTint="255" RedOffset="0" GreenOffset="0" BlueOffset="0" Rotation="0" Interpolated="false"/>
 					<Frame XPosition="0" YPosition="0" XPivot="8" YPivot="8" XCrop="240" YCrop="32" Width="16" Height="16" XScale="100" YScale="100" Delay="1" Visible="true" RedTint="255" GreenTint="255" BlueTint="255" AlphaTint="255" RedOffset="0" GreenOffset="0" BlueOffset="0" Rotation="0" Interpolated="false"/>
+					<Frame XPosition="0" YPosition="0" XPivot="8" YPivot="8" XCrop="256" YCrop="32" Width="16" Height="16" XScale="100" YScale="100" Delay="1" Visible="true" RedTint="255" GreenTint="255" BlueTint="255" AlphaTint="255" RedOffset="0" GreenOffset="0" BlueOffset="0" Rotation="0" Interpolated="false"/>
 				</LayerAnimation>
 			</LayerAnimations>
 			<NullAnimations/>

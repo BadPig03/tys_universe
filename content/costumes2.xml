@@ -17,6 +17,7 @@
 	<costume id="16" anm2path="character_warfarin_reverse_empress.anm2" type="none" priority="99"/>
 	<costume id="17" anm2path="character_warfarin_taurus.anm2" type="none"/>
 	<costume id="18" anm2path="character_warfarin_wings.anm2" type="none" isFlying="true"/>
+	
 	<costume id="36" anm2path="costume_effervescent_tablet.anm2" type="none"/>
 	<costume id="39" anm2path="costume_blessed_destiny.anm2" type="none" priority="1"/>
 	<costume id="41" anm2path="costume_ruby.anm2" type="none" priority="1"/>
@@ -33,9 +34,9 @@
 	<costume id="25" anm2path="costume_fallen_sky.anm2" type="passive" hasSkinAlt="true"/>
 	<costume id="26" anm2path="costume_guilt.anm2" type="passive"/>
 	<costume id="29" anm2path="costume_hephaestus_soul.anm2" type="passive" isFlying="true" hasOverlay="true"/>
-	<costume id="34" anm2path="costume_marriage_certificate.anm2" type="passive" hasSkinAlt="true"/>
-	<costume id="38" anm2path="costume_oceanus_soul.anm2" type="passive" isFlying="true"/>
-	<costume id="44" anm2path="costume_recon_vision.anm2" type="passive" priority="1"/>
-	<costume id="47" anm2path="costume_scapegoat.anm2" type="passive" priority="96" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
-	<costume id="49" anm2path="costume_sticky_ball.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="35" anm2path="costume_marriage_certificate.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="39" anm2path="costume_oceanus_soul.anm2" type="passive" isFlying="true"/>
+	<costume id="45" anm2path="costume_recon_vision.anm2" type="passive" priority="1"/>
+	<costume id="48" anm2path="costume_scapegoat.anm2" type="passive" priority="96" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
+	<costume id="50" anm2path="costume_sticky_ball.anm2" type="passive" hasSkinAlt="true"/>
 </costumes>
