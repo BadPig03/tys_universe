@@ -275,7 +275,7 @@ function OceanusSoul:PostUpdate()
     local direction = GetGlobalLibData("Direction") or Vector(0, 1)
     local room = TYU.GAME:GetRoom()
     local waterAmount = room:GetWaterAmount()
-    local player = PlayerManager.FirstCollectibleOwner(ModItemIDs.OCEANUS_SOUL)
+    local player = Players.FirstCollectibleOwner(ModItemIDs.OCEANUS_SOUL)
     if timeout > 0 then
         if waterAmount < 1 then
             room:SetWaterAmount(math.min(1, waterAmount + 1 / 10))

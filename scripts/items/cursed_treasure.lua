@@ -8,7 +8,7 @@ local ModItemIDs = TYU.ModItemIDs
 local ModEntityIDs = TYU.ModEntityIDs
 
 function CursedTreasure:PostPickupUpdate(pickup)
-    if not Players.AnyoneHasCollectible(ModItemIDs.CURSED_TREASURE)  then
+    if not Players.AnyoneHasCollectible(ModItemIDs.CURSED_TREASURE) then
         return
     end
     if not Players.AnyoneHasCollectible(ModItemIDs.EXPIRED_GLUE) and pickup.Variant == PickupVariant.PICKUP_COIN and pickup.SubType ~= ModEntityIDs.CURSED_PENNY.SubType then

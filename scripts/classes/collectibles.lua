@@ -70,4 +70,17 @@ function Collectibles.GetFamiliarsFromItemPool(itemPoolType, rng, defaultItem)
     return itemID
 end
 
+function Collectibles.GetCollectibleFromRandomPool(lowQuality, highQuality, rng)
+    local itemID = CollectibleType.COLLECTIBLE_BREAKFAST
+    local itemList = {}
+    for i = 1, TYU.ITEMCONFIG:GetCollectibles().Size - 1 do
+        if ItemConfig.Config.IsValidCollectible(i) and TYU.ITEMCONFIG:GetCollectible(i).Quality <= highQuality and TYU.ITEMCONFIG:GetCollectible(i).Quality >= lowQuality and not TYU.ITEMCONFIG:GetCollectible(i):HasTags(ItemConfig.TAG_QUEST) and TYU.ITEMPOOL:CanSpawnCollectible(i, false) then
+            table.insert(itemList, i)
+        end
+    end
+    itemID = TYU.ITEMPOOL:GetCollectibleFromList(itemList, rng:Next())
+    TYU.ITEMPOOL:RemoveCollectible(itemID)
+    return itemID
+end
+
 return Collectibles

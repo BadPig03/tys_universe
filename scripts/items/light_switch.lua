@@ -74,9 +74,13 @@ function LightSwitch:PostUpdate()
         for _, player in ipairs(Players.GetPlayers(true)) do
             if npc.Position:Distance(player.Position) > 192 then
                 local cooldown = npc:GetBossStatusEffectCooldown()
-                npc:SetBossStatusEffectCooldown(0)
+                if npc:IsBoss() and cooldown > 0 then
+                    npc:SetBossStatusEffectCooldown(0)
+                end
                 npc:AddFreeze(EntityRef(player), 1, true)
-                npc:SetBossStatusEffectCooldown(cooldown)
+                if npc:IsBoss() and cooldown > 0 then
+                    npc:SetBossStatusEffectCooldown(cooldown)
+                end
             end
         end
         ::continue::

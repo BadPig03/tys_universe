@@ -178,6 +178,7 @@ TYU.ModItemIDs = {
     CROWN_OF_KINGS = GetItemInfo("Crown of Kings", "主宰之冠"),
     CURSED_DICE = GetItemInfo("Cursed Dice", "被诅咒的骰子"),
     CURSED_TREASURE = GetItemInfo("Cursed Treasure", "被诅咒的宝藏"),
+    DARK_MASK = GetItemInfo("Dark Mask", "漆黑面具"),
     EFFERVESCENT_TABLET = GetItemInfo("Effervescent Tablet", "泡腾片"),
     ENCHANTED_BOOK = GetItemInfo("Enchanted Book", "附魔书"),
     EXPIRED_GLUE = GetItemInfo("Expired Glue", "过期胶水"),
@@ -276,7 +277,8 @@ TYU.ModItemPoolIDs = {
 }
 
 TYU.ModEntityFlags = {
-    FLAG_NO_PAUSE = 1 << 60
+    FLAG_NO_PAUSE = 1 << 60,
+    FLAG_DARK_MASK_MARKED = 1 << 61
 }
 
 TYU.ModProjectileFlags = {

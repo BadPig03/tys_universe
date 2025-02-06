@@ -26,7 +26,7 @@ function CursedDice:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
                     chance = chance + 10
                 end
                 if player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_BELIAL_PASSIVE) then
-                    chance = chance + 10
+                    chance = chance + 15
                 end
                 if rng:RandomInt(100) < (100 - chance) then
                     pickup:SetForceBlind(true)

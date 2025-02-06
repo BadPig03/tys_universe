@@ -20,7 +20,9 @@ function FireAspect:PostPlayerUpdate(player)
                 ent:SetBossStatusEffectCooldown(0)
             end
             ent:AddBurn(EntityRef(player), 1, player.Damage)
-            ent:SetBossStatusEffectCooldown(cooldown)
+            if ent:IsBoss() and cooldown > 0 then
+                ent:SetBossStatusEffectCooldown(cooldown)
+            end
         end
     end
 end

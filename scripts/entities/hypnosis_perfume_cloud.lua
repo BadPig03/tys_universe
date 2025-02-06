@@ -1,6 +1,7 @@
 local HypnosisPerfumeCloud = TYU:NewModEntity("Hypnosis Perfume Cloud", "HYPNOSIS_PERFUME_CLOUD")
 
 local Entities = TYU.Entities
+local Players = TYU.Players
 
 local ModEntityIDs = TYU.ModEntityIDs
 local ModItemIDs = TYU.ModItemIDs
@@ -34,7 +35,7 @@ function HypnosisPerfumeCloud:PostUpdate()
         if not npc and not Entities.IsValidEnemy(ent) then
             goto continue
         end
-        local player = PlayerManager.FirstCollectibleOwner(ModItemIDs.HYPNOSIS_PERFUME)
+        local player = Players.FirstCollectibleOwner(ModItemIDs.HYPNOSIS_PERFUME)
         if PrivateField.IsCloudNearby(npc) then
             local time = (npc:IsBoss() and 300) or -1
             npc:AddCharmed(EntityRef(player), time)

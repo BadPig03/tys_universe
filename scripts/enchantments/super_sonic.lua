@@ -17,10 +17,14 @@ function SuperSonic:PostUpdate()
     for _, ent in pairs(Isaac.FindInRadius(player.Position, 1 << 16, EntityPartition.ENEMY)) do
         if ent:IsActiveEnemy() and ent:IsVulnerableEnemy() then
             if ent:IsBoss() then
-                if ent:GetBossStatusEffectCooldown() > 0 then
+                local cooldown = ent:GetBossStatusEffectCooldown()
+                if cooldown > 0 then
                     ent:SetBossStatusEffectCooldown(0)
                 end
                 ent:AddSlowing(EntityRef(player), 1, math.min(0.4, count * 0.075), Color(1, 1, 1.3, 1, 0.156863, 0.156863, 0.156863))
+                if cooldown > 0 then
+                    ent:SetBossStatusEffectCooldown(cooldown)
+                end
             else
                 ent:AddSlowing(EntityRef(player), 1, math.min(0.8, count * 0.15), Color(1, 1, 1.3, 1, 0.156863, 0.156863, 0.156863))
             end

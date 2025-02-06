@@ -27,10 +27,10 @@ do
         if extraDamage >= 50 then
             TYU.GAME:ShakeScreen(5)
         end
-        local countdown = enemy:GetBossStatusEffectCooldown()
+        local cooldown = enemy:GetBossStatusEffectCooldown()
         enemy:SetBossStatusEffectCooldown(0)
         enemy:AddBleeding(EntityRef(player), 150)
-        enemy:GetBossStatusEffectCooldown(countdown)
+        enemy:GetBossStatusEffectCooldown(cooldown)
         Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.BLOOD_EXPLOSION, 0, enemy.Position)
         enemy:BloodExplode()
     end

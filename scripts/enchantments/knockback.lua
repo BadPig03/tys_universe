@@ -21,7 +21,9 @@ function Knockback:PostPlayerUpdate(player)
                 ent:SetBossStatusEffectCooldown(0)
             end
             ent:AddKnockback(EntityRef(player), (ent.Position - player.Position):Normalized():Resized(count * 7), 15, true)
-            ent:SetBossStatusEffectCooldown(cooldown)
+            if ent:IsBoss() and cooldown > 0 then
+                ent:SetBossStatusEffectCooldown(cooldown)
+            end
         end
     end
 end

@@ -13,17 +13,17 @@
 	<wisp id="8" count="0"/>
 	<wisp id="16" count="0"/>
 	<wisp id="19" count="0"/>
-	<wisp id="21" hp="1" layer="1" damage="0.5" shotSpeed="0.6" fireDelay="10" tearColor="tear_white" flameColor="flame_white" coreColor="core_white" tearFlags="64" tearVariant="37" coreGfx="core_bright.png"/>
-	<wisp id="22" count="0"/>
-	<wisp id="28" hp="10" layer="2" damage="2" tearColor="tear_dark_red" flameColor="flame_dark_red" coreColor="core_dark_red" coreGfx="baby.png"/>
-	<wisp id="31" count="0"/>
+	<wisp id="22" hp="1" layer="1" damage="0.5" shotSpeed="0.6" fireDelay="10" tearColor="tear_white" flameColor="flame_white" coreColor="core_white" tearFlags="64" tearVariant="37" coreGfx="core_bright.png"/>
+	<wisp id="23" count="0"/>
+	<wisp id="29" hp="10" layer="2" damage="2" tearColor="tear_dark_red" flameColor="flame_dark_red" coreColor="core_dark_red" coreGfx="baby.png"/>
 	<wisp id="32" count="0"/>
-	<wisp id="35" hp="9" layer="2" priority="99" flameColor="mirroring_white" canShoot="false" coreGfx=""/>
-	<wisp id="36" hp="6" layer="2" priority="99" flameColor="mirroring_black" canShoot="false" coreGfx=""/>
-	<wisp id="42" count="0"/>
-	<wisp id="45" count="0"/>
-	<wisp id="50" count="0"/>
+	<wisp id="33" count="0"/>
+	<wisp id="36" hp="9" layer="2" priority="99" flameColor="mirroring_white" canShoot="false" coreGfx=""/>
+	<wisp id="37" hp="6" layer="2" priority="99" flameColor="mirroring_black" canShoot="false" coreGfx=""/>
+	<wisp id="43" count="0"/>
+	<wisp id="46" count="0"/>
 	<wisp id="51" count="0"/>
 	<wisp id="52" count="0"/>
 	<wisp id="53" count="0"/>
+	<wisp id="54" count="0"/>
 </wisps>

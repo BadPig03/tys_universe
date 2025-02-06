@@ -209,7 +209,7 @@ EIDInfo.Collectibles = {
         {
             Name = "巧克力煎饼",
             Desc = "#{{EmptyHeart}} +1空心之容器"..
-            "#{{BlackHeart}} 击杀敌人时有较低的概率掉落一颗黑心"..
+            "#{{BlackHeart}} 击杀敌人时有2.5%概率掉落一颗黑心"..
             "#{{Warning}} 概率不可叠加",
             BingeEater = "{{ArrowUp}} +1幸运"..
             "#{{ArrowUp}} +0.2弹速"..
@@ -218,7 +218,7 @@ EIDInfo.Collectibles = {
         {
             Name = "Chocolate Pancake",
             Desc = "#{{EmptyHeart}} Grants an empty heart container"..
-            "#{{BlackHeart}} Enemies have a small chance to drop a black heart on death"..
+            "#{{BlackHeart}} Enemies have a 2.5% chance to drop a black heart on death"..
             "#{{Warning}} The chance is not stackable",
             BingeEater = "{{ArrowUp}} +1 Luck"..
             "#{{ArrowUp}} +0.2 Shotspeed"..
@@ -299,16 +299,16 @@ EIDInfo.Collectibles = {
             Name = "被诅咒的骰子",
             Desc = "#重置并用{{CurseBlind}}致盲诅咒的效果遮蔽所在房间的底座道具"..
             "#已遮蔽的底座道具将被重置为诅咒硬币",
-            BookOfVirtues = "有额外10%的概率不遮蔽道具",
-            BookOfBelial = "有额外10%的概率不遮蔽道具",
+            BookOfVirtues = "有10%概率不遮蔽道具",
+            BookOfBelial = "有15%概率不遮蔽道具",
             CarBattery = "无效果"
         },
         {
             Name = "Cursed Dice",
             Desc = "#Rerolls and hides the pedestal items in the room with the effect of the {{CurseBlind}} Blind Curse"..
             "#Rerolling hidden pedestal items will cause them to disappear",
-            BookOfVirtues = "Has chance to reroll into an Angel Room item",
-            BookOfBelial = "Has chance to reroll into a Devil Room item",
+            BookOfVirtues = "There is a 10% chance to not hide the item",
+            BookOfBelial = "There is a 15% chance to not hide the item",
             CarBattery = "No effect"
         }
     },
@@ -322,6 +322,24 @@ EIDInfo.Collectibles = {
             Name = "Cursed Treasure",
             Desc = "#Replace all types of coins with cursed coins, picking up triggers the effect of a random coin trinket once"..
             "#Pick ups sold in the shop will be replaced with collectibles",
+        }
+    },
+    [ModItemIDs.DARK_MASK] = {
+        {
+            Name = "漆黑面具",
+            Desc = "#{{Damage}} 伤害修正x120%"..
+            "#进入新房间时，随机指定一名敌人作为委托目标"..
+            "#{{BossRoom}} 每击杀6个委托目标，头目房的道具池会随机变化一次"..
+            "#{{Warning}} 委托目标会获得永久混乱效果，且击杀时生成2-4个基础掉落物，但血量提升至500%"..
+            "#{{Warning}} 委托目标会在房间内仅剩自己时立刻死亡，但不计入击杀数量也不生成击杀奖励"
+        },
+        {
+            Name = "Dark Mask",
+            Desc = "#{{Damage}} x1.2 Damage multiplier"..
+            "#When entering a new room, a random enemy is designated as the commission target"..
+            "#{{BossRoom}} For every 6 commission targets killed, the item pool of the Boss room will change randomly once"..
+            "#{{Warning}} The commission target will receive a permanent confusion effect and, upon being killed, will spawn 2-4 pick ups, but its health will increase to 500%"..
+            "#{{Warning}} The commission target will die instantly when it is the only one left in the room, but it will not count toward the kill count and will not spawn kill rewards",
         }
     },
     [ModItemIDs.EFFERVESCENT_TABLET] = {
@@ -352,12 +370,12 @@ EIDInfo.Collectibles = {
         {
             Name = "过期胶水",
             Desc = "#硬币在生成时会被替换为黏性镍币"..
-            "#{{Warning}} 替换后的硬币会在随机时间和离开房间后消失"
+            "#{{Warning}} 替换后的硬币会在随机时间后或离开房间时消失"
         },
         {
             Name = "Expired Glue",
             Desc = "#Coins are replaced with sticky nickels when spawned",
-            "#{{Warning}} The replaced coins will disappear at a random time and after leaving the room"
+            "#{{Warning}} The replaced coins will disappear at a random time or after leaving the room"
         }
     },
     [ModItemIDs.ENCHANTED_BOOK] = {
@@ -365,40 +383,42 @@ EIDInfo.Collectibles = {
             Name = "附魔书",
             Desc = "#获得1条随机附魔"..
             "#附魔可叠加来提升等级，但存在等级上限",
-            BookOfVirtues = "生成一张附魔卡",
-            BookOfBelial = "生成一张附魔卡",
+            BookOfVirtues = "额外生成一张附魔卡",
+            BookOfBelial = "额外生成一张附魔卡",
             CarBattery = {1, 2}
         },
         {
             Name = "Enchanted Book",
             Desc = "#Grants a random enchantment"..
             "#The enchantment can be leveled up through stacking, but there is a level cap",
-            BookOfVirtues = "Spawns an enchanted card",
-            BookOfBelial = "Spawns an enchanted card",
+            BookOfVirtues = "Spawns an extra enchanted card",
+            BookOfBelial = "Spawns an extra enchanted card",
             CarBattery = {"a random enchantment", "two random enchantments"}
         }
     },
     [ModItemIDs.EXPLOSION_MASTER] = {
         {
             Name = "爆炸大师",
-            Desc = "#敌方泪弹有概率被替换成不伤害角色的炸弹"
+            Desc = "#敌方泪弹有20%概率被替换成不伤害角色的炸弹"
         },
         {
             Name = "Explosion Master",
-            Desc = "#Enemy projectiles have a chance to be replaced by bombs that do no harm to Isaac"
+            Desc = "#Enemy projectiles have a 20% chance to be replaced by bombs that do no harm to Isaac"
         }
     },
     [ModItemIDs.FALLEN_SKY] = {
         {
             Name = "天坠",
-            Desc = "#有概率发射追踪剑气泪弹，击中敌人后坠下圣剑"..
-            "#圣剑会连锁一定范围的其他敌人并给予燃烧效果，4秒后坠下新的圣剑"
+            Desc = "#有10%概率发射追踪剑气泪弹，击中敌人后坠下圣剑"..
+            "#圣剑会连锁一定范围的其他敌人并给予燃烧效果，4秒后坠下新的圣剑"..
+            "#{{Luck}} 幸运16: 50%"
         },
         {
             Name = "Fallen Sky",
-            Desc = "#There is a chance to fire a sword projectile that falls a holy sword after hitting an enemy"..
+            Desc = "#There is a 10% chance to fire a sword projectile that falls a holy sword after hitting an enemy"..
             "#After hitting an enemy, the holy sword will chain other enemies within a certain range and inflict a burning effect"..
-            "#After 4 seconds, another holy sword will fall down again"
+            "#After 4 seconds, another holy sword will fall down again"..
+            "#{{Luck}} Luck 16: 50%"
         }
     },
     [ModItemIDs.GUILT] = {
@@ -629,12 +649,12 @@ EIDInfo.Collectibles = {
         {
             Name = "过载电池",
             Desc = "#当角色无法容纳要拾取的心掉落物时，将其转化为充能"..
-            "#2{{Heart}}/{{RottenHeart}}=1{{SoulHeart}}/{{BlackHeart}}/{{EmptyBoneHeart}}=1充能，1{{GoldHeart}}/{{EternalHeart}}=12充能"
+            "#{{Warning}} 2{{Heart}}/{{RottenHeart}}=1{{SoulHeart}}/{{BlackHeart}}/{{EmptyBoneHeart}}=1充能，1{{GoldHeart}}/{{EternalHeart}}=12充能"
         },
         {
             Name = "Overload Battery",
             Desc = "#When Isaac can't collect the heart pick up he touches, it will be converted into charge"..
-            "#2{{Heart}}/{{RottenHeart}}=1{{SoulHeart}}/{{BlackHeart}}/{{EmptyBoneHeart}}=1 charge, 1{{GoldHeart}}/{{EternalHeart}}=12 charges"
+            "#{{Warning}} 2{{Heart}}/{{RottenHeart}}=1{{SoulHeart}}/{{BlackHeart}}/{{EmptyBoneHeart}}=1 charge, 1{{GoldHeart}}/{{EternalHeart}}=12 charges"
         }
     },
     [ModItemIDs.PEELED_BANANA] = {
@@ -707,15 +727,15 @@ EIDInfo.Collectibles = {
             Name = "倒带",
             Desc = "#使用后进入一个全新房间"..
             "#此房间将会是曾进入过的特殊房间之一",
-            BookOfVirtues = "有概率随机进入一个天使房",
-            BookOfBelial = "有概率随机进入一个恶魔房",
+            BookOfVirtues = "有10%概率进入一个天使房",
+            BookOfBelial = "有10%概率进入一个恶魔房",
             CarBattery = "无效果"
         },
         {
             Name = "Rewind",
             Desc = "#Upon use, enters a new room that will be one of the special rooms Isaac have previously visited",
-            BookOfVirtues = "There is a chance to randomly enter an Angel Room",
-            BookOfBelial = "There is a chance to randomly enter a Devil Room",
+            BookOfVirtues = "There is a 10% chance to randomly enter an Angel Room",
+            BookOfBelial = "There is a 10% chance to randomly enter a Devil Room",
             CarBattery = "No effect"
         }
     },
@@ -761,32 +781,32 @@ EIDInfo.Collectibles = {
     [ModItemIDs.STICKY_BALL] = {
         {
             Name = "粘性球",
-            Desc = "#有概率发射粘性泪弹，减速击中的敌人并增加粘性等级"..
-            "#粘性等级越高，召唤的友好的粘性液滴越强大"..
-            "#{{Warning}} 在5秒内未获得粘性等级就会重置粘性等级"
+            Desc = "#有25%概率发射粘性泪弹，命中时会使敌人的粘性等级提升1级(最大5级)，且有概率生成友好的粘性液滴跟班"..
+            "#{{Slow}} 拥有粘性等级的敌人会获得5秒的减速"..
+            "#{{Luck}} 幸运12: 100%" 
         },
         {
             Name = "Sticky Ball",
-            Desc = "#Has a chance to fire sticky tears that slow down enemies and apply a sticky level"..
-            "#The higher the sticky level, the more powerful the summoned friendly sticky squirts become"..
-            "#{{Warning}} If no level is applied within 5 seconds, the sticky level will reset"
+            Desc = "#There is a 25% chance to fire sticky tears, which increase the enemy's sticky level by 1 upon hit (max 5), and have a chance to spawn friendly sticky squirts"..
+            "#{{Slow}} Enemies with at least 1 sticky level will be slowed for 5 seconds"..
+            "#{{Luck}} Luck 12: 100%" 
         }
     },
     [ModItemIDs.STRANGE_SYRINGE] = {
         {
             Name = "奇怪的针筒",
-            Desc = "#{{Warning}} 一次性"..
-            "#{{Heart}} 随机受到0-6次半心的伤害"..
-            "#使{{Spun}}嗑药！的套装进度+3",
+            Desc = "#{{Heart}} 随机受到0-6次半心的伤害"..
+            "#使{{Spun}}嗑药！的套装进度+3"..
+            "#{{Warning}} 一次性",
             BookOfVirtues = "使{{Seraphim}}撒拉弗！的套装进度+1",
             BookOfBelial = "使{{Leviathan}}利维坦！的套装进度+1",
             CarBattery = "无效果"
         },
         {
             Name = "Strange Syringe",
-            Desc = "#{{Warning}} SINGLE USE"..
-            "{{Heart}} Deals 0-6 times half hearts of damage to Isaac randomly"..
-            "#Increases the count by 3 items toward {{Spun}} Spun transformation progress",
+            Desc = "{{Heart}} Deals 0-6 times half hearts of damage to Isaac randomly"..
+            "#Increases the count by 3 items toward {{Spun}} Spun transformation progress"..
+            "#{{Warning}} SINGLE USE",
             BookOfVirtues = "Increases the count by 1 item toward {{Seraphim}} Seraphim transformation progress",
             BookOfBelial = "Increases the count by 1 item toward {{Leviathan}} Leviathan transformation progress",
             CarBattery = "No effect"
@@ -814,8 +834,8 @@ EIDInfo.Collectibles = {
             Desc = "#重置所在房间的底座道具为品质3/4级的天使被动道具，每重置一个就获得1/2碎心"..
             "#若即将因碎心溢出而死亡，则停止重置的过程"..
             "#若房间内没有底座道具，则消除1颗碎心",
-            BookOfVirtues = "有概率生成一个天使房道具魂火跟班",
-            BookOfBelial = "有概率生成一个恶魔房道具魂火跟班",
+            BookOfVirtues = "有25%概率生成一个天使房道具魂火跟班",
+            BookOfBelial = "有25%概率生成一个恶魔房道具魂火跟班",
             CarBattery = {"1颗", "2颗"}
         },
         {
@@ -823,8 +843,8 @@ EIDInfo.Collectibles = {
             Desc = "#Rerolls the collectibles in the current room to quality 3/4 Angel Room passive items. For each reset, Isaac gains 1/2 broken hearts",
             "#If Issac is about to die due to broken heart overflow, the reroll process will stop"..
             "#If there are no collectibles in the room, remove 1 broken heart",
-            BookOfVirtues = "Has chance to spawn an Angel item wisp",
-            BookOfBelial = "Has chance to spawn a Devil item wisp",
+            BookOfVirtues = "Has 25% chance to spawn an Angel item wisp",
+            BookOfBelial = "Has 25% chance to spawn a Devil item wisp",
             CarBattery = {"1 broken heart", "2 broken hearts"}
         }
     },
@@ -861,7 +881,8 @@ EIDInfo.Collectibles = {
             Name = "唤醒",
             Desc = "#传送至教条房间，并生成3个最低品质为3的攻击道具"..
             "#击败后获得{{Collectible633}}教条并返回"..
-            "#{{Warning}} 无法在第五章及以后使用",
+            "#{{Warning}} 无法在第五章及以后使用"..
+            "#{{Warning}} 一次性",
             BookOfVirtues = "道具来自天使房道具池",
             BookOfBelial = "道具来自恶魔房道具池",
             CarBattery = "无效果"
@@ -870,7 +891,8 @@ EIDInfo.Collectibles = {
             Name = "Wake-up",
             Desc = "#Teleports Isaac to a room where he can fight the Dogma and spawns 3 offensive items of at least quality 3 from random item pools"..
             "#Grants {{Collectible633}} the Dogma and returns if the Dogma is killed"..
-            "#{{Warning}} Can't be used in Chapter 5 and beyond",
+            "#{{Warning}} Can't be used in Chapter 5 and beyond"..
+            "#{{Warning}} SINGLE USE",
             BookOfVirtues = "Collectibles are selected from Angel Room item pool instead",
             BookOfBelial = "Collectibles are selected from Devil Room item pool instead",
             CarBattery = "No effect"

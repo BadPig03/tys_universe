@@ -44,6 +44,7 @@
         <Item Name="Philosopher's Staff" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
         <Item Name="Recon Vision" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
         <Item Name="Ruby" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Sticky Ball" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Tool Box" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
         <Item Name="Wake-up" Weight="0.5" DecreaseBy="0.5" RemoveOn="0.1"/>
     </Pool>
@@ -57,6 +58,7 @@
     </Pool>
     <Pool Name="devil">
         <Item Name="Blood Sacrifice" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Dark Mask" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Fallen Sky" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Guilt" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Hades Blade" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -102,6 +104,7 @@
         <Item Name="Collapse" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
         <Item Name="Cursed Dice" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
         <Item Name="Cursed Treasure" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Dark Mask" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
         <Item Name="Expired Glue" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
         <Item Name="Notice of Critical Condition" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
     </Pool>
@@ -136,6 +139,7 @@
         <Item Name="Twilight Fox" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="greedDevil">
+        <Item Name="Dark Mask" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Fallen Sky" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Hades Blade" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Scapegoat" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>

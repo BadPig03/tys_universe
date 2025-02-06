@@ -58,7 +58,19 @@ do
 
     function PrivateField.IsSatanicBibleUsedBossRoom()
         return Utils.IsRoomType(RoomType.ROOM_BOSS) and TYU.LEVEL:GetStateFlag(LevelStateFlag.STATE_SATANIC_BIBLE_USED)
-    end    
+    end
+
+    function PrivateField.SaveMovingBox()
+        for _, player in ipairs(Players.GetPlayers(true)) do
+            local movingBoxContents = player:GetMovingBoxContents()
+            for i = 0, movingBoxContents:__len() - 1 do
+                local item = movingBoxContents:Get(i)
+                if item:GetType() == EntityType.ENTITY_PICKUP and item:GetVariant() == PickupVariant.PICKUP_COLLECTIBLE then
+                    Utils.AddSeedToWarfarinItems(item.InitSeed)
+                end
+            end
+        end
+    end
 end
 
 function Warfarin:EvaluateCache(player, cacheFlag)
@@ -67,6 +79,9 @@ function Warfarin:EvaluateCache(player, cacheFlag)
     end
     local effects = player:GetEffects()
     if cacheFlag == CacheFlag.CACHE_DAMAGE then
+        if effects:HasNullEffect(ModNullItemIDs.WARFARIN_HAEMOLACRIA) then
+            Stat:SetDamageMultiplier(player, 0.75)
+        end
         Stat:AddFlatDamage(player, 0.2 * TYU.GAME:GetDevilRoomDeals())
     elseif cacheFlag == CacheFlag.CACHE_FLYING and effects:HasNullEffect(ModNullItemIDs.WARFARIN_WINGS) and not Utils.HasCurseMist() then
         player.CanFly = true
@@ -371,15 +386,7 @@ function Warfarin:PreLevelSelect(levelStage, stageType)
     SetGlobalLibData({}, "RoomIndices")
     SetGlobalLibData(false, "Spawned")
     TYU:SetGlobalLibData({}, "WarfarinItems")
-    for _, player in ipairs(Players.GetPlayers(true)) do
-        local movingBoxContents = player:GetMovingBoxContents()
-        for i = 0, movingBoxContents:__len() - 1 do
-            local item = movingBoxContents:Get(i)
-            if item:GetType() == EntityType.ENTITY_PICKUP and item:GetVariant() == PickupVariant.PICKUP_COLLECTIBLE then
-                Utils.AddSeedToWarfarinItems(item.InitSeed)
-            end
-        end
-    end
+    PrivateField.SaveMovingBox()
     if TYU.ITEMPOOL:HasCollectible(CollectibleType.COLLECTIBLE_MEMBER_CARD) then
         TYU.ITEMPOOL:RemoveCollectible(CollectibleType.COLLECTIBLE_MEMBER_CARD)
     end

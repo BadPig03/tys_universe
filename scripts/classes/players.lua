@@ -27,6 +27,10 @@ function Players.AnyoneHasTrinket(id)
     return PlayerManager.AnyoneHasTrinket(id)
 end
 
+function Players.FirstCollectibleOwner(id)
+    return PlayerManager.FirstCollectibleOwner(id)
+end
+
 function Players.AddShield(player, time)
     local effects = player:GetEffects()
     local effect = effects:GetCollectibleEffect(CollectibleType.COLLECTIBLE_BOOK_OF_SHADOWS)

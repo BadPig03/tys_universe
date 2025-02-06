@@ -129,13 +129,15 @@ function StickyBallTear:ApplyStickyLevel(npc, player, rng)
 		end
 	end
 	SetTempEntityLibData(npc, level + 1, "Level")
+	SetTempEntityLibData(npc, 150, "Timeout")
 	local cooldown = npc:GetBossStatusEffectCooldown()
 	if npc:IsBoss() and cooldown > 0 then
 		npc:SetBossStatusEffectCooldown(0)
 	end
 	npc:AddSlowing(EntityRef(player), math.max(0, 150 - npc:GetSlowingCountdown()), 0.75, Color(1, 1, 1, 1))
-	npc:SetBossStatusEffectCooldown(cooldown)
-	SetTempEntityLibData(npc, 150, "Timeout")
+	if npc:IsBoss() and cooldown > 0 then
+		npc:SetBossStatusEffectCooldown(cooldown)
+	end
 end
 
 function StickyBallTear:PostTearRender(tear, offset)

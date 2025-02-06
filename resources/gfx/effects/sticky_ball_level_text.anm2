@@ -1,5 +1,5 @@
 <AnimatedActor>
-	<Info CreatedBy="Unknown" CreatedOn="2024/8/29 1:32:42" Version="15" Fps="30"/>
+	<Info CreatedBy="ty" CreatedOn="2024/8/29 1:32:42" Version="15" Fps="30"/>
 	<Content>
 		<Spritesheets>
 			<Spritesheet Path="sticky_ball_level_text.png" Id="0"/>
