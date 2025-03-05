@@ -85,7 +85,7 @@
 	<passive id="39" quality="3" craftquality="3" description="Uncertain fate" gfx="collectibles_notice_of_critical_condition.png" name="Notice of Critical Condition" tags="lazarusshared nogreed nokeeper nolostbr" customtags="nometronome"/>
 	<passive id="40" quality="4" craftquality="4" description="Master of ocean" gfx="collectibles_oceanus_soul.png" name="Oceanus' Soul" cache="flying" devilprice="2" shopprice="30" tags="lazarusshared offensive summonable"/>
 	<passive id="41" quality="3" craftquality="3" description="???" gfx="collectibles_order.png" name="Order" tags="offensive summonable"/>
-	<passive id="42" quality="2" craftquality="2" description="<3 = Charge" gfx="collectibles_overload_battery.png" name="Overload Battery" tags="battery offensive summonable"/>
+	<passive id="42" quality="2" craftquality="2" description="&lt;3 = Charge" gfx="collectibles_overload_battery.png" name="Overload Battery" tags="battery offensive summonable"/>
 	<passive id="43" quality="2" craftquality="2" description="Sweet sensation" gfx="collectibles_peeled_banana.png" name="Peeled Banana" maxhearts="2" hearts="2" tags="food nolostbr summonable" cache="luck range"/>
 	<active id="44" quality="2" craftquality="2" description="Don't touch it!" gfx="collectibles_philosophers_staff.png" name="Philosopher's Staff" maxcharges="5" cooldown="60" tags="offensive"/>
 	<passive id="45" quality="3" craftquality="3" description="Distant observation" gfx="collectibles_planetarium_telescope.png" name="Planetarium Telescope" cache="luck" tags="lazarusshared nogreed offensive stars summonable"/>
