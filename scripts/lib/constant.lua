@@ -202,6 +202,7 @@ TYU.ModItemIDs = {
     OVERLOAD_BATTERY = GetItemInfo("Overload Battery", "过载电池"),
     PEELED_BANANA = GetItemInfo("Peeled Banana", "剥皮香蕉"),
     PHILOSOPHERS_STAFF = GetItemInfo("Philosopher's Staff", "贤者权杖"),
+    PILL_CASE = GetItemInfo("Pill Case", "胶囊盒"),
     PLANETARIUM_TELESCOPE = GetItemInfo("Planetarium Telescope", "星象望远镜"),
     RECON_VISION = GetItemInfo("Recon Vision", "洞察视界"),
     REWIND = GetItemInfo("Rewind", "倒带"),

@@ -37,7 +37,7 @@
 	<costume id="30" anm2path="costume_hephaestus_soul.anm2" type="passive" isFlying="true" hasOverlay="true"/>
 	<costume id="36" anm2path="costume_marriage_certificate.anm2" type="passive" hasSkinAlt="true"/>
 	<costume id="40" anm2path="costume_oceanus_soul.anm2" type="passive" isFlying="true"/>
-	<costume id="46" anm2path="costume_recon_vision.anm2" type="passive" priority="1"/>
-	<costume id="49" anm2path="costume_scapegoat.anm2" type="passive" priority="96" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
-	<costume id="51" anm2path="costume_sticky_ball.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="47" anm2path="costume_recon_vision.anm2" type="passive" priority="1"/>
+	<costume id="50" anm2path="costume_scapegoat.anm2" type="passive" priority="96" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
+	<costume id="52" anm2path="costume_sticky_ball.anm2" type="passive" hasSkinAlt="true"/>
 </costumes>

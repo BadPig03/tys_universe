@@ -46,6 +46,7 @@ function BloodyDice:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
     Entities.Morph(collectible, nil, nil, newType)
     collectible.ShopItemId = -2
     collectible.Price = 0
+    collectible.Touched = false
     collectible:ClearEntityFlags(EntityFlag.FLAG_ITEM_SHOULD_DUPLICATE)
     local count = GetPlayerLibData(player, "Counts") or 0
     SetPlayerLibData(player, count + 1, "Counts")

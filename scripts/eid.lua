@@ -21,7 +21,7 @@ EIDInfo.Collectibles = {
         },
         {
             Name = "Absence Note",
-            Desc = "#A bed will spawn when entering a new {{ChallengeRoom}}challenge room or {{BossRushRoom}}boss challenge room",
+            Desc = "#A bed will spawn when entering a new {{ChallengeRoom}}challenge room or {{BossRushRoom}}boss challenge room"..
             "#The total number of waves in the above room is halved and rounded up"
         }
     },
@@ -694,6 +694,18 @@ EIDInfo.Collectibles = {
             BookOfVirtues = "Has chance to fire {{Collectible202}} Midas' Touch tears",
             BookOfBelial = "Spawns 3 random coins",
             CarBattery = "No effect"
+        }
+    },
+    [ModItemIDs.PILL_CASE] = {
+        {
+            Name = "胶囊盒",
+            Desc = "#{{Pill}} 识别拥有的胶囊"..
+            "#拾取的胶囊会变成大胶囊"
+        },
+        {
+            Name = "Pill Case",
+            Desc = "#{{Pill}} Identifies pills Isaac owns"..
+            "#Pills always become horse pills when picked up"
         }
     },
     [ModItemIDs.PLANETARIUM_TELESCOPE] = {
