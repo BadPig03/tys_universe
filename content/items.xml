@@ -90,9 +90,9 @@
 	<active id="44" quality="2" craftquality="2" description="Don't touch it!" gfx="collectibles_philosophers_staff.png" name="Philosopher's Staff" maxcharges="5" cooldown="60" tags="offensive"/>
 	<passive id="45" quality="3" craftquality="3" description="Distant observation" gfx="collectibles_planetarium_telescope.png" name="Planetarium Telescope" cache="luck" tags="lazarusshared nogreed offensive stars summonable"/>
 	<passive id="46" quality="2" craftquality="2" description="Double your pill" gfx="collectibles_pill_case.png" name="Pill Case" tags="offensive summonable syringe"/>
-	<passive id="47" quality="2" craftquality="2" description="See through everything" gfx="collectibles_recon_vision.png" name="Recon Vision" tags="lazarusshared offensive summonable"/>
+	<passive id="47" quality="1" craftquality="1" description="See through everything" gfx="collectibles_recon_vision.png" name="Recon Vision" shopprice="10" tags="lazarusshared offensive summonable"/>
 	<active id="48" quality="4" craftquality="4" description="Seems to have met before" gfx="collectibles_rewind.png" name="Rewind" maxcharges="6" cooldown="440" tags="nocantrip nochallenge nogreed offensive"/>
-	<passive id="49" quality="2" craftquality="2" description="Symbol of wealth" gfx="collectibles_ruby.png" name="Ruby" shopprice="20" tags="lazarusshared offensive summonable"/>
+	<passive id="49" quality="2" craftquality="2" description="Symbol of wealth" gfx="collectibles_ruby.png" name="Ruby" tags="lazarusshared offensive summonable"/>
 	<passive id="50" quality="3" craftquality="3" description="Takes on all impurities and sins" gfx="collectibles_scapegoat.png" name="Scapegoat" tags="nochallenge nolostbr" customtags="nometronome"/>
 	<passive id="51" quality="3" craftquality="3" description="He craves your pledge" gfx="collectibles_sinister_pact.png" name="Sinister Pact" blackhearts="2" tags="devil nokeeper nolostbr summonable"/>
 	<passive id="52" quality="3" craftquality="3" description="So sticky" gfx="collectibles_sticky_ball.png" name="Sticky Ball" tags="offensive summonable"/>
@@ -111,4 +111,5 @@
 	<trinket id="5" name="Lost Bottle Cap" description="One more bottle!" gfx="trinket_lost_bottle_cap.png"/>
 	<trinket id="6" name="Meal Ticket" description="Free gift" gfx="trinket_meal_ticket.png"/>
 	<trinket id="7" name="Stone Carving Knife" description="Stone sculpture" gfx="trinket_stone_carving_knife.png"/>
+	<trinket id="8" name="Twisted Lovers" description="Twist of fate" gfx="trinket_twisted_lovers.png"/>
 </items>

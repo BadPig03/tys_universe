@@ -5,4 +5,6 @@
 
 	<!--Pills-->
 	<pilleffect id="0" name="Bait and Switch" class="0" mimiccharge="2"/>
+	<pilleffect id="1" name="Bleh!" class="2" mimiccharge="6"/>
+	<pilleffect id="2" name="Blood Extraction" class="2+" mimiccharge="6"/>
 </pocketitems>

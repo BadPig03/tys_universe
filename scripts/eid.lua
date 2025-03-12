@@ -725,12 +725,12 @@ EIDInfo.Collectibles = {
     [ModItemIDs.RECON_VISION] = {
         {
             Name = "洞察视界",
-            Desc = "#揭示所有被{{CurseBlind}}致盲诅咒替换为问号的道具"..
+            Desc = "#{{CurseBlind}} 揭示所有被替换为问号的道具"..
             "#对支线层宝箱房内的道具仍然生效"
         },
         {
             Name = "Recon Vision",
-            Desc = "#Reveals all item sprites replaced with a question mark by {{CurseBlind}} the Curse of Blind"..
+            Desc = "#{{CurseBlind}} Reveals all item sprites replaced with a question mark"..
             "#Also works for the extra item on the alt path"
         }
     },
@@ -1064,6 +1064,18 @@ EIDInfo.Trinkets = {
                 "9"
             }
         }
+    },
+    [ModTrinketIDs.TWISTED_LOVERS] = {
+        {
+            Name = "扭曲之契",
+            Desc = "#{{Card}} 使用正位塔罗牌时，视作使用对应的逆位塔罗牌"..
+            "#{{BrokenHeart}} 同时，将1心之容器或2魂心转换为1碎心"
+        },
+        {
+            Name = "Twisted Lovers",
+            Desc = "#{{Card}} When using a Tarot card, it is treated as using the corresponding reversed Tarot card"..
+            "#{{BrokenHeart}}Turns 1 heart container or 1 Bone Heart or 2 Soul Hearts into a Broken Heart"
+        }
     }
 }
 
@@ -1134,6 +1146,42 @@ EIDInfo.Pills = {
             HorsePill = "Teleport Isaac to a random position in the room, and grants shield for 4 second",
             MimicCharge = 2,
             Class = "0"
+        }
+    },
+    [ModPillEffectIDs.BLEH] = {
+        {
+            Name = "口岁!",
+            Desc = "#吐出1个非\"任务\"标签的被动道具或吞下的饰品",
+            HorsePill = "#吐出2个非\"任务\"标签的被动道具或吞下的饰品",
+            MimicCharge = 6,
+            Class = "2"
+        },
+        {
+            Name = "Bleh",
+            Desc = "#Drops a passive item without \"quest\" tag or smelted trinket",
+            HorsePill = "#Drops two passive items without \"quest\" tag or smelted trinkets",
+            MimicCharge = 6,
+            Class = "2"
+        }
+    },
+    [ModPillEffectIDs.BLOOD_EXTRACTION] = {
+        {
+            Name = "血液提取",
+            Desc = "#{{Heart}} 保留一颗红心，清除角色拥有的其它红心、永恒之心、腐心和金心并生成对应数量和种类的血团宝宝"..
+            "#{{HalfHeart}} 每半个红心生成一个血团宝宝",
+            HorsePill = "#{{Heart}}保留一颗红心，清除角色拥有的其它红心、永恒之心、腐心和金心并生成对应数量和种类的大血团宝宝"..
+            "#{{HalfHeart}} 每半个红心生成一个大血团宝宝",
+            MimicCharge = 6,
+            Class = "2+"
+        },
+        {
+            Name = "Blood Extraction",
+            Desc = "#{{Heart}} Retains one red heart, drains Isaac's other red hearts, eternal hearts, rotten hearts, and golden hearts, and creates the corresponding number and types of blood clot familiars"..
+            "#{{HalfHeart}} Creates a blood clot familiar for every half red heart",
+            HorsePill = "#{{Heart}} Retains one red heart, drains Isaac's other red hearts, eternal hearts, rotten hearts, and golden hearts, and creates the corresponding number and types of larger blood clot familiars"..
+            "#{{HalfHeart}} Creates a larger blood clot familiar for every half red heart",
+            MimicCharge = 6,
+            Class = "2+"
         }
     }
 }

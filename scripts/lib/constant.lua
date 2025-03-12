@@ -225,7 +225,8 @@ TYU.ModTrinketIDs = {
     KEEPERS_CORE = GetTrinketInfo("Keeper's Core", "店主的核心"),
     LOST_BOTTLE_CAP = GetTrinketInfo("Lost Bottle Cap", "丢失的瓶盖"),
     MEAL_TICKET = GetTrinketInfo("Meal Ticket", "餐券"),
-    STONE_CARVING_KNIFE = GetTrinketInfo("Stone Carving Knife", "石刻刀")
+    STONE_CARVING_KNIFE = GetTrinketInfo("Stone Carving Knife", "石刻刀"),
+    TWISTED_LOVERS = GetTrinketInfo("Twisted Lovers", "扭曲之契")
 }
 
 TYU.ModNullItemIDs = {
@@ -256,7 +257,9 @@ TYU.ModNullItemIDs = {
 }
 
 TYU.ModPillEffectIDs = {
-    BAIT_AND_SWITCH = GetPillInfo("Bait and Switch", "偷天换日")
+    BAIT_AND_SWITCH = GetPillInfo("Bait and Switch", "偷天换日"),
+    BLEH = GetPillInfo("Bleh!", "口岁!"),
+    BLOOD_EXTRACTION = GetPillInfo("Blood Extraction", "血液提取")
 }
 
 TYU.ModPlayerIDs = {

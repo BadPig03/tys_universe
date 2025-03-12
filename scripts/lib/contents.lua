@@ -252,10 +252,15 @@ do
         return TYU.ModComponents.ModPill:New(name, dataName)
     end
     TYU.ModPills = {
-        BaitAndSwitch = TYU:Require("scripts/pills/bait_and_switch")
+        BaitAndSwitch = TYU:Require("scripts/pills/bait_and_switch"),
+        Bleh = TYU:Require("scripts/pills/bleh"),
+        BloodExtraction = TYU:Require("scripts/pills/blood_extraction")
+        
     }
     TYU.ModPillTexts = {
-        [TYU.ModPillEffectIDs.BAIT_AND_SWITCH] = "偷天换日"
+        [TYU.ModPillEffectIDs.BAIT_AND_SWITCH] = "偷天换日",
+        [TYU.ModPillEffectIDs.BLEH] = "口岁!",
+        [TYU.ModPillEffectIDs.BLOOD_EXTRACTION] = "血液提取"
     }
 end
 
@@ -279,7 +284,8 @@ do
         KeepersCore = TYU:Require("scripts/trinkets/keepers_core"),
         LostBottleCap = TYU:Require("scripts/trinkets/lost_bottle_cap"),
         MealTicket = TYU:Require("scripts/trinkets/meal_ticket"),
-        StoneCarvingKnife = TYU:Require("scripts/trinkets/stone_carving_knife")
+        StoneCarvingKnife = TYU:Require("scripts/trinkets/stone_carving_knife"),
+        TwistedLovers = TYU:Require("scripts/trinkets/twisted_lovers")
     }
     TYU.ModTrinketTexts = {
         [TYU.ModTrinketIDs.BETHS_SALVATION] = {"伯大尼的救赎", "解脱于罪恶"},
@@ -288,7 +294,8 @@ do
         [TYU.ModTrinketIDs.KEEPERS_CORE] = {"店主的核心", "积少成多"},
         [TYU.ModTrinketIDs.LOST_BOTTLE_CAP] = {"丢失的瓶盖", "再来一瓶!"},
         [TYU.ModTrinketIDs.MEAL_TICKET] = {"餐券", "免费赠品"},
-        [TYU.ModTrinketIDs.STONE_CARVING_KNIFE] = {"石刻刀", "石雕"}
+        [TYU.ModTrinketIDs.STONE_CARVING_KNIFE] = {"石刻刀", "石雕"},
+        [TYU.ModTrinketIDs.TWISTED_LOVERS] = {"扭曲之契", "反转命运"}
     }
 end
 
