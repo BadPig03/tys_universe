@@ -14,7 +14,7 @@ local function GetPlayerLibData(player, ...)
 end
 
 function BloodSample:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
-    if Utils.HasFlags(useFlags, UseFlag.USE_CARBATTERY) or Utils.HasFlags(useFlags, UseFlag.USE_VOID) then
+    if Utils.HasFlags(useFlags, UseFlag.USE_VOID) then
         return { Discharge = false, Remove = false, ShowAnim = false }
     end
     local count = GetPlayerLibData(player, "Counts") or 0

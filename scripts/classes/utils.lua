@@ -1,12 +1,11 @@
 local Utils = TYU:RegisterNewClass()
 
 function Utils.FindFreePickupSpawnPosition(position, initialStep, avoidActiveEntities, allowPits)
-    initialStep = initialStep or 0
+    initialStep = initialStep or 40
     if avoidActiveEntities == nil then
         avoidActiveEntities = true
     end
     allowPits = allowPits or false
-
     local room = TYU.GAME:GetRoom()
     return room:FindFreePickupSpawnPosition(position, initialStep, avoidActiveEntities, allowPits)
 end

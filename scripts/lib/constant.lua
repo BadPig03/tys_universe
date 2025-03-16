@@ -168,6 +168,7 @@ TYU.ModItemIDs = {
     BLOOD_SAMPLE = GetItemInfo("Blood Sample", "血液样本"),
     BLOODY_DICE = GetItemInfo("Bloody Dice", "血之骰"),
     BOBS_STOMACH = GetItemInfo("Bob's Stomach", "鲍勃的胃"),
+    BONE_CLAY_POT = GetItemInfo("Bone Clay Pot", "骨陶罐"),
     BONE_IN_FISH_STEAK = GetItemInfo("Bone-in Fish Steak", "带骨鱼排"),
     CHEF_HAT = GetItemInfo("Chef Hat", "厨师帽"),
     CHOCOLATE_PANCAKE = GetItemInfo("Chocolate Pancake", "巧克力煎饼"),

@@ -27,17 +27,17 @@
 	<costume id="2" anm2path="costume_anorexia.anm2" type="passive" hasSkinAlt="true"/>
 	<costume id="4" anm2path="costume_beggar_mask.anm2" type="passive"/>
 	<costume id="10" anm2path="" type="passive" overwriteColor="true" skinColor="4" forceBodyColor="true" forceHeadColor="true"/>
-	<costume id="13" anm2path="costume_chef_hat.anm2" type="passive"/>
-	<costume id="14" anm2path="" type="passive" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
-	<costume id="15" anm2path="costume_conjunctivitis.anm2" type="passive"/>
-	<costume id="16" anm2path="costume_conservative_treatment.anm2" type="passive" hasSkinAlt="true"/>
-	<costume id="21" anm2path="costume_dark_mask.anm2" type="passive"/>
-	<costume id="26" anm2path="costume_fallen_sky.anm2" type="passive" hasSkinAlt="true"/>
-	<costume id="27" anm2path="costume_guilt.anm2" type="passive"/>
-	<costume id="30" anm2path="costume_hephaestus_soul.anm2" type="passive" isFlying="true" hasOverlay="true"/>
-	<costume id="36" anm2path="costume_marriage_certificate.anm2" type="passive" hasSkinAlt="true"/>
-	<costume id="40" anm2path="costume_oceanus_soul.anm2" type="passive" isFlying="true"/>
-	<costume id="47" anm2path="costume_recon_vision.anm2" type="passive" priority="1"/>
-	<costume id="50" anm2path="costume_scapegoat.anm2" type="passive" priority="96" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
-	<costume id="52" anm2path="costume_sticky_ball.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="14" anm2path="costume_chef_hat.anm2" type="passive"/>
+	<costume id="15" anm2path="" type="passive" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
+	<costume id="16" anm2path="costume_conjunctivitis.anm2" type="passive"/>
+	<costume id="17" anm2path="costume_conservative_treatment.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="22" anm2path="costume_dark_mask.anm2" type="passive"/>
+	<costume id="27" anm2path="costume_fallen_sky.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="28" anm2path="costume_guilt.anm2" type="passive"/>
+	<costume id="31" anm2path="costume_hephaestus_soul.anm2" type="passive" isFlying="true" hasOverlay="true"/>
+	<costume id="37" anm2path="costume_marriage_certificate.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="41" anm2path="costume_oceanus_soul.anm2" type="passive" isFlying="true"/>
+	<costume id="48" anm2path="costume_recon_vision.anm2" type="passive" priority="1"/>
+	<costume id="51" anm2path="costume_scapegoat.anm2" type="passive" priority="96" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
+	<costume id="53" anm2path="costume_sticky_ball.anm2" type="passive" hasSkinAlt="true"/>
 </costumes>

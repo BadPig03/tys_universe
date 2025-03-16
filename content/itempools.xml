@@ -5,6 +5,7 @@
         <Item Name="Beggar Mask" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Blaze Fly" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Bob's Stomach" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Bone Clay Pot" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Collapse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Chef Hat" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Conjunctivitis" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -29,6 +30,7 @@
     <Pool Name="shop">
         <Item Name="Absence Note" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Atonement Voucher" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Bone Clay Pot" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Chef Hat" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Explosion Master" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -138,6 +140,7 @@
         <Item Name="Beggar Mask" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Blaze Fly" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Bob's Stomach" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Bone Clay Pot" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Collapse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Chef Hat" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Conjunctivitis" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -163,6 +166,7 @@
     </Pool>
     <Pool Name="greedShop">
         <Item Name="Atonement Voucher" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Bone Clay Pot" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Chef Hat" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Effervescent Tablet" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Explosion Master" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>

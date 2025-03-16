@@ -1,5 +1,6 @@
 local EIDInfo = {}
 local EIDLanguage = { "zh_cn", "en_us" }
+
 local Enchantments = TYU.Enchantments
 local Foods = TYU.Foods
 local ModItemIDs = TYU.ModItemIDs
@@ -57,13 +58,13 @@ EIDInfo.Collectibles = {
         {
             Name = "赎罪券",
             Desc = "#{{AngelChance}} 本层天使房的几率为100%"..
-            "#{{Warning}} 下一层失去赎罪券"..
+            "#{{Warning}} 下一层会移除赎罪券"..
             "#{{DevilChance}} 若进行过恶魔交易，则改为获得{{Collectible673}}赎罪"
         },
         {
             Name = "Atonement Voucher",
             Desc = "#{{AngelChance}} Causes the Angel Room to always spawn for the current floor"..
-            "#{{Warning}} The item disappears on next floor"..
+            "#{{Warning}} The item will be removed on next floor"..
             "#{{DevilChance}} If a Devil Deal was taken previously, grants a {{Collectible673}}Redemption instead"
         }
     },
@@ -133,27 +134,27 @@ EIDInfo.Collectibles = {
         {
             Name = "血液样本",
             Desc = "#{{EmptyHeart}} +1空心之容器"..
-            "#只能通过造成伤害进行充能",
-            CarBattery = "无效果"
+            "#{{Warning}} 只能通过造成伤害进行充能",
+            CarBattery = "额外获得1个空心之容器"
         },
         {
             Name = "Blood Sample",
-            Desc = "#{{EmptyHeart}} Grants an empty health container"..
-            "#Can only be charged by dealing damage to enemies",
-            CarBattery = "No Effect"
+            Desc = "#{{EmptyHeart}} Grants an empty heart container"..
+            "#{{Warning}} Can only be charged by dealing damage to enemies",
+            CarBattery = "Grants an extra empty heart container"
         }
     },
     [ModItemIDs.BLOODY_DICE] = {
         {
             Name = "血之骰",
             Desc = "#重置离角色最近的恶魔交易，并使其免费"..
-            "#只能通过造成伤害进行充能",
+            "#{{Warning}} 只能通过造成伤害进行充能",
             CarBattery = "无效果"
         },
         {
             Name = "Bloody Dice",
             Desc = "#Rerolls and makes the nearest devil deal free"..
-            "#Can only be charged by dealing damage to enemies",
+            "#{{Warning}} Can only be charged by dealing damage to enemies",
             CarBattery = "No Effect"
         }
     },
@@ -167,6 +168,24 @@ EIDInfo.Collectibles = {
             Name = "Bob's Stomach",
             Desc = "#{{Chargeable}} Charging for a while will fire an explosive and poisoning tear"..
             "#{{Damage}} Deals damage equal to 15 + 250% of Isaac's damage"
+        }
+    },
+    [ModItemIDs.BONE_CLAY_POT] = {
+        {
+            Name = "骨陶罐",
+            Desc = "#{{Heart}} 只能通过在角色无法继续获得红心的情况下拾取红心来充能"..
+            "#即使充能未满也可以使用，根据消耗的充能数不同生成对应的心掉落物",
+            BookOfVirtues = "有概率额外掉落一颗魂心，充能越多概率越大",
+            BookOfBelial = "有概率额外掉落一颗黑心，充能越多概率越大",
+            CarBattery = "额外生成一颗腐心"
+        },
+        {
+            Name = "Bone Clay Pot",
+            Desc = "#{{Heart}} Can only be charged by picking up red hearts when Isaac can no longer pick up red hearts"..
+            "#Can be used even if not fully charged, spawns corresponding heart pick ups based on the amount of charge consumed",
+            BookOfVirtues = "Has chance to spawn an extra soul heart, with the probability increasing the more it is charged",
+            BookOfBelial = "Has chance to spawn an extra black heart, with the probability increasing the more it is charged",
+            CarBattery = "Spawns an extra rotten heart"
         }
     },
     [ModItemIDs.BONE_IN_FISH_STEAK] = {
@@ -266,7 +285,7 @@ EIDInfo.Collectibles = {
     [ModItemIDs.CORNUCOPIA] = {
         {
             Name = "丰饶羊角",
-            Desc = "#使用后，吸收角色接触的所有掉落物、道具和饰品，并转换为充能"..
+            Desc = "#仅能通过吸收角色接触的所有掉落物、道具和饰品来获得充能"..
             "#充能满后使用，如果当前房间内有底座道具，则为所有道具增加一个道具选择"..
             "#否则生成一个来自当前房间道具池的道具",
             BookOfVirtues = "有概率额外生成一个天使房道具",
@@ -275,8 +294,9 @@ EIDInfo.Collectibles = {
         },
         {
             Name = "Cornucopia",
-            Desc = "#When used, absorbs all pickups, collectibles and trinkets that the player comes into contact with, and converts them into charges"..
-            "#Use it when fully charged: if there are items in the current room, it adds an additional item choice to all of them; otherwise, it spawns an item from the current room's item pool",
+            Desc = "#Can only be charged by absorbing pickups, items and trinkets that Isaac comes into contact with"..
+            "#Use it when fully charged: if there are item pedestals in the current room, it adds an additional item choice to all of them"..
+            "#Otherwise, it spawns an item from the current room's item pool",
             BookOfVirtues = "Has chance to spawn an extra Angel Room item",
             BookOfBelial = "Has chance to spawn an extra Devil Room item",
             CarBattery = "No effect"
@@ -291,7 +311,7 @@ EIDInfo.Collectibles = {
         {
             Name = "Crown of Kings",
             Desc = "#Cleaning a room containing any boss when entering without being hit:"..
-            "#{{Collectible}} Spawns a collectible of at most quality 3 from random item pools"
+            "#{{Collectible}} Spawns an item of at most quality 3 from random item pools"
         }
     },
     [ModItemIDs.CURSED_DICE] = {
@@ -301,15 +321,15 @@ EIDInfo.Collectibles = {
             "#已遮蔽的底座道具将被重置为诅咒硬币",
             BookOfVirtues = "有10%概率不遮蔽道具",
             BookOfBelial = "有15%概率不遮蔽道具",
-            CarBattery = "无效果"
+            CarBattery = "连续重置两次"
         },
         {
             Name = "Cursed Dice",
             Desc = "#Rerolls and hides the pedestal items in the room with the effect of the {{CurseBlind}} Blind Curse"..
             "#Rerolling hidden pedestal items will cause them to disappear",
-            BookOfVirtues = "There is a 10% chance to not hide the item",
-            BookOfBelial = "There is a 15% chance to not hide the item",
-            CarBattery = "No effect"
+            BookOfVirtues = "There is a 10% chance not to hide the item",
+            BookOfBelial = "There is a 15% chance not to hide the item",
+            CarBattery = "Rerolls twice"
         }
     },
     [ModItemIDs.CURSED_TREASURE] = {
@@ -683,7 +703,7 @@ EIDInfo.Collectibles = {
             "#击杀敌人有概率掉落饰品",
             BookOfVirtues = "有概率发射点金术眼泪",
             BookOfBelial = "额外生成3个随机硬币",
-            CarBattery = "无效果"
+            CarBattery = "每次摧毁饰品时额外生成2个硬币"
         },
         {
             Name = "Philosopher's Staff",
@@ -693,7 +713,7 @@ EIDInfo.Collectibles = {
             "#Enemies have chance to drop a trinket on death",
             BookOfVirtues = "Has chance to fire {{Collectible202}} Midas' Touch tears",
             BookOfBelial = "Spawns 3 random coins",
-            CarBattery = "No effect"
+            CarBattery = "Spawns an extra 2 coins each time a trinket is consumed"
         }
     },
     [ModItemIDs.PILL_CASE] = {
