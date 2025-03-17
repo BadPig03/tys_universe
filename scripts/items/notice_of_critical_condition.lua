@@ -76,7 +76,7 @@ function NoticeOfCriticalCondition:PreNewRoom(room, roomDesc)
     if not Utils.IsRoomIndex(roomIndex) then
         return
     end
-    local itemPool = ModItemPoolIDs.ILLNESS
+    local itemPool = ModItemPoolIDs.ICU_ROOM
     if Players.AnyoneHasCollectible(ModItemIDs.ORDER) then
         itemPool = Utils.GetOrderItemPool()
     end

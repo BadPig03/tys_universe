@@ -1,6 +1,7 @@
 local BoneClayPot = TYU:NewModItem("Bone Clay Pot", "BONE_CLAY_POT")
 
 local Entities = TYU.Entities
+local Reverie = TYU.Reverie
 local Utils = TYU.Utils
 
 local ModItemIDs = TYU.ModItemIDs
@@ -77,14 +78,18 @@ function BoneClayPot:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
         return { Discharge = false, Remove = false, ShowAnim = false }
     end
     local charge = player:GetActiveCharge(activeSlot)
-    Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, PrivateField.GetChargeHeart(charge), Utils.FindFreePickupSpawnPosition(player.Position))
-    TYU.SFXMANAGER:Play(SoundEffect.SOUND_HEARTOUT, 0.6)
+    local subType = PrivateField.GetChargeHeart(charge)
+    Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, subType, Utils.FindFreePickupSpawnPosition(player.Position))
+    if Reverie.WillPlayerBuff(player) then
+        Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, subType, Utils.FindFreePickupSpawnPosition(player.Position)):ToPickup()
+    end
     if player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_VIRTUES) and rng:RandomInt(100) < 5 * charge then
         Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, HeartSubType.HEART_SOUL, Utils.FindFreePickupSpawnPosition(player.Position)):ToPickup()
     end
     if player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_BELIAL_PASSIVE) and rng:RandomInt(100) < 5 * charge then
         Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, HeartSubType.HEART_BLACK, Utils.FindFreePickupSpawnPosition(player.Position)):ToPickup()
     end
+    TYU.SFXMANAGER:Play(SoundEffect.SOUND_HEARTOUT, 0.6)
     return { Discharge = true, Remove = false, ShowAnim = true }
 end
 BoneClayPot:AddCallback(ModCallbacks.MC_USE_ITEM, BoneClayPot.UseItem, ModItemIDs.BONE_CLAY_POT)

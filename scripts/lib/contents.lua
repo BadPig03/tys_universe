@@ -7,6 +7,7 @@ do
         Foods = "foods",
         ModComponents = "mod_components",
         Players = "players",
+        Reverie = "reverie",
         Rewind = "rewind",
         SaveAndLoad = "save_and_load",
         Stat = "stat",

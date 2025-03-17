@@ -1,6 +1,7 @@
 local AtonementVoucher = TYU:NewModItem("Atonement Voucher", "ATONEMENT_VOUCHER")
 
 local Players = TYU.Players
+local Reverie = TYU.Reverie
 
 local ModItemIDs = TYU.ModItemIDs
 
@@ -31,6 +32,12 @@ AtonementVoucher:AddCallback(ModCallbacks.MC_POST_DEVIL_CALCULATE, AtonementVouc
 
 function AtonementVoucher:PostNewLevel()
     for _, player in ipairs(Players.GetPlayers(true)) do
+        if Reverie.WillPlayerBuff(player) then
+            local rng = player:GetCollectibleRNG(ModItemIDs.ATONEMENT_VOUCHER)
+            if rng:RandomInt(100) < 50 then
+                return
+            end
+        end
         PrivateField.RemoveCollectibles(player, ModItemIDs.ATONEMENT_VOUCHER, 1)
     end
 end

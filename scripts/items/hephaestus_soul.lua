@@ -3,6 +3,7 @@ local HephaestusSoul = TYU:NewModItem("Hephaestus' Soul", "HEPHAESTUS_SOUL")
 local Constants = TYU.Constants
 local Entities = TYU.Entities
 local Players = TYU.Players
+local Reverie = TYU.Reverie
 local Utils = TYU.Utils
 
 local ModEntityIDs = TYU.ModEntityIDs
@@ -211,7 +212,9 @@ function HephaestusSoul:PostEffectUpdate(effect)
             ent:Die()
         end
     end
-    PrivateField.BreakNearbyRocks(effect)
+    if not Reverie.WillPlayerNerf(player) then
+        PrivateField.BreakNearbyRocks(effect)
+    end
 end
 HephaestusSoul:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, HephaestusSoul.PostEffectUpdate, EffectVariant.FIRE_JET)
 
@@ -256,7 +259,9 @@ function HephaestusSoul:PostProjectileDeath(projectile)
             fireWave.CollisionDamage = projectile.CollisionDamage + 5
         end
     end
-    PrivateField.BreakNearbyRocks(projectile)
+    if not Reverie.WillPlayerNerf(player) then
+        PrivateField.BreakNearbyRocks(projectile)
+    end
 end
 HephaestusSoul:AddCallback(ModCallbacks.MC_POST_PROJECTILE_DEATH, HephaestusSoul.PostProjectileDeath, ProjectileVariant.PROJECTILE_FIRE)
 

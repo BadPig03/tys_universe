@@ -2,6 +2,8 @@ local Conjunctivitis = TYU:NewModItem("Conjunctivitis", "CONJUNCTIVITIS")
 
 local Entities = TYU.Entities
 local Players = TYU.Players
+local Reverie = TYU.Reverie
+local Stat = TYU.Stat
 local Utils = TYU.Utils
 
 local ModItemIDs = TYU.ModItemIDs
@@ -61,12 +63,17 @@ function Conjunctivitis:EvaluateCache(player, cacheFlag)
     if not player:HasCollectible(ModItemIDs.CONJUNCTIVITIS) then
         return
     end
-    if player:HasCollectible(CollectibleType.COLLECTIBLE_POP) then
-        player.TearFlags = player.TearFlags ~ TearFlags.TEAR_POP
+    if cacheFlag == CacheFlag.CACHE_TEARFLAG then
+        if player:HasCollectible(CollectibleType.COLLECTIBLE_POP) then
+            player.TearFlags = player.TearFlags ~ TearFlags.TEAR_POP
+        end
+        player.TearFlags = player.TearFlags | ModTearFlags.TEAR_TRAILING | TearFlags.TEAR_PIERCING | TearFlags.TEAR_SPECTRAL
     end
-    player.TearFlags = player.TearFlags | ModTearFlags.TEAR_TRAILING | TearFlags.TEAR_PIERCING | TearFlags.TEAR_SPECTRAL
+    if cacheFlag == CacheFlag.CACHE_FIREDELAY and Reverie.WillPlayerNerf(player) then
+        Stat:AddTearsMultiplier(player, 0.5)
+    end
 end
-Conjunctivitis:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, Conjunctivitis.EvaluateCache, CacheFlag.CACHE_TEARFLAG)
+Conjunctivitis:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, Conjunctivitis.EvaluateCache)
 
 function Conjunctivitis:PostFireTear(tear)
     local player = tear.SpawnerEntity and tear.SpawnerEntity:ToPlayer()

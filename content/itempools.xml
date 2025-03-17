@@ -70,6 +70,7 @@
         <Item Name="Hephaestus' Soul" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Oceanus' Soul" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="The Gospel of John" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Twilight Fox" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="secret">
         <Item Name="Beggar Mask" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -195,6 +196,7 @@
         <Item Name="Hephaestus' Soul" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Oceanus' Soul" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="The Gospel of John" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Twilight Fox" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="greedSecret">
         <Item Name="Beggar Mask" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
@@ -229,7 +231,7 @@
     <Pool Name="rottenBeggar">
         <Item Name="Bob's Stomach" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
-    <Pool Name="tyuIllness">
+    <Pool Name="tyuICURoom">
         <Item Id="13" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Id="14" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Id="70" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>

@@ -2,6 +2,7 @@ local Rewind = TYU:NewModItem("Rewind", "REWIND")
 
 local Entities = TYU.Entities
 local Players = TYU.Players
+local Reverie = TYU.Reverie
 local Utils = TYU.Utils
 
 local ModItemIDs = TYU.ModItemIDs
@@ -222,6 +223,10 @@ function Rewind:UseItem(itemID, rng, player, useFlags, activeSlot, varData)
 	end
     if activeSlot < ActiveSlot.SLOT_PRIMARY then
         return { Discharge = false, Remove = false, ShowAnim = false }
+    end
+    if Reverie.WillPlayerNerf(player) and rng:RandomInt(100) < 35 then
+        TYU.GAME:StartRoomTransition(GridRooms.ROOM_ERROR_IDX, Direction.NO_DIRECTION, RoomTransitionAnim.TELEPORT, player, 0)
+        return { Discharge = true, Remove = false, ShowAnim = true }
     end
 	if player:HasCollectible(CollectibleType.COLLECTIBLE_BOOK_OF_VIRTUES) and rng:RandomInt(100) < 10 then
         PrivateField.TeleportToRoom(RoomType.ROOM_ANGEL, player, rng)

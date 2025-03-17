@@ -278,7 +278,7 @@ TYU.ModSoundIDs = {
 }
 
 TYU.ModItemPoolIDs = {
-    ILLNESS = GetItemPoolInfo("tyuIllness")
+    ICU_ROOM = GetItemPoolInfo("tyuICURoom")
 }
 
 TYU.ModEntityFlags = {

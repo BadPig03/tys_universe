@@ -59,7 +59,7 @@
 	<passive id="13" quality="2" craftquality="2" description="Demon's favorite" gfx="collectibles_chocolate_pancake.png" name="Chocolate Pancake" maxhearts="2" cache="speed shotspeed luck" tags="food nolostbr summonable"/>
 	<passive id="14" quality="3" craftquality="3" description="Time to cook" gfx="collectibles_chef_hat.png" name="Chef Hat" tags="lazarusshared offensive summonable" customtags="nometronome"/>
 	<passive id="15" quality="0" craftquality="0" description="Supergravity" gfx="collectibles_collapse.png" name="Collapse" cache="tearflag" tags="nolostbr"/>
-	<passive id="16" quality="4" craftquality="4" description="Red eyes" gfx="collectibles_conjunctivitis.png" name="Conjunctivitis" devilprice="2" shopprice="30" cache="tearflag" tags="offensive summonable"/>
+	<passive id="16" quality="4" craftquality="4" description="Red eyes" gfx="collectibles_conjunctivitis.png" name="Conjunctivitis" devilprice="2" shopprice="30" cache="tearflag firedelay" tags="offensive summonable"/>
 	<passive id="17" quality="2" craftquality="2" description="Prevents from becoming worse" gfx="collectibles_conservative_treatment.png" name="Conservative Treatment" cache="speed firedelay damage range shotspeed luck" tags="offensive summonable syringe"/>
 	<active	id="18" quality="4" craftquality="-1" description="Turning trash into treasure" gfx="collectibles_cornucopia.png" name="Cornucopia" maxcharges="24" initcharge="0" chargetype="special" devilprice="2" shopprice="30" cooldown="12" tags="nocantrip offensive" customtags="nometronome"/>
 	<passive id="19" quality="3" craftquality="3" description="Power is fragile" gfx="collectibles_crown_of_kings.png" name="Crown of Kings" tags="nogreed offensive summonable"/>

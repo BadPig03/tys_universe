@@ -43,6 +43,19 @@ do
         end
         halo:Remove()
     end
+
+    function PrivateField.UpdateTrail(familiar)
+        local trail = familiar.Child and familiar.Child:ToEffect()
+        if not trail or not trail:Exists() then
+            trail = Entities.Spawn(EntityType.ENTITY_EFFECT, EffectVariant.SPRITE_TRAIL, 0, familiar.Position, Vector.Zero, familiar):ToEffect()
+            trail.Parent = familiar
+            trail:SetColor(Color(0.4, 0.15, 0.38, 1, 0.278431, 0, 0.454902), -1, 0, true, false)
+            familiar.Child = trail
+        end
+        trail.MinRadius = 0.04
+        trail.SpriteScale = Vector(0.5, 0.5)
+        trail.Position = familiar.Position + familiar.PositionOffset + Vector(0, -5)
+    end
 end
 
 function TwilightFox:FamiliarInit(familiar)
@@ -72,6 +85,7 @@ function TwilightFox:FamiliarUpdate(familiar)
         PrivateField.SpawnHalo(familiar, ModEntityIDs.TWILIGHT_FOX_HALO.SubType)
     end
     familiar:FollowParent()
+    PrivateField.UpdateTrail(familiar)
 end
 TwilightFox:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, TwilightFox.FamiliarUpdate, ModEntityIDs.TWILIGHT_FOX.Variant)
 

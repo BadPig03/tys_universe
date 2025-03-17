@@ -2,6 +2,7 @@ local Collapse = TYU:NewModItem("Collapse", "COLLAPSE")
 
 local Entities = TYU.Entities
 local Players = TYU.Players
+local Reverie = TYU.Reverie
 local Utils = TYU.Utils
 
 local ModItemIDs = TYU.ModItemIDs
@@ -26,6 +27,15 @@ do
             end
         end
         return nil
+    end
+
+    function PrivateField.IsSourceRelatedToProjectile(source, flags)
+        if source.Entity == nil then
+            return false
+        elseif source.Entity:ToProjectile() then
+            return true
+        end
+        return false
     end
 end
 
@@ -52,6 +62,9 @@ Collapse:AddCallback(ModCallbacks.MC_POST_UPDATE, Collapse.PostUpdate)
 function Collapse:PrePlayerTakeDamage(player, amount, flags, source, countdown)
     if not player:HasCollectible(ModItemIDs.COLLAPSE) or (source.Type == EntityType.ENTITY_FIREPLACE and source.Variant == 4) or Utils.HasFlags(flags, DamageFlag.DAMAGE_LASER) then
         return
+    end
+    if Reverie.WillPlayerBuff(player) and PrivateField.IsSourceRelatedToProjectile(source, flags) then
+        return false
     end
     if (not source.Entity or not source.Entity:ToNPC()) and Utils.HasFlags(flags, DamageFlag.DAMAGE_ACID, true) and Utils.HasFlags(flags, DamageFlag.DAMAGE_EXPLOSION, true) then
         return

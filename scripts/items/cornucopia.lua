@@ -4,6 +4,7 @@ local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
 local Fonts = TYU.Fonts
 local Players = TYU.Players
+local Reverie = TYU.Reverie
 local Utils = TYU.Utils
 
 local ModFoodItemIDs = TYU.ModFoodItemIDs
@@ -258,6 +259,9 @@ function Cornucopia:PrePickupCollision(pickup, collider, low)
         return
     else
         charge = math.abs(charge)
+    end
+    if Reverie.WillPlayerNerf(player) and player:GetCollectibleRNG(ModItemIDs.CORNUCOPIA):RandomInt(100) < 35 then
+        charge = 0
     end
     player:AddActiveCharge(charge, ActiveSlot.SLOT_PRIMARY, true, false, true)
     if player:GetActiveCharge(ActiveSlot.SLOT_PRIMARY) == 24 then

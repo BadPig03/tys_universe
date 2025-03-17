@@ -1,6 +1,7 @@
 local LightSwitch = TYU:NewModItem("Light Switch", "LIGHT_SWITCH")
 
 local Players = TYU.Players
+local Reverie = TYU.Reverie
 local Utils = TYU.Utils
 
 local ModItemIDs = TYU.ModItemIDs
@@ -39,6 +40,9 @@ function LightSwitch:GetShaderParams(shaderName)
     local distances = {192, 192, 96, 96}
     local active = 0
 	if not PrivateField.IsRoomValid() or not Players.AnyoneHasCollectible(ModItemIDs.LIGHT_SWITCH) then
+        return { ActiveIn = 0 }
+    end
+    if Reverie.WillAnyPlayerBuff() then
         return { ActiveIn = 0 }
     end
     local room = TYU.GAME:GetRoom()

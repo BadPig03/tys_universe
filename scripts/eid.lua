@@ -59,13 +59,15 @@ EIDInfo.Collectibles = {
             Name = "赎罪券",
             Desc = "#{{AngelChance}} 本层天使房的几率为100%"..
             "#{{Warning}} 下一层会移除赎罪券"..
-            "#{{DevilChance}} 若进行过恶魔交易，则改为获得{{Collectible673}}赎罪"
+            "#{{DevilChance}} 若进行过恶魔交易，则改为获得{{Collectible673}}赎罪",
+            SeijaBuff = "下层时只有50%的概率移除赎罪券"
         },
         {
             Name = "Atonement Voucher",
             Desc = "#{{AngelChance}} Causes the Angel Room to always spawn for the current floor"..
             "#{{Warning}} The item will be removed on next floor"..
-            "#{{DevilChance}} If a Devil Deal was taken previously, grants a {{Collectible673}}Redemption instead"
+            "#{{DevilChance}} If a Devil Deal was taken previously, grants a {{Collectible673}}Redemption instead",
+            SeijaBuff = "There is only a 50% chance to remove the item"
         }
     },
     [ModItemIDs.BEGGAR_MASK] = {
@@ -101,7 +103,7 @@ EIDInfo.Collectibles = {
             Name = "神圣命运",
             Desc = "#{{AngelRoom}} 首次进入房间时有概率变为教堂的样式，道具池变为天使房道具池"..
             "#{{AngelChance}} 恶魔房开启率转换为天使房开启率"..
-            "#{{Warning}} 离开房间后恢复为原来的样式，在教堂层始终生效"
+            "#{{Warning}} 离开房间后恢复为原来的样式，且在教堂层始终生效"
         },
         {
             Name = "Blessed Destiny",
@@ -177,15 +179,17 @@ EIDInfo.Collectibles = {
             "#即使充能未满也可以使用，根据消耗的充能数不同生成对应的心掉落物",
             BookOfVirtues = "有概率额外掉落一颗魂心，充能越多概率越大",
             BookOfBelial = "有概率额外掉落一颗黑心，充能越多概率越大",
-            CarBattery = "额外生成一颗腐心"
+            CarBattery = "额外生成一颗腐心",
+            SeijaBuff = "额外生成一颗对应心掉落物"
         },
         {
             Name = "Bone Clay Pot",
             Desc = "#{{Heart}} Can only be charged by picking up red hearts when Isaac can no longer pick up red hearts"..
             "#Can be used even if not fully charged, spawns corresponding heart pick ups based on the amount of charge consumed",
-            BookOfVirtues = "Has chance to spawn an extra soul heart, with the probability increasing the more it is charged",
-            BookOfBelial = "Has chance to spawn an extra black heart, with the probability increasing the more it is charged",
-            CarBattery = "Spawns an extra rotten heart"
+            BookOfVirtues = "There is a chance to spawn an extra soul heart, with the probability increasing the more it is charged",
+            BookOfBelial = "There is a chance to spawn an extra black heart, with the probability increasing the more it is charged",
+            CarBattery = "Spawns an extra rotten heart",
+            SeijaBuff = "Spawns an extra corresponding heart pick up"
         }
     },
     [ModItemIDs.BONE_IN_FISH_STEAK] = {
@@ -249,25 +253,29 @@ EIDInfo.Collectibles = {
             Name = "坍缩",
             Desc = "#{{Magnetize}} 角色会吸引周围的实体"..
             "#{{HolyMantle}} 敌人无法碰撞角色，且接触角色时会受到伤害"..
-            "#免疫来自炸弹的爆炸伤害和敌人的接触伤害"
+            "#免疫来自炸弹的爆炸伤害和敌人的接触伤害",
+            SeijaBuff = "免疫敌方泪弹的伤害"
         },
         {
             Name = "Collapse",
             Desc = "#{{Magnetize}} Isaac attracts nearby entities"..
             "#{{HolyMantle}} Enemies are not able to collide with Isaac and nearby enemies will take damage"..
-            "#Prevents explosion damage from bombs and contact damage from enemies"
+            "#Prevents explosion damage from bombs and contact damage from enemies",
+            SeijaBuff = "Prevents damage from enemy projectiles"
         }
     },
     [ModItemIDs.CONJUNCTIVITIS] = {
         {
             Name = "结膜炎",
             Desc = "#泪弹会产生拖尾"..
-            "#拖尾泪弹造成角色50%伤害"
+            "#拖尾泪弹造成角色50%伤害",
+            SeijaNerf = "{{Tears}} -50%射速"
         },
         {
             Name = "Conjunctivitis",
             Desc = "#Isaac's tears leave a trail"..
-            "Trailing tears deal x0.5 damage"
+            "#Trailing tears deal x0.5 damage",
+            SeijaNerf = "{{Tears}} x0.5 Fire rate multiplier"
         }
     },
     [ModItemIDs.CONSERVATIVE_TREATMENT] = {
@@ -288,18 +296,20 @@ EIDInfo.Collectibles = {
             Desc = "#仅能通过吸收角色接触的所有掉落物、道具和饰品来获得充能"..
             "#充能满后使用，如果当前房间内有底座道具，则为所有道具增加一个道具选择"..
             "#否则生成一个来自当前房间道具池的道具",
-            BookOfVirtues = "有概率额外生成一个天使房道具",
-            BookOfBelial = "有概率额外生成一个恶魔房道具",
-            CarBattery = "无效果"
+            BookOfVirtues = "有10%概率额外生成一个天使房道具",
+            BookOfBelial = "有10%概率额外生成一个恶魔房道具",
+            CarBattery = "无效果",
+            SeijaNerf = "吸收时有35%概率不给予充能"
         },
         {
             Name = "Cornucopia",
             Desc = "#Can only be charged by absorbing pickups, items and trinkets that Isaac comes into contact with"..
             "#Use it when fully charged: if there are item pedestals in the current room, it adds an additional item choice to all of them"..
             "#Otherwise, it spawns an item from the current room's item pool",
-            BookOfVirtues = "Has chance to spawn an extra Angel Room item",
-            BookOfBelial = "Has chance to spawn an extra Devil Room item",
-            CarBattery = "No effect"
+            BookOfVirtues = "There is a 10% chance to spawn an extra Angel Room item",
+            BookOfBelial = "There is a 10% chance to spawn an extra Devil Room item",
+            CarBattery = "No effect",
+            SeijaNerf = "There is a 35% chance not to grant any charge when absorbing"
         }
     },
     [ModItemIDs.CROWN_OF_KINGS] = {
@@ -318,18 +328,18 @@ EIDInfo.Collectibles = {
         {
             Name = "被诅咒的骰子",
             Desc = "#重置并用{{CurseBlind}}致盲诅咒的效果遮蔽所在房间的底座道具"..
-            "#已遮蔽的底座道具将被重置为诅咒硬币",
+            "#{{Warning}} 已遮蔽的底座道具将被重置为诅咒硬币",
             BookOfVirtues = "有10%概率不遮蔽道具",
             BookOfBelial = "有15%概率不遮蔽道具",
             CarBattery = "连续重置两次"
         },
         {
             Name = "Cursed Dice",
-            Desc = "#Rerolls and hides the pedestal items in the room with the effect of the {{CurseBlind}} Blind Curse"..
-            "#Rerolling hidden pedestal items will cause them to disappear",
+            Desc = "#Rerolls and hides the items in the room with the effect of the {{CurseBlind}} Blind Curse"..
+            "#{{Warning}} Hidden items will be rerolled into cursed coins",
             BookOfVirtues = "There is a 10% chance not to hide the item",
             BookOfBelial = "There is a 15% chance not to hide the item",
-            CarBattery = "Rerolls twice"
+            CarBattery = "Rerolls the items twice"
         }
     },
     [ModItemIDs.CURSED_TREASURE] = {
@@ -341,7 +351,7 @@ EIDInfo.Collectibles = {
         {
             Name = "Cursed Treasure",
             Desc = "#Replace all types of coins with cursed coins, picking up triggers the effect of a random coin trinket once"..
-            "#Pick ups sold in the shop will be replaced with collectibles",
+            "#Pick ups sold in the shop will be replaced with items",
         }
     },
     [ModItemIDs.DARK_MASK] = {
@@ -390,12 +400,14 @@ EIDInfo.Collectibles = {
         {
             Name = "过期胶水",
             Desc = "#硬币在生成时会被替换为黏性镍币"..
-            "#{{Warning}} 替换后的硬币会在随机时间后或离开房间时消失"
+            "#{{Warning}} 替换后的硬币会在随机时间后或离开房间时消失",
+            SeijaBuff = "硬币会被替换为普通的镍币"
         },
         {
             Name = "Expired Glue",
             Desc = "#Coins are replaced with sticky nickels when spawned",
-            "#{{Warning}} The replaced coins will disappear at a random time or after leaving the room"
+            "#{{Warning}} The replaced coins will disappear at a random time or after leaving the room",
+            SeijaBuff = "Coins are replaced with normal nickels"
         }
     },
     [ModItemIDs.ENCHANTED_BOOK] = {
@@ -451,7 +463,7 @@ EIDInfo.Collectibles = {
         },
         {
             Name = "Guilt",
-            Desc = "{{ArrowUp}} The Devil Room owns a better layout"..
+            Desc = "{{ArrowUp}} The Devil Room has a better layout"..
             "#{{DevilChance}} Increases the chance to open the Devil Room by 5% each devil deals"..
             "#{{Warning}} After making fewer than two deals, several items will be removed from the Devil Room item pool in the next floor"..
             "#Killing the Krampus drops 2 Devil Room items"
@@ -486,7 +498,7 @@ EIDInfo.Collectibles = {
         },
         {
             Name = "Hades Blade",
-            Desc = "#{{Heart}} if successfully removed one red heart container or three soul hearts, grants a familiar from the Devil Room item pool"..
+            Desc = "#{{Heart}} If successfully removed one red heart container or three soul hearts, grants a familiar from the Devil Room item pool"..
             "#{{BoneHeart}} Bone hearts have a higher priority",
             BookOfVirtues = "Spawns a red wisp with 10 health and can deal 2 damage to enemies",
             BookOfBelial = "Grants +0.2 damage up",
@@ -498,25 +510,27 @@ EIDInfo.Collectibles = {
             Name = "赫菲斯托斯之魂",
             Desc = "#{{Chargeable}} 蓄力一段时间可射出一堆火焰"..
             "#{{Damage}} 火焰造成角色12+400%伤害且可以摧毁石头"..
-            "#获得飞行并免疫火焰伤害"
+            "#获得飞行并免疫火焰伤害",
+            SeijaNerf = "火焰无法摧毁石头"
         },
         {
             Name = "Hephaestus' Soul",
             Desc = "#{{Chargeable}} Charging for a while will release a burst of flames"..
             "#{{Damage}} The flames deal 12 + 400% of Isaac's damage and can destroy rocks"..
-            "#Grants flight and is immune to fire damage"
+            "#Grants flight and Isaac is immune to fire damage",
+            SeijaNerf = "The flames can no longer destroy rocks"
         }
     },
     [ModItemIDs.HYPNOSIS_PERFUME] = {
         {
             Name = "魅惑香水",
             Desc = "#{{Charm}} 当敌人死亡时，有10%概率留下存在10秒的魅惑雾"..
-            "#{{Charm}} 接触魅惑雾的非头目敌人会变为友好敌人，头目敌人则会被魅惑10秒"
+            "#接触魅惑雾的非头目敌人会变为友好敌人，头目敌人则会被魅惑10秒"
         },
         {
             Name = "Hypnosis Perfume",
             Desc = "#{{Charm}} Enemies have a 10% chance to leave a charming smoke cloud that lasts for 10 seconds upon death"..
-            "#{{Charm}} Non-boss enemies that come into contact with the charming smoke cloud will become friendly enemies, while boss enemies will be charmed for 10 seconds"
+            "#Non-boss enemies that come into contact with the charming smoke cloud will become friendly enemies, while boss enemies will be charmed for 10 seconds"
         }
     },
     [ModItemIDs.LANDMINE] = {
@@ -544,7 +558,7 @@ EIDInfo.Collectibles = {
         },
         {
             Name = "Laser Blaster",
-            Desc = "#Spawns a laser orb that slowly moves"..
+            Desc = "#Spawns a laser orb that moves slowly"..
             "#It will automatically attack enemies within a certain range nearby",
             BookOfVirtues = "The damage of laser orb increases by 25%",
             BookOfBelial = "The damage of laser orb increases by 50%",
@@ -555,12 +569,14 @@ EIDInfo.Collectibles = {
         {
             Name = "灯光开关",
             Desc = "#{{CurseDarkness}} 使所在房间内陷入黑暗，仅保留角色周围视野"..
-            "#{{Freezing}} 黑暗中的敌人会始终处于石化状态"
+            "#{{Freezing}} 黑暗中的敌人会始终处于石化状态",
+            SeijaBuff = "完全移除黑暗效果，但仍会石化敌人"
         },
         {
             Name = "Light Switch",
             Desc = "#{{CurseDarkness}} Cause the room to fall into darkness, leaving only Isaac's surrounding vision"..
-            "#{{Freezing}} Enemies in the darkness will always be petrified"
+            "#{{Freezing}} Enemies in the darkness will always be petrified",
+            SeijaBuff = "Completely removes the darkness, but enemies are still petrified"
         }
     },
     [ModItemIDs.MAGNIFIER] = {
@@ -585,8 +601,8 @@ EIDInfo.Collectibles = {
         {
             Name = "Marriage Certificate",
             Desc = "#{{Player5}} Summons Eve as a secondary character, and any items collected will be transferred to Isaac"..
-            "#After Eve's death, she transforms into a spirit form and revives on the next floor"..
-            "#If Eve is alive when going to the next floor, Eve duplicates the last three items Isaac obtained"
+            "#Eve transforms into a spirit form when she dies and revives on the next floor"..
+            "#If Eve is alive when entering a new floor, she will duplicate the last three items Isaac obtained"
         }
     },
     [ModItemIDs.MIRRORING] = {
@@ -644,13 +660,15 @@ EIDInfo.Collectibles = {
             Name = "俄刻阿诺斯之魂",
             Desc = "#{{Chargeable}} 蓄力一段时间可在房间内产生强大的水流"..
             "#{{Water}} 水流可推动敌人撞到障碍物或房间墙壁并受伤，同时对静止的敌人造成伤害"..
-            "#飞行敌人仍然受到影响"
+            "#飞行敌人仍然受到影响",
+            SeijaNerf = "水流的持续时间减半"
         },
         {
             Name = "Oceanus' Soul",
             Desc = "#{{Chargeable}} Charging for a while generates a powerful water flow within the room"..
             "#{{Water}} The water flow can push enemies into obstacles or room walls, causing damage, while also dealing damage to stationary enemies"..
-            "#Flying enemies are still affected"
+            "#Flying enemies are still affected",
+            SeijaNerf = "The duration of the water flow is halved"
         }
     },
     [ModItemIDs.ORDER] = {
@@ -707,13 +725,27 @@ EIDInfo.Collectibles = {
         },
         {
             Name = "Philosopher's Staff",
-            Desc = "#{{ArrowUp}} When held, transforms trinkets on Isaac into the golden version"..
-            "#Upon use, consume all trinkets in the room"..
+            Desc = "#{{ArrowUp}} Transforms trinkets on Isaac into the golden version when holding"..
+            "#Upon use, consumes all trinkets in the room"..
             "#For each trinket consumed, spawns 4-8 random coins"..
             "#Enemies have chance to drop a trinket on death",
-            BookOfVirtues = "Has chance to fire {{Collectible202}} Midas' Touch tears",
+            BookOfVirtues = "There is a chance to fire {{Collectible202}} Midas' Touch tears",
             BookOfBelial = "Spawns 3 random coins",
             CarBattery = "Spawns an extra 2 coins each time a trinket is consumed"
+        }
+    },
+    [ModItemIDs.PLANETARIUM_TELESCOPE] = {
+        {
+            Name = "星象望远镜",
+            Desc = "#{{Card}} 生成一张\"XVII-星星\"卡牌"..
+            "#{{Planetarium}} 根据幸运值增加星象房的基础开启概率"..
+            "#{{Luck}} 每个\"星星\"标签道具提供+2幸运值"
+        },
+        {
+            Name = "Planetarium Telescope",
+            Desc = "#{{Card}} Spawns a tarot card \"XVII-Star\""..
+            "#{{Planetarium}} Increases the base chance of Planetarium based on Luck"..
+            "#{{Luck}} Each item with a \"star\" tag grants +2 luck"
         }
     },
     [ModItemIDs.PILL_CASE] = {
@@ -728,30 +760,18 @@ EIDInfo.Collectibles = {
             "#Pills always become horse pills when picked up"
         }
     },
-    [ModItemIDs.PLANETARIUM_TELESCOPE] = {
-        {
-            Name = "星象望远镜",
-            Desc = "#{{Card}} 生成一张'XVII-星星'卡牌"..
-            "#{{Planetarium}} 根据幸运值增加星象房的基础开启概率"..
-            "#{{Luck}} 每个'星星'标签道具提供+2幸运值"
-        },
-        {
-            Name = "Planetarium Telescope",
-            Desc = "#{{Card}} Spawns a tarot card 'XVII-Star'"..
-            "#{{Planetarium}} Increases the base chance of Planetarium based on Luck"..
-            "#{{Luck}} Each collectible with a 'star' tag grants +2 luck"
-        }
-    },
     [ModItemIDs.RECON_VISION] = {
         {
             Name = "洞察视界",
             Desc = "#{{CurseBlind}} 揭示所有被替换为问号的道具"..
-            "#对支线层宝箱房内的道具仍然生效"
+            "#对支线层宝箱房内的道具仍然生效",
+            SeijaBuff = "额外获得一个{{Collectible260}}黑蜡烛"
         },
         {
             Name = "Recon Vision",
             Desc = "#{{CurseBlind}} Reveals all item sprites replaced with a question mark"..
-            "#Also works for the extra item on the alt path"
+            "#Also works for the extra item on the alt path",
+            SeijaBuff = "Grants an extra {{Collectible260}}Black Candle"
         }
     },
     [ModItemIDs.REWIND] = {
@@ -761,14 +781,16 @@ EIDInfo.Collectibles = {
             "#此房间将会是曾进入过的特殊房间之一",
             BookOfVirtues = "有10%概率进入一个天使房",
             BookOfBelial = "有10%概率进入一个恶魔房",
-            CarBattery = "无效果"
+            CarBattery = "无效果",
+            SeijaNerf = "有35%的概率进入错误房"
         },
         {
             Name = "Rewind",
             Desc = "#Upon use, enters a new room that will be one of the special rooms Isaac have previously visited",
             BookOfVirtues = "There is a 10% chance to randomly enter an Angel Room",
             BookOfBelial = "There is a 10% chance to randomly enter a Devil Room",
-            CarBattery = "No effect"
+            CarBattery = "No effect",
+            SeijaNerf = "There is a 35% chance to enter the Error Room"
         }
     },
     [ModItemIDs.RUBY] = {
@@ -793,7 +815,7 @@ EIDInfo.Collectibles = {
         {
             Name = "Scapegoat",
             Desc = "#{{ArrowUp}} Grants Isaac an extra life"..
-            "#When Isaac dies, he will respawn as {{Player7}}the Azazel permanently in the current room and receive an additional black heart"..
+            "#When Isaac dies, he will respawn as {{Player7}}the Azazel permanently in the current room and gain a black heart"..
             "#If Isaac is {{Player28}}the Tainted Azazel, he will be granted a {{Collectible82}}Lord of the Pit instead"..
             "#{{Warning}} The revival has the lowest priority"
         }
@@ -868,16 +890,18 @@ EIDInfo.Collectibles = {
             "#若房间内没有底座道具，则消除1颗碎心",
             BookOfVirtues = "有25%概率生成一个天使房道具魂火跟班",
             BookOfBelial = "有25%概率生成一个恶魔房道具魂火跟班",
-            CarBattery = {"1颗", "2颗"}
+            CarBattery = {"1颗", "2颗"},
+            SeijaNerf = "只能重置为4级的道具"
         },
         {
             Name = "The Gospel of John",
-            Desc = "#Rerolls the collectibles in the current room to quality 3/4 Angel Room passive items. For each reset, Isaac gains 1/2 broken hearts",
+            Desc = "#Rerolls items in the current room to quality 3/4 Angel Room passive items. For each reset, Isaac gains 1/2 broken hearts",
             "#If Issac is about to die due to broken heart overflow, the reroll process will stop"..
-            "#If there are no collectibles in the room, remove 1 broken heart",
-            BookOfVirtues = "Has 25% chance to spawn an Angel item wisp",
-            BookOfBelial = "Has 25% chance to spawn a Devil item wisp",
-            CarBattery = {"1 broken heart", "2 broken hearts"}
+            "#If there are no items in the room, removes 1 broken heart",
+            BookOfVirtues = "There is a 25% chance to spawn an Angel item wisp",
+            BookOfBelial = "There is a 25% chance to spawn a Devil item wisp",
+            CarBattery = {"1 broken heart", "2 broken hearts"},
+            SeijaNerf = "Rerolls items to quality 4 only"
         }
     },
     [ModItemIDs.TOOL_BOX] = {
@@ -904,7 +928,7 @@ EIDInfo.Collectibles = {
             Name = "Twilight Fox",
             Desc = "#Spawns a familiar that follows Isaac and blocks enemy projectiles"..
             "It has two auras, capable of absorbing enemy projectiles and weakening enemies"..
-            "#{{ArrowUp}} With each absorbed projectile, the radius of the weakening aura increases"..
+            "#{{ArrowUp}} With each projectile absorbs, the radius of the weakening aura increases"..
             "#{{Warning}} The radius resets upon entering a new floor"
         }
     },
@@ -959,7 +983,7 @@ EIDInfo.Trinkets = {
         },
         {
             Name = "Broken Vision",
-            Desc = "#Picked up passive items have a 70% chance to transform into the last passive item owned by Issac, but 'quest' items are excluded"..
+            Desc = "#Picked passive items have 70% chance to transform into the last passive item owned by Issac, but 'quest' items are excluded"..
             "#{{Warning}} The rerolled item don't count toward transformations",
             GoldenInfo = {findReplace = true},
             GoldenEffect = {
@@ -1030,7 +1054,7 @@ EIDInfo.Trinkets = {
         {
             Name = "Lost Bottle Cap",
             Desc = "#Using an active item has a 33% chance to restore half of its charge"..
-            "#{{Warning}} Does't work on additional charge bars",
+            "#{{Warning}} Does't work on extra charge bars",
             GoldenInfo = {findReplace = true},
             GoldenEffect = {
                 "33",
@@ -1053,8 +1077,8 @@ EIDInfo.Trinkets = {
         },
         {
             Name = "Meal Ticket",
-            Desc = "#{{Shop}} Upon entering a shop, spawns 1 random collectible with the \"Food\" tag"..
-            "#{{Warning}} Removes the trinket after spawning",
+            Desc = "#{{Shop}} Upon entering a shop, spawns 1 random item with the \"Food\" tag"..
+            "#{{Warning}} Removes the trinket after spawning item",
             GoldenInfo = {findReplace = true},
             GoldenEffect = {
                 "1",
@@ -1094,7 +1118,7 @@ EIDInfo.Trinkets = {
         {
             Name = "Twisted Lovers",
             Desc = "#{{Card}} When using a Tarot card, it is treated as using the corresponding reversed Tarot card"..
-            "#{{BrokenHeart}}Turns 1 heart container or 1 Bone Heart or 2 Soul Hearts into a Broken Heart"
+            "#{{BrokenHeart}} Turns a heart container or 2 soul hearts into a broken heart"
         }
     }
 }
@@ -1497,6 +1521,16 @@ for ID, Info in pairs(EIDInfo.Collectibles) do
         if descTable.CarBattery then
             EID.descriptions[EIDLanguage[i]].carBattery[ID] = descTable.CarBattery
         end
+        if CuerLib and THI then
+            if descTable.SeijaBuff then
+                EID.descriptions[EIDLanguage[i]].reverieSeijaBuffs["100."..ID] = descTable.SeijaBuff
+                THI.Players.Seija:AddExceptedModItem(ID)
+            end
+            if descTable.SeijaNerf then
+                EID.descriptions[EIDLanguage[i]].reverieSeijaNerfs["100."..ID] = descTable.SeijaNerf
+                THI.Players.Seija:AddExceptedModItem(ID)
+            end
+        end
     end
 end
 
@@ -1549,10 +1583,10 @@ for ShortCut, descTable in pairs(EIDInfo.Icons) do
     EID:addIcon(ShortCut, descTable.AnimationName, descTable.AnimationFrame, descTable.Width, descTable.Height, descTable.LeftOffset, descTable.TopOffset, descTable.SpriteObject)
 end
 
-if EID then
+do
     EID.CharacterToHeartType[ModPlayerIDs.WARFARIN] = "Red"
-    EID.ItemPoolTypeToMarkup[ModItemPoolIDs.ILLNESS] = "{{ItemPoolICU}}"
-    EID.descriptions[EID:getLanguage()].itemPoolNames[ModItemPoolIDs.ILLNESS] = "ICU"
+    EID.ItemPoolTypeToMarkup[ModItemPoolIDs.ICU_ROOM] = "{{ItemPoolICU}}"
+    EID.descriptions[EID:getLanguage()].itemPoolNames[ModItemPoolIDs.ICU_ROOM] = "ICU"
 end
 
 do

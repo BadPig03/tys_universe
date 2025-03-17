@@ -4,6 +4,7 @@ local Constants = TYU.Constants
 local Collectibles = TYU.Collectibles
 local Entities = TYU.Entities
 local Players = TYU.Players
+local Reverie = TYU.Reverie
 local Utils = TYU.Utils
 
 local ModItemIDs = TYU.ModItemIDs
@@ -16,6 +17,14 @@ if EID then
         return Utils.HasFlags(TYU.LEVEL:GetCurses(), LevelCurse.CURSE_OF_BLIND)
     end
 end
+
+function ReconVision:PostAddCollectible(collectibleType, charge, firstTime, slot, varData, player)
+    if not Reverie.WillPlayerBuff(player) then
+        return
+    end
+    player:AddCollectible(CollectibleType.COLLECTIBLE_BLACK_CANDLE)
+end
+ReconVision:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, ReconVision.PostAddCollectible, ModItemIDs.RECON_VISION)
 
 function ReconVision:PostPickupRender(pickup, offset)
     local subType = pickup.SubType

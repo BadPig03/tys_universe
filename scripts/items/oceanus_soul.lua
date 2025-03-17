@@ -3,6 +3,7 @@ local OceanusSoul = TYU:NewModItem("Oceanus' Soul", "OCEANUS_SOUL")
 local Constants = TYU.Constants
 local Entities = TYU.Entities
 local Players = TYU.Players
+local Reverie = TYU.Reverie
 local Utils = TYU.Utils
 
 local ModEntityIDs = TYU.ModEntityIDs
@@ -135,6 +136,9 @@ do
         SetTempEntityLibData(player, { FullyCharged = false, ChargeTime = 0 })
         local timeout = GetGlobalLibData("Timeout") or 0
         local addTime = math.floor(50 * math.sqrt(100 / (player.MaxFireDelay + 1)))
+        if Reverie.WillPlayerNerf(player) then
+            addTime = math.floor(addTime * 0.5)
+        end
         SetGlobalLibData(timeout + addTime, "Timeout")
         SetGlobalLibData(Vector.FromAngle(player:GetLastDirection():GetAngleDegrees()), "Direction")
         TYU.GAME:ShakeScreen(15)

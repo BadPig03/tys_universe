@@ -62,7 +62,7 @@ function HealingBeggar:PostSlotUpdate(slot)
 		TYU.SFXMANAGER:Play(SoundEffect.SOUND_THUMBS_DOWN)
 	end
 	if sprite:IsEventTriggered("Prize") then
-		local newItem = TYU.ITEMPOOL:GetCollectible(ModItemPoolIDs.ILLNESS, true, rng:Next())
+		local newItem = TYU.ITEMPOOL:GetCollectible(ModItemPoolIDs.ICU_ROOM, true, rng:Next())
 		Entities.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, newItem, Utils.FindFreePickupSpawnPosition(slot.Position + Vector(0, 60)))
 		TYU.SFXMANAGER:Play(SoundEffect.SOUND_SLOTSPAWN)
 		TYU.SFXMANAGER:Play(SoundEffect.SOUND_THUMBSUP)
