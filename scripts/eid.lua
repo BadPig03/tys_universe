@@ -244,7 +244,7 @@ EIDInfo.Collectibles = {
             "#{{BlackHeart}} Enemies have a 2.5% chance to drop a black heart on death"..
             "#{{Warning}} The chance is not stackable",
             BingeEater = "{{ArrowUp}} +1 Luck"..
-            "#{{ArrowUp}} +0.2 Shotspeed"..
+            "#{{ArrowUp}} +0.2 Shot Speed"..
             "#{{ArrowDown}} -0.03 Speed"
         }
     },
@@ -269,7 +269,7 @@ EIDInfo.Collectibles = {
             Name = "结膜炎",
             Desc = "#泪弹会产生拖尾"..
             "#拖尾泪弹造成角色50%伤害",
-            SeijaNerf = "{{Tears}} -50%射速"
+            SeijaNerf = "{{Tears}} x50%射速"
         },
         {
             Name = "Conjunctivitis",
@@ -708,7 +708,7 @@ EIDInfo.Collectibles = {
             Name = "Peeled Banana",
             Desc = "#{{ArrowUp}} +1 Health up and heals 1 red heart"..
             "#{{Heart}} Entering a new room gives a chance to heal half a red heart",
-            BingeEater = "{{ArrowUp}} +2.5 Tear range"..
+            BingeEater = "{{ArrowUp}} +2.5 Range"..
             "#{{ArrowUp}} +1 Luck"..
             "#{{ArrowDown}} -0.03 Speed"
         }
@@ -791,6 +791,30 @@ EIDInfo.Collectibles = {
             BookOfBelial = "There is a 10% chance to randomly enter a Devil Room",
             CarBattery = "No effect",
             SeijaNerf = "There is a 35% chance to enter the Error Room"
+        }
+    },
+    [ModItemIDs.ROTTEN_STEAK] = {
+        {
+            Name = "腐烂肉排",
+            Desc = "#{{EmptyHeart}} +1空心之容器"..
+            "#{{RottenHeart}} +1腐心"..
+            "#{{ArrowUp}} +0.7射速修正"..
+            "#{{ArrowDown}} -0.5射速"..
+            "#将替换下个遇到的拥有\"食物\"标签的道具",
+            BingeEater = "{{ArrowUp}} +2.5射程"..
+            "#{{ArrowUp}} +0.2弹速"..
+            "#{{ArrowDown}} -0.03移速"
+        },
+        {
+            Name = "Rotten Steak",
+            Desc = "#{{EmptyHeart}} Grants an empty heart container"..
+            "#{{RottenHeart}} Grants a rotten heart"..
+            "#{{ArrowUp}} +0.7 Fire rate"..
+            "#{{ArrowDown}} -0.5 Tears"..
+            "#Replaces the next item with the \"food\" tag that Isaac encounters",
+            BingeEater = "{{ArrowUp}} +2.5 Range"..
+            "#{{ArrowUp}} +0.2 Shot Speed"..
+            "#{{ArrowDown}} -0.03 Speed"
         }
     },
     [ModItemIDs.RUBY] = {

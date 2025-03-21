@@ -72,7 +72,7 @@ function BlazeFly:PreFamiliarCollision(familiar, collider, low)
         return
     end
     collider:TakeDamage(7 * multiplier, DamageFlag.DAMAGE_FIRE, EntityRef(familiar), 0)
-    collider:AddBurn(EntityRef(player), 63, player.Damage * 2)
+    collider:AddBurn(EntityRef(player), 63, player.Damage)
 end
 BlazeFly:AddCallback(ModCallbacks.MC_PRE_FAMILIAR_COLLISION, BlazeFly.PreFamiliarCollision, ModEntityIDs.BLAZE_FLY.Variant)
 

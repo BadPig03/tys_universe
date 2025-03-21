@@ -38,6 +38,6 @@
 	<costume id="37" anm2path="costume_marriage_certificate.anm2" type="passive" hasSkinAlt="true"/>
 	<costume id="41" anm2path="costume_oceanus_soul.anm2" type="passive" isFlying="true"/>
 	<costume id="48" anm2path="costume_recon_vision.anm2" type="passive" priority="1"/>
-	<costume id="51" anm2path="costume_scapegoat.anm2" type="passive" priority="96" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
-	<costume id="53" anm2path="costume_sticky_ball.anm2" type="passive" hasSkinAlt="true"/>
+	<costume id="52" anm2path="costume_scapegoat.anm2" type="passive" priority="96" overwriteColor="true" skinColor="1" forceBodyColor="true" forceHeadColor="true"/>
+	<costume id="54" anm2path="costume_sticky_ball.anm2" type="passive" hasSkinAlt="true"/>
 </costumes>

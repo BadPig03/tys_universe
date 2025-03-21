@@ -429,7 +429,7 @@ do
             end,
             function(damage, player, reverse)
                 if not reverse then
-                    damage = 3.5 * (1.2 * damage + 1) ^ 0.5
+                    damage = 3.5 * math.max(0, (1.2 * damage + 1)) ^ 0.5
                 else
                     damage = ((damage / 3.5) ^ 2 - 1) / 1.2 
                 end
@@ -783,16 +783,15 @@ do
             local origin = 30 / (player.MaxFireDelay + 1)
             local tears = origin
             local modMultiplier = 1
-            local maxTearsUp = 2
-            local maxMultiplier = 1.4
-            local minMultiplier = 0.6
             local modTearsUp = Stat:GetTearsUp(player)
-            if modTearsUp > maxTearsUp then
-                modMultiplier = maxMultiplier
-            elseif modTearsUp > 0 then
-                modMultiplier = -((maxMultiplier - 1) / maxTearsUp ^ 2) * (modTearsUp - maxTearsUp) ^ 2 + maxMultiplier
+            if modTearsUp > 425 / 234 then
+                modMultiplier = 11 / 6
+            elseif modTearsUp > 0 and modTearsUp <= 425 / 234 then
+                modMultiplier = 11 / (17 - 6 * math.sqrt(1.3 * modTearsUp + 1))
+            elseif modTearsUp > -10 / 13 and modTearsUp <= 0 then
+                modMultiplier = 11 / (17 - 6 * math.sqrt(1.3 * modTearsUp + 1) - 6 * modTearsUp)
             else
-                modMultiplier = (1 - minMultiplier) * (0.5 ^ modTearsUp - 1) + 1
+                modMultiplier = 11 / (17 - 6 * modTearsUp)
             end
             tears = tears * modMultiplier
             local tearModifiers = Stat:GetTearsModifiers(player)
@@ -806,6 +805,33 @@ do
             end
             return tears
         end
+        --[[function Stat:GetEvaluatedTears(player)
+            local origin = 30 / (player.MaxFireDelay + 1)
+            local tears = origin
+            local modMultiplier = 1
+            local maxTearsUp = 2
+            local maxMultiplier = 1.4
+            local minMultiplier = 0.6
+            local modTearsUp = Stat:GetTearsUp(player)
+            if modTearsUp > maxTearsUp then
+                modMultiplier = maxMultiplier
+            elseif modTearsUp > 0 then
+                modMultiplier = -((maxMultiplier - 1) / maxTearsUp ^ 2) * (modTearsUp - maxTearsUp) ^ 2 + maxMultiplier
+            else
+                modMultiplier = (1 - minMultiplier) * (0.5 ^ (-modTearsUp) - 1) + 1
+            end
+            tears = tears * modMultiplier
+            local tearModifiers = Stat:GetTearsModifiers(player)
+            if tearModifiers then
+                for _, modi in ipairs(tearModifiers) do
+                    tears = modi.Func(tears, origin)
+                end
+            end
+            if player:HasCollectible(TYU.ModItemIDs.CONSERVATIVE_TREATMENT) and tears < 30 / 11 then
+                return 30 / 11
+            end
+            return tears
+        end]]
     end
     do
         function Stat:GetDamageUp(player)

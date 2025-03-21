@@ -207,6 +207,7 @@ TYU.ModItemIDs = {
     PLANETARIUM_TELESCOPE = GetItemInfo("Planetarium Telescope", "星象望远镜"),
     RECON_VISION = GetItemInfo("Recon Vision", "洞察视界"),
     REWIND = GetItemInfo("Rewind", "倒带"),
+    ROTTEN_STEAK = GetItemInfo("Rotten Steak", "腐烂肉排"),
     RUBY = GetItemInfo("Ruby", "红宝石"),
     SCAPEGOAT = GetItemInfo("Scapegoat", "替罪羊"),
     SINISTER_PACT = GetItemInfo("Sinister Pact", "邪恶契约"),

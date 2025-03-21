@@ -52,6 +52,7 @@
         <Item Name="Conservative Treatment" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Guppy's Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Peeled Banana" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Rotten Steak" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Strange Syringe" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="devil">
@@ -107,6 +108,7 @@
         <Item Name="Chocolate Pancake" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
         <Item Name="Guppy's Food" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
         <Item Name="Peeled Banana" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
+        <Item Name="Rotten Steak" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="keyMaster">
         <Item Name="Blaze Fly" Weight="1" DecreaseBy="0.5" RemoveOn="0.1"/>
@@ -164,6 +166,8 @@
         <Item Name="Conservative Treatment" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Guppy's Food" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
         <Item Name="Peeled Banana" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Rotten Steak" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Strange Syringe" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <Pool Name="greedShop">
         <Item Name="Atonement Voucher" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>

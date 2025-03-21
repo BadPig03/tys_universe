@@ -93,16 +93,17 @@
 	<passive id="47" quality="2" craftquality="2" description="Double your pill" gfx="collectibles_pill_case.png" name="Pill Case" tags="offensive summonable syringe"/>
 	<passive id="48" quality="1" craftquality="1" description="See through everything" gfx="collectibles_recon_vision.png" name="Recon Vision" shopprice="10" tags="lazarusshared offensive summonable"/>
 	<active id="49" quality="4" craftquality="4" description="Seems to have met before" gfx="collectibles_rewind.png" name="Rewind" maxcharges="6" cooldown="440" tags="nocantrip nochallenge nogreed offensive"/>
-	<passive id="50" quality="2" craftquality="2" description="Symbol of wealth" gfx="collectibles_ruby.png" name="Ruby" tags="lazarusshared offensive summonable"/>
-	<passive id="51" quality="3" craftquality="3" description="Takes on all impurities and sins" gfx="collectibles_scapegoat.png" name="Scapegoat" tags="nochallenge nolostbr" customtags="nometronome"/>
-	<passive id="52" quality="3" craftquality="3" description="He craves your pledge" gfx="collectibles_sinister_pact.png" name="Sinister Pact" blackhearts="2" tags="devil nokeeper nolostbr summonable"/>
-	<passive id="53" quality="3" craftquality="3" description="So sticky" gfx="collectibles_sticky_ball.png" name="Sticky Ball" tags="offensive summonable"/>
-	<active id="54" quality="2" craftquality="2" description="Spun?" gfx="collectibles_strange_syringe.png" name="Strange Syringe" maxcharges="0" cooldown="60" tags="nocantrip nolostbr" customtags="nometronome"/>
-	<active id="55" quality="2" craftquality="-1" description="So weird" gfx="collectibles_suspicious_stew.png" name="Suspicious Stew" maxcharges="0" cooldown="60" hidden="true" tags="nocantrip offensive" customtags="nometronome"/>
-	<active	id="56" quality="4" craftquality="4" description="Aspiration of the future" gfx="collectibles_the_gospel_of_john.png" name="The Gospel of John" maxcharges="4" devilprice="2" shopprice="30" cooldown="60" tags="angel book nokeeper offensive"/>
-	<familiar id="57" quality="3" craftquality="3" description="What's inside?" gfx="collectibles_tool_box.png" name="Tool Box" cache="familiars" tags="offensive summonable"/>
-	<familiar id="58" quality="3" craftquality="3" description="Silent protector" gfx="collectibles_twilight_fox.png" name="Twilight Fox" cache="familiars" tags="nolostbr summonable"/>
-	<active id="59" quality="3" craftquality="-1" description="Is it a dream?" gfx="collectibles_wake_up.png" name="Wake-up" maxcharges="0" shopprice="20" cooldown="60" tags="nocantrip nochallenge nogreed offensive"/>
+	<passive id="50" quality="1" craftquality="1" description="Rotten smell" gfx="collectibles_rotten_steak.png" name="Rotten Steak" maxhearts="2" cache="range shotspeed firedelay speed" tags="food nolostbr summonable"/>
+	<passive id="51" quality="2" craftquality="2" description="Symbol of wealth" gfx="collectibles_ruby.png" name="Ruby" tags="lazarusshared offensive summonable"/>
+	<passive id="52" quality="3" craftquality="3" description="Takes on all impurities and sins" gfx="collectibles_scapegoat.png" name="Scapegoat" tags="nochallenge nolostbr" customtags="nometronome"/>
+	<passive id="53" quality="3" craftquality="3" description="He craves your pledge" gfx="collectibles_sinister_pact.png" name="Sinister Pact" blackhearts="2" tags="devil nokeeper nolostbr summonable"/>
+	<passive id="54" quality="3" craftquality="3" description="So sticky" gfx="collectibles_sticky_ball.png" name="Sticky Ball" tags="offensive summonable"/>
+	<active id="55" quality="2" craftquality="2" description="Spun?" gfx="collectibles_strange_syringe.png" name="Strange Syringe" maxcharges="0" cooldown="60" tags="nocantrip nolostbr" customtags="nometronome"/>
+	<active id="56" quality="2" craftquality="-1" description="So weird" gfx="collectibles_suspicious_stew.png" name="Suspicious Stew" maxcharges="0" cooldown="60" hidden="true" tags="nocantrip offensive" customtags="nometronome"/>
+	<active	id="57" quality="4" craftquality="4" description="Aspiration of the future" gfx="collectibles_the_gospel_of_john.png" name="The Gospel of John" maxcharges="4" devilprice="2" shopprice="30" cooldown="60" tags="angel book nokeeper offensive"/>
+	<familiar id="58" quality="3" craftquality="3" description="What's inside?" gfx="collectibles_tool_box.png" name="Tool Box" cache="familiars" tags="offensive summonable"/>
+	<familiar id="59" quality="3" craftquality="3" description="Silent protector" gfx="collectibles_twilight_fox.png" name="Twilight Fox" cache="familiars" tags="nolostbr summonable"/>
+	<active id="60" quality="3" craftquality="-1" description="Is it a dream?" gfx="collectibles_wake_up.png" name="Wake-up" maxcharges="0" shopprice="20" cooldown="60" tags="nocantrip nochallenge nogreed offensive"/>
 
 	<!--Trinkets-->
 	<trinket id="1" name="Beth's Salvation" description="Deliverance from sin" gfx="trinket_beths_salvation.png"/>

@@ -22,8 +22,8 @@
 	<wisp id="39" hp="6" layer="2" priority="99" flameColor="mirroring_black" canShoot="false" coreGfx=""/>
 	<wisp id="45" count="0"/>
 	<wisp id="49" count="0"/>
-	<wisp id="54" count="0"/>
 	<wisp id="55" count="0"/>
 	<wisp id="56" count="0"/>
-	<wisp id="59" count="0"/>
+	<wisp id="57" count="0"/>
+	<wisp id="60" count="0"/>
 </wisps>

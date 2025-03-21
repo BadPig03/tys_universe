@@ -1,6 +1,7 @@
 local TheGospelOfJohn = TYU:NewModItem("The Gospel of John", "THE_GOSPEL_OF_JOHN")
 
 local Entities = TYU.Entities
+local Reverie = TYU.Reverie
 local Utils = TYU.Utils
 
 local ModItemIDs = TYU.ModItemIDs
@@ -9,12 +10,12 @@ local ModGiantBookIDs = TYU.ModGiantBookIDs
 local PrivateField = {}
 
 do
-    function PrivateField.GetAngelRoomCollectible(rng)
+    function PrivateField.GetAngelRoomCollectible(rng, quality)
         local itemID = CollectibleType.COLLECTIBLE_GUARDIAN_ANGEL
         local itemList = {}
         for _, itemTable in ipairs(TYU.ITEMPOOL:GetCollectiblesFromPool(ItemPoolType.POOL_ANGEL)) do
             local itemID = itemTable.itemID
-            if TYU.ITEMPOOL:HasCollectible(itemID) and TYU.ITEMCONFIG:GetCollectible(itemID) and TYU.ITEMCONFIG:GetCollectible(itemID).Quality >= 3 and not TYU.ITEMCONFIG:GetCollectible(itemID):HasTags(ItemConfig.TAG_QUEST) and TYU.ITEMCONFIG:GetCollectible(itemID).Type ~= ItemType.ITEM_ACTIVE and TYU.ITEMPOOL:CanSpawnCollectible(itemID, false) then
+            if TYU.ITEMPOOL:HasCollectible(itemID) and TYU.ITEMCONFIG:GetCollectible(itemID) and TYU.ITEMCONFIG:GetCollectible(itemID).Quality >= quality and not TYU.ITEMCONFIG:GetCollectible(itemID):HasTags(ItemConfig.TAG_QUEST) and TYU.ITEMCONFIG:GetCollectible(itemID).Type ~= ItemType.ITEM_ACTIVE and TYU.ITEMPOOL:CanSpawnCollectible(itemID, false) then
                 table.insert(itemList, itemID)
             end
         end
@@ -33,7 +34,11 @@ function TheGospelOfJohn:UseItem(itemID, rng, player, useFlags, activeSlot, varD
         if ent.SubType > 0 then
             foundAnyCollectible = true
             local pickup = ent:ToPickup()
-            local newType = PrivateField.GetAngelRoomCollectible(rng)
+            local quality = 3
+            if Reverie.WillPlayerNerf(player) then
+                quality = 4
+            end
+            local newType = PrivateField.GetAngelRoomCollectible(rng, quality)
             if newType == CollectibleType.COLLECTIBLE_BREAKFAST then
                 return { Discharge = false, Remove = false, ShowAnim = true }
             end
